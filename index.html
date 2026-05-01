@@ -6,26 +6,28 @@
 <title>Pinnacle Series Wiki — Internal Reference</title>
 <style>
   :root {
-    /* Brand palette inspired by Eagle Point Software / Pinnacle Series */
+    /* Brand palette matched to Eagle Point Software (eaglepoint.com): navy + bright blue + yellow accent */
     --c-bg: #fafbfc;
     --c-content-bg: #ffffff;
     --c-text: #1a2332;
     --c-muted: #5b6b7a;
     --c-border: #e2e8f0;
-    --c-sidebar-bg: #0f1f2c;
-    --c-sidebar-text: #b8c4d1;
+    --c-sidebar-bg: #0f1f3a;          /* deep navy from EPS branding */
+    --c-sidebar-text: #b8c4d8;
     --c-sidebar-text-active: #ffffff;
-    --c-sidebar-hover: #1c3142;
-    --c-accent: #7DBF45;          /* EPS green */
-    --c-accent-dark: #5fa030;
-    --c-accent-light: #eef7e3;
-    --c-link: #2d6b9e;
+    --c-sidebar-hover: #1d3354;
+    --c-accent: #0096DC;              /* EPS bright blue (action color) */
+    --c-accent-dark: #007ab3;
+    --c-accent-light: #e1f1fa;
+    --c-link: #0078b4;
+    --c-yellow: #f5c518;              /* EPS yellow accent (used sparingly) */
+    --c-yellow-light: #fef6da;
     --c-callout-bg: #f6f9fb;
     --c-callout-border: #d4dde5;
-    --c-warn-bg: #fff8e1;
-    --c-warn-border: #f0c75e;
-    --c-perm-bg: #eef7e3;
-    --c-perm-border: #c4dba1;
+    --c-warn-bg: #fef6da;
+    --c-warn-border: #f5c518;
+    --c-perm-bg: #e1f1fa;
+    --c-perm-border: #a7d4ee;
     --c-code-bg: #eef2f6;
     --sidebar-w: 280px;
   }
@@ -40,9 +42,9 @@
     font-size: 15.5px;
     /* Soft pastel landscape backdrop, very subtle, fades out as you scroll */
     background-image:
-      radial-gradient(ellipse 1100px 600px at 80% -100px, rgba(245, 196, 200, 0.28) 0%, rgba(245, 196, 200, 0) 70%),
-      radial-gradient(ellipse 900px 500px at 100% 200px, rgba(181, 163, 204, 0.22) 0%, rgba(181, 163, 204, 0) 70%),
-      radial-gradient(ellipse 1200px 700px at 60% 0px, rgba(168, 201, 220, 0.18) 0%, rgba(168, 201, 220, 0) 70%);
+      radial-gradient(ellipse 1100px 600px at 80% -100px, rgba(0, 150, 220, 0.10) 0%, rgba(0, 150, 220, 0) 70%),
+      radial-gradient(ellipse 900px 500px at 100% 200px, rgba(245, 197, 24, 0.08) 0%, rgba(245, 197, 24, 0) 70%),
+      radial-gradient(ellipse 1200px 700px at 60% 0px, rgba(15, 31, 58, 0.05) 0%, rgba(15, 31, 58, 0) 70%);
     background-attachment: fixed;
     background-repeat: no-repeat;
   }
@@ -231,7 +233,7 @@
   /* "Where to find it" mini-card */
   .where {
     background: var(--c-accent-light);
-    border: 1px solid #c4dba1;
+    border: 1px solid #a7d4ee;
     border-radius: 6px;
     padding: 10px 14px;
     margin: 12px 0 18px;
@@ -276,7 +278,7 @@
     font-weight: 600;
     color: var(--c-accent-dark);
     background: var(--c-accent-light);
-    border: 1px solid #c4dba1;
+    border: 1px solid #a7d4ee;
     padding: 2px 8px;
     border-radius: 10px;
     text-transform: uppercase;
@@ -285,6 +287,11 @@
     vertical-align: middle;
     position: relative;
     top: -3px;
+  }
+  .ap-badge.new-feature {
+    background: var(--c-yellow-light);
+    border-color: #e8b800;
+    color: #7a5a00;
   }
 
   /* Lead paragraph */
@@ -296,13 +303,78 @@
 
   /* POC banner */
   .poc-banner {
-    background: #fdf6e3;
-    border: 1px solid #f0c75e;
-    color: #6b4f00;
+    background: var(--c-accent-light);
+    border: 1px solid var(--c-accent);
+    color: var(--c-accent-dark);
     padding: 10px 14px;
     border-radius: 4px;
     font-size: 13.5px;
     margin-bottom: 28px;
+  }
+  /* Stat block for the welcome page */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 22px 0 28px;
+  }
+  .stats .stat {
+    background: var(--c-content-bg);
+    border: 1px solid var(--c-border);
+    border-radius: 8px;
+    padding: 16px 14px;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(15, 31, 58, 0.04);
+  }
+  .stats .stat .num {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--c-accent);
+    line-height: 1.1;
+  }
+  .stats .stat .lbl {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--c-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  @media (max-width: 760px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+  /* Tier comparison cards on welcome */
+  .tier-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 14px 0 22px;
+  }
+  .tier {
+    background: var(--c-content-bg);
+    border: 1px solid var(--c-border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+  }
+  .tier .label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--c-muted);
+    margin-bottom: 4px;
+  }
+  .tier .name { font-weight: 600; font-size: 15px; color: #1a2332; margin-bottom: 4px; }
+  .tier .examples { color: var(--c-muted); font-size: 12.5px; }
+  .tier.pinnacle {
+    background: var(--c-accent-light);
+    border-color: var(--c-accent);
+  }
+  .tier.pinnacle .label { color: var(--c-accent-dark); }
+  @media (max-width: 760px) {
+    .tier-row { grid-template-columns: 1fr; }
   }
 
   /* Footer */
@@ -365,7 +437,7 @@
       <!-- Stylized EPS-style mark: dark wedge with green accent triangle -->
       <svg class="logo-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M2 18 L12 4 L22 18 Z" fill="#ffffff" opacity="0.92"/>
-        <path d="M12 4 L22 18 L17 18 Z" fill="#7DBF45"/>
+        <path d="M12 4 L22 18 L17 18 Z" fill="#0096DC"/>
       </svg>
       <h1>Pinnacle Series</h1>
     </div>
@@ -423,7 +495,7 @@
 <!-- ====================================================================== -->
 <section id="welcome">
 <h1>Pinnacle Series Wiki</h1>
-<p class="lead">A shared reference for how Pinnacle Series actually behaves — what's where, who can do what, and the small details that trip people up.</p>
+<p class="lead">Eagle Point Software's flagship applied learning platform — the source of truth for how Pinnacle Series actually works, who can do what, and why customers keep choosing it. Use this as a quick lookup whenever you need to answer a "what does Pinnacle do?" or "how does X work?" question.</p>
 
 <div class="hero" aria-hidden="true">
   <svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
@@ -434,8 +506,8 @@
         <stop offset="100%" stop-color="#fbe9e2"/>
       </linearGradient>
       <linearGradient id="m1" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#cdb2d4"/>
-        <stop offset="100%" stop-color="#a890b8"/>
+        <stop offset="0%" stop-color="#a8c8e0"/>
+        <stop offset="100%" stop-color="#7ba5c8"/>
       </linearGradient>
       <linearGradient id="m2" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#9eb7d0"/>
@@ -476,22 +548,90 @@
   </svg>
 </div>
 
-<h2>Welcome / Overview</h2>
-<p>Pinnacle Series is Eagle Point Software's learning and productivity platform. It combines a structured library of curated learning content with on-demand search, AI chat, and personalized skill development tools. It's used by AEC and manufacturing organizations to onboard new hires, support continuing education, and answer in-the-moment "how do I do this?" questions.</p>
+<h2>What is Pinnacle Series?</h2>
 
-<h3>Three ways users find what they need</h3>
+<p><strong>Pinnacle Series is the only applied learning platform built exclusively for AECO and manufacturing.</strong> Where eLearning delivers content and an LMS manages it, Pinnacle Series makes learning <em>matter</em> — by embedding training, knowledge, and capability measurement directly into the tools and projects your customers' teams already use every day.</p>
+
+<p>It's a single integrated system that combines:</p>
 <ul>
-  <li><strong>Global Search.</strong> A keyword or phrase typed into the top-right search bar returns videos, guides, workflows, and documents — filtered to what the user has access to.</li>
-  <li><strong>Library Browsing.</strong> Structured content organized by discipline, product, or job function. Good for discovering new topics or working through a learning path.</li>
-  <li><strong>AI Chat.</strong> Natural-language Q&amp;A backed by Pinnacle's content. Pulls only from content the user is authorized to see. <a href="#ai-chat">More on AI Chat →</a></li>
+  <li><strong>30,000+ expert videos</strong> — curated AEC and manufacturing content, ready on day one.</li>
+  <li><strong>Integrated LMS</strong> — assignments, learning paths, certificates, and reporting in one place.</li>
+  <li><strong>In-Autodesk guidance</strong> — Command Launcher and Related Learning bring the right help to the user without breaking their workflow.</li>
+  <li><strong>KnowledgeSmart assessments</strong> — measure real capability and identify the actual gaps before assigning training.</li>
+  <li><strong>SPARK AI Nano-Learning</strong> — short, AI-curated videos personalized to each user's interests, role, and workflow.</li>
 </ul>
 
-<h3>Two experiences: Peak and Classic</h3>
-<p>Pinnacle Series ships in two UIs — <strong>Peak Experience</strong> (the modern UI, default for new tenants) and <strong>Classic</strong> (the legacy UI, still in use at some tenants mid-migration). All new feature work targets Peak. <a href="#peak-vs-classic">More on Peak vs Classic →</a></p>
+<div class="stats">
+  <div class="stat"><span class="num">750K+</span><span class="lbl">Users</span></div>
+  <div class="stat"><span class="num">2,700+</span><span class="lbl">Customers</span></div>
+  <div class="stat"><span class="num">95%</span><span class="lbl">Renewal rate</span></div>
+  <div class="stat"><span class="num">30,000+</span><span class="lbl">Expert videos</span></div>
+  <div class="stat"><span class="num">130+</span><span class="lbl">Languages</span></div>
+  <div class="stat"><span class="num">AEC + MFG</span><span class="lbl">Built for your industry</span></div>
+  <div class="stat"><span class="num">Day 1</span><span class="lbl">Content ready</span></div>
+  <div class="stat"><span class="num">In-Workflow</span><span class="lbl">Guidance</span></div>
+</div>
+
+<h2>Why Applied Learning beats traditional training</h2>
+
+<p>Most organizations buy one of three things to address skill gaps. Pinnacle Series is the only one that closes the loop between knowing and doing.</p>
+
+<div class="tier-row">
+  <div class="tier">
+    <div class="label">Tier 1 · eLearning</div>
+    <div class="name">Delivers content</div>
+    <div class="examples">LinkedIn Learning, Udemy, Coursera</div>
+  </div>
+  <div class="tier">
+    <div class="label">Tier 2 · LMS</div>
+    <div class="name">Manages learning</div>
+    <div class="examples">Docebo, Cornerstone, SAP, Absorb</div>
+  </div>
+  <div class="tier pinnacle">
+    <div class="label">Tier 3 · Pinnacle Series</div>
+    <div class="name">Applied Learning — makes it matter</div>
+    <div class="examples">Content + LMS + In-Autodesk + Assessments + AI</div>
+  </div>
+</div>
+
+<p>Traditional, out-of-flow learning creates a delay between exposure to an idea and putting it to work. Applied learning eliminates that delay. By making training relevant <em>at the moment of need</em>, Pinnacle Series helps engineers, architects, designers, and builders learn faster and retain that learning longer. The result is stronger project outcomes, greater workforce agility, and lasting business impact.</p>
+
+<h2>How Pinnacle Series helps change the world</h2>
+
+<p>The AEC and manufacturing industries build the physical world — every road, building, factory, bridge, and product. Yet these industries face a widening skills gap, accelerating tool change, and projects that demand more coordination across more partners than ever. Mistakes are expensive, rework is corrosive, and traditional training simply can't keep up with the pace of change.</p>
+
+<p>Pinnacle Series helps organizations close that gap. <strong>It transforms how teams learn — from scheduled, generic, and unmeasured to targeted, embedded, and measurably improved.</strong> Customers who deploy Pinnacle Series report:</p>
+
+<ul>
+  <li><strong>Reduced rework</strong> on billable projects through in-tool guidance that prevents errors before they become rework.</li>
+  <li><strong>Accelerated technology adoption</strong> — when a new version of AutoCAD, Revit, or another tool ships, teams ramp up in days rather than months.</li>
+  <li><strong>Measurable capability improvement</strong> — KnowledgeSmart heatmaps and closed-loop reassessment give leaders reportable evidence of skill growth.</li>
+  <li><strong>Faster onboarding</strong> for new hires — personalized learning paths based on real assessments, not generic checklists.</li>
+  <li><strong>Stronger collaboration</strong> across internal and external teams via External Users, Workgroups, and shared libraries.</li>
+</ul>
+
+<p>For Eagle Point Software, this is what "Build Skills. Apply Fast. Deliver Results." means in practice. The work behind Pinnacle Series — the content libraries, the AI integrations, the assessment platform, the rigorously-engineered Peak Experience — is what enables hundreds of thousands of professionals across thousands of companies to do their best work, every day.</p>
+
+<h2>What you'll find in this wiki</h2>
+
+<p>The wiki is organized into four areas, accessible via the sidebar:</p>
+
+<ul>
+  <li><strong>Getting Started</strong> — Welcome, Peak vs Classic, Sign-In &amp; Authentication, Glossary.</li>
+  <li><strong>End-User Experience</strong> — Home, Assignments, Libraries, Bookmarks, AI Chat, SPARK, My Account.</li>
+  <li><strong>Administration Portal</strong> — every admin page from Admin Home through Integrations.</li>
+  <li><strong>Reference</strong> — full Permissions Reference and a Common Questions section that answers the most-asked support and sales questions.</li>
+</ul>
 
 <div class="callout">
-  <strong>Who uses this wiki:</strong> Sales, CSM, Support, QA, new hires. The goal is a single trustworthy reference for "what does this do, and what permissions does it need." If you find something wrong or missing, flag it to Nick.
+  <strong>Who this is for:</strong> Sales, CSM, Support, QA, and new hires at Eagle Point Software. Use it as a quick lookup when you need to answer "what permissions does someone need to do X?" or "where is feature Y in the Admin Portal?" The canonical source of truth behind this wiki is the <code>Pinnacle_UI_Facts.md</code> file maintained by the Pinnacle Series QA team. When new product behavior is discovered or a UI changes, that file is updated first and the wiki regenerates from it.
 </div>
+
+<div class="callout">
+  <strong>Want to take a closer look?</strong> Visit <a href="https://eaglepoint.com/pinnacle-series/" target="_blank" rel="noreferrer">eaglepoint.com/pinnacle-series</a> for the public marketing view of the platform, customer stories, and information about scheduling a demo.
+</div>
+</section>
+
 </section>
 
 <!-- ====================================================================== -->
@@ -523,6 +663,34 @@
   <li><strong>Workgroups</strong> — still in development. Note the related <em>Work Group Management</em> permissions exist but apply only to Classic.</li>
   <li><strong>Document conversion for search &amp; translation</strong> — converting external docs into Pinnacle Documents for enhanced searchability and translation isn't yet supported.</li>
 </ul>
+
+<h3>How Peak compares to Classic at a glance</h3>
+
+<figure class="screenshot">
+  <img src="screenshots/web/shot_210.jpg" alt="Classic UI (Management Utility) — the legacy admin interface that some tenants still use during migration. Note the yellow header and older visual style. The new Peak Administration Portal replaces this for most admin tasks; some on-prem AD configurations still link out to the Management Utility from the Peak Integrations page." loading="lazy">
+  <figcaption>Classic UI (Management Utility) — the legacy admin interface that some tenants still use during migration. Note the yellow header and older visual style. The new Peak Administration Portal replaces this for most admin tasks; some on-prem AD configurations still link out to the Management Utility from the Peak Integrations page.</figcaption>
+</figure>
+<table>
+  <tr><th></th><th>Classic</th><th>Peak Experience</th></tr>
+  <tr><td>Admin UI</td><td>Management Utility (Windows desktop app)</td><td>Browser-based Administration Portal</td></tr>
+  <tr><td>Content organization</td><td>Folder-based</td><td>Library + Topics + Subtopics</td></tr>
+  <tr><td>Permissions</td><td>Per-folder with manual upkeep</td><td>Library-driven, role-based, less manual effort</td></tr>
+  <tr><td>Assignment management</td><td>Separate views per content type</td><td>Centralized — content + assessments together</td></tr>
+  <tr><td>Reporting</td><td>Management Utility reports</td><td>Peak Reporting suite (5 pillars, saved views, scheduled exports)</td></tr>
+  <tr><td>Bulk content edits</td><td>Limited</td><td>Bulk Modify, Search &amp; Replace, Bulk Actions</td></tr>
+  <tr><td>AI features</td><td>None</td><td>AI Chat, SPARK Nano-Learning</td></tr>
+</table>
+
+<h3>Common transition questions</h3>
+<p>When a tenant migrates to Peak, customer success managers should be prepared for a few recurring questions. Most of them come down to "where did my [Classic feature] go?" Here are the high-frequency ones:</p>
+<ul>
+  <li><strong>"Where are my folders?"</strong> Folders still exist inside Content for organizing custom files, but visibility is now controlled at the library level. Administrators set up libraries first, then organize content inside them.</li>
+  <li><strong>"How do I see who has access to what?"</strong> Permissions are now visible per user in <a href="#users">Users → User Details → Permissions</a>, and per library in <a href="#admin-libraries">Libraries → Library Details → Sharing</a>.</li>
+  <li><strong>"Why can't I find Live Events?"</strong> Live Events are still under development for Peak. Tenants that depend on Live Events should keep Peak Experience for End Users disabled until the feature ships.</li>
+  <li><strong>"Why does some admin work still send me to the Management Utility?"</strong> A few legacy configurations (e.g., on-premises Active Directory sync) are still managed via the Management Utility. The Admin Portal links out to it where needed via a "Launch Management Utility" button.</li>
+</ul>
+
+
 </section>
 
 <!-- ====================================================================== -->
@@ -658,6 +826,11 @@
 </div>
 
 <h3>Page body</h3>
+<figure class="screenshot">
+  <img src="screenshots/web/shot_005.jpg" alt="End-user Home — assignment card kebab menu open. From this menu, learners can self-service: Resume, View, Mark as Completed, Change Due Date, Add to Bookmarks, Copy Link (Formatted/Unformatted), Drop Course, or Drop Learning Path." loading="lazy">
+  <figcaption>End-user Home — assignment card kebab menu open. From this menu, learners can self-service: Resume, View, Mark as Completed, Change Due Date, Add to Bookmarks, Copy Link (Formatted/Unformatted), Drop Course, or Drop Learning Path.</figcaption>
+</figure>
+
 <p>The Home page body shows:</p>
 <ul>
   <li><strong>Assignments</strong> section — the user's currently assigned content.</li>
@@ -671,6 +844,18 @@
   <li>Global Search (top-right).</li>
   <li>User avatar (top-right) → menu opens with <strong>Profile &amp; Settings</strong>, <strong>Switch Tenant</strong>, <strong>Sign Out</strong>.</li>
 </ul>
+
+<h3>Top bar in detail</h3>
+<p>The top bar of the Home page (and most end-user pages) provides global access to:</p>
+<ul>
+  <li><strong>Search All Content</strong> — universal search across all content the user can access. Returns videos, documents, learning paths, workflows, etc., filterable by type and other facets on the results page.</li>
+  <li><strong>AI Chat button</strong> — opens the dedicated <a href="#ai-chat">AI Chat</a> page. Visible only when the tenant has "Allow Users to Access AI Chat (Preview)" enabled.</li>
+  <li><strong>Submit External Learning button</strong> — when present, opens a form for users to log learning they completed outside Pinnacle Series. Visible only when the tenant has "Allow Users to Submit External Learning" enabled.</li>
+  <li><strong>Notification bell</strong> — surfaces SPARK notifications, enrollment-due reminders, Entra ID Sync alerts, and other system events.</li>
+  <li><strong>User avatar</strong> — opens a dropdown for Profile &amp; Settings, Switch Tenant (if user has access to multiple), and Sign Out.</li>
+</ul>
+
+
 </section>
 
 <!-- ====================================================================== -->
@@ -728,6 +913,18 @@
   <li>Content cards for videos, documents, workflows, courses, learning paths, and quizzes.</li>
   <li>Per-content actions: Like, Share, Bookmark, Send Feedback.</li>
 </ul>
+
+<h3>Why end users only see some libraries</h3>
+<p>Libraries are visibility-controlled. A user only sees a library if an admin has explicitly shared it with them, with their group, or with everyone in the tenant. This is a frequent CSM/Support question — when a learner says "I can't find the AutoCAD library," the first thing to check is whether an admin has shared the AutoCAD library with that user's group in <a href="#admin-libraries">Admin Portal → Libraries</a>.</p>
+<p>The end-user Libraries page typically shows three groupings (depending on what's been shared):</p>
+<ul>
+  <li><strong>Featured Libraries</strong> — present only when at least one library is flagged as Featured by an admin.</li>
+  <li><strong>Subscription Libraries</strong> — Eagle Point-provided libraries (3ds Max, AutoCAD, Civil 3D, Revit, Bentley, Bluebeam, etc.). Curated by EPS content teams and updated regularly.</li>
+  <li><strong>Custom Libraries</strong> — libraries the customer's own Content Administrators have created using their internal content.</li>
+</ul>
+<p>Inside a library, the user gets a search bar scoped to that library, plus a filter panel with Publisher, Topic, Sub-topic, Content Type, Duration, and Difficulty filters. Each piece of content is a card with quick actions (Like, Bookmark, Share, Send Feedback).</p>
+
+
 
 <div class="callout permissions">
   <strong>Required permissions:</strong> None. Library access is controlled by the admin via library sharing — once shared, no special permission is needed to view.
@@ -1057,6 +1254,11 @@
   <li><strong>Exclude users</strong> who already completed prior versions.</li>
 </ul>
 
+<figure class="screenshot">
+  <img src="screenshots/web/shot_041.jpg" alt="Assignment of Content sub-page — opened after clicking Assign New → Content. Three sections: Content (what gets assigned), Users (who it gets assigned to), and Options (Expiration Date, Map Learning)." loading="lazy">
+  <figcaption>Assignment of Content sub-page — opened after clicking Assign New → Content. Three sections: Content (what gets assigned), Users (who it gets assigned to), and Options (Expiration Date, Map Learning).</figcaption>
+</figure>
+
 <h3>Auto-Assignments</h3>
 <p>Auto-Assignments are rules that automatically assign content or assessments based on conditions — typically group membership or assessment results.</p>
 
@@ -1138,6 +1340,22 @@
 <h3>Folders</h3>
 <p>The Content area uses folders to organize content. Common per-folder actions: <strong>Create Copy</strong>, <strong>Share</strong> (Add Groups, Add Users), <strong>Topics</strong> association, <strong>Start Modifying</strong> (enters bulk-edit mode).</p>
 
+<figure class="screenshot">
+  <img src="screenshots/web/shot_069.jpg" alt="Manage Topics & Subtopics modal — the global topic catalog used to categorize content. Each tile is a topic with its branded icon. Admins can add new topics or edit existing ones from this view." loading="lazy">
+  <figcaption>Manage Topics & Subtopics modal — the global topic catalog used to categorize content. Each tile is a topic with its branded icon. Admins can add new topics or edit existing ones from this view.</figcaption>
+</figure>
+
+<h3>Content authoring lifecycle</h3>
+<p>Pinnacle Series content moves through a predictable lifecycle that admins should understand when supporting customers:</p>
+<ol>
+  <li><strong>Draft</strong> — newly created or imported content. Visible only to its author and other Content Administrators. Can be deleted without going through the Recycle Bin.</li>
+  <li><strong>Published</strong> — content that has been pushed to one or more libraries. Visible to users that have access to those libraries via group or direct sharing.</li>
+  <li><strong>Recycled</strong> — soft-deleted content. Lives in the <a href="#content">Recycle Bin</a> indefinitely; can be restored to its original location or permanently deleted.</li>
+</ol>
+<p>Content authoring permissions are tiered: a Content Author can create and modify draft content but can't publish independently. A Content Publisher can publish into libraries that have been shared with them. A Content Administrator can do everything, including library creation and visibility management. See the <a href="#permissions">Permissions Reference</a> for the full breakdown.</p>
+
+
+
 <div class="callout permissions">
   <strong>Required permissions (descending access):</strong>
   <ul>
@@ -1180,6 +1398,16 @@
   <li><strong>Feature</strong> — flag a library as Featured for the tenant.</li>
 </ul>
 
+<figure class="screenshot">
+  <img src="screenshots/web/shot_267.jpg" alt="Library Details page — opened by clicking into a library from Admin → Libraries. Shows the library hero, sharing indicator, filter panel with Applied Filters, and the list of contained content. The Select Course to Export modal is open here as part of the SCORM Export workflow." loading="lazy">
+  <figcaption>Library Details page — opened by clicking into a library from Admin → Libraries. Shows the library hero, sharing indicator, filter panel with Applied Filters, and the list of contained content. The Select Course to Export modal is open here as part of the SCORM Export workflow.</figcaption>
+</figure>
+
+<h3>What "Featured" means</h3>
+<p>Marking a library as Featured surfaces it on every end user's Home page in a special <strong>Featured Libraries</strong> carousel above the regular Libraries list. Featured is a tenant-wide setting — there is no per-group Featured list. Use it sparingly to highlight what matters most to your customer's users right now (e.g., a quarterly focus area, a new tool rollout, or an onboarding library).</p>
+
+
+
 <div class="callout permissions">
   <strong>Required permissions:</strong>
   <ul>
@@ -1211,6 +1439,20 @@
 
 <h3>Setup</h3>
 <p>Where admins define the catalog of <strong>External Learning Activities</strong> users can request credit for.</p>
+
+<h3>Why customers care about External Learning</h3>
+
+<figure class="screenshot">
+  <img src="screenshots/web/shot_097.jpg" alt="Admin Portal → External Learning → Records Management — list view of submitted external learning records. Toolbar includes Search, Filter, Add User, Create Record, plus bulk actions (Delete, Approve, Deny). Each row has user avatar, training title, completed date, training provider, duration, and status." loading="lazy">
+  <figcaption>Admin Portal → External Learning → Records Management — list view of submitted external learning records. Toolbar includes Search, Filter, Add User, Create Record, plus bulk actions (Delete, Approve, Deny). Each row has user avatar, training title, completed date, training provider, duration, and status.</figcaption>
+</figure>
+<p>External Learning Tracking matters for two big customer use cases:</p>
+<ul>
+  <li><strong>CPD / CEU compliance</strong> — many AEC professionals must accumulate continuing professional development hours each year for license renewal. External Learning lets them log webinars, conferences, and trade-show sessions in their Pinnacle Series transcript so admins can report on compliance from a single source of truth.</li>
+  <li><strong>Holistic capability picture</strong> — a learner's Pinnacle Series record is no longer "what they did in Pinnacle." It includes everything they've completed, internal and external. This becomes essential when leaders are making promotion decisions, project staffing decisions, or evaluating a team's readiness.</li>
+</ul>
+
+
 <ul>
   <li><strong>Create Activity</strong> — Training Title (required), Training Provider, Duration (Minutes).</li>
   <li>Edit / Delete existing activities.</li>
@@ -1258,6 +1500,33 @@
   <li><strong>Targeted permissions</strong> — Reporting Administrator (sees all users) vs. Reporting Manager (sees only managed users).</li>
   <li><strong>Power BI export</strong> — Usage Reports support export for use in Power BI dashboards.</li>
 </ul>
+
+<figure class="screenshot">
+  <img src="screenshots/web/shot_106.jpg" alt="Peak Reporting — User Management Reports landing page. Three filter panels on the left (Login Filters, Registered Users Filters, Global User Filters), KPI tiles at the top (Total Pinnacle Logins, etc.), trend charts (Total/Unique Pinnacle and KnowledgeSmart Logins), and the report category tabs along the bottom." loading="lazy">
+  <figcaption>Peak Reporting — User Management Reports landing page. Three filter panels on the left (Login Filters, Registered Users Filters, Global User Filters), KPI tiles at the top (Total Pinnacle Logins, etc.), trend charts (Total/Unique Pinnacle and KnowledgeSmart Logins), and the report category tabs along the bottom.</figcaption>
+</figure>
+
+<h3>The full Peak Reporting nav</h3>
+<p>The Reports area has six top-level tabs (visible at the bottom of every Reports page):</p>
+<ol>
+  <li><strong>User Management Reports</strong> — Total/Unique Pinnacle and KnowledgeSmart logins, registered users by month, login histograms.</li>
+  <li><strong>Usage Reports</strong> — content access patterns, search behavior, user interest trends.</li>
+  <li><strong>Learning Reports</strong> — course progression, completions, learning path progress, learning time.</li>
+  <li><strong>Assessment Reports</strong> — competency scores, time taken, skill gaps, assessment progress.</li>
+  <li><strong>Content Reports</strong> — inventory, content types, publishers, library structure, content governance.</li>
+  <li><strong>Matrix and Leaderboard Reports</strong> — heatmap views and leaderboards across teams or skills.</li>
+</ol>
+
+<h3>The filter panel — three tiers of filtering</h3>
+<p>Most Peak Reporting pages have three filter sections in a left drawer:</p>
+<ul>
+  <li><strong>Login Filters / context-specific filters</strong> — vary by report (e.g., Date Dimension Quarter / Month / Week / Day, Login Date range, User multi-select).</li>
+  <li><strong>Registered Users Filters</strong> — Created Date range, Number of Logins (min-max).</li>
+  <li><strong>Global User Filters</strong> — Attributes (multi-select), Managers (multi-select), Groups (multi-select), User Type (Standard / External), Is Deleted (True / False).</li>
+</ul>
+<p>Each filter has a "Clear Filters" button at the bottom of the panel. Filter selections persist when navigating between report tabs but reset when leaving the Reports area entirely.</p>
+
+
 
 <div class="callout permissions">
   <strong>Required permissions:</strong>
@@ -1330,6 +1599,11 @@
   <li>Product Expertise / Areas of Interest</li>
 </ul>
 
+<figure class="screenshot">
+  <img src="screenshots/web/shot_167.jpg" alt="Edit User Details — opened by clicking "View Full Profile" then Edit Profile on a user record. From here admins manage user attributes, group membership, permissions (per-user or inherited), and the "Exclude User from SSO" toggle." loading="lazy">
+  <figcaption>Edit User Details — opened by clicking "View Full Profile" then Edit Profile on a user record. From here admins manage user attributes, group membership, permissions (per-user or inherited), and the "Exclude User from SSO" toggle.</figcaption>
+</figure>
+
 <h3>External Users page</h3>
 <p>External Users is a separate user type for people outside your organization who need scoped access to your Pinnacle Series tenant — typically vendors, contractors, or project partners.</p>
 <ul>
@@ -1380,6 +1654,11 @@
 </ul>
 
 <h3>Group Details page</h3>
+
+<figure class="screenshot">
+  <img src="screenshots/web/shot_187.jpg" alt="Group Details — Members tab. The page also has tabs for Owners & Partners, Parent & Child Groups, and a Features panel (top right) that includes the SPARK toggle and SPARK Notifications configuration." loading="lazy">
+  <figcaption>Group Details — Members tab. The page also has tabs for Owners & Partners, Parent & Child Groups, and a Features panel (top right) that includes the SPARK toggle and SPARK Notifications configuration.</figcaption>
+</figure>
 <ul>
   <li><strong>Members</strong> — users in this group.</li>
   <li><strong>Group Owners</strong> — users designated as owners (in future releases, owners will gain enhanced autonomy to assign content directly to their group).</li>
@@ -1390,6 +1669,16 @@
 
 <h3>Group sync (Active Directory / Entra ID)</h3>
 <p>Groups can be synced from Microsoft Entra ID (Azure AD) or on-prem Active Directory. Configuration lives at Admin Portal → Integrations. Synced groups can be excluded per-user via the "Exclude from Synchronized Groups" bulk action.</p>
+
+<h3>General Groups vs Job Role Groups</h3>
+<p>Pinnacle Series groups are typed at creation. The Group Type field on the "Add Group Manually" modal has two values:</p>
+<ul>
+  <li><strong>General</strong> — the default. Most tenants use General groups for departments, offices, and project teams. Visibility, content sharing, and assignments all behave the same way for General groups.</li>
+  <li><strong>Job Role</strong> — used for groups that map to a specific job function (e.g., "BIM Manager," "Civil Engineer," "Project Coordinator"). Job Role groups can be referenced by Role-Based Learning paths and may surface differently in some reports.</li>
+</ul>
+<p>The behavioral difference between General and Job Role groups is still being documented as test cases are written. For most current customer-facing scenarios, the two types are functionally interchangeable; the distinction primarily affects future Role-Based Learning features.</p>
+
+
 
 <div class="callout permissions">
   <strong>Required permission:</strong> <a href="#permissions">Administrator</a> (under User Administration).
@@ -1419,6 +1708,21 @@
   <li><strong>Font</strong> selection.</li>
   <li>Apply changes to preview before save.</li>
 </ul>
+
+<h3>Theme management — Custom and Standard themes</h3>
+
+<figure class="screenshot">
+  <img src="screenshots/web/shot_209.jpg" alt="Theme Customization — Available Themes view. Custom Themes are saved themes the customer's admins have created (here, "CP 2025" with the green "CURRENT THEME" badge). Standard Themes are Eagle Point-provided defaults like "Autumn Bliss". Each theme card shows its three colors as horizontal bars and has a kebab for Edit / Delete Theme." loading="lazy">
+  <figcaption>Theme Customization — Available Themes view. Custom Themes are saved themes the customer's admins have created (here, "CP 2025" with the green "CURRENT THEME" badge). Standard Themes are Eagle Point-provided defaults like "Autumn Bliss". Each theme card shows its three colors as horizontal bars and has a kebab for Edit / Delete Theme.</figcaption>
+</figure>
+<p>Theme Customization isn't a single set of colors. It's a theme management system with an "Available Themes" gallery split into two categories:</p>
+<ul>
+  <li><strong>Custom Themes</strong> — themes the customer's admins have created and saved. Each theme is named (e.g., "CP 2025") and shows its three colors as horizontal bars (Navigation / Primary / Secondary). The currently-active theme has a green "CURRENT THEME" badge.</li>
+  <li><strong>Standard Themes</strong> — Eagle Point-provided default themes (e.g., "Autumn Bliss"). These can be selected as-is, or duplicated and modified.</li>
+</ul>
+<p>Each theme card has a kebab menu with <strong>Edit</strong> (opens the Create New Theme modal pre-populated with the theme's values) and <strong>Delete Theme</strong>. The active theme cannot be deleted directly — switch to a different theme first.</p>
+
+
 
 <div class="callout permissions">
   <strong>Required permission:</strong> <a href="#permissions">Manage Portal Branding and Customization</a>.
@@ -1455,6 +1759,11 @@
 </ul>
 
 <h3>Settings → Users</h3>
+
+<figure class="screenshot">
+  <img src="screenshots/web/shot_219.jpg" alt="Settings → Users → User Attributes — admins define custom attributes (with name and data type), Areas of Expertise (selectable on user profiles), and User Interests (the catalog Group admins draw from when configuring SPARK)." loading="lazy">
+  <figcaption>Settings → Users → User Attributes — admins define custom attributes (with name and data type), Areas of Expertise (selectable on user profiles), and User Interests (the catalog Group admins draw from when configuring SPARK).</figcaption>
+</figure>
 <p>User-attribute configuration:</p>
 <ul>
   <li><strong>User Attributes</strong> — define custom attributes (Attribute name, Data Type) that show up on every user record.</li>
@@ -1486,6 +1795,22 @@
 
 <h3>Password Authentication</h3>
 <p>Settings that govern password-based sign-in:</p>
+
+<h3>Password Authentication — exact controls</h3>
+
+<figure class="screenshot">
+  <img src="screenshots/web/shot_223.jpg" alt="Security &amp; Authentication page — top section sets Password Authentication policy (Use Complex Passwords, Password Expires in N Days, Password Cannot Match Previous N Passwords, Lock Out User After N Invalid Attempts). Bottom section configures Single Sign-On — three mutually-exclusive radio options: Do Not Use Single Sign-On, SAML, OpenID. EWS configuration may appear elsewhere depending on tenant setup." loading="lazy">
+  <figcaption>Security &amp; Authentication page — top section sets Password Authentication policy (Use Complex Passwords, Password Expires in N Days, Password Cannot Match Previous N Passwords, Lock Out User After N Invalid Attempts). Bottom section configures Single Sign-On — three mutually-exclusive radio options: Do Not Use Single Sign-On, SAML, OpenID. EWS configuration may appear elsewhere depending on tenant setup.</figcaption>
+</figure>
+<p>The Password Authentication section sets tenant-wide password policy. Each control is independently configurable:</p>
+<ul>
+  <li><strong>Use Complex Passwords</strong> — when enabled, requires passwords to meet four criteria simultaneously: minimum 8 characters, at least one uppercase letter (A-Z), at least one lowercase letter (a-z), and at least one alphanumeric special character (e.g., !, #, $, %).</li>
+  <li><strong>Password Expires in [N] Days</strong> — default 90. Forces a password reset on the next sign-in after the expiration period.</li>
+  <li><strong>Password Cannot Match Previous [N] Password(s)</strong> — default 10. Prevents users from cycling through the same handful of passwords.</li>
+  <li><strong>Lock Out User After [N] Invalid Attempts</strong> — default 10. After this many failed sign-ins, the account is locked and an admin must reset it.</li>
+</ul>
+
+
 <ul>
   <li>Complex password requirements</li>
   <li>Password history (prevent reuse)</li>
@@ -1564,6 +1889,17 @@
   <li>Synchronize KnowledgeSmart users with Pinnacle Series users.</li>
   <li>Manage KnowledgeSmart invitations and assessment campaigns.</li>
 </ul>
+
+<h3>What KnowledgeSmart actually is</h3>
+<p>KnowledgeSmart is a separate product from Pinnacle Series. It's a skill assessment platform — also owned by Eagle Point Software — that delivers software skill assessments, skills gap analysis, and benchmarking specifically tailored for AEC and manufacturing tools. It integrates deeply with Pinnacle Series so that:</p>
+<ul>
+  <li>Assessment results feed into Pinnacle Series learning recommendations (Personalized / Mapped Learning).</li>
+  <li>Pinnacle Series users with appropriate roles can launch into the KnowledgeSmart admin dashboard from the Admin Portal nav.</li>
+  <li>KnowledgeSmart logins are tracked in the Pinnacle Series User Management Reports alongside Pinnacle logins.</li>
+</ul>
+<p>The integration is configured via Admin Portal → Integrations → KnowledgeSmart (toggle + Configure button). To use KnowledgeSmart admin features, a user needs both Pinnacle Series Administrator permission AND a KnowledgeSmart admin role configured in the KS Admin Dashboard.</p>
+
+
 
 <div class="callout permissions">
   <strong>Required role:</strong> <strong>KnowledgeSmart Administrator</strong> — this is a separate role configured in the KnowledgeSmart Admin Dashboard, not in Pinnacle Series itself. A user can have full Pinnacle admin permissions and still see "You do not have permission to log in to KnowledgeSmart" in this section if their KS admin role hasn't been set up.
