@@ -6,28 +6,26 @@
 <title>Pinnacle Series Wiki — Internal Reference</title>
 <style>
   :root {
-    /* Brand palette matched to Eagle Point Software (eaglepoint.com): navy + bright blue + yellow accent */
+    /* Brand palette inspired by Eagle Point Software / Pinnacle Series */
     --c-bg: #fafbfc;
     --c-content-bg: #ffffff;
     --c-text: #1a2332;
     --c-muted: #5b6b7a;
     --c-border: #e2e8f0;
-    --c-sidebar-bg: #0f1f3a;          /* deep navy from EPS branding */
-    --c-sidebar-text: #b8c4d8;
+    --c-sidebar-bg: #0f1f2c;
+    --c-sidebar-text: #b8c4d1;
     --c-sidebar-text-active: #ffffff;
-    --c-sidebar-hover: #1d3354;
-    --c-accent: #0096DC;              /* EPS bright blue (action color) */
-    --c-accent-dark: #007ab3;
-    --c-accent-light: #e1f1fa;
-    --c-link: #0078b4;
-    --c-yellow: #f5c518;              /* EPS yellow accent (used sparingly) */
-    --c-yellow-light: #fef6da;
+    --c-sidebar-hover: #1c3142;
+    --c-accent: #7DBF45;          /* EPS green */
+    --c-accent-dark: #5fa030;
+    --c-accent-light: #eef7e3;
+    --c-link: #2d6b9e;
     --c-callout-bg: #f6f9fb;
     --c-callout-border: #d4dde5;
-    --c-warn-bg: #fef6da;
-    --c-warn-border: #f5c518;
-    --c-perm-bg: #e1f1fa;
-    --c-perm-border: #a7d4ee;
+    --c-warn-bg: #fff8e1;
+    --c-warn-border: #f0c75e;
+    --c-perm-bg: #eef7e3;
+    --c-perm-border: #c4dba1;
     --c-code-bg: #eef2f6;
     --sidebar-w: 280px;
   }
@@ -36,291 +34,12 @@
   html, body { margin: 0; padding: 0; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    color: var(--c-text);
-    background: linear-gradient(180deg, #f7faff 0%, #eff5fb 100%);
-    line-height: 1.55;
-    font-size: 15.5px;
-    overflow-x: hidden;
-  }
-  /* Animated architectural blueprint backdrop — fixed, behind content, subtle but visible */
-  .ae-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
-  .ae-backdrop svg {
-    width: 100%;
-    height: 100%;
-    opacity: 0.55;
-  }
-  /* Slow horizontal drift animation for the blueprint sheets */
-  @keyframes drift1 { 0% { transform: translateX(0); } 100% { transform: translateX(-60px); } }
-  @keyframes drift2 { 0% { transform: translateX(0); } 100% { transform: translateX(40px); } }
-  @keyframes spin   { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-  .ae-drift1 { animation: drift1 24s ease-in-out infinite alternate; transform-origin: center; }
-  .ae-drift2 { animation: drift2 30s ease-in-out infinite alternate; transform-origin: center; }
-  .ae-spin   { animation: spin 60s linear infinite; transform-origin: 250px 250px; }
-
-  /* Top header bar — persistent across the wiki */
-  .top-bar {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: saturate(180%) blur(8px);
-    -webkit-backdrop-filter: saturate(180%) blur(8px);
-    border-bottom: 1px solid var(--c-border);
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 28px;
-  }
-  .top-bar .brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13.5px;
-    color: var(--c-text);
-  }
-  .top-bar .brand .mark {
-    width: 22px; height: 22px;
-  }
-  .top-bar .brand strong {
-    font-weight: 700;
-    letter-spacing: 0.4px;
-  }
-  .top-bar .brand .sep {
-    color: var(--c-muted);
-    margin: 0 8px;
-  }
-  .top-bar .actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .top-bar .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 14px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-    border: 1px solid transparent;
-    transition: background 0.15s, border-color 0.15s, color 0.15s;
-  }
-  .top-bar .btn-secondary {
-    color: var(--c-text);
-    border-color: var(--c-border);
+    color: #0f1f2c;
     background: transparent;
+    line-height: 1.6;
+    font-size: 16.5px;
   }
-  .top-bar .btn-secondary:hover {
-    background: #f4f7fa;
-    border-color: #c4d0dc;
-  }
-  .top-bar .btn-primary {
-    background: var(--c-accent);
-    color: #fff;
-    border-color: var(--c-accent);
-  }
-  .top-bar .btn-primary:hover {
-    background: var(--c-accent-dark);
-    border-color: var(--c-accent-dark);
-  }
-  .top-bar .btn .arrow {
-    font-size: 14px;
-    transition: transform 0.15s;
-  }
-  .top-bar .btn-primary:hover .arrow { transform: translateX(2px); }
-
-  /* Make sure main content sits above the backdrop */
-  .sidebar { z-index: 100; }
-  main { position: relative; z-index: 5; }
-  /* Content card-like surface for readability over backdrop */
-  main section {
-    background: rgba(255, 255, 255, 0.78);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-    border-radius: 8px;
-    padding: 20px 24px;
-    margin-bottom: 28px;
-    border: 1px solid rgba(226, 232, 240, 0.6);
-    box-shadow: 0 1px 3px rgba(15, 31, 58, 0.04);
-  }
-
-  /* Chat bot widget */
-  .chat-fab {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: var(--c-accent);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 6px 18px rgba(0, 120, 180, 0.35);
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    transition: transform 0.15s, background 0.15s;
-  }
-  .chat-fab:hover { transform: scale(1.06); background: var(--c-accent-dark); }
-  .chat-panel {
-    position: fixed;
-    bottom: 92px;
-    right: 24px;
-    width: 360px;
-    max-width: calc(100vw - 32px);
-    max-height: 540px;
-    background: #fff;
-    border: 1px solid var(--c-border);
-    border-radius: 12px;
-    box-shadow: 0 12px 40px rgba(15, 31, 58, 0.25);
-    z-index: 200;
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-  }
-  .chat-panel.open { display: flex; }
-  .chat-panel header {
-    background: linear-gradient(135deg, var(--c-sidebar-bg) 0%, var(--c-accent-dark) 100%);
-    color: #fff;
-    padding: 14px 16px;
-    border: none;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-  }
-  .chat-panel header h3 {
-    margin: 0; font-size: 15px; font-weight: 600; color: #fff;
-  }
-  .chat-panel header .sub {
-    font-size: 11.5px;
-    color: rgba(255,255,255,0.85);
-    margin-top: 2px;
-  }
-  .chat-panel header .close {
-    position: absolute;
-    top: 12px;
-    right: 14px;
-    background: transparent;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 18px;
-    line-height: 1;
-  }
-  .chat-panel .messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 14px 14px 6px;
-    background: #f6f9fb;
-  }
-  .chat-msg {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 10px;
-    align-items: flex-start;
-  }
-  .chat-msg .avatar {
-    width: 28px; height: 28px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: var(--c-accent);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 700;
-  }
-  .chat-msg .bubble {
-    background: #fff;
-    border: 1px solid var(--c-border);
-    border-radius: 10px;
-    padding: 8px 11px;
-    font-size: 13.5px;
-    color: var(--c-text);
-    max-width: calc(100% - 36px);
-  }
-  .chat-msg.user { flex-direction: row-reverse; }
-  .chat-msg.user .avatar { background: #6c7a89; }
-  .chat-msg.user .bubble { background: var(--c-accent-light); border-color: #a7d4ee; }
-  .chat-suggested {
-    padding: 8px 14px 12px;
-    border-top: 1px solid var(--c-border);
-    background: #fff;
-  }
-  .chat-suggested .label {
-    font-size: 11px;
-    color: var(--c-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    margin-bottom: 6px;
-  }
-  .chat-suggested .chip {
-    display: inline-block;
-    background: #f4f7fa;
-    border: 1px solid var(--c-border);
-    color: var(--c-text);
-    padding: 5px 10px;
-    border-radius: 14px;
-    font-size: 12.5px;
-    margin: 0 4px 4px 0;
-    cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
-  }
-  .chat-suggested .chip:hover {
-    background: var(--c-accent-light);
-    border-color: var(--c-accent);
-  }
-  .chat-input {
-    border-top: 1px solid var(--c-border);
-    display: flex;
-    gap: 6px;
-    padding: 10px;
-  }
-  .chat-input input {
-    flex: 1;
-    border: 1px solid var(--c-border);
-    border-radius: 6px;
-    padding: 7px 10px;
-    font-size: 13.5px;
-    outline: none;
-  }
-  .chat-input input:focus { border-color: var(--c-accent); }
-  .chat-input button {
-    background: var(--c-accent);
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 7px 14px;
-    font-size: 13px;
-    cursor: pointer;
-    font-weight: 600;
-  }
-  .chat-input button:hover { background: var(--c-accent-dark); }
-  .chat-disclaimer {
-    font-size: 10.5px;
-    color: var(--c-muted);
-    text-align: center;
-    padding: 6px 10px 10px;
-    background: #f6f9fb;
-  }
-
-  @media (max-width: 760px) {
-    .top-bar { padding: 0 14px; }
-    .top-bar .brand .sep, .top-bar .brand .tagline { display: none; }
-    .chat-panel { width: calc(100vw - 32px); }
-  }
-
+  html { background: var(--c-bg); }
 
   /* Sidebar */
   .sidebar {
@@ -438,18 +157,19 @@
     padding: 40px 56px 80px;
     max-width: 920px;
   }
-  main h1 { font-size: 30px; margin: 0 0 6px; color: #0f1f2c; letter-spacing: -0.2px; }
+  main h1 { font-size: 34px; margin: 0 0 8px; color: #0a1722; letter-spacing: -0.3px; font-weight: 700; }
   main h2 {
-    font-size: 22px;
-    margin: 38px 0 10px;
-    padding-top: 16px;
+    font-size: 25px;
+    margin: 42px 0 12px;
+    padding-top: 18px;
     border-top: 1px solid var(--c-border);
-    color: #0f1f2c;
+    color: #0a1722;
+    font-weight: 650;
   }
   main section:first-of-type h2 { border-top: none; padding-top: 0; }
-  main h3 { font-size: 17px; margin: 22px 0 8px; color: #1f2d3a; }
-  main h4 { font-size: 14.5px; margin: 16px 0 6px; color: #2d3a47; text-transform: uppercase; letter-spacing: 0.4px; }
-  main p { margin: 0 0 12px; }
+  main h3 { font-size: 19px; margin: 24px 0 8px; color: #142231; font-weight: 600; }
+  main h4 { font-size: 15px; margin: 18px 0 6px; color: #2d3a47; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+  main p { margin: 0 0 14px; }
   main ul, main ol { margin: 0 0 14px; padding-left: 22px; }
   main li { margin-bottom: 4px; }
   main a { color: var(--c-link); text-decoration: none; border-bottom: 1px dotted var(--c-link); }
@@ -506,7 +226,7 @@
   /* "Where to find it" mini-card */
   .where {
     background: var(--c-accent-light);
-    border: 1px solid #a7d4ee;
+    border: 1px solid #c4dba1;
     border-radius: 6px;
     padding: 10px 14px;
     margin: 12px 0 18px;
@@ -551,7 +271,7 @@
     font-weight: 600;
     color: var(--c-accent-dark);
     background: var(--c-accent-light);
-    border: 1px solid #a7d4ee;
+    border: 1px solid #c4dba1;
     padding: 2px 8px;
     border-radius: 10px;
     text-transform: uppercase;
@@ -561,93 +281,24 @@
     position: relative;
     top: -3px;
   }
-  .ap-badge.new-feature {
-    background: var(--c-yellow-light);
-    border-color: #e8b800;
-    color: #7a5a00;
-  }
 
   /* Lead paragraph */
   .lead {
-    font-size: 16.5px;
-    color: var(--c-muted);
-    margin-bottom: 20px;
+    font-size: 18px;
+    color: #3a4d5c;
+    margin-bottom: 22px;
+    line-height: 1.5;
   }
 
   /* POC banner */
   .poc-banner {
-    background: var(--c-accent-light);
-    border: 1px solid var(--c-accent);
-    color: var(--c-accent-dark);
+    background: #fdf6e3;
+    border: 1px solid #f0c75e;
+    color: #6b4f00;
     padding: 10px 14px;
     border-radius: 4px;
     font-size: 13.5px;
     margin-bottom: 28px;
-  }
-  /* Stat block for the welcome page */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin: 22px 0 28px;
-  }
-  .stats .stat {
-    background: var(--c-content-bg);
-    border: 1px solid var(--c-border);
-    border-radius: 8px;
-    padding: 16px 14px;
-    text-align: center;
-    box-shadow: 0 1px 2px rgba(15, 31, 58, 0.04);
-  }
-  .stats .stat .num {
-    display: block;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--c-accent);
-    line-height: 1.1;
-  }
-  .stats .stat .lbl {
-    display: block;
-    margin-top: 4px;
-    font-size: 12px;
-    color: var(--c-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  @media (max-width: 760px) {
-    .stats { grid-template-columns: repeat(2, 1fr); }
-  }
-  /* Tier comparison cards on welcome */
-  .tier-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 14px 0 22px;
-  }
-  .tier {
-    background: var(--c-content-bg);
-    border: 1px solid var(--c-border);
-    border-radius: 6px;
-    padding: 12px 14px;
-    font-size: 13.5px;
-  }
-  .tier .label {
-    font-size: 10.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--c-muted);
-    margin-bottom: 4px;
-  }
-  .tier .name { font-weight: 600; font-size: 15px; color: #1a2332; margin-bottom: 4px; }
-  .tier .examples { color: var(--c-muted); font-size: 12.5px; }
-  .tier.pinnacle {
-    background: var(--c-accent-light);
-    border-color: var(--c-accent);
-  }
-  .tier.pinnacle .label { color: var(--c-accent-dark); }
-  @media (max-width: 760px) {
-    .tier-row { grid-template-columns: 1fr; }
   }
 
   /* Footer */
@@ -696,98 +347,1214 @@
     .sidebar, .menu-toggle { display: none; }
     main { margin-left: 0; padding: 0; max-width: none; }
     section { page-break-inside: avoid; }
-    .poc-banner { display: none; }
+    .poc-banner, .mascot-launcher, .chatbot-panel, .lightbox, .brand-bar, .arch-layer { display: none !important; }
+  }
+
+  /* ============================================================
+     ENHANCEMENTS: animations, mascot/chatbot, right-rail TOC,
+     decorative dividers, scroll reveals, lightbox, hover lifts
+     ============================================================ */
+
+  @media (min-width: 1320px) {
+    main { max-width: 1000px; padding-right: 32px; }
+  }
+
+  .brand-bar {
+    position: fixed;
+    top: 0; left: var(--sidebar-w); right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #7DBF45, #5fa030, #2d6b9e, #7DBF45);
+    background-size: 300% 100%;
+    animation: gradientShift 12s ease infinite;
+    z-index: 90;
+  }
+  @keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @media (max-width: 960px) { .brand-bar { left: 0; } }
+
+  .hero { position: relative; }
+  .hero::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 80% 30%, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 40%);
+    pointer-events: none;
+    animation: sunPulse 6s ease-in-out infinite;
+  }
+  @keyframes sunPulse {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50%      { opacity: 0.85; transform: scale(1.05); }
+  }
+  .hero svg { animation: heroFloat 14s ease-in-out infinite; }
+  @keyframes heroFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+
+  .sidebar-header .logo-mark path:last-child {
+    transform-origin: 12px 18px;
+    animation: logoPulse 4s ease-in-out infinite;
+  }
+  @keyframes logoPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.75; transform: scale(1.08); }
+  }
+
+  .sidebar nav a { position: relative; overflow: hidden; }
+  .sidebar nav a::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--c-accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.25s ease;
+  }
+  .sidebar nav a:hover::before,
+  .sidebar nav a.active::before { transform: scaleY(1); }
+  .sidebar nav a:hover { transform: translateX(2px); }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .hero svg, .hero::after, .brand-bar, .sidebar-header .logo-mark path:last-child,
+    .mascot-launcher, .eye-lid, .wing-flap, .monitor-glow { animation: none !important; }
+  }
+
+  main h2 { position: relative; }
+  main h2::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -8px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--c-accent) 0%, transparent 100%);
+    transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  section.in-view h2::after { width: 64px; }
+
+  .where, .callout, .screenshot {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .where:hover, .callout:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(15, 31, 44, 0.08);
+  }
+  .screenshot { cursor: zoom-in; }
+  .screenshot:hover {
+    transform: translateY(-3px) scale(1.005);
+    box-shadow: 0 10px 28px rgba(15, 31, 44, 0.12);
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed; inset: 0;
+    background: rgba(15, 31, 44, 0.85);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 9000;
+    backdrop-filter: blur(6px);
+    cursor: zoom-out;
+    animation: fadeIn 0.2s ease;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 92vw; max-height: 92vh;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    animation: zoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes zoomIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+
+  /* Mascot launcher */
+  .mascot-launcher {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7DBF45 0%, #5fa030 100%);
+    border: 3px solid #fff;
+    box-shadow: 0 6px 24px rgba(125, 191, 69, 0.45), 0 2px 6px rgba(15,31,44,0.15);
+    cursor: pointer;
+    z-index: 8000;
+    overflow: visible;
+    animation: mascotBob 3.5s ease-in-out infinite;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .mascot-launcher:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 32px rgba(125, 191, 69, 0.6), 0 4px 10px rgba(15,31,44,0.2);
+  }
+  .mascot-launcher.hidden { transform: scale(0); opacity: 0; pointer-events: none; }
+  @keyframes mascotBob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+  .mascot-launcher svg { width: 100%; height: 100%; display: block; border-radius: 50%; }
+  .mascot-launcher .talk-bubble {
+    position: absolute;
+    top: 4px; right: 88px;
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: 10px 10px 2px 10px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    color: var(--c-text);
+    box-shadow: 0 4px 12px rgba(15,31,44,0.1);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+  }
+  .mascot-launcher .talk-bubble::after {
+    content: "";
+    position: absolute;
+    right: -7px; bottom: 8px;
+    width: 0; height: 0;
+    border-left: 7px solid #fff;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+  }
+  .mascot-launcher.greet .talk-bubble { opacity: 1; transform: translateX(0); }
+  .mascot-launcher .pulse-ring {
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 2px solid #7DBF45;
+    animation: pulseRing 2.5s ease-out infinite;
+    pointer-events: none;
+  }
+  @keyframes pulseRing {
+    0%   { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+
+  /* Chatbot panel */
+  .chatbot-panel {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 380px;
+    max-width: calc(100vw - 32px);
+    height: 560px;
+    max-height: calc(100vh - 48px);
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(15, 31, 44, 0.25);
+    z-index: 8001;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    transform-origin: bottom right;
+    animation: chatPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .chatbot-panel.open { display: flex; }
+  @keyframes chatPop {
+    from { opacity: 0; transform: scale(0.85) translateY(20px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .chatbot-scene {
+    height: 160px;
+    background: linear-gradient(180deg, #eaf2f9 0%, #d4e4f0 100%);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .chatbot-scene svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .chatbot-scene .close-x {
+    position: absolute;
+    top: 10px; right: 10px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(15, 31, 44, 0.6);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease;
+    z-index: 2;
+  }
+  .chatbot-scene .close-x:hover { background: rgba(15, 31, 44, 0.85); }
+  .chatbot-header-text {
+    padding: 12px 16px 14px;
+    background: var(--c-sidebar-bg);
+    color: #fff;
+    font-size: 13.5px;
+    flex-shrink: 0;
+  }
+  .chatbot-header-text strong { color: var(--c-accent); }
+  .chatbot-header-text .sub { font-size: 11.5px; color: #94a3b8; margin-top: 2px; }
+  .chatbot-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px 14px 8px;
+    background: #fafbfc;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .chat-msg {
+    max-width: 85%;
+    padding: 9px 12px;
+    border-radius: 14px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    animation: msgIn 0.25s ease;
+  }
+  @keyframes msgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .chat-msg.bot {
+    background: #fff;
+    border: 1px solid var(--c-border);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  .chat-msg.user {
+    background: var(--c-accent);
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  .chat-msg .jump {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 3px 9px;
+    background: var(--c-accent-light);
+    color: var(--c-accent-dark);
+    border: 1px solid #c4dba1;
+    border-radius: 12px;
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .chat-msg .jump:hover { background: var(--c-accent); color: #fff; }
+  .chat-msg .src-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--c-accent-dark);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .chat-typing {
+    display: inline-flex;
+    gap: 3px;
+    padding: 9px 12px;
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: 14px;
+    align-self: flex-start;
+  }
+  .chat-typing span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #94a3b8;
+    animation: typingBlink 1.2s infinite;
+  }
+  .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingBlink {
+    0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+    30%           { opacity: 1; transform: translateY(-3px); }
+  }
+  .chatbot-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px 14px 8px;
+    background: #fafbfc;
+    border-top: 1px solid var(--c-border);
+  }
+  .chatbot-suggestions button {
+    background: #fff;
+    border: 1px solid var(--c-border);
+    color: var(--c-text);
+    border-radius: 14px;
+    padding: 5px 11px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .chatbot-suggestions button:hover {
+    background: var(--c-accent-light);
+    border-color: var(--c-accent);
+    color: var(--c-accent-dark);
+  }
+  .chatbot-input {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    border-top: 1px solid var(--c-border);
+    background: #fff;
+  }
+  .chatbot-input input {
+    flex: 1;
+    padding: 9px 12px;
+    border: 1px solid var(--c-border);
+    border-radius: 18px;
+    font-size: 13.5px;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+  .chatbot-input input:focus { border-color: var(--c-accent); }
+  .chatbot-input button {
+    background: var(--c-accent);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 36px; height: 36px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .chatbot-input button:hover { background: var(--c-accent-dark); transform: scale(1.05); }
+  .chatbot-input button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* Mascot eye blink + wing flap */
+  .eye-lid { transform-origin: center; animation: blink 5s infinite; }
+  @keyframes blink {
+    0%, 92%, 100% { transform: scaleY(0); }
+    94%, 96%      { transform: scaleY(1); }
+  }
+  .wing-flap { transform-origin: 100px 110px; animation: wingFlap 4s ease-in-out infinite; }
+  @keyframes wingFlap {
+    0%, 100% { transform: rotate(0deg); }
+    50%      { transform: rotate(-8deg); }
+  }
+  .monitor-glow { animation: monitorFlicker 3s ease-in-out infinite; }
+  @keyframes monitorFlicker {
+    0%, 100% { opacity: 0.85; }
+    50%      { opacity: 1; }
+  }
+
+
+  /* ============== Drifting architectural backgrounds ============== */
+  .arch-layer {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .arch-shape {
+    position: absolute;
+    width: 720px;
+    height: auto;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  .arch-shape svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .arch-shape svg path,
+  .arch-shape svg line,
+  .arch-shape svg circle,
+  .arch-shape svg rect,
+  .arch-shape svg polyline,
+  .arch-shape svg polygon {
+    fill: none;
+    stroke: #3a4d5c;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+  .arch-shape svg .filled {
+    fill: #3a4d5c;
+    stroke: none;
+    opacity: 0.7;
+  }
+  @keyframes archDrift1 {
+    0%   { transform: translate(-40vw, 8vh) rotate(-2deg); opacity: 0; }
+    15%  { opacity: 0.13; }
+    85%  { opacity: 0.13; }
+    100% { transform: translate(120vw, 14vh) rotate(2deg); opacity: 0; }
+  }
+  @keyframes archDrift2 {
+    0%   { transform: translate(115vw, 55vh) rotate(3deg); opacity: 0; }
+    18%  { opacity: 0.12; }
+    82%  { opacity: 0.12; }
+    100% { transform: translate(-45vw, 48vh) rotate(-1deg); opacity: 0; }
+  }
+  @keyframes archDrift3 {
+    0%   { transform: translate(-35vw, 70vh) rotate(1deg); opacity: 0; }
+    20%  { opacity: 0.11; }
+    80%  { opacity: 0.11; }
+    100% { transform: translate(120vw, 60vh) rotate(-3deg); opacity: 0; }
+  }
+  @keyframes archDrift4 {
+    0%   { transform: translate(110vw, 22vh) rotate(-1deg); opacity: 0; }
+    18%  { opacity: 0.12; }
+    82%  { opacity: 0.12; }
+    100% { transform: translate(-40vw, 32vh) rotate(2deg); opacity: 0; }
+  }
+  @keyframes archDrift5 {
+    0%   { transform: translate(-40vw, 38vh) rotate(2deg); opacity: 0; }
+    18%  { opacity: 0.11; }
+    82%  { opacity: 0.11; }
+    100% { transform: translate(120vw, 28vh) rotate(-2deg); opacity: 0; }
+  }
+  @keyframes archDrift6 {
+    0%   { transform: translate(115vw, 80vh) rotate(-2deg); opacity: 0; }
+    20%  { opacity: 0.10; }
+    80%  { opacity: 0.10; }
+    100% { transform: translate(-45vw, 5vh) rotate(2deg); opacity: 0; }
+  }
+  .arch-shape.s1 { animation: archDrift1 145s linear infinite; }
+  .arch-shape.s2 { animation: archDrift2 165s linear infinite; animation-delay: -45s; }
+  .arch-shape.s3 { animation: archDrift3 185s linear infinite; animation-delay: -90s; }
+  .arch-shape.s4 { animation: archDrift4 155s linear infinite; animation-delay: -65s; }
+  .arch-shape.s5 { animation: archDrift5 175s linear infinite; animation-delay: -120s; }
+  .arch-shape.s6 { animation: archDrift6 195s linear infinite; animation-delay: -150s; }
+  @media (prefers-reduced-motion: reduce) {
+    .arch-shape { animation: none !important; opacity: 0.10 !important; }
+    .arch-shape.s1 { transform: translate(15vw, 8vh); }
+    .arch-shape.s2 { transform: translate(60vw, 22vh); }
+    .arch-shape.s3 { transform: translate(20vw, 45vh); }
+    .arch-shape.s4 { transform: translate(70vw, 55vh); }
+    .arch-shape.s5 { transform: translate(35vw, 75vh); }
+    .arch-shape.s6 { transform: translate(80vw, 80vh); }
+  }
+  @media (max-width: 960px) {
+    .arch-shape { width: 480px; }
+  }
+  @media (max-width: 600px) {
+    .arch-layer { display: none; }
+  }
+
+  /* ============== Pinnacle Series side-embed ============== */
+  .embed-toggle {
+    position: fixed;
+    top: 16px;
+    right: 22px;
+    z-index: 92;
+    background: linear-gradient(135deg, #8acb50 0%, #5fa030 100%);
+    color: #fff;
+    border: none;
+    padding: 11px 22px;
+    border-radius: 26px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(125, 191, 69, 0.55), 0 2px 6px rgba(15,31,44,0.18);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.2px;
+    text-shadow: 0 1px 1px rgba(15,31,44,0.15);
+  }
+  .embed-toggle::before,
+  .embed-toggle::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 30px;
+    border: 2px solid #7DBF45;
+    animation: embedPulse 2.6s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+    pointer-events: none;
+  }
+  .embed-toggle::after { animation-delay: 1.3s; }
+  @keyframes embedPulse {
+    0%   { transform: scale(1);   opacity: 0.75; }
+    100% { transform: scale(1.45); opacity: 0; }
+  }
+  .embed-toggle .arrow {
+    display: inline-block;
+    font-size: 15px;
+    line-height: 1;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .embed-toggle:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 12px 32px rgba(125, 191, 69, 0.7), 0 4px 10px rgba(15,31,44,0.22);
+  }
+  .embed-toggle:hover .arrow { transform: translateX(5px); }
+  .embed-toggle:active { transform: translateY(0) scale(0.98); }
+  body.embed-open .embed-toggle { display: none; }
+  @media (max-width: 720px) { .embed-toggle { display: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .embed-toggle::before, .embed-toggle::after { animation: none !important; opacity: 0 !important; }
+  }
+
+  .embed-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 480px;
+    height: 100vh;
+    background: #fff;
+    border-left: 1px solid var(--c-border);
+    box-shadow: -8px 0 30px rgba(15, 31, 44, 0.1);
+    z-index: 96;
+    display: none;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .embed-panel.open { display: flex; transform: translateX(0); }
+  @media (min-width: 1500px) { .embed-panel { width: 45vw; } }
+  @media (max-width: 1100px) { .embed-panel { width: 100vw; } }
+
+  .embed-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--c-sidebar-bg);
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .embed-title {
+    font-weight: 500;
+    font-size: 13px;
+    flex: 1;
+    color: #fff;
+  }
+  .embed-title .accent { color: var(--c-accent); }
+  .embed-popout, .embed-close {
+    color: #b8c4d1;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border-bottom: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .embed-popout:hover, .embed-close:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+  }
+  .embed-close { font-size: 14px; padding: 5px 9px; }
+
+  .embed-banner {
+    background: #fff8e1;
+    color: #6b4f00;
+    padding: 6px 14px;
+    font-size: 11.5px;
+    border-bottom: 1px solid #f0c75e;
+    flex-shrink: 0;
+    text-align: center;
+  }
+  .embed-banner a { color: #6b4f00; font-weight: 500; }
+
+  .embed-body {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: #fafbfc;
+  }
+  .embed-body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  body.embed-open main { transition: margin-right 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+  @media (min-width: 1101px) {
+    body.embed-open main { margin-right: 480px; }
+  }
+  @media (min-width: 1500px) {
+    body.embed-open main { margin-right: 45vw; }
+  }
+  @media (max-width: 1100px) {
+    body.embed-open main { display: none; }
+  }
+
+  /* Move chatbot when embed open so it doesn't overlap */
+  @media (min-width: 1101px) {
+    body.embed-open .mascot-launcher,
+    body.embed-open .chatbot-panel { right: calc(480px + 24px); }
+  }
+  @media (min-width: 1500px) {
+    body.embed-open .mascot-launcher,
+    body.embed-open .chatbot-panel { right: calc(45vw + 24px); }
+  }
+
+
+  /* ============== Text knock-out effect over architectural drawings ============== */
+  /* Stacked white halos so drawings fade where text is, stay visible in margins */
+  main {
+    text-shadow:
+      0 0 8px #fff,
+      0 0 6px #fff,
+      0 0 4px #fff;
+  }
+  main h1, main h2, main h3, main h4 {
+    text-shadow:
+      0 0 10px #fff,
+      0 0 8px #fff,
+      0 0 6px #fff;
+  }
+  /* Elements that already have solid backgrounds don't need halos */
+  .callout, .callout *,
+  .where, .where *,
+  .screenshot, .screenshot *,
+  .poc-banner, .poc-banner *,
+  .ap-badge,
+  .hero, .hero *,
+  table, table *,
+  code, pre {
+    text-shadow: none;
+  }
+
+  /* ============== Hero illustration as faded full-page background ============== */
+  .hero-bg {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+    opacity: 0.35;
+  }
+  .hero-bg svg {
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 </style>
 </head>
 <body>
 
-<div class="ae-backdrop" aria-hidden="true">
-  <svg viewBox="0 0 1600 1000" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+<div class="hero-bg" aria-hidden="true">
+  <svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
     <defs>
-      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#9bb6cd" stroke-width="0.5" opacity="0.3"/>
-      </pattern>
-      <pattern id="grid-major" width="200" height="200" patternUnits="userSpaceOnUse">
-        <path d="M 200 0 L 0 0 0 200" fill="none" stroke="#7da3c1" stroke-width="0.8" opacity="0.4"/>
-      </pattern>
+      <linearGradient id="sky-bg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#eaf2f9"/>
+        <stop offset="60%" stop-color="#f5e6e8"/>
+        <stop offset="100%" stop-color="#fbe9e2"/>
+      </linearGradient>
+      <linearGradient id="m1-bg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#cdb2d4"/>
+        <stop offset="100%" stop-color="#a890b8"/>
+      </linearGradient>
+      <linearGradient id="m2-bg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#9eb7d0"/>
+        <stop offset="100%" stop-color="#7691b0"/>
+      </linearGradient>
+      <linearGradient id="m3-bg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a4d5c"/>
+        <stop offset="100%" stop-color="#2a3a48"/>
+      </linearGradient>
+      <linearGradient id="ground-bg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#a8c4d6"/>
+        <stop offset="100%" stop-color="#7da5c0"/>
+      </linearGradient>
     </defs>
-    <!-- Soft tinted background -->
-    <rect width="1600" height="1000" fill="url(#grid)"/>
-    <rect width="1600" height="1000" fill="url(#grid-major)"/>
-
-    <!-- Floor plan / blueprint #1 (drifting left-right) -->
-    <g class="ae-drift1" transform="translate(80, 80)" opacity="0.5">
-      <rect x="0" y="0" width="320" height="220" fill="none" stroke="#0078b4" stroke-width="1.5"/>
-      <line x1="0" y1="100" x2="320" y2="100" stroke="#0078b4" stroke-width="1"/>
-      <line x1="160" y1="0" x2="160" y2="220" stroke="#0078b4" stroke-width="1"/>
-      <line x1="80" y1="100" x2="80" y2="220" stroke="#0078b4" stroke-width="0.8"/>
-      <rect x="240" y="40" width="60" height="40" fill="none" stroke="#0078b4" stroke-width="0.8"/>
-      <circle cx="40" cy="50" r="12" fill="none" stroke="#0078b4" stroke-width="0.8"/>
-      <text x="0" y="-8" font-size="10" font-family="monospace" fill="#0078b4" opacity="0.7">FLOOR PLAN — A-101</text>
-      <text x="170" y="115" font-size="8" font-family="monospace" fill="#0078b4" opacity="0.7">12'-6"</text>
+    <rect x="0" y="0" width="1200" height="320" fill="url(#sky-bg)"/>
+    <circle cx="950" cy="100" r="120" fill="#f8d4cc" opacity="0.55"/>
+    <circle cx="950" cy="100" r="70" fill="#fae0d8" opacity="0.5"/>
+    <g fill="#ffffff" opacity="0.92">
+      <ellipse cx="180" cy="100" rx="80" ry="22"/>
+      <ellipse cx="220" cy="90" rx="55" ry="18"/>
+      <ellipse cx="600" cy="70" rx="90" ry="20"/>
+      <ellipse cx="650" cy="60" rx="55" ry="14"/>
+      <ellipse cx="1080" cy="140" rx="70" ry="18"/>
     </g>
-
-    <!-- Section / elevation #2 (drifts opposite direction) -->
-    <g class="ae-drift2" transform="translate(1100, 120)" opacity="0.45">
-      <polyline points="0,150 0,80 100,30 200,80 200,150" fill="none" stroke="#0f1f3a" stroke-width="1.5"/>
-      <line x1="0" y1="150" x2="200" y2="150" stroke="#0f1f3a" stroke-width="1"/>
-      <line x1="20" y1="150" x2="20" y2="100" stroke="#0f1f3a" stroke-width="0.8"/>
-      <rect x="40" y="100" width="30" height="50" fill="none" stroke="#0f1f3a" stroke-width="0.8"/>
-      <line x1="80" y1="150" x2="80" y2="110" stroke="#0f1f3a" stroke-width="0.8"/>
-      <rect x="120" y="100" width="40" height="50" fill="none" stroke="#0f1f3a" stroke-width="0.8"/>
-      <text x="0" y="-8" font-size="10" font-family="monospace" fill="#0f1f3a" opacity="0.7">ELEVATION — E-201</text>
-    </g>
-
-    <!-- Drafting compass — slow rotation -->
-    <g class="ae-spin" transform="translate(180, 700)" opacity="0.32">
-      <circle cx="250" cy="250" r="180" fill="none" stroke="#0078b4" stroke-width="0.8"/>
-      <circle cx="250" cy="250" r="120" fill="none" stroke="#0078b4" stroke-width="0.6"/>
-      <circle cx="250" cy="250" r="60" fill="none" stroke="#0078b4" stroke-width="0.6"/>
-      <line x1="70" y1="250" x2="430" y2="250" stroke="#0078b4" stroke-width="0.6"/>
-      <line x1="250" y1="70" x2="250" y2="430" stroke="#0078b4" stroke-width="0.6"/>
-      <text x="250" y="60" font-size="10" font-family="monospace" fill="#0078b4" opacity="0.7" text-anchor="middle">N</text>
-    </g>
-
-    <!-- Detail callout box -->
-    <g transform="translate(1200, 600)" opacity="0.4">
-      <rect x="0" y="0" width="240" height="160" fill="none" stroke="#0078b4" stroke-width="1" stroke-dasharray="4,4"/>
-      <text x="0" y="-8" font-size="10" font-family="monospace" fill="#0078b4">DETAIL — D-301 · 1:20</text>
-      <line x1="20" y1="40" x2="220" y2="40" stroke="#0078b4" stroke-width="0.6"/>
-      <line x1="20" y1="80" x2="220" y2="80" stroke="#0078b4" stroke-width="0.6"/>
-      <line x1="20" y1="120" x2="220" y2="120" stroke="#0078b4" stroke-width="0.6"/>
-    </g>
-
-    <!-- Dimension lines / measurements -->
-    <g transform="translate(500, 500)" opacity="0.35">
-      <line x1="0" y1="0" x2="500" y2="0" stroke="#0078b4" stroke-width="0.8"/>
-      <line x1="0" y1="-6" x2="0" y2="6" stroke="#0078b4" stroke-width="0.8"/>
-      <line x1="250" y1="-6" x2="250" y2="6" stroke="#0078b4" stroke-width="0.8"/>
-      <line x1="500" y1="-6" x2="500" y2="6" stroke="#0078b4" stroke-width="0.8"/>
-      <text x="125" y="-10" font-size="10" font-family="monospace" fill="#0078b4" text-anchor="middle">24'-0"</text>
-      <text x="375" y="-10" font-size="10" font-family="monospace" fill="#0078b4" text-anchor="middle">24'-0"</text>
+    <path d="M0 240 L120 170 L220 210 L340 130 L470 200 L580 160 L720 220 L860 150 L990 200 L1120 170 L1200 220 L1200 320 L0 320 Z" fill="url(#m1-bg)" opacity="0.85"/>
+    <path d="M0 270 L80 230 L200 260 L300 200 L420 250 L540 220 L660 270 L800 220 L920 250 L1060 230 L1200 260 L1200 320 L0 320 Z" fill="url(#m2-bg)" opacity="0.9"/>
+    <path d="M0 295 L100 260 L180 285 L280 240 L380 280 L500 250 L620 290 L740 250 L860 290 L1000 260 L1120 285 L1200 270 L1200 320 L0 320 Z" fill="url(#m3-bg)"/>
+    <path d="M280 240 L295 252 L260 252 Z" fill="#ffffff" opacity="0.55"/>
+    <path d="M740 250 L755 262 L720 262 Z" fill="#ffffff" opacity="0.55"/>
+    <path d="M1000 260 L1015 272 L980 272 Z" fill="#ffffff" opacity="0.55"/>
+    <rect x="0" y="305" width="1200" height="15" fill="url(#ground-bg)" opacity="0.7"/>
+    <g fill="#1f3543" opacity="0.78">
+      <polygon points="1080,300 1095,260 1110,300"/>
+      <polygon points="1110,300 1130,250 1150,300"/>
+      <polygon points="1150,300 1165,265 1180,300"/>
+      <polygon points="1175,300 1190,270 1200,290 1200,300"/>
     </g>
   </svg>
 </div>
 
-<header class="top-bar" role="banner">
-  <div class="brand">
-    <svg class="mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M2 18 L12 4 L22 18 Z" fill="#0f1f3a"/>
-      <path d="M12 4 L22 18 L17 18 Z" fill="#0096DC"/>
+<div class="brand-bar" aria-hidden="true"></div>
+<button class="embed-toggle" id="embed-toggle" aria-label="Open Pinnacle Series alongside">
+  <span>Open Pinnacle Series</span>
+  <span class="arrow" aria-hidden="true">&rarr;</span>
+</button>
+
+<aside class="embed-panel" id="embed-panel" aria-label="Pinnacle Series">
+  <header class="embed-header">
+    <span class="embed-title"><span class="accent">&#9650;</span> Pinnacle Series</span>
+    <a href="#" target="_blank" rel="noopener" class="embed-popout" id="embed-popout">Open in new tab &nearr;</a>
+    <button class="embed-close" id="embed-close" aria-label="Close">&#x2715;</button>
+  </header>
+  <div class="embed-banner">
+    Some pages may not load embedded due to security settings &mdash;
+    <a href="#" target="_blank" rel="noopener" id="embed-banner-link">open in a new tab</a> if so.
+  </div>
+  <div class="embed-body">
+    <iframe id="embed-frame" title="Pinnacle Series" referrerpolicy="no-referrer-when-downgrade" loading="lazy" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+  </div>
+</aside>
+
+
+<div class="arch-layer" aria-hidden="true">
+
+  <!-- 1. Cable-stayed bridge elevation -->
+  <div class="arch-shape s1">
+    <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="280" x2="720" y2="280" stroke-width="0.8"/>
+      <path d="M 50 290 Q 60 285 70 290 T 90 290 T 110 290" stroke-width="0.6"/>
+      <path d="M 200 295 Q 215 290 230 295 T 260 295" stroke-width="0.6"/>
+      <path d="M 380 290 Q 395 285 410 290 T 440 290" stroke-width="0.6"/>
+      <path d="M 540 295 Q 555 290 570 295 T 600 295" stroke-width="0.6"/>
+      <line x1="218" y1="280" x2="218" y2="40" stroke-width="2"/>
+      <line x1="226" y1="280" x2="226" y2="40" stroke-width="2"/>
+      <line x1="497" y1="280" x2="497" y2="40" stroke-width="2"/>
+      <line x1="505" y1="280" x2="505" y2="40" stroke-width="2"/>
+      <line x1="218" y1="60" x2="226" y2="60"/>
+      <line x1="218" y1="80" x2="226" y2="80"/>
+      <line x1="497" y1="60" x2="505" y2="60"/>
+      <line x1="497" y1="80" x2="505" y2="80"/>
+      <line x1="20" y1="218" x2="700" y2="218" stroke-width="1.6"/>
+      <line x1="20" y1="232" x2="700" y2="232" stroke-width="1"/>
+      <line x1="20" y1="225" x2="700" y2="225" stroke-width="0.5"/>
+      <line x1="222" y1="50" x2="40" y2="218"/>
+      <line x1="222" y1="50" x2="80" y2="218"/>
+      <line x1="222" y1="50" x2="120" y2="218"/>
+      <line x1="222" y1="50" x2="160" y2="218"/>
+      <line x1="222" y1="50" x2="260" y2="218"/>
+      <line x1="222" y1="50" x2="300" y2="218"/>
+      <line x1="222" y1="50" x2="340" y2="218"/>
+      <line x1="222" y1="50" x2="380" y2="218"/>
+      <line x1="501" y1="50" x2="340" y2="218"/>
+      <line x1="501" y1="50" x2="380" y2="218"/>
+      <line x1="501" y1="50" x2="420" y2="218"/>
+      <line x1="501" y1="50" x2="460" y2="218"/>
+      <line x1="501" y1="50" x2="540" y2="218"/>
+      <line x1="501" y1="50" x2="580" y2="218"/>
+      <line x1="501" y1="50" x2="620" y2="218"/>
+      <line x1="501" y1="50" x2="660" y2="218"/>
+      <line x1="501" y1="50" x2="700" y2="218"/>
+      <line x1="216" y1="280" x2="216" y2="320"/>
+      <line x1="228" y1="280" x2="228" y2="320"/>
+      <line x1="495" y1="280" x2="495" y2="320"/>
+      <line x1="507" y1="280" x2="507" y2="320"/>
+      <rect x="200" y="320" width="44" height="14"/>
+      <rect x="479" y="320" width="44" height="14"/>
+      <line x1="20" y1="20" x2="700" y2="20" stroke-width="0.5"/>
+      <line x1="20" y1="14" x2="20" y2="26" stroke-width="0.5"/>
+      <line x1="700" y1="14" x2="700" y2="26" stroke-width="0.5"/>
+      <line x1="222" y1="14" x2="222" y2="26" stroke-width="0.5"/>
+      <line x1="501" y1="14" x2="501" y2="26" stroke-width="0.5"/>
+      <text x="120" y="14" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">120 m</text>
+      <text x="361" y="14" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">280 m  MAIN SPAN</text>
+      <text x="600" y="14" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">120 m</text>
+      <rect x="510" y="340" width="190" height="32"/>
+      <line x1="510" y1="352" x2="700" y2="352"/>
+      <line x1="600" y1="340" x2="600" y2="372"/>
+      <text x="514" y="350" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">CABLE-STAYED BRIDGE</text>
+      <text x="514" y="364" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">SCALE 1:1500</text>
+      <text x="606" y="350" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">DWG</text>
+      <text x="606" y="364" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">S-101</text>
     </svg>
-    <strong>PINNACLE SERIES</strong>
-    <span class="sep tagline">·</span>
-    <span class="tagline" style="color: var(--c-muted); font-size: 12px;">by Eagle Point Software</span>
   </div>
-  <div class="actions">
-    <a class="btn btn-secondary" href="https://eaglepoint.com/pinnacle-series/" target="_blank" rel="noreferrer">About</a>
-    <a class="btn btn-secondary" href="https://eaglepoint.com/request-a-demo/" target="_blank" rel="noreferrer">Request a Demo</a>
-    <a class="btn btn-primary" href="https://portal.pinnacleseries.com/#/home" target="_blank" rel="noreferrer">
-      Pinnacle Series Login <span class="arrow">→</span>
-    </a>
+
+  <!-- 2. Detailed floor plan with fixtures and dimensions -->
+  <div class="arch-shape s2">
+    <svg viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg">
+      <rect x="40" y="40" width="640" height="380" stroke-width="2"/>
+      <rect x="48" y="48" width="624" height="364" stroke-width="0.7"/>
+      <rect x="280" y="48" width="6" height="200" fill="#3a4d5c" stroke="none" opacity="0.55"/>
+      <rect x="48" y="248" width="540" height="6" fill="#3a4d5c" stroke="none" opacity="0.55"/>
+      <rect x="440" y="48" width="6" height="100" fill="#3a4d5c" stroke="none" opacity="0.55"/>
+      <rect x="448" y="60" width="38" height="22" rx="3"/>
+      <line x1="448" y1="71" x2="486" y2="71" stroke-width="0.5"/>
+      <ellipse cx="520" cy="74" rx="22" ry="14"/>
+      <circle cx="520" cy="74" r="3"/>
+      <rect x="560" y="56" width="60" height="60"/>
+      <line x1="560" y1="56" x2="620" y2="116" stroke-width="0.5"/>
+      <line x1="560" y1="116" x2="620" y2="56" stroke-width="0.5"/>
+      <circle cx="590" cy="86" r="3"/>
+      <rect x="450" y="270" width="220" height="40"/>
+      <circle cx="490" cy="285" r="6"/>
+      <circle cx="510" cy="285" r="6"/>
+      <circle cx="490" cy="300" r="6"/>
+      <circle cx="510" cy="300" r="6"/>
+      <rect x="540" y="278" width="50" height="24"/>
+      <rect x="615" y="278" width="40" height="24"/>
+      <line x1="615" y1="290" x2="655" y2="290" stroke-width="0.5"/>
+      <rect x="60" y="270" width="120" height="130"/>
+      <line x1="60" y1="280" x2="180" y2="280"/>
+      <line x1="60" y1="290" x2="180" y2="290"/>
+      <line x1="60" y1="300" x2="180" y2="300"/>
+      <line x1="60" y1="310" x2="180" y2="310"/>
+      <line x1="60" y1="320" x2="180" y2="320"/>
+      <line x1="60" y1="330" x2="180" y2="330"/>
+      <line x1="60" y1="340" x2="180" y2="340"/>
+      <line x1="60" y1="350" x2="180" y2="350"/>
+      <line x1="60" y1="360" x2="180" y2="360"/>
+      <line x1="60" y1="370" x2="180" y2="370"/>
+      <line x1="60" y1="380" x2="180" y2="380"/>
+      <line x1="60" y1="390" x2="180" y2="390"/>
+      <line x1="120" y1="395" x2="120" y2="320"/>
+      <polygon points="116,322 120,316 124,322" fill="#3a4d5c" stroke="none" opacity="0.6"/>
+      <text x="130" y="395" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">UP 14R</text>
+      <path d="M 280 100 A 36 36 0 0 1 316 136"/>
+      <line x1="280" y1="100" x2="316" y2="100" stroke-width="0.7"/>
+      <path d="M 440 200 A 36 36 0 0 0 476 236"/>
+      <line x1="440" y1="200" x2="476" y2="200" stroke-width="0.7"/>
+      <path d="M 220 248 A 30 30 0 0 1 250 278"/>
+      <line x1="120" y1="40" x2="200" y2="40" stroke-width="3"/>
+      <line x1="120" y1="42" x2="200" y2="42" stroke-width="0.6"/>
+      <line x1="120" y1="46" x2="200" y2="46" stroke-width="0.6"/>
+      <line x1="320" y1="40" x2="400" y2="40" stroke-width="3"/>
+      <line x1="320" y1="42" x2="400" y2="42" stroke-width="0.6"/>
+      <line x1="320" y1="46" x2="400" y2="46" stroke-width="0.6"/>
+      <line x1="40" y1="280" x2="40" y2="340" stroke-width="3"/>
+      <line x1="42" y1="280" x2="42" y2="340" stroke-width="0.6"/>
+      <line x1="46" y1="280" x2="46" y2="340" stroke-width="0.6"/>
+      <line x1="40" y1="20" x2="680" y2="20" stroke-width="0.5"/>
+      <line x1="40" y1="14" x2="40" y2="26" stroke-width="0.5"/>
+      <line x1="680" y1="14" x2="680" y2="26" stroke-width="0.5"/>
+      <line x1="280" y1="14" x2="280" y2="26" stroke-width="0.5"/>
+      <line x1="440" y1="14" x2="440" y2="26" stroke-width="0.5"/>
+      <text x="160" y="14" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">4800</text>
+      <text x="360" y="14" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">3200</text>
+      <text x="560" y="14" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">4800</text>
+      <line x1="20" y1="40" x2="20" y2="420" stroke-width="0.5"/>
+      <line x1="14" y1="40" x2="26" y2="40" stroke-width="0.5"/>
+      <line x1="14" y1="420" x2="26" y2="420" stroke-width="0.5"/>
+      <line x1="14" y1="248" x2="26" y2="248" stroke-width="0.5"/>
+      <text x="20" y="144" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" transform="rotate(-90 20 144)" text-anchor="middle">4160</text>
+      <text x="20" y="334" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" transform="rotate(-90 20 334)" text-anchor="middle">3440</text>
+      <circle cx="640" cy="380" r="20"/>
+      <polygon points="640,365 645,380 640,395 635,380"/>
+      <line x1="640" y1="365" x2="640" y2="395" stroke-width="0.5"/>
+      <text x="640" y="362" font-size="10" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">N</text>
+      <rect x="40" y="430" width="220" height="40"/>
+      <line x1="40" y1="445" x2="260" y2="445"/>
+      <line x1="170" y1="430" x2="170" y2="470"/>
+      <text x="46" y="442" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">FLOOR PLAN</text>
+      <text x="46" y="458" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">SCALE 1:50</text>
+      <text x="176" y="442" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">A-101</text>
+      <text x="176" y="458" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">SHEET 01/12</text>
+    </svg>
   </div>
-</header>
+
+  <!-- 3. High-rise tower elevation -->
+  <div class="arch-shape s3">
+    <svg viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="450" x2="720" y2="450" stroke-width="2"/>
+      <line x1="0" y1="455" x2="720" y2="455" stroke-width="0.4"/>
+      <line x1="0" y1="460" x2="720" y2="460" stroke-width="0.4"/>
+      <rect x="220" y="50" width="280" height="400" stroke-width="2"/>
+      <rect x="240" y="50" width="240" height="20"/>
+      <rect x="260" y="30" width="200" height="20"/>
+      <line x1="350" y1="0" x2="350" y2="30" stroke-width="0.7"/>
+      <line x1="370" y1="0" x2="370" y2="30" stroke-width="0.7"/>
+      <line x1="220" y1="100" x2="500" y2="100"/>
+      <line x1="220" y1="130" x2="500" y2="130"/>
+      <line x1="220" y1="160" x2="500" y2="160"/>
+      <line x1="220" y1="190" x2="500" y2="190"/>
+      <line x1="220" y1="220" x2="500" y2="220"/>
+      <line x1="220" y1="250" x2="500" y2="250"/>
+      <line x1="220" y1="280" x2="500" y2="280"/>
+      <line x1="220" y1="310" x2="500" y2="310"/>
+      <line x1="220" y1="340" x2="500" y2="340"/>
+      <line x1="220" y1="370" x2="500" y2="370"/>
+      <line x1="220" y1="400" x2="500" y2="400"/>
+      <g stroke-width="0.7">
+        <line x1="245" y1="80" x2="245" y2="430"/>
+        <line x1="280" y1="80" x2="280" y2="430"/>
+        <line x1="320" y1="80" x2="320" y2="430"/>
+        <line x1="360" y1="80" x2="360" y2="430"/>
+        <line x1="400" y1="80" x2="400" y2="430"/>
+        <line x1="440" y1="80" x2="440" y2="430"/>
+        <line x1="475" y1="80" x2="475" y2="430"/>
+      </g>
+      <rect x="320" y="410" width="80" height="40"/>
+      <line x1="360" y1="410" x2="360" y2="450"/>
+      <circle cx="350" cy="430" r="1.5" fill="#3a4d5c" stroke="none"/>
+      <circle cx="370" cy="430" r="1.5" fill="#3a4d5c" stroke="none"/>
+      <line x1="280" y1="450" x2="280" y2="430"/>
+      <line x1="280" y1="430" x2="320" y2="430"/>
+      <line x1="320" y1="430" x2="320" y2="410"/>
+      <line x1="400" y1="410" x2="400" y2="430"/>
+      <line x1="400" y1="430" x2="440" y2="430"/>
+      <line x1="440" y1="430" x2="440" y2="450"/>
+      <rect x="60" y="370" width="120" height="80"/>
+      <line x1="60" y1="385" x2="180" y2="385"/>
+      <line x1="60" y1="400" x2="180" y2="400"/>
+      <line x1="60" y1="415" x2="180" y2="415"/>
+      <line x1="60" y1="430" x2="180" y2="430"/>
+      <line x1="90" y1="370" x2="90" y2="450"/>
+      <line x1="120" y1="370" x2="120" y2="450"/>
+      <line x1="150" y1="370" x2="150" y2="450"/>
+      <rect x="540" y="320" width="120" height="130"/>
+      <line x1="540" y1="335" x2="660" y2="335"/>
+      <line x1="540" y1="355" x2="660" y2="355"/>
+      <line x1="540" y1="375" x2="660" y2="375"/>
+      <line x1="540" y1="395" x2="660" y2="395"/>
+      <line x1="540" y1="415" x2="660" y2="415"/>
+      <line x1="570" y1="320" x2="570" y2="450"/>
+      <line x1="600" y1="320" x2="600" y2="450"/>
+      <line x1="630" y1="320" x2="630" y2="450"/>
+      <line x1="200" y1="50" x2="200" y2="450" stroke-width="0.5"/>
+      <line x1="194" y1="50" x2="206" y2="50" stroke-width="0.5"/>
+      <line x1="194" y1="450" x2="206" y2="450" stroke-width="0.5"/>
+      <text x="200" y="250" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace" transform="rotate(-90 200 250)" text-anchor="middle">+45.0 m</text>
+      <rect x="510" y="430" width="190" height="36"/>
+      <line x1="510" y1="445" x2="700" y2="445"/>
+      <line x1="610" y1="430" x2="610" y2="466"/>
+      <text x="514" y="442" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">NORTH ELEVATION</text>
+      <text x="514" y="458" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">SCALE 1:200</text>
+      <text x="616" y="442" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">A-201</text>
+    </svg>
+  </div>
+
+  <!-- 4. Mechanical part: shaft assembly with section view + dimensions -->
+  <div class="arch-shape s4">
+    <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
+      <line x1="80" y1="180" x2="640" y2="180" stroke-width="0.6" stroke-dasharray="14 3 1 3"/>
+      <rect x="100" y="160" width="80" height="40"/>
+      <rect x="180" y="140" width="180" height="80"/>
+      <rect x="360" y="160" width="60" height="40"/>
+      <rect x="420" y="120" width="160" height="120"/>
+      <rect x="580" y="160" width="40" height="40"/>
+      <line x1="100" y1="160" x2="180" y2="160" stroke-width="0.6"/>
+      <line x1="100" y1="200" x2="180" y2="200" stroke-width="0.6"/>
+      <line x1="200" y1="155" x2="220" y2="155" stroke-width="0.6"/>
+      <line x1="200" y1="205" x2="220" y2="205" stroke-width="0.6"/>
+      <g stroke-width="0.5" opacity="0.7">
+        <line x1="190" y1="148" x2="350" y2="148"/>
+        <line x1="195" y1="155" x2="355" y2="155"/>
+        <line x1="190" y1="162" x2="350" y2="162"/>
+        <line x1="195" y1="168" x2="355" y2="168"/>
+        <line x1="190" y1="175" x2="350" y2="175"/>
+        <line x1="195" y1="195" x2="355" y2="195"/>
+        <line x1="190" y1="202" x2="350" y2="202"/>
+        <line x1="195" y1="208" x2="355" y2="208"/>
+        <line x1="190" y1="215" x2="350" y2="215"/>
+      </g>
+      <g stroke-width="0.5" opacity="0.7">
+        <line x1="430" y1="128" x2="570" y2="128"/>
+        <line x1="435" y1="135" x2="575" y2="135"/>
+        <line x1="430" y1="142" x2="570" y2="142"/>
+        <line x1="435" y1="220" x2="575" y2="220"/>
+        <line x1="430" y1="228" x2="570" y2="228"/>
+        <line x1="435" y1="234" x2="575" y2="234"/>
+      </g>
+      <ellipse cx="500" cy="180" rx="30" ry="50" stroke-width="0.7" stroke-dasharray="3 2"/>
+      <line x1="180" y1="160" x2="180" y2="140"/>
+      <line x1="360" y1="160" x2="360" y2="140"/>
+      <line x1="180" y1="200" x2="180" y2="220"/>
+      <line x1="360" y1="200" x2="360" y2="220"/>
+      <line x1="100" y1="100" x2="180" y2="100" stroke-width="0.5"/>
+      <line x1="100" y1="160" x2="100" y2="100" stroke-width="0.4" stroke-dasharray="2 2"/>
+      <line x1="180" y1="160" x2="180" y2="100" stroke-width="0.4" stroke-dasharray="2 2"/>
+      <polygon points="105,98 100,102 95,98" fill="#3a4d5c" stroke="none"/>
+      <polygon points="175,98 180,102 185,98" fill="#3a4d5c" stroke="none"/>
+      <text x="140" y="94" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">80</text>
+      <line x1="180" y1="100" x2="360" y2="100" stroke-width="0.5"/>
+      <polygon points="185,98 180,102 175,98" fill="#3a4d5c" stroke="none"/>
+      <polygon points="355,98 360,102 365,98" fill="#3a4d5c" stroke="none"/>
+      <text x="270" y="94" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">180 ±0.05</text>
+      <line x1="600" y1="120" x2="640" y2="120" stroke-width="0.5"/>
+      <line x1="580" y1="120" x2="580" y2="160" stroke-width="0.4" stroke-dasharray="2 2"/>
+      <line x1="620" y1="120" x2="620" y2="160" stroke-width="0.4" stroke-dasharray="2 2"/>
+      <polygon points="585,118 580,122 575,118" fill="#3a4d5c" stroke="none"/>
+      <polygon points="615,118 620,122 625,118" fill="#3a4d5c" stroke="none"/>
+      <text x="600" y="114" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">40 H7</text>
+      <line x1="660" y1="120" x2="660" y2="240" stroke-width="0.5"/>
+      <polygon points="658,125 662,125 660,120" fill="#3a4d5c" stroke="none"/>
+      <polygon points="658,235 662,235 660,240" fill="#3a4d5c" stroke="none"/>
+      <text x="666" y="180" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" transform="rotate(-90 666 180)" text-anchor="middle">120</text>
+      <text x="500" y="290" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">SECT A-A</text>
+      <line x1="488" y1="295" x2="512" y2="295" stroke-width="0.5"/>
+      <rect x="500" y="310" width="200" height="40"/>
+      <line x1="500" y1="325" x2="700" y2="325"/>
+      <line x1="600" y1="310" x2="600" y2="350"/>
+      <text x="504" y="322" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">SHAFT ASSEMBLY</text>
+      <text x="504" y="338" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">MAT'L: AISI 4140</text>
+      <text x="606" y="322" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">M-024</text>
+      <text x="606" y="338" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">REV B</text>
+    </svg>
+  </div>
+
+  <!-- 5. Steel beam connection detail -->
+  <div class="arch-shape s5">
+    <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
+      <rect x="40" y="160" width="280" height="14"/>
+      <rect x="40" y="186" width="280" height="14"/>
+      <line x1="160" y1="160" x2="160" y2="200" stroke-width="6"/>
+      <rect x="380" y="60" width="14" height="280"/>
+      <rect x="406" y="60" width="14" height="280"/>
+      <line x1="394" y1="60" x2="394" y2="340" stroke-width="6"/>
+      <rect x="320" y="120" width="100" height="120" stroke-width="2"/>
+      <g fill="#3a4d5c" stroke="none" opacity="0.7">
+        <circle cx="335" cy="135" r="3.5"/>
+        <circle cx="370" cy="135" r="3.5"/>
+        <circle cx="405" cy="135" r="3.5"/>
+        <circle cx="335" cy="180" r="3.5"/>
+        <circle cx="370" cy="180" r="3.5"/>
+        <circle cx="405" cy="180" r="3.5"/>
+        <circle cx="335" cy="225" r="3.5"/>
+        <circle cx="370" cy="225" r="3.5"/>
+        <circle cx="405" cy="225" r="3.5"/>
+      </g>
+      <g opacity="0.5">
+        <circle cx="335" cy="135" r="6"/>
+        <circle cx="370" cy="135" r="6"/>
+        <circle cx="405" cy="135" r="6"/>
+        <circle cx="335" cy="180" r="6"/>
+        <circle cx="370" cy="180" r="6"/>
+        <circle cx="405" cy="180" r="6"/>
+        <circle cx="335" cy="225" r="6"/>
+        <circle cx="370" cy="225" r="6"/>
+        <circle cx="405" cy="225" r="6"/>
+      </g>
+      <line x1="320" y1="160" x2="320" y2="200"/>
+      <line x1="380" y1="170" x2="380" y2="170"/>
+      <path d="M 320 160 L 326 154 L 332 160" stroke-width="0.7" fill="none"/>
+      <path d="M 320 200 L 326 206 L 332 200" stroke-width="0.7" fill="none"/>
+      <line x1="80" y1="80" x2="160" y2="160" stroke-width="0.5"/>
+      <text x="40" y="76" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">W14x90</text>
+      <line x1="500" y1="100" x2="430" y2="180" stroke-width="0.5"/>
+      <text x="510" y="96" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">W14x90</text>
+      <line x1="500" y1="280" x2="430" y2="220" stroke-width="0.5"/>
+      <text x="510" y="285" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">9 — 7/8" A325-X</text>
+      <line x1="200" y1="280" x2="345" y2="240" stroke-width="0.5"/>
+      <text x="60" y="285" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">SHEAR PLATE PL 1/2"</text>
+      <line x1="40" y1="40" x2="320" y2="40" stroke-width="0.5"/>
+      <line x1="40" y1="34" x2="40" y2="46" stroke-width="0.5"/>
+      <line x1="320" y1="34" x2="320" y2="46" stroke-width="0.5"/>
+      <text x="180" y="34" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">2'-4"</text>
+      <rect x="500" y="310" width="200" height="40"/>
+      <line x1="500" y1="325" x2="700" y2="325"/>
+      <line x1="610" y1="310" x2="610" y2="350"/>
+      <text x="504" y="322" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">BEAM CONNECTION</text>
+      <text x="504" y="338" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">DETAIL B-3</text>
+      <text x="616" y="322" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">S-302</text>
+      <text x="616" y="338" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">SCALE 3" = 1'</text>
+    </svg>
+  </div>
+
+  <!-- 6. Gear assembly with shaft + bearings -->
+  <div class="arch-shape s6">
+    <svg viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(260,220)">
+        <circle r="120" stroke-width="1.6"/>
+        <circle r="105"/>
+        <g stroke-width="1">
+          <path d="M 104.6 -9.2 L 119.5 -10.5 L 119.5 10.5 L 104.6 9.2"/>
+          <path d="M 103.4 18.2 L 118.2 20.8 L 112.8 41.0 L 98.7 35.9"/>
+          <path d="M 95.2 44.4 L 108.8 50.7 L 98.3 68.8 L 86.0 60.2"/>
+          <path d="M 80.4 67.5 L 91.9 77.1 L 77.1 91.9 L 67.5 80.4"/>
+          <path d="M 60.2 86.0 L 68.8 98.3 L 50.7 108.8 L 44.4 95.2"/>
+          <path d="M 35.9 98.7 L 41.0 112.8 L 20.8 118.2 L 18.2 103.4"/>
+          <path d="M 9.2 104.6 L 10.5 119.5 L -10.5 119.5 L -9.2 104.6"/>
+          <path d="M -18.2 103.4 L -20.8 118.2 L -41.0 112.8 L -35.9 98.7"/>
+          <path d="M -44.4 95.2 L -50.7 108.8 L -68.8 98.3 L -60.2 86.0"/>
+          <path d="M -67.5 80.4 L -77.1 91.9 L -91.9 77.1 L -80.4 67.5"/>
+          <path d="M -86.0 60.2 L -98.3 68.8 L -108.8 50.7 L -95.2 44.4"/>
+          <path d="M -98.7 35.9 L -112.8 41.0 L -118.2 20.8 L -103.4 18.2"/>
+          <path d="M -104.6 9.2 L -119.5 10.5 L -119.5 -10.5 L -104.6 -9.2"/>
+          <path d="M -103.4 -18.2 L -118.2 -20.8 L -112.8 -41.0 L -98.7 -35.9"/>
+          <path d="M -95.2 -44.4 L -108.8 -50.7 L -98.3 -68.8 L -86.0 -60.2"/>
+          <path d="M -80.4 -67.5 L -91.9 -77.1 L -77.1 -91.9 L -67.5 -80.4"/>
+          <path d="M -60.2 -86.0 L -68.8 -98.3 L -50.7 -108.8 L -44.4 -95.2"/>
+          <path d="M -35.9 -98.7 L -41.0 -112.8 L -20.8 -118.2 L -18.2 -103.4"/>
+          <path d="M -9.2 -104.6 L -10.5 -119.5 L 10.5 -119.5 L 9.2 -104.6"/>
+          <path d="M 18.2 -103.4 L 20.8 -118.2 L 41.0 -112.8 L 35.9 -98.7"/>
+          <path d="M 44.4 -95.2 L 50.7 -108.8 L 68.8 -98.3 L 60.2 -86.0"/>
+          <path d="M 67.5 -80.4 L 77.1 -91.9 L 91.9 -77.1 L 80.4 -67.5"/>
+          <path d="M 86.0 -60.2 L 98.3 -68.8 L 108.8 -50.7 L 95.2 -44.4"/>
+          <path d="M 98.7 -35.9 L 112.8 -41.0 L 118.2 -20.8 L 103.4 -18.2"/>
+        </g>
+        <circle r="22" stroke-width="1.4"/>
+        <circle r="14"/>
+        <line x1="-130" y1="0" x2="130" y2="0" stroke-width="0.5" stroke-dasharray="14 3 1 3"/>
+        <line x1="0" y1="-130" x2="0" y2="130" stroke-width="0.5" stroke-dasharray="14 3 1 3"/>
+        <line x1="-22" y1="-22" x2="22" y2="22" stroke-width="0.5" opacity="0.5"/>
+        <line x1="-22" y1="22" x2="22" y2="-22" stroke-width="0.5" opacity="0.5"/>
+      </g>
+      <g transform="translate(440,220)">
+        <circle r="60" stroke-width="1.4"/>
+        <circle r="50"/>
+        <g stroke-width="0.9">
+          <path d="M 49.5 -7.0 L 59.4 -8.4 L 59.4 8.4 L 49.5 7.0"/>
+          <path d="M 46.4 18.7 L 55.6 22.5 L 47.3 36.9 L 39.4 30.8"/>
+          <path d="M 30.8 39.4 L 36.9 47.3 L 22.5 55.6 L 18.7 46.4"/>
+          <path d="M 7.0 49.5 L 8.4 59.4 L -8.4 59.4 L -7.0 49.5"/>
+          <path d="M -18.7 46.4 L -22.5 55.6 L -36.9 47.3 L -30.8 39.4"/>
+          <path d="M -39.4 30.8 L -47.3 36.9 L -55.6 22.5 L -46.4 18.7"/>
+          <path d="M -49.5 7.0 L -59.4 8.4 L -59.4 -8.4 L -49.5 -7.0"/>
+          <path d="M -46.4 -18.7 L -55.6 -22.5 L -47.3 -36.9 L -39.4 -30.8"/>
+          <path d="M -30.8 -39.4 L -36.9 -47.3 L -22.5 -55.6 L -18.7 -46.4"/>
+          <path d="M -7.0 -49.5 L -8.4 -59.4 L 8.4 -59.4 L 7.0 -49.5"/>
+          <path d="M 18.7 -46.4 L 22.5 -55.6 L 36.9 -47.3 L 30.8 -39.4"/>
+          <path d="M 39.4 -30.8 L 47.3 -36.9 L 55.6 -22.5 L 46.4 -18.7"/>
+        </g>
+        <circle r="14" stroke-width="1.2"/>
+        <circle r="8"/>
+        <line x1="-65" y1="0" x2="65" y2="0" stroke-width="0.5" stroke-dasharray="10 3 1 3"/>
+        <line x1="0" y1="-65" x2="0" y2="65" stroke-width="0.5" stroke-dasharray="10 3 1 3"/>
+      </g>
+      <line x1="120" y1="220" x2="170" y2="220" stroke-width="2"/>
+      <line x1="350" y1="220" x2="380" y2="220" stroke-width="2"/>
+      <line x1="500" y1="220" x2="560" y2="220" stroke-width="2"/>
+      <rect x="120" y="210" width="50" height="20"/>
+      <rect x="350" y="210" width="30" height="20"/>
+      <rect x="500" y="210" width="60" height="20"/>
+      <line x1="125" y1="215" x2="125" y2="225" stroke-width="0.5"/>
+      <line x1="135" y1="215" x2="135" y2="225" stroke-width="0.5"/>
+      <line x1="145" y1="215" x2="145" y2="225" stroke-width="0.5"/>
+      <line x1="155" y1="215" x2="155" y2="225" stroke-width="0.5"/>
+      <line x1="510" y1="215" x2="510" y2="225" stroke-width="0.5"/>
+      <line x1="520" y1="215" x2="520" y2="225" stroke-width="0.5"/>
+      <line x1="530" y1="215" x2="530" y2="225" stroke-width="0.5"/>
+      <line x1="540" y1="215" x2="540" y2="225" stroke-width="0.5"/>
+      <line x1="550" y1="215" x2="550" y2="225" stroke-width="0.5"/>
+      <line x1="100" y1="60" x2="260" y2="100" stroke-width="0.5"/>
+      <text x="40" y="56" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">DRIVE GEAR Z=24 m=10</text>
+      <line x1="600" y1="60" x2="440" y2="160" stroke-width="0.5"/>
+      <text x="540" y="56" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">PINION Z=12</text>
+      <line x1="180" y1="380" x2="260" y2="350" stroke-width="0.5"/>
+      <text x="60" y="385" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">RATIO 2:1   MOD 10</text>
+      <line x1="140" y1="180" x2="140" y2="220" stroke-width="0.5"/>
+      <line x1="160" y1="180" x2="160" y2="220" stroke-width="0.5"/>
+      <line x1="140" y1="170" x2="160" y2="170" stroke-width="0.5"/>
+      <polygon points="143,170 140,166 137,170" fill="#3a4d5c" stroke="none"/>
+      <polygon points="157,170 160,166 163,170" fill="#3a4d5c" stroke="none"/>
+      <text x="150" y="164" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">25H7</text>
+      <rect x="500" y="410" width="200" height="40"/>
+      <line x1="500" y1="425" x2="700" y2="425"/>
+      <line x1="610" y1="410" x2="610" y2="450"/>
+      <text x="504" y="422" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">GEAR ASSEMBLY</text>
+      <text x="504" y="438" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">MAT'L: 20MnCr5</text>
+      <text x="616" y="422" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">M-117</text>
+      <text x="616" y="438" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">REV A</text>
+    </svg>
+  </div>
+</div>
+
 
 
 <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰ Menu</button>
@@ -798,7 +1565,7 @@
       <!-- Stylized EPS-style mark: dark wedge with green accent triangle -->
       <svg class="logo-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M2 18 L12 4 L22 18 Z" fill="#ffffff" opacity="0.92"/>
-        <path d="M12 4 L22 18 L17 18 Z" fill="#0096DC"/>
+        <path d="M12 4 L22 18 L17 18 Z" fill="#7DBF45"/>
       </svg>
       <h1>Pinnacle Series</h1>
     </div>
@@ -856,143 +1623,25 @@
 <!-- ====================================================================== -->
 <section id="welcome">
 <h1>Pinnacle Series Wiki</h1>
-<p class="lead">Eagle Point Software's flagship applied learning platform — the source of truth for how Pinnacle Series actually works, who can do what, and why customers keep choosing it. Use this as a quick lookup whenever you need to answer a "what does Pinnacle do?" or "how does X work?" question.</p>
+<p class="lead">A shared reference for how Pinnacle Series actually behaves — what's where, who can do what, and the small details that trip people up.</p>
 
-<div class="hero" aria-hidden="true">
-  <svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#eaf2f9"/>
-        <stop offset="60%" stop-color="#f5e6e8"/>
-        <stop offset="100%" stop-color="#fbe9e2"/>
-      </linearGradient>
-      <linearGradient id="m1" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#a8c8e0"/>
-        <stop offset="100%" stop-color="#7ba5c8"/>
-      </linearGradient>
-      <linearGradient id="m2" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#9eb7d0"/>
-        <stop offset="100%" stop-color="#7691b0"/>
-      </linearGradient>
-      <linearGradient id="m3" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#3a4d5c"/>
-        <stop offset="100%" stop-color="#2a3a48"/>
-      </linearGradient>
-      <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#a8c4d6"/>
-        <stop offset="100%" stop-color="#7da5c0"/>
-      </linearGradient>
-    </defs>
-    <rect x="0" y="0" width="1200" height="320" fill="url(#sky)"/>
-    <circle cx="950" cy="100" r="120" fill="#f8d4cc" opacity="0.55"/>
-    <circle cx="950" cy="100" r="70" fill="#fae0d8" opacity="0.5"/>
-    <g fill="#ffffff" opacity="0.92">
-      <ellipse cx="180" cy="100" rx="80" ry="22"/>
-      <ellipse cx="220" cy="90" rx="55" ry="18"/>
-      <ellipse cx="600" cy="70" rx="90" ry="20"/>
-      <ellipse cx="650" cy="60" rx="55" ry="14"/>
-      <ellipse cx="1080" cy="140" rx="70" ry="18"/>
-    </g>
-    <path d="M0 240 L120 170 L220 210 L340 130 L470 200 L580 160 L720 220 L860 150 L990 200 L1120 170 L1200 220 L1200 320 L0 320 Z" fill="url(#m1)" opacity="0.85"/>
-    <path d="M0 270 L80 230 L200 260 L300 200 L420 250 L540 220 L660 270 L800 220 L920 250 L1060 230 L1200 260 L1200 320 L0 320 Z" fill="url(#m2)" opacity="0.9"/>
-    <path d="M0 295 L100 260 L180 285 L280 240 L380 280 L500 250 L620 290 L740 250 L860 290 L1000 260 L1120 285 L1200 270 L1200 320 L0 320 Z" fill="url(#m3)"/>
-    <path d="M280 240 L295 252 L260 252 Z" fill="#ffffff" opacity="0.55"/>
-    <path d="M740 250 L755 262 L720 262 Z" fill="#ffffff" opacity="0.55"/>
-    <path d="M1000 260 L1015 272 L980 272 Z" fill="#ffffff" opacity="0.55"/>
-    <rect x="0" y="305" width="1200" height="15" fill="url(#ground)" opacity="0.7"/>
-    <g fill="#1f3543" opacity="0.78">
-      <polygon points="1080,300 1095,260 1110,300"/>
-      <polygon points="1110,300 1130,250 1150,300"/>
-      <polygon points="1150,300 1165,265 1180,300"/>
-      <polygon points="1175,300 1190,270 1200,290 1200,300"/>
-    </g>
-  </svg>
-</div>
 
-<h2>What is Pinnacle Series?</h2>
+<h2>Welcome / Overview</h2>
+<p>Pinnacle Series is Eagle Point Software's learning and productivity platform. It combines a structured library of curated learning content with on-demand search, AI chat, and personalized skill development tools. It's used by AEC and manufacturing organizations to onboard new hires, support continuing education, and answer in-the-moment "how do I do this?" questions.</p>
 
-<p><strong>Pinnacle Series is the only applied learning platform built exclusively for AECO and manufacturing.</strong> Where eLearning delivers content and an LMS manages it, Pinnacle Series makes learning <em>matter</em> — by embedding training, knowledge, and capability measurement directly into the tools and projects your customers' teams already use every day.</p>
-
-<p>It's a single integrated system that combines:</p>
+<h3>Three ways users find what they need</h3>
 <ul>
-  <li><strong>30,000+ expert videos</strong> — curated AEC and manufacturing content, ready on day one.</li>
-  <li><strong>Integrated LMS</strong> — assignments, learning paths, certificates, and reporting in one place.</li>
-  <li><strong>In-Autodesk guidance</strong> — Command Launcher and Related Learning bring the right help to the user without breaking their workflow.</li>
-  <li><strong>KnowledgeSmart assessments</strong> — measure real capability and identify the actual gaps before assigning training.</li>
-  <li><strong>SPARK AI Nano-Learning</strong> — short, AI-curated videos personalized to each user's interests, role, and workflow.</li>
+  <li><strong>Global Search.</strong> A keyword or phrase typed into the top-right search bar returns videos, guides, workflows, and documents — filtered to what the user has access to.</li>
+  <li><strong>Library Browsing.</strong> Structured content organized by discipline, product, or job function. Good for discovering new topics or working through a learning path.</li>
+  <li><strong>AI Chat.</strong> Natural-language Q&amp;A backed by Pinnacle's content. Pulls only from content the user is authorized to see. <a href="#ai-chat">More on AI Chat →</a></li>
 </ul>
 
-<div class="stats">
-  <div class="stat"><span class="num">750K+</span><span class="lbl">Users</span></div>
-  <div class="stat"><span class="num">2,700+</span><span class="lbl">Customers</span></div>
-  <div class="stat"><span class="num">95%</span><span class="lbl">Renewal rate</span></div>
-  <div class="stat"><span class="num">30,000+</span><span class="lbl">Expert videos</span></div>
-  <div class="stat"><span class="num">130+</span><span class="lbl">Languages</span></div>
-  <div class="stat"><span class="num">AEC + MFG</span><span class="lbl">Built for your industry</span></div>
-  <div class="stat"><span class="num">Day 1</span><span class="lbl">Content ready</span></div>
-  <div class="stat"><span class="num">In-Workflow</span><span class="lbl">Guidance</span></div>
-</div>
-
-<h2>Why Applied Learning beats traditional training</h2>
-
-<p>Most organizations buy one of three things to address skill gaps. Pinnacle Series is the only one that closes the loop between knowing and doing.</p>
-
-<div class="tier-row">
-  <div class="tier">
-    <div class="label">Tier 1 · eLearning</div>
-    <div class="name">Delivers content</div>
-    <div class="examples">LinkedIn Learning, Udemy, Coursera</div>
-  </div>
-  <div class="tier">
-    <div class="label">Tier 2 · LMS</div>
-    <div class="name">Manages learning</div>
-    <div class="examples">Docebo, Cornerstone, SAP, Absorb</div>
-  </div>
-  <div class="tier pinnacle">
-    <div class="label">Tier 3 · Pinnacle Series</div>
-    <div class="name">Applied Learning — makes it matter</div>
-    <div class="examples">Content + LMS + In-Autodesk + Assessments + AI</div>
-  </div>
-</div>
-
-<p>Traditional, out-of-flow learning creates a delay between exposure to an idea and putting it to work. Applied learning eliminates that delay. By making training relevant <em>at the moment of need</em>, Pinnacle Series helps engineers, architects, designers, and builders learn faster and retain that learning longer. The result is stronger project outcomes, greater workforce agility, and lasting business impact.</p>
-
-<h2>How Pinnacle Series helps change the world</h2>
-
-<p>The AEC and manufacturing industries build the physical world — every road, building, factory, bridge, and product. Yet these industries face a widening skills gap, accelerating tool change, and projects that demand more coordination across more partners than ever. Mistakes are expensive, rework is corrosive, and traditional training simply can't keep up with the pace of change.</p>
-
-<p>Pinnacle Series helps organizations close that gap. <strong>It transforms how teams learn — from scheduled, generic, and unmeasured to targeted, embedded, and measurably improved.</strong> Customers who deploy Pinnacle Series report:</p>
-
-<ul>
-  <li><strong>Reduced rework</strong> on billable projects through in-tool guidance that prevents errors before they become rework.</li>
-  <li><strong>Accelerated technology adoption</strong> — when a new version of AutoCAD, Revit, or another tool ships, teams ramp up in days rather than months.</li>
-  <li><strong>Measurable capability improvement</strong> — KnowledgeSmart heatmaps and closed-loop reassessment give leaders reportable evidence of skill growth.</li>
-  <li><strong>Faster onboarding</strong> for new hires — personalized learning paths based on real assessments, not generic checklists.</li>
-  <li><strong>Stronger collaboration</strong> across internal and external teams via External Users, Workgroups, and shared libraries.</li>
-</ul>
-
-<p>For Eagle Point Software, this is what "Build Skills. Apply Fast. Deliver Results." means in practice. The work behind Pinnacle Series — the content libraries, the AI integrations, the assessment platform, the rigorously-engineered Peak Experience — is what enables hundreds of thousands of professionals across thousands of companies to do their best work, every day.</p>
-
-<h2>What you'll find in this wiki</h2>
-
-<p>The wiki is organized into four areas, accessible via the sidebar:</p>
-
-<ul>
-  <li><strong>Getting Started</strong> — Welcome, Peak vs Classic, Sign-In &amp; Authentication, Glossary.</li>
-  <li><strong>End-User Experience</strong> — Home, Assignments, Libraries, Bookmarks, AI Chat, SPARK, My Account.</li>
-  <li><strong>Administration Portal</strong> — every admin page from Admin Home through Integrations.</li>
-  <li><strong>Reference</strong> — full Permissions Reference and a Common Questions section that answers the most-asked support and sales questions.</li>
-</ul>
+<h3>Two experiences: Peak and Classic</h3>
+<p>Pinnacle Series ships in two UIs — <strong>Peak Experience</strong> (the modern UI, default for new tenants) and <strong>Classic</strong> (the legacy UI, still in use at some tenants mid-migration). All new feature work targets Peak. <a href="#peak-vs-classic">More on Peak vs Classic →</a></p>
 
 <div class="callout">
-  <strong>Who this is for:</strong> Sales, CSM, Support, QA, and new hires at Eagle Point Software. Use it as a quick lookup when you need to answer "what permissions does someone need to do X?" or "where is feature Y in the Admin Portal?" The canonical source of truth behind this wiki is the <code>Pinnacle_UI_Facts.md</code> file maintained by the Pinnacle Series QA team. When new product behavior is discovered or a UI changes, that file is updated first and the wiki regenerates from it.
+  <strong>Who uses this wiki:</strong> Sales, CSM, Support, QA, new hires. The goal is a single trustworthy reference for "what does this do, and what permissions does it need." If you find something wrong or missing, flag it to Nick.
 </div>
-
-<div class="callout">
-  <strong>Want to take a closer look?</strong> Visit <a href="https://eaglepoint.com/pinnacle-series/" target="_blank" rel="noreferrer">eaglepoint.com/pinnacle-series</a> for the public marketing view of the platform, customer stories, and information about scheduling a demo.
-</div>
-</section>
-
 </section>
 
 <!-- ====================================================================== -->
@@ -1024,47 +1673,6 @@
   <li><strong>Workgroups</strong> — still in development. Note the related <em>Work Group Management</em> permissions exist but apply only to Classic.</li>
   <li><strong>Document conversion for search &amp; translation</strong> — converting external docs into Pinnacle Documents for enhanced searchability and translation isn't yet supported.</li>
 </ul>
-
-<h3>How Peak compares to Classic at a glance</h3>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_292.jpg" alt="Classic Pinnacle Series — End-user Home page with thin blue header, left-side hierarchical Asset Libraries tree, MY WORK GROUPS, MY COURSES, and TRENDING ASSETS sections, plus right-column panels for user profile, Upcoming Live Events, My Assets, and Download Add-ons." loading="lazy">
-  <figcaption>Classic Pinnacle Series — End-user Home page. Note the differences from Peak: thin blue header with icon nav (not a left text sidebar), a flat hierarchical "Asset Libraries" tree of all libraries the user can access, and Home sections for MY WORK GROUPS, MY COURSES, and TRENDING ASSETS. The right column stacks user stats, Upcoming Live Events, My Assets, and Download Add-ons directly on Home.</figcaption>
-</figure>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_293.jpg" alt="Classic Pinnacle Series — Course/content view with yellow accent banner, lesson outline on the left, video player in the center, and transcript panel with auto-scroll on the right." loading="lazy">
-  <figcaption>Classic Pinnacle Series — course view. Yellow banner with course title and metadata at the top, lesson outline with completion checkmarks on the left, video player center, transcript panel with Auto-scroll toggle on the right. The "PINNACLE SERIES" footer marks this as Classic, not Peak.</figcaption>
-</figure>
-
-<div class="callout warn">
-  <strong>Important:</strong> The yellow-header KnowledgeSmart admin dashboard (visible in the <a href="#ks-admin">KnowledgeSmart Admin Area</a> section) is sometimes mistaken for Classic Pinnacle. It is not. KnowledgeSmart is a separate product. Anything yellow-header-styled in our captures is the KS admin dashboard, not Classic Pinnacle. Classic Pinnacle has a thin <em>blue</em> header.
-</div>
-
-<div class="callout">
-  <strong>Note on the Pinnacle Management Utility:</strong> The Management Utility is a separate Windows <em>desktop application</em> that handles a few legacy admin tasks (on-prem AD sync configuration, certain deployment settings). It is not a web UI. End users can download it from My Account → Account Info → Download Add-Ons. The Peak Integrations page links out to it via a "Launch Management Utility" button when on-premises AD sync is selected as the directory provider.
-</div>
-<table>
-  <tr><th></th><th>Classic</th><th>Peak Experience</th></tr>
-  <tr><td>Admin UI</td><td>Management Utility (Windows desktop app)</td><td>Browser-based Administration Portal</td></tr>
-  <tr><td>Content organization</td><td>Folder-based</td><td>Library + Topics + Subtopics</td></tr>
-  <tr><td>Permissions</td><td>Per-folder with manual upkeep</td><td>Library-driven, role-based, less manual effort</td></tr>
-  <tr><td>Assignment management</td><td>Separate views per content type</td><td>Centralized — content + assessments together</td></tr>
-  <tr><td>Reporting</td><td>Management Utility reports</td><td>Peak Reporting suite (5 pillars, saved views, scheduled exports)</td></tr>
-  <tr><td>Bulk content edits</td><td>Limited</td><td>Bulk Modify, Search &amp; Replace, Bulk Actions</td></tr>
-  <tr><td>AI features</td><td>None</td><td>AI Chat, SPARK Nano-Learning</td></tr>
-</table>
-
-<h3>Common transition questions</h3>
-<p>When a tenant migrates to Peak, customer success managers should be prepared for a few recurring questions. Most of them come down to "where did my [Classic feature] go?" Here are the high-frequency ones:</p>
-<ul>
-  <li><strong>"Where are my folders?"</strong> Folders still exist inside Content for organizing custom files, but visibility is now controlled at the library level. Administrators set up libraries first, then organize content inside them.</li>
-  <li><strong>"How do I see who has access to what?"</strong> Permissions are now visible per user in <a href="#users">Users → User Details → Permissions</a>, and per library in <a href="#admin-libraries">Libraries → Library Details → Sharing</a>.</li>
-  <li><strong>"Why can't I find Live Events?"</strong> Live Events are still under development for Peak. Tenants that depend on Live Events should keep Peak Experience for End Users disabled until the feature ships.</li>
-  <li><strong>"Why does some admin work still send me to the Management Utility?"</strong> A few legacy configurations (e.g., on-premises Active Directory sync) are still managed via the Management Utility. The Admin Portal links out to it where needed via a "Launch Management Utility" button.</li>
-</ul>
-
-
 </section>
 
 <!-- ====================================================================== -->
@@ -1200,11 +1808,6 @@
 </div>
 
 <h3>Page body</h3>
-<figure class="screenshot">
-  <img src="screenshots/web/shot_005.jpg" alt="End-user Home — assignment card kebab menu open. From this menu, learners can self-service: Resume, View, Mark as Completed, Change Due Date, Add to Bookmarks, Copy Link (Formatted/Unformatted), Drop Course, or Drop Learning Path." loading="lazy">
-  <figcaption>End-user Home — assignment card kebab menu open. From this menu, learners can self-service: Resume, View, Mark as Completed, Change Due Date, Add to Bookmarks, Copy Link (Formatted/Unformatted), Drop Course, or Drop Learning Path.</figcaption>
-</figure>
-
 <p>The Home page body shows:</p>
 <ul>
   <li><strong>Assignments</strong> section — the user's currently assigned content.</li>
@@ -1218,18 +1821,6 @@
   <li>Global Search (top-right).</li>
   <li>User avatar (top-right) → menu opens with <strong>Profile &amp; Settings</strong>, <strong>Switch Tenant</strong>, <strong>Sign Out</strong>.</li>
 </ul>
-
-<h3>Top bar in detail</h3>
-<p>The top bar of the Home page (and most end-user pages) provides global access to:</p>
-<ul>
-  <li><strong>Search All Content</strong> — universal search across all content the user can access. Returns videos, documents, learning paths, workflows, etc., filterable by type and other facets on the results page.</li>
-  <li><strong>AI Chat button</strong> — opens the dedicated <a href="#ai-chat">AI Chat</a> page. Visible only when the tenant has "Allow Users to Access AI Chat (Preview)" enabled.</li>
-  <li><strong>Submit External Learning button</strong> — when present, opens a form for users to log learning they completed outside Pinnacle Series. Visible only when the tenant has "Allow Users to Submit External Learning" enabled.</li>
-  <li><strong>Notification bell</strong> — surfaces SPARK notifications, enrollment-due reminders, Entra ID Sync alerts, and other system events.</li>
-  <li><strong>User avatar</strong> — opens a dropdown for Profile &amp; Settings, Switch Tenant (if user has access to multiple), and Sign Out.</li>
-</ul>
-
-
 </section>
 
 <!-- ====================================================================== -->
@@ -1287,18 +1878,6 @@
   <li>Content cards for videos, documents, workflows, courses, learning paths, and quizzes.</li>
   <li>Per-content actions: Like, Share, Bookmark, Send Feedback.</li>
 </ul>
-
-<h3>Why end users only see some libraries</h3>
-<p>Libraries are visibility-controlled. A user only sees a library if an admin has explicitly shared it with them, with their group, or with everyone in the tenant. This is a frequent CSM/Support question — when a learner says "I can't find the AutoCAD library," the first thing to check is whether an admin has shared the AutoCAD library with that user's group in <a href="#admin-libraries">Admin Portal → Libraries</a>.</p>
-<p>The end-user Libraries page typically shows three groupings (depending on what's been shared):</p>
-<ul>
-  <li><strong>Featured Libraries</strong> — present only when at least one library is flagged as Featured by an admin.</li>
-  <li><strong>Subscription Libraries</strong> — Eagle Point-provided libraries (3ds Max, AutoCAD, Civil 3D, Revit, Bentley, Bluebeam, etc.). Curated by EPS content teams and updated regularly.</li>
-  <li><strong>Custom Libraries</strong> — libraries the customer's own Content Administrators have created using their internal content.</li>
-</ul>
-<p>Inside a library, the user gets a search bar scoped to that library, plus a filter panel with Publisher, Topic, Sub-topic, Content Type, Duration, and Difficulty filters. Each piece of content is a card with quick actions (Like, Bookmark, Share, Send Feedback).</p>
-
-
 
 <div class="callout permissions">
   <strong>Required permissions:</strong> None. Library access is controlled by the admin via library sharing — once shared, no special permission is needed to view.
@@ -1628,11 +2207,6 @@
   <li><strong>Exclude users</strong> who already completed prior versions.</li>
 </ul>
 
-<figure class="screenshot">
-  <img src="screenshots/web/shot_041.jpg" alt="Assignment of Content sub-page — opened after clicking Assign New → Content. Three sections: Content (what gets assigned), Users (who it gets assigned to), and Options (Expiration Date, Map Learning)." loading="lazy">
-  <figcaption>Assignment of Content sub-page — opened after clicking Assign New → Content. Three sections: Content (what gets assigned), Users (who it gets assigned to), and Options (Expiration Date, Map Learning).</figcaption>
-</figure>
-
 <h3>Auto-Assignments</h3>
 <p>Auto-Assignments are rules that automatically assign content or assessments based on conditions — typically group membership or assessment results.</p>
 
@@ -1714,22 +2288,6 @@
 <h3>Folders</h3>
 <p>The Content area uses folders to organize content. Common per-folder actions: <strong>Create Copy</strong>, <strong>Share</strong> (Add Groups, Add Users), <strong>Topics</strong> association, <strong>Start Modifying</strong> (enters bulk-edit mode).</p>
 
-<figure class="screenshot">
-  <img src="screenshots/web/shot_069.jpg" alt="Manage Topics & Subtopics modal — the global topic catalog used to categorize content. Each tile is a topic with its branded icon. Admins can add new topics or edit existing ones from this view." loading="lazy">
-  <figcaption>Manage Topics & Subtopics modal — the global topic catalog used to categorize content. Each tile is a topic with its branded icon. Admins can add new topics or edit existing ones from this view.</figcaption>
-</figure>
-
-<h3>Content authoring lifecycle</h3>
-<p>Pinnacle Series content moves through a predictable lifecycle that admins should understand when supporting customers:</p>
-<ol>
-  <li><strong>Draft</strong> — newly created or imported content. Visible only to its author and other Content Administrators. Can be deleted without going through the Recycle Bin.</li>
-  <li><strong>Published</strong> — content that has been pushed to one or more libraries. Visible to users that have access to those libraries via group or direct sharing.</li>
-  <li><strong>Recycled</strong> — soft-deleted content. Lives in the <a href="#content">Recycle Bin</a> indefinitely; can be restored to its original location or permanently deleted.</li>
-</ol>
-<p>Content authoring permissions are tiered: a Content Author can create and modify draft content but can't publish independently. A Content Publisher can publish into libraries that have been shared with them. A Content Administrator can do everything, including library creation and visibility management. See the <a href="#permissions">Permissions Reference</a> for the full breakdown.</p>
-
-
-
 <div class="callout permissions">
   <strong>Required permissions (descending access):</strong>
   <ul>
@@ -1772,16 +2330,6 @@
   <li><strong>Feature</strong> — flag a library as Featured for the tenant.</li>
 </ul>
 
-<figure class="screenshot">
-  <img src="screenshots/web/shot_267.jpg" alt="Library Details page — opened by clicking into a library from Admin → Libraries. Shows the library hero, sharing indicator, filter panel with Applied Filters, and the list of contained content. The Select Course to Export modal is open here as part of the SCORM Export workflow." loading="lazy">
-  <figcaption>Library Details page — opened by clicking into a library from Admin → Libraries. Shows the library hero, sharing indicator, filter panel with Applied Filters, and the list of contained content. The Select Course to Export modal is open here as part of the SCORM Export workflow.</figcaption>
-</figure>
-
-<h3>What "Featured" means</h3>
-<p>Marking a library as Featured surfaces it on every end user's Home page in a special <strong>Featured Libraries</strong> carousel above the regular Libraries list. Featured is a tenant-wide setting — there is no per-group Featured list. Use it sparingly to highlight what matters most to your customer's users right now (e.g., a quarterly focus area, a new tool rollout, or an onboarding library).</p>
-
-
-
 <div class="callout permissions">
   <strong>Required permissions:</strong>
   <ul>
@@ -1813,20 +2361,6 @@
 
 <h3>Setup</h3>
 <p>Where admins define the catalog of <strong>External Learning Activities</strong> users can request credit for.</p>
-
-<h3>Why customers care about External Learning</h3>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_097.jpg" alt="Admin Portal → External Learning → Records Management — list view of submitted external learning records. Toolbar includes Search, Filter, Add User, Create Record, plus bulk actions (Delete, Approve, Deny). Each row has user avatar, training title, completed date, training provider, duration, and status." loading="lazy">
-  <figcaption>Admin Portal → External Learning → Records Management — list view of submitted external learning records. Toolbar includes Search, Filter, Add User, Create Record, plus bulk actions (Delete, Approve, Deny). Each row has user avatar, training title, completed date, training provider, duration, and status.</figcaption>
-</figure>
-<p>External Learning Tracking matters for two big customer use cases:</p>
-<ul>
-  <li><strong>CPD / CEU compliance</strong> — many AEC professionals must accumulate continuing professional development hours each year for license renewal. External Learning lets them log webinars, conferences, and trade-show sessions in their Pinnacle Series transcript so admins can report on compliance from a single source of truth.</li>
-  <li><strong>Holistic capability picture</strong> — a learner's Pinnacle Series record is no longer "what they did in Pinnacle." It includes everything they've completed, internal and external. This becomes essential when leaders are making promotion decisions, project staffing decisions, or evaluating a team's readiness.</li>
-</ul>
-
-
 <ul>
   <li><strong>Create Activity</strong> — Training Title (required), Training Provider, Duration (Minutes).</li>
   <li>Edit / Delete existing activities.</li>
@@ -1874,33 +2408,6 @@
   <li><strong>Targeted permissions</strong> — Reporting Administrator (sees all users) vs. Reporting Manager (sees only managed users).</li>
   <li><strong>Power BI export</strong> — Usage Reports support export for use in Power BI dashboards.</li>
 </ul>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_106.jpg" alt="Peak Reporting — User Management Reports landing page. Three filter panels on the left (Login Filters, Registered Users Filters, Global User Filters), KPI tiles at the top (Total Pinnacle Logins, etc.), trend charts (Total/Unique Pinnacle and KnowledgeSmart Logins), and the report category tabs along the bottom." loading="lazy">
-  <figcaption>Peak Reporting — User Management Reports landing page. Three filter panels on the left (Login Filters, Registered Users Filters, Global User Filters), KPI tiles at the top (Total Pinnacle Logins, etc.), trend charts (Total/Unique Pinnacle and KnowledgeSmart Logins), and the report category tabs along the bottom.</figcaption>
-</figure>
-
-<h3>The full Peak Reporting nav</h3>
-<p>The Reports area has six top-level tabs (visible at the bottom of every Reports page):</p>
-<ol>
-  <li><strong>User Management Reports</strong> — Total/Unique Pinnacle and KnowledgeSmart logins, registered users by month, login histograms.</li>
-  <li><strong>Usage Reports</strong> — content access patterns, search behavior, user interest trends.</li>
-  <li><strong>Learning Reports</strong> — course progression, completions, learning path progress, learning time.</li>
-  <li><strong>Assessment Reports</strong> — competency scores, time taken, skill gaps, assessment progress.</li>
-  <li><strong>Content Reports</strong> — inventory, content types, publishers, library structure, content governance.</li>
-  <li><strong>Matrix and Leaderboard Reports</strong> — heatmap views and leaderboards across teams or skills.</li>
-</ol>
-
-<h3>The filter panel — three tiers of filtering</h3>
-<p>Most Peak Reporting pages have three filter sections in a left drawer:</p>
-<ul>
-  <li><strong>Login Filters / context-specific filters</strong> — vary by report (e.g., Date Dimension Quarter / Month / Week / Day, Login Date range, User multi-select).</li>
-  <li><strong>Registered Users Filters</strong> — Created Date range, Number of Logins (min-max).</li>
-  <li><strong>Global User Filters</strong> — Attributes (multi-select), Managers (multi-select), Groups (multi-select), User Type (Standard / External), Is Deleted (True / False).</li>
-</ul>
-<p>Each filter has a "Clear Filters" button at the bottom of the panel. Filter selections persist when navigating between report tabs but reset when leaving the Reports area entirely.</p>
-
-
 
 <div class="callout permissions">
   <strong>Required permissions:</strong>
@@ -1973,11 +2480,6 @@
   <li>Product Expertise / Areas of Interest</li>
 </ul>
 
-<figure class="screenshot">
-  <img src="screenshots/web/shot_167.jpg" alt="Edit User Details — opened by clicking "View Full Profile" then Edit Profile on a user record. From here admins manage user attributes, group membership, permissions (per-user or inherited), and the "Exclude User from SSO" toggle." loading="lazy">
-  <figcaption>Edit User Details — opened by clicking "View Full Profile" then Edit Profile on a user record. From here admins manage user attributes, group membership, permissions (per-user or inherited), and the "Exclude User from SSO" toggle.</figcaption>
-</figure>
-
 <h3>External Users page</h3>
 <p>External Users is a separate user type for people outside your organization who need scoped access to your Pinnacle Series tenant — typically vendors, contractors, or project partners.</p>
 <ul>
@@ -2028,11 +2530,6 @@
 </ul>
 
 <h3>Group Details page</h3>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_187.jpg" alt="Group Details — Members tab. The page also has tabs for Owners & Partners, Parent & Child Groups, and a Features panel (top right) that includes the SPARK toggle and SPARK Notifications configuration." loading="lazy">
-  <figcaption>Group Details — Members tab. The page also has tabs for Owners & Partners, Parent & Child Groups, and a Features panel (top right) that includes the SPARK toggle and SPARK Notifications configuration.</figcaption>
-</figure>
 <ul>
   <li><strong>Members</strong> — users in this group.</li>
   <li><strong>Group Owners</strong> — users designated as owners (in future releases, owners will gain enhanced autonomy to assign content directly to their group).</li>
@@ -2043,16 +2540,6 @@
 
 <h3>Group sync (Active Directory / Entra ID)</h3>
 <p>Groups can be synced from Microsoft Entra ID (Azure AD) or on-prem Active Directory. Configuration lives at Admin Portal → Integrations. Synced groups can be excluded per-user via the "Exclude from Synchronized Groups" bulk action.</p>
-
-<h3>General Groups vs Job Role Groups</h3>
-<p>Pinnacle Series groups are typed at creation. The Group Type field on the "Add Group Manually" modal has two values:</p>
-<ul>
-  <li><strong>General</strong> — the default. Most tenants use General groups for departments, offices, and project teams. Visibility, content sharing, and assignments all behave the same way for General groups.</li>
-  <li><strong>Job Role</strong> — used for groups that map to a specific job function (e.g., "BIM Manager," "Civil Engineer," "Project Coordinator"). Job Role groups can be referenced by Role-Based Learning paths and may surface differently in some reports.</li>
-</ul>
-<p>The behavioral difference between General and Job Role groups is still being documented as test cases are written. For most current customer-facing scenarios, the two types are functionally interchangeable; the distinction primarily affects future Role-Based Learning features.</p>
-
-
 
 <div class="callout permissions">
   <strong>Required permission:</strong> <a href="#permissions">Administrator</a> (under User Administration).
@@ -2082,21 +2569,6 @@
   <li><strong>Font</strong> selection.</li>
   <li>Apply changes to preview before save.</li>
 </ul>
-
-<h3>Theme management — Custom and Standard themes</h3>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_209.jpg" alt="Theme Customization — Available Themes view. Custom Themes are saved themes the customer's admins have created (here, "CP 2025" with the green "CURRENT THEME" badge). Standard Themes are Eagle Point-provided defaults like "Autumn Bliss". Each theme card shows its three colors as horizontal bars and has a kebab for Edit / Delete Theme." loading="lazy">
-  <figcaption>Theme Customization — Available Themes view. Custom Themes are saved themes the customer's admins have created (here, "CP 2025" with the green "CURRENT THEME" badge). Standard Themes are Eagle Point-provided defaults like "Autumn Bliss". Each theme card shows its three colors as horizontal bars and has a kebab for Edit / Delete Theme.</figcaption>
-</figure>
-<p>Theme Customization isn't a single set of colors. It's a theme management system with an "Available Themes" gallery split into two categories:</p>
-<ul>
-  <li><strong>Custom Themes</strong> — themes the customer's admins have created and saved. Each theme is named (e.g., "CP 2025") and shows its three colors as horizontal bars (Navigation / Primary / Secondary). The currently-active theme has a green "CURRENT THEME" badge.</li>
-  <li><strong>Standard Themes</strong> — Eagle Point-provided default themes (e.g., "Autumn Bliss"). These can be selected as-is, or duplicated and modified.</li>
-</ul>
-<p>Each theme card has a kebab menu with <strong>Edit</strong> (opens the Create New Theme modal pre-populated with the theme's values) and <strong>Delete Theme</strong>. The active theme cannot be deleted directly — switch to a different theme first.</p>
-
-
 
 <div class="callout permissions">
   <strong>Required permission:</strong> <a href="#permissions">Manage Portal Branding and Customization</a>.
@@ -2133,11 +2605,6 @@
 </ul>
 
 <h3>Settings → Users</h3>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_219.jpg" alt="Settings → Users → User Attributes — admins define custom attributes (with name and data type), Areas of Expertise (selectable on user profiles), and User Interests (the catalog Group admins draw from when configuring SPARK)." loading="lazy">
-  <figcaption>Settings → Users → User Attributes — admins define custom attributes (with name and data type), Areas of Expertise (selectable on user profiles), and User Interests (the catalog Group admins draw from when configuring SPARK).</figcaption>
-</figure>
 <p>User-attribute configuration:</p>
 <ul>
   <li><strong>User Attributes</strong> — define custom attributes (Attribute name, Data Type) that show up on every user record.</li>
@@ -2169,22 +2636,6 @@
 
 <h3>Password Authentication</h3>
 <p>Settings that govern password-based sign-in:</p>
-
-<h3>Password Authentication — exact controls</h3>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_223.jpg" alt="Security &amp; Authentication page — top section sets Password Authentication policy (Use Complex Passwords, Password Expires in N Days, Password Cannot Match Previous N Passwords, Lock Out User After N Invalid Attempts). Bottom section configures Single Sign-On — three mutually-exclusive radio options: Do Not Use Single Sign-On, SAML, OpenID. EWS configuration may appear elsewhere depending on tenant setup." loading="lazy">
-  <figcaption>Security &amp; Authentication page — top section sets Password Authentication policy (Use Complex Passwords, Password Expires in N Days, Password Cannot Match Previous N Passwords, Lock Out User After N Invalid Attempts). Bottom section configures Single Sign-On — three mutually-exclusive radio options: Do Not Use Single Sign-On, SAML, OpenID. EWS configuration may appear elsewhere depending on tenant setup.</figcaption>
-</figure>
-<p>The Password Authentication section sets tenant-wide password policy. Each control is independently configurable:</p>
-<ul>
-  <li><strong>Use Complex Passwords</strong> — when enabled, requires passwords to meet four criteria simultaneously: minimum 8 characters, at least one uppercase letter (A-Z), at least one lowercase letter (a-z), and at least one alphanumeric special character (e.g., !, #, $, %).</li>
-  <li><strong>Password Expires in [N] Days</strong> — default 90. Forces a password reset on the next sign-in after the expiration period.</li>
-  <li><strong>Password Cannot Match Previous [N] Password(s)</strong> — default 10. Prevents users from cycling through the same handful of passwords.</li>
-  <li><strong>Lock Out User After [N] Invalid Attempts</strong> — default 10. After this many failed sign-ins, the account is locked and an admin must reset it.</li>
-</ul>
-
-
 <ul>
   <li>Complex password requirements</li>
   <li>Password history (prevent reuse)</li>
@@ -2263,22 +2714,6 @@
   <li>Synchronize KnowledgeSmart users with Pinnacle Series users.</li>
   <li>Manage KnowledgeSmart invitations and assessment campaigns.</li>
 </ul>
-
-<h3>What KnowledgeSmart actually is</h3>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_291.jpg" alt="KnowledgeSmart admin dashboard — the external platform that opens when an admin clicks KnowledgeSmart Admin Area in the Pinnacle Series Admin Portal." loading="lazy">
-  <figcaption>KnowledgeSmart admin dashboard — what you see after clicking "KnowledgeSmart Admin Area" in the Pinnacle Series Admin Portal. This is hosted at https://online.knowledgesmart.net/, not Pinnacle Series. Note the yellow "KNOWLEDGE SMART" branding, the Test/Survey/Skills tabs, and the dashboard cards (INVITES SENT, TESTS, SUBSCRIPTION DETAILS).</figcaption>
-</figure>
-<p>KnowledgeSmart is a separate product from Pinnacle Series. It's a skill assessment platform — also owned by Eagle Point Software — that delivers software skill assessments, skills gap analysis, and benchmarking specifically tailored for AEC and manufacturing tools. It integrates deeply with Pinnacle Series so that:</p>
-<ul>
-  <li>Assessment results feed into Pinnacle Series learning recommendations (Personalized / Mapped Learning).</li>
-  <li>Pinnacle Series users with appropriate roles can launch into the KnowledgeSmart admin dashboard from the Admin Portal nav.</li>
-  <li>KnowledgeSmart logins are tracked in the Pinnacle Series User Management Reports alongside Pinnacle logins.</li>
-</ul>
-<p>The integration is configured via Admin Portal → Integrations → KnowledgeSmart (toggle + Configure button). To use KnowledgeSmart admin features, a user needs both Pinnacle Series Administrator permission AND a KnowledgeSmart admin role configured in the KS Admin Dashboard.</p>
-
-
 
 <div class="callout permissions">
   <strong>Required role:</strong> <strong>KnowledgeSmart Administrator</strong> — this is a separate role configured in the KnowledgeSmart Admin Dashboard, not in Pinnacle Series itself. A user can have full Pinnacle admin permissions and still see "You do not have permission to log in to KnowledgeSmart" in this section if their KS admin role hasn't been set up.
@@ -2557,16 +2992,151 @@
 
 </main>
 
+<!-- Lightbox for screenshot zoom -->
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged screenshot">
+  <img id="lightbox-img" alt="">
+</div>
+
+<!-- Eagle Point Mascot Launcher -->
+<button class="mascot-launcher" id="mascot-launcher" aria-label="Open Eagle assistant">
+  <span class="pulse-ring" aria-hidden="true"></span>
+  <span class="talk-bubble">Need help? Ask me!</span>
+  <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="lf-feather" cx="50%" cy="40%" r="60%">
+        <stop offset="0%" stop-color="#fff8ec"/>
+        <stop offset="100%" stop-color="#d8c89a"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="40" cy="44" rx="26" ry="22" fill="url(#lf-feather)"/>
+    <path d="M22 30 Q26 18 32 26" stroke="#a89668" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M40 22 Q40 14 44 24" stroke="#a89668" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M58 30 Q54 18 48 26" stroke="#a89668" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="32" cy="42" r="4" fill="#1a2332"/>
+    <circle cx="33" cy="41" r="1.4" fill="#fff"/>
+    <circle cx="48" cy="42" r="4" fill="#1a2332"/>
+    <circle cx="49" cy="41" r="1.4" fill="#fff"/>
+    <path d="M27 36 Q32 33 37 37" stroke="#a89668" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <path d="M43 37 Q48 33 53 36" stroke="#a89668" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <path d="M40 46 L34 54 Q40 58 46 54 Z" fill="#f5b942" stroke="#c08e1f" stroke-width="1"/>
+    <path d="M40 50 L37 53 L43 53 Z" fill="#c08e1f"/>
+    <ellipse cx="26" cy="50" rx="3" ry="1.5" fill="#f5c4c8" opacity="0.5"/>
+    <ellipse cx="54" cy="50" rx="3" ry="1.5" fill="#f5c4c8" opacity="0.5"/>
+  </svg>
+</button>
+
+<!-- Chatbot Panel: Eagle behind a desk -->
+<div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-label="Pinnacle Wiki Assistant">
+  <div class="chatbot-scene">
+    <button class="close-x" id="chat-close" aria-label="Close">&#x2715;</button>
+    <svg viewBox="0 0 380 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="sky-bg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#eaf2f9"/>
+          <stop offset="100%" stop-color="#d4e4f0"/>
+        </linearGradient>
+        <linearGradient id="desk-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#8b6d4f"/>
+          <stop offset="100%" stop-color="#6b5238"/>
+        </linearGradient>
+        <radialGradient id="body-feather" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#fff8ec"/>
+          <stop offset="100%" stop-color="#c9b888"/>
+        </radialGradient>
+        <linearGradient id="monitor-screen" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#7DBF45"/>
+          <stop offset="100%" stop-color="#5fa030"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="380" height="160" fill="url(#sky-bg)"/>
+      <rect x="20" y="14" width="100" height="70" fill="#fafbfc" stroke="#b8c4d1" stroke-width="2" opacity="0.7"/>
+      <line x1="70" y1="14" x2="70" y2="84" stroke="#b8c4d1" stroke-width="2" opacity="0.7"/>
+      <line x1="20" y1="49" x2="120" y2="49" stroke="#b8c4d1" stroke-width="2" opacity="0.7"/>
+      <path d="M22 75 L50 55 L72 70 L95 50 L118 75 Z" fill="#a890b8" opacity="0.7"/>
+      <ellipse cx="335" cy="98" rx="22" ry="8" fill="#6b5238" opacity="0.6"/>
+      <path d="M335 98 Q325 80 320 65 Q335 75 340 60 Q345 78 355 70 Q345 85 335 98 Z" fill="#5fa030"/>
+      <path d="M335 98 Q330 88 325 80" stroke="#7DBF45" stroke-width="2" fill="none"/>
+      <rect x="0" y="115" width="380" height="45" fill="url(#desk-grad)"/>
+      <rect x="0" y="113" width="380" height="4" fill="#a08560"/>
+      <rect x="220" y="58" width="100" height="62" rx="4" fill="#1a2332"/>
+      <rect x="225" y="63" width="90" height="48" rx="2" fill="url(#monitor-screen)" class="monitor-glow"/>
+      <rect x="232" y="70" width="40" height="3" fill="#fff" opacity="0.85"/>
+      <rect x="232" y="78" width="60" height="2" fill="#fff" opacity="0.6"/>
+      <rect x="232" y="84" width="50" height="2" fill="#fff" opacity="0.6"/>
+      <rect x="232" y="90" width="55" height="2" fill="#fff" opacity="0.6"/>
+      <rect x="232" y="98" width="35" height="2" fill="#fff" opacity="0.6"/>
+      <rect x="262" y="120" width="16" height="6" fill="#0f1f2c"/>
+      <rect x="252" y="124" width="36" height="4" fill="#0f1f2c"/>
+      <rect x="40" y="125" width="22" height="22" rx="2" fill="#7DBF45"/>
+      <path d="M62 130 Q72 132 72 138 Q72 144 62 144" stroke="#7DBF45" stroke-width="3" fill="none"/>
+      <ellipse cx="51" cy="125" rx="11" ry="3" fill="#5a3d20"/>
+      <path d="M48 122 Q46 116 50 110 Q52 104 48 100" stroke="#fff" stroke-width="1.5" fill="none" opacity="0.6"/>
+      <path d="M54 122 Q56 116 52 110 Q50 104 54 100" stroke="#fff" stroke-width="1.5" fill="none" opacity="0.5"/>
+      <rect x="78" y="128" width="32" height="22" fill="#fff" stroke="#b8c4d1" stroke-width="1"/>
+      <line x1="82" y1="134" x2="106" y2="134" stroke="#b8c4d1" stroke-width="0.7"/>
+      <line x1="82" y1="139" x2="106" y2="139" stroke="#b8c4d1" stroke-width="0.7"/>
+      <line x1="82" y1="144" x2="100" y2="144" stroke="#b8c4d1" stroke-width="0.7"/>
+      <g class="wing-flap">
+        <path d="M100 110 Q75 90 85 130 Q105 135 115 125 Z" fill="#a89668"/>
+        <path d="M88 105 Q92 100 96 108" stroke="#7a6b4a" stroke-width="1.5" fill="none"/>
+        <path d="M85 115 Q90 110 94 118" stroke="#7a6b4a" stroke-width="1.5" fill="none"/>
+      </g>
+      <ellipse cx="170" cy="135" rx="48" ry="28" fill="url(#body-feather)"/>
+      <path d="M170 122 L160 145 L170 152 L180 145 Z" fill="#7DBF45"/>
+      <circle cx="170" cy="135" r="4" fill="#fff"/>
+      <text x="170" y="138" font-size="6" font-weight="bold" text-anchor="middle" fill="#5fa030">EP</text>
+      <ellipse cx="170" cy="92" rx="32" ry="28" fill="url(#body-feather)"/>
+      <path d="M148 78 Q152 64 158 74" stroke="#a89668" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M163 70 Q167 60 171 70" stroke="#a89668" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M178 70 Q182 60 186 70" stroke="#a89668" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M192 78 Q188 64 182 74" stroke="#a89668" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="160" cy="92" r="5" fill="#fff"/>
+      <circle cx="180" cy="92" r="5" fill="#fff"/>
+      <circle cx="161" cy="93" r="3" fill="#1a2332"/>
+      <circle cx="181" cy="93" r="3" fill="#1a2332"/>
+      <circle cx="162" cy="92" r="1" fill="#fff"/>
+      <circle cx="182" cy="92" r="1" fill="#fff"/>
+      <ellipse class="eye-lid" cx="160" cy="92" rx="5" ry="5" fill="#d8c89a"/>
+      <ellipse class="eye-lid" cx="180" cy="92" rx="5" ry="5" fill="#d8c89a"/>
+      <path d="M153 85 Q160 81 167 86" stroke="#a89668" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M173 86 Q180 81 187 85" stroke="#a89668" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M170 100 L160 113 Q170 119 180 113 Z" fill="#f5b942" stroke="#c08e1f" stroke-width="1.2"/>
+      <path d="M170 106 L165 111 L175 111 Z" fill="#c08e1f"/>
+      <ellipse cx="146" cy="103" rx="4" ry="2" fill="#f5c4c8" opacity="0.5"/>
+      <ellipse cx="194" cy="103" rx="4" ry="2" fill="#f5c4c8" opacity="0.5"/>
+      <path d="M212 122 Q230 115 235 130 Q220 135 210 130 Z" fill="#a89668"/>
+      <ellipse cx="170" cy="158" rx="50" ry="3" fill="#0f1f2c" opacity="0.15"/>
+    </svg>
+  </div>
+  <div class="chatbot-header-text">
+    <strong>Pinnacle Eagle</strong> &middot; Wiki Assistant
+    <div class="sub">Ask me about anything in this wiki &mdash; I'll find the right section.</div>
+  </div>
+  <div class="chatbot-messages" id="chat-messages"></div>
+  <div class="chatbot-suggestions" id="chat-suggestions">
+    <button data-q="What permissions do I need to publish content?">Publishing perms?</button>
+    <button data-q="Where do I configure SSO?">Where's SSO?</button>
+    <button data-q="What is the difference between Peak and Classic?">Peak vs Classic</button>
+    <button data-q="How do I set up auto-assignments?">Auto-assignments</button>
+    <button data-q="Where is the Recycle Bin?">Recycle Bin</button>
+  </div>
+  <form class="chatbot-input" id="chat-form" autocomplete="off">
+    <input type="text" id="chat-input" placeholder="Ask the Eagle&hellip;" aria-label="Ask the Eagle">
+    <button type="submit" aria-label="Send">&rarr;</button>
+  </form>
+</div>
+
 <script>
   const sections = document.querySelectorAll('main section');
   const navLinks = document.querySelectorAll('#sidebar-nav a');
+
   function setActive() {
     let current = '';
     const scrollY = window.scrollY + 80;
     sections.forEach(s => { if (s.offsetTop <= scrollY) current = s.id; });
     navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
   }
-  window.addEventListener('scroll', setActive);
+  window.addEventListener('scroll', setActive, { passive: true });
   setActive();
 
   function filterNav(q) {
@@ -2588,115 +3158,313 @@
   navLinks.forEach(a => a.addEventListener('click', () => {
     if (window.innerWidth <= 960) document.querySelector('.sidebar').classList.remove('open');
   }));
-</script>
 
-
-<button class="chat-fab" id="chat-fab" aria-label="Open Pinnacle Series assistant chat" title="Ask the Pinnacle Series assistant">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-</button>
-
-<div class="chat-panel" id="chat-panel" role="dialog" aria-labelledby="chat-title">
-  <header style="position: relative;">
-    <h3 id="chat-title">Pinnacle Series Assistant</h3>
-    <div class="sub">Ask me anything about Pinnacle Series</div>
-    <button class="close" id="chat-close" aria-label="Close chat">×</button>
-  </header>
-  <div class="messages" id="chat-messages">
-    <div class="chat-msg">
-      <div class="avatar">P</div>
-      <div class="bubble">Hi! I'm the Pinnacle Series Assistant. I can help answer common questions about how Pinnacle Series works, where features live in the UI, or what permissions someone needs to do something. Try one of the suggested questions below, or type your own.</div>
-    </div>
-  </div>
-  <div class="chat-suggested" id="chat-suggested">
-    <div class="label">Try asking</div>
-    <span class="chip" data-q="What is Pinnacle Series?">What is Pinnacle Series?</span>
-    <span class="chip" data-q="What permissions are needed to add users?">Permissions to add users?</span>
-    <span class="chip" data-q="Where is the Recycle Bin?">Where is the Recycle Bin?</span>
-    <span class="chip" data-q="How does SCORM Export work?">How does SCORM Export work?</span>
-    <span class="chip" data-q="What is SPARK?">What is SPARK?</span>
-    <span class="chip" data-q="Peak vs Classic?">Peak vs Classic?</span>
-  </div>
-  <div class="chat-input">
-    <input type="text" id="chat-input-field" placeholder="Type your question…" autocomplete="off">
-    <button id="chat-send">Send</button>
-  </div>
-  <div class="chat-disclaimer">Answers are static and based on the wiki content. For complex or current questions, contact Nick.</div>
-</div>
-
-<script>
-(function() {
-  const fab = document.getElementById("chat-fab");
-  const panel = document.getElementById("chat-panel");
-  const closeBtn = document.getElementById("chat-close");
-  const messages = document.getElementById("chat-messages");
-  const suggested = document.getElementById("chat-suggested");
-  const input = document.getElementById("chat-input-field");
-  const sendBtn = document.getElementById("chat-send");
-
-  // Canned Q&A — keyword-matched, all sourced from the wiki
-  const QA = [
-    { keys: ["what is pinnacle", "what's pinnacle", "pinnacle series"], a: "Pinnacle Series is Eagle Point Software's applied learning platform — built exclusively for AECO and manufacturing. It combines 30,000+ expert videos, an integrated LMS, in-Autodesk guidance (Command Launcher + Related Learning), KnowledgeSmart assessments, and SPARK AI Nano-Learning in one system. 750K+ users, 2,700+ customers, 95% renewal rate." },
-    { keys: ["add users", "permission", "users", "add user"], a: "To add users to Pinnacle Series, the admin needs the Administrator permission (under User Administration). They can add users manually, import via spreadsheet, or sync from Microsoft Entra ID / on-prem Active Directory. Find this in Admin Portal → Users → Standard Users → Add User." },
-    { keys: ["recycle bin", "deleted content", "restore"], a: "The Recycle Bin lives at Admin Portal → Content → Tools (kebab icon) → Recycle Bin. It's NOT a left-nav item. Per-item kebab offers Restore to Previous Location and Delete (permanent). Items remain in the bin indefinitely." },
-    { keys: ["scorm", "export", "external lms"], a: "SCORM Export packages eligible learning paths or specific courses for upload to your customer's external LMS. Initiated from the per-item kebab in a Library Details view (Export Learning Path to SCORM / Export Course to SCORM). Progress is tracked in Pinnacle, but the learner needs an active Pinnacle account in the issuing tenant with matching email and content access for it to work." },
-    { keys: ["spark", "nano-learning", "ai-powered"], a: "SPARK is Pinnacle's personalized nano-learning feed — short videos (under 5 minutes) curated by AI from the user's interests, group's focus, and shared libraries. Enabled per group at Admin Portal → Groups → Group Details → SPARK toggle. Cadence options: Daily / Weekly / Monthly." },
-    { keys: ["peak", "classic", "experience"], a: "Peak Experience is the modern Pinnacle UI; Classic is the legacy interface that some tenants still use during migration. Two independent tenant toggles control Peak: Peak Experience Configuration (admin UI) and Peak Experience for End Users (Home page). Classic has a thin blue header with icon nav and an Asset Libraries tree on the left; Peak has a sidebar with Home/Assignments/Libraries/Bookmarks/MANAGEMENT structure." },
-    { keys: ["ai chat", "chatbot", "pinnacle ai"], a: "AI Chat is Pinnacle's natural-language assistant (Pinnacle AI). It uses Microsoft Azure OpenAI (GPT-3.5) with Retrieval-Augmented Generation — answers come only from content the user has access to. Each reply includes citations linking back to source content. Enabled by tenant via Settings → General → Allow Users to Access AI Chat (Preview)." },
-    { keys: ["sso", "single sign", "saml", "openid"], a: "SSO is configured tenant-wide at Admin Portal → Security & Authentication. Three options: Do Not Use SSO, SAML, or OpenID. Each user has an individual 'Exclude User from SSO' toggle that overrides the tenant setting. SSO-eligible users skip the password field entirely on sign-in." },
-    { keys: ["external user", "vendor", "contractor"], a: "External Users are accounts for people outside the customer's organization (vendors, contractors, project partners). They have scoped access to libraries shared with them. They do NOT count against the customer's standard user license. Managed at Admin Portal → Users → External Users." },
-    { keys: ["report", "reporting", "analytics"], a: "Peak Reporting has 6 category tabs: User Management, Usage, Learning, Assessment, Content, and Matrix and Leaderboard Reports. Permissions: Reporting Administrator (sees all users) or Reporting Manager (scoped to managed users / owned groups). Each report has Original analysis / Export / Schedule export options." },
-    { keys: ["knowledgesmart", "ks", "assessment"], a: "KnowledgeSmart is Eagle Point's separate skill-assessment platform, integrated with Pinnacle Series. Clicking 'KnowledgeSmart Admin Area' in the Admin Portal redirects to https://online.knowledgesmart.net/ — it's NOT an in-product page. Configure the integration at Admin Portal → Integrations → KnowledgeSmart." },
-    { keys: ["theme", "branding", "color"], a: "Theme Customization (Admin Portal → Theme Customization) supports multiple saved themes. Each has three independently-configurable colors: Navigation, Primary, Secondary. Standard Themes (e.g., Autumn Bliss) ship with Pinnacle; Custom Themes are saved by the customer's admins. Required permission: Manage Portal Branding and Customization." },
-    { keys: ["language", "translate"], a: "Pinnacle Series supports 130+ languages. Users set their preferred language in My Account → Account Info → Language. Asset titles, descriptions, and transcripts are auto-translated. Tenant default language is at Admin Portal → Settings → General → Default Language." },
-    { keys: ["bookmark"], a: "Bookmarks (end-user left nav) are saved references to content for quick access. Per-card kebab options: View, Remove from Bookmarks, Copy Link (Formatted), Copy Link (Unformatted)." },
-    { keys: ["sign in", "login", "log in"], a: "Pinnacle's sign-in is email-first, two-step. The user enters email and clicks Continue — the page then either shows a password field, redirects to an SSO IdP, or signs them in directly if they already have an IdP session. There's also a Naviate-specific flow for users with NaviateID URL parameters (production-only, requires Naviate credentials)." },
-    { keys: ["where", "find"], a: "Most pages are reachable from the sidebar nav on the left of this wiki. The Glossary section lists common Pinnacle terms with definitions. The Permissions Reference covers who can do what. If you're looking for a specific feature, try the Common Questions section at the bottom." },
-  ];
-
-  function findAnswer(q) {
-    const lower = q.toLowerCase();
-    for (const item of QA) {
-      if (item.keys.some(k => lower.includes(k))) return item.a;
+  /* Reveal-on-scroll */
+  (function setupReveal() {
+    sections.forEach(s => s.classList.add('reveal'));
+    if (!('IntersectionObserver' in window)) {
+      sections.forEach(s => s.classList.add('in-view'));
+      return;
     }
-    return "I don't have a specific answer for that, but the wiki itself probably does — try the sidebar nav or the Common Questions section. For anything not covered here, contact Nick.";
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+    sections.forEach(s => io.observe(s));
+  })();
+
+  /* Lightbox */
+  (function setupLightbox() {
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    document.querySelectorAll('.screenshot img').forEach(img => {
+      img.addEventListener('click', e => {
+        e.stopPropagation();
+        lbImg.src = img.src;
+        lbImg.alt = img.alt || '';
+        lb.classList.add('open');
+      });
+    });
+    lb.addEventListener('click', () => lb.classList.remove('open'));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') lb.classList.remove('open');
+    });
+  })();
+
+  /* Wiki-aware chatbot */
+  /* ============== CONFIG: paste your Cloudflare Worker URL here to enable Claude AI ============== */
+  /* When this is empty, the chatbot falls back to local keyword search.  */
+  /* When set, the chatbot calls your worker which forwards to Claude.    */
+  const CHATBOT_PROXY_URL = "https://pinnacle-eagle.nick-cartony.workers.dev"; // e.g. "https://pinnacle-eagle.your-account.workers.dev"
+
+  const STOPWORDS = new Set(['the','a','an','is','are','to','of','in','on','for','and','or','do','does','i','my','what','where','who','how','can','it','this','that','be','need']);
+
+  const wikiIndex = Array.from(sections).map(sec => {
+    const id = sec.id;
+    const titleEl = sec.querySelector('h2, h1');
+    const title = titleEl ? titleEl.textContent.replace(/\s+/g, ' ').trim() : id;
+    const bodyText = sec.textContent.replace(/\s+/g, ' ').trim();
+    const tokens = bodyText.toLowerCase().match(/[a-z][a-z0-9'-]+/g) || [];
+    const tf = {};
+    tokens.forEach(t => { if (!STOPWORDS.has(t)) tf[t] = (tf[t] || 0) + 1; });
+    const paragraphs = Array.from(sec.querySelectorAll('p, li')).map(el => el.textContent.replace(/\s+/g, ' ').trim()).filter(t => t.length > 30);
+    return { id, title, body: bodyText.toLowerCase(), tf, paragraphs, titleLower: title.toLowerCase() };
+  });
+
+  const df = {};
+  wikiIndex.forEach(d => Object.keys(d.tf).forEach(t => { df[t] = (df[t] || 0) + 1; }));
+  const N = wikiIndex.length;
+  const idf = t => Math.log(1 + N / (1 + (df[t] || 0)));
+
+  function searchWiki(query, n) {
+    const qTokens = (query.toLowerCase().match(/[a-z][a-z0-9'-]+/g) || []).filter(t => !STOPWORDS.has(t));
+    if (qTokens.length === 0) return [];
+    const scored = wikiIndex.map(doc => {
+      let score = 0;
+      qTokens.forEach(t => {
+        const tf = doc.tf[t] || 0;
+        if (tf) score += (1 + Math.log(tf)) * idf(t);
+        if (doc.titleLower.includes(t)) score += 3;
+      });
+      return { doc, score };
+    }).filter(s => s.score > 0).sort((a, b) => b.score - a.score);
+    return scored.slice(0, n || 2);
   }
 
-  function addMessage(role, text) {
-    const wrap = document.createElement("div");
-    wrap.className = "chat-msg " + role;
-    const avatar = document.createElement("div");
-    avatar.className = "avatar";
-    avatar.textContent = role === "user" ? "U" : "P";
-    const bubble = document.createElement("div");
-    bubble.className = "bubble";
-    bubble.textContent = text;
-    wrap.appendChild(avatar);
-    wrap.appendChild(bubble);
-    messages.appendChild(wrap);
-    messages.scrollTop = messages.scrollHeight;
+  function bestSnippet(doc, qTokens) {
+    if (!doc.paragraphs.length) return '';
+    let best = doc.paragraphs[0], bestScore = -1;
+    doc.paragraphs.forEach(p => {
+      const lp = p.toLowerCase();
+      let s = 0;
+      qTokens.forEach(t => { if (lp.includes(t)) s++; });
+      if (s > bestScore) { bestScore = s; best = p; }
+    });
+    if (best.length > 240) best = best.slice(0, 240).replace(/\s\S*$/, '') + '…';
+    return best;
   }
 
-  function send(text) {
-    text = (text || "").trim();
-    if (!text) return;
-    addMessage("user", text);
-    input.value = "";
-    setTimeout(() => addMessage("bot", findAnswer(text)), 420);
-  }
+  const launcher = document.getElementById('mascot-launcher');
+  const panel = document.getElementById('chatbot-panel');
+  const closeBtn = document.getElementById('chat-close');
+  const messagesEl = document.getElementById('chat-messages');
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+  const suggestions = document.getElementById('chat-suggestions');
 
-  fab.addEventListener("click", () => {
-    panel.classList.toggle("open");
-    if (panel.classList.contains("open")) {
-      setTimeout(() => input.focus(), 100);
+  function openChat() {
+    panel.classList.add('open');
+    launcher.classList.add('hidden');
+    if (messagesEl.children.length === 0) {
+      const greeting = CHATBOT_PROXY_URL
+        ? "Hi! I'm the Pinnacle Eagle, powered by Claude. Ask me anything about the wiki and I'll answer from the source sections."
+        : "Hi! I'm the Pinnacle Eagle. I'll search the wiki by keyword and point you to the right section. Try a suggestion below or type your own question.";
+      addBotMsg(greeting);
     }
+    setTimeout(() => input.focus(), 300);
+  }
+  function closeChat() {
+    panel.classList.remove('open');
+    launcher.classList.remove('hidden');
+  }
+  launcher.addEventListener('click', openChat);
+  closeBtn.addEventListener('click', closeChat);
+
+  function scrollMessages() { messagesEl.scrollTop = messagesEl.scrollHeight; }
+  function addUserMsg(text) {
+    const d = document.createElement('div');
+    d.className = 'chat-msg user';
+    d.textContent = text;
+    messagesEl.appendChild(d);
+    scrollMessages();
+  }
+  function addBotMsg(html) {
+    const d = document.createElement('div');
+    d.className = 'chat-msg bot';
+    d.innerHTML = html;
+    messagesEl.appendChild(d);
+    scrollMessages();
+  }
+  function addTyping() {
+    const t = document.createElement('div');
+    t.className = 'chat-typing';
+    t.id = '_typing';
+    t.innerHTML = '<span></span><span></span><span></span>';
+    messagesEl.appendChild(t);
+    scrollMessages();
+  }
+  function removeTyping() {
+    const t = document.getElementById('_typing');
+    if (t) t.remove();
+  }
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  /* ============== Local TF-IDF fallback answer ============== */
+  function localAnswer(query) {
+    const qTokens = (query.toLowerCase().match(/[a-z][a-z0-9'-]+/g) || []).filter(t => !STOPWORDS.has(t));
+    const hits = searchWiki(query, 2);
+    if (!hits.length) {
+      return "I couldn't find anything in the wiki about that. Try keywords like <em>permissions</em>, <em>SSO</em>, <em>libraries</em>, <em>auto-assign</em>, or <em>Peak</em>.";
+    }
+    let html = '';
+    hits.forEach((h, i) => {
+      const snippet = escapeHtml(bestSnippet(h.doc, qTokens));
+      html += '<div class="src-title">' + escapeHtml(h.doc.title) + '</div>';
+      html += '<div>' + snippet + '</div>';
+      html += '<a class="jump" href="#' + h.doc.id + '">Jump to section &rarr;</a>';
+      if (i < hits.length - 1) html += '<hr style="margin:10px 0;border:none;border-top:1px dashed #e2e8f0;">';
+    });
+    return html;
+  }
+
+  /* ============== Header status badge ============== */
+  function updateChatStatus() {
+    var sub = document.querySelector('.chatbot-header-text .sub');
+    if (!sub) return;
+    if (CHATBOT_PROXY_URL) {
+      sub.textContent = "Powered by Claude Haiku 4.5";
+    } else {
+      sub.textContent = "Wiki keyword search";
+    }
+  }
+  updateChatStatus();
+
+  /* ============== Render Claude's markdown-ish output ============== */
+  function renderClaudeOutput(text) {
+    var s = escapeHtml(text);
+    s = s.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
+    s = s.replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>');
+    s = s.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+    s = s.replace(/\[source:\s*([a-z0-9-]+)\s*\]/gi, function(m, id) {
+      var doc = wikiIndex.find(function(d) { return d.id === id; });
+      if (!doc) return '';
+      return ' <a class="jump" href="#' + id + '">' + escapeHtml(doc.title) + ' &rarr;</a>';
+    });
+    s = s.replace(/\n{2,}/g, '</p><p style="margin:0 0 6px;">');
+    s = s.replace(/\n/g, '<br>');
+    return '<p style="margin:0 0 6px;">' + s + '</p>';
+  }
+
+  /* ============== Call the Cloudflare Worker proxy (RAG) ============== */
+  async function callClaude(query) {
+    if (!CHATBOT_PROXY_URL) {
+      var noProxy = new Error('NO_PROXY'); noProxy.code = 'NO_PROXY'; throw noProxy;
+    }
+    var hits = searchWiki(query, 4);
+    if (!hits.length) {
+      var noCtx = new Error('NO_CONTEXT'); noCtx.code = 'NO_CONTEXT'; throw noCtx;
+    }
+    var ctx = hits.slice(0, 3).map(function(h) {
+      var body = h.doc.body;
+      if (body.length > 2500) body = body.slice(0, 2500) + '...';
+      return '<wiki_section id="' + h.doc.id + '" title="' + h.doc.title.replace(/"/g, '\"') + '">\n' + body + '\n</wiki_section>';
+    }).join('\n\n');
+
+    var resp = await fetch(CHATBOT_PROXY_URL, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ query: query, context: ctx })
+    });
+
+    if (!resp.ok) {
+      var t = await resp.text();
+      var err = new Error('Proxy ' + resp.status + ': ' + t.slice(0, 200));
+      err.code = 'PROXY_ERROR';
+      err.status = resp.status;
+      throw err;
+    }
+    var data = await resp.json();
+    return data.text || '';
+  }
+
+  /* ============== Top-level answer dispatcher ============== */
+  async function answer(query) {
+    if (!CHATBOT_PROXY_URL) {
+      addBotMsg(localAnswer(query));
+      return;
+    }
+    try {
+      var text = await callClaude(query);
+      addBotMsg(renderClaudeOutput(text));
+    } catch (err) {
+      console.error('Chatbot proxy failed:', err);
+      var note;
+      if (err.status === 429) note = 'Rate-limited. Used keyword search as fallback.';
+      else if (err.code === 'NO_CONTEXT') note = 'No matching wiki sections found.';
+      else note = 'AI assistant unavailable &mdash; used keyword search instead.';
+      addBotMsg(localAnswer(query) + '<div style="margin-top:8px; font-size:11px; color:#a32d2d;">' + note + '</div>');
+    }
+  }
+
+  /* ============== Form / suggestions handlers (async-aware) ============== */
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var q = input.value.trim();
+    if (!q) return;
+    addUserMsg(q);
+    input.value = '';
+    addTyping();
+    try { await answer(q); } finally { removeTyping(); }
   });
-  closeBtn.addEventListener("click", () => panel.classList.remove("open"));
-  sendBtn.addEventListener("click", () => send(input.value));
-  input.addEventListener("keydown", (e) => { if (e.key === "Enter") send(input.value); });
-  suggested.querySelectorAll(".chip").forEach(chip => {
-    chip.addEventListener("click", () => send(chip.dataset.q));
+
+  suggestions.addEventListener('click', async function(e) {
+    var btn = e.target.closest('button[data-q]');
+    if (!btn) return;
+    var q = btn.dataset.q;
+    addUserMsg(q);
+    addTyping();
+    try { await answer(q); } finally { removeTyping(); }
   });
-})();
+
+  messagesEl.addEventListener('click', function(e) {
+    var a = e.target.closest('a.jump');
+    if (a && window.innerWidth <= 720) closeChat();
+  });
+
+
+  setTimeout(function() {
+    if (!panel.classList.contains('open')) launcher.classList.add('greet');
+    setTimeout(function() { launcher.classList.remove('greet'); }, 5500);
+  }, 1500);
+
+  /* ============== Pinnacle Series embed ============== */
+  const PINNACLE_URL = "https://portal.pinnacleseries.com/#/login";
+  (function setupEmbed() {
+    const toggle = document.getElementById('embed-toggle');
+    const panel = document.getElementById('embed-panel');
+    const closeBtn = document.getElementById('embed-close');
+    const frame = document.getElementById('embed-frame');
+    const popout = document.getElementById('embed-popout');
+    const bannerLink = document.getElementById('embed-banner-link');
+    if (!toggle || !panel) return;
+
+    if (popout) popout.href = PINNACLE_URL;
+    if (bannerLink) bannerLink.href = PINNACLE_URL;
+
+    function openEmbed() {
+      document.body.classList.add('embed-open');
+      panel.classList.add('open');
+      if (!frame.src || frame.src === 'about:blank' || frame.src === window.location.href) {
+        frame.src = PINNACLE_URL;
+      }
+    }
+    function closeEmbed() {
+      document.body.classList.remove('embed-open');
+      panel.classList.remove('open');
+    }
+    toggle.addEventListener('click', openEmbed);
+    closeBtn.addEventListener('click', closeEmbed);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && panel.classList.contains('open')) closeEmbed();
+    });
+  })();
+
 </script>
 
 </body>
