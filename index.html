@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pinnacle Series Wiki — Internal Reference</title>
 <style>
@@ -16,16 +17,16 @@
     --c-sidebar-text: #b8c4d1;
     --c-sidebar-text-active: #ffffff;
     --c-sidebar-hover: #1c3142;
-    --c-accent: #7DBF45;          /* EPS green */
-    --c-accent-dark: #5fa030;
-    --c-accent-light: #eef7e3;
+    --c-accent: #1f6dc1;          /* Eagle Point blue */
+    --c-accent-dark: #0e4d96;
+    --c-accent-light: #e7f1fa;
     --c-link: #2d6b9e;
     --c-callout-bg: #f6f9fb;
     --c-callout-border: #d4dde5;
     --c-warn-bg: #fff8e1;
     --c-warn-border: #f0c75e;
-    --c-perm-bg: #eef7e3;
-    --c-perm-border: #c4dba1;
+    --c-perm-bg: #e7f1fa;
+    --c-perm-border: #b4d2eb;
     --c-code-bg: #eef2f6;
     --sidebar-w: 280px;
   }
@@ -35,11 +36,13 @@
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     color: #0f1f2c;
-    background: transparent;
     line-height: 1.6;
     font-size: 16.5px;
+    background:
+      linear-gradient(180deg, #f7faff 0%, #eff5fb 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
   }
-  html { background: var(--c-bg); }
 
   /* Sidebar */
   .sidebar {
@@ -65,8 +68,12 @@
     margin-bottom: 8px;
   }
   .sidebar-header .logo-mark {
-    width: 24px; height: 24px;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
     flex-shrink: 0;
+    background:
+      url("https://eaglepoint.com/wp-content/uploads/2024/06/logo-white.png") left center / 380% auto no-repeat;
   }
   .sidebar-header h1 {
     font-size: 16px;
@@ -226,7 +233,7 @@
   /* "Where to find it" mini-card */
   .where {
     background: var(--c-accent-light);
-    border: 1px solid #c4dba1;
+    border: 1px solid #b4d2eb;
     border-radius: 6px;
     padding: 10px 14px;
     margin: 12px 0 18px;
@@ -271,7 +278,7 @@
     font-weight: 600;
     color: var(--c-accent-dark);
     background: var(--c-accent-light);
-    border: 1px solid #c4dba1;
+    border: 1px solid #b4d2eb;
     padding: 2px 8px;
     border-radius: 10px;
     text-transform: uppercase;
@@ -333,8 +340,19 @@
   }
   .screenshot img {
     display: block;
-    width: 100%;
+    max-width: 100%;
+    width: auto;
     height: auto;
+    margin: 0 auto;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+  /* Container also gets a clean centering for narrow images */
+  .screenshot {
+    text-align: center;
+  }
+  .screenshot figcaption {
+    text-align: left;
   }
   .screenshot figcaption {
     padding: 8px 14px;
@@ -363,7 +381,7 @@
     position: fixed;
     top: 0; left: var(--sidebar-w); right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #7DBF45, #5fa030, #2d6b9e, #7DBF45);
+    background: linear-gradient(90deg, #1f6dc1, #0e4d96, #2d6b9e, #1f6dc1);
     background-size: 300% 100%;
     animation: gradientShift 12s ease infinite;
     z-index: 90;
@@ -393,14 +411,6 @@
     50%      { transform: translateY(-6px); }
   }
 
-  .sidebar-header .logo-mark path:last-child {
-    transform-origin: 12px 18px;
-    animation: logoPulse 4s ease-in-out infinite;
-  }
-  @keyframes logoPulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%      { opacity: 0.75; transform: scale(1.08); }
-  }
 
   .sidebar nav a { position: relative; overflow: hidden; }
   .sidebar nav a::before {
@@ -426,8 +436,8 @@
   .reveal.in-view { opacity: 1; transform: translateY(0); }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
-    .hero svg, .hero::after, .brand-bar, .sidebar-header .logo-mark path:last-child,
-    .mascot-launcher, .eye-lid, .wing-flap, .monitor-glow { animation: none !important; }
+    .hero svg, .hero::after, .brand-bar,
+    .mascot-launcher { animation: none !important; }
   }
 
   main h2 { position: relative; }
@@ -484,9 +494,11 @@
     width: 76px;
     height: 76px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #7DBF45 0%, #5fa030 100%);
+    background:
+      url("https://eaglepoint.com/wp-content/uploads/2024/06/logo-white.png") left center / 380% auto no-repeat,
+      linear-gradient(135deg, #1f6dc1 0%, #0e4d96 100%);
     border: 3px solid #fff;
-    box-shadow: 0 6px 24px rgba(125, 191, 69, 0.45), 0 2px 6px rgba(15,31,44,0.15);
+    box-shadow: 0 6px 24px rgba(31, 109, 193, 0.45), 0 2px 6px rgba(15,31,44,0.15);
     cursor: pointer;
     z-index: 8000;
     overflow: visible;
@@ -495,14 +507,13 @@
   }
   .mascot-launcher:hover {
     transform: scale(1.08);
-    box-shadow: 0 10px 32px rgba(125, 191, 69, 0.6), 0 4px 10px rgba(15,31,44,0.2);
+    box-shadow: 0 10px 32px rgba(31, 109, 193, 0.6), 0 4px 10px rgba(15,31,44,0.2);
   }
   .mascot-launcher.hidden { transform: scale(0); opacity: 0; pointer-events: none; }
   @keyframes mascotBob {
     0%, 100% { transform: translateY(0); }
     50%      { transform: translateY(-6px); }
   }
-  .mascot-launcher svg { width: 100%; height: 100%; display: block; border-radius: 50%; }
   .mascot-launcher .talk-bubble {
     position: absolute;
     top: 4px; right: 88px;
@@ -533,7 +544,7 @@
     position: absolute;
     inset: -3px;
     border-radius: 50%;
-    border: 2px solid #7DBF45;
+    border: 2px solid #1f6dc1;
     animation: pulseRing 2.5s ease-out infinite;
     pointer-events: none;
   }
@@ -569,7 +580,7 @@
   }
   .chatbot-scene {
     height: 160px;
-    background: linear-gradient(180deg, #eaf2f9 0%, #d4e4f0 100%);
+    background: #ffffff;
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
@@ -580,7 +591,8 @@
     top: 10px; right: 10px;
     width: 28px; height: 28px;
     border-radius: 50%;
-    background: rgba(15, 31, 44, 0.6);
+    background: rgba(15, 31, 44, 0.4);
+    z-index: 3;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -637,7 +649,7 @@
     padding: 3px 9px;
     background: var(--c-accent-light);
     color: var(--c-accent-dark);
-    border: 1px solid #c4dba1;
+    border: 1px solid #b4d2eb;
     border-radius: 12px;
     font-size: 11.5px;
     font-weight: 600;
@@ -727,22 +739,6 @@
   .chatbot-input button:hover { background: var(--c-accent-dark); transform: scale(1.05); }
   .chatbot-input button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-  /* Mascot eye blink + wing flap */
-  .eye-lid { transform-origin: center; animation: blink 5s infinite; }
-  @keyframes blink {
-    0%, 92%, 100% { transform: scaleY(0); }
-    94%, 96%      { transform: scaleY(1); }
-  }
-  .wing-flap { transform-origin: 100px 110px; animation: wingFlap 4s ease-in-out infinite; }
-  @keyframes wingFlap {
-    0%, 100% { transform: rotate(0deg); }
-    50%      { transform: rotate(-8deg); }
-  }
-  .monitor-glow { animation: monitorFlicker 3s ease-in-out infinite; }
-  @keyframes monitorFlicker {
-    0%, 100% { opacity: 0.85; }
-    50%      { opacity: 1; }
-  }
 
 
   /* ============== Drifting architectural backgrounds ============== */
@@ -825,6 +821,21 @@
   .arch-shape.s4 { animation: archDrift4 155s linear infinite; animation-delay: -65s; }
   .arch-shape.s5 { animation: archDrift5 175s linear infinite; animation-delay: -120s; }
   .arch-shape.s6 { animation: archDrift6 195s linear infinite; animation-delay: -150s; }
+  .arch-shape.s7 {
+    position: absolute;
+    top: 42vh;
+    left: 50vw;
+    width: 760px;
+    opacity: 0.30;
+    animation: none;
+    pointer-events: none;
+  }
+  @media (max-width: 1320px) {
+    .arch-shape.s7 { left: auto; right: 0; top: 45vh; width: 620px; opacity: 0.26; }
+  }
+  @media (max-width: 960px) {
+    .arch-shape.s7 { display: none; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .arch-shape { animation: none !important; opacity: 0.10 !important; }
     .arch-shape.s1 { transform: translate(15vw, 8vh); }
@@ -833,6 +844,7 @@
     .arch-shape.s4 { transform: translate(70vw, 55vh); }
     .arch-shape.s5 { transform: translate(35vw, 75vh); }
     .arch-shape.s6 { transform: translate(80vw, 80vh); }
+    /* s7 motto is static; reduced-motion uses default static positioning */
   }
   @media (max-width: 960px) {
     .arch-shape { width: 480px; }
@@ -847,7 +859,7 @@
     top: 16px;
     right: 22px;
     z-index: 92;
-    background: linear-gradient(135deg, #8acb50 0%, #5fa030 100%);
+    background: linear-gradient(135deg, #3a8fd1 0%, #0e4d96 100%);
     color: #fff;
     border: none;
     padding: 11px 22px;
@@ -855,7 +867,7 @@
     font-size: 13.5px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 8px 24px rgba(125, 191, 69, 0.55), 0 2px 6px rgba(15,31,44,0.18);
+    box-shadow: 0 8px 24px rgba(31, 109, 193, 0.55), 0 2px 6px rgba(15,31,44,0.18);
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
     display: flex;
     align-items: center;
@@ -869,7 +881,7 @@
     position: absolute;
     inset: -4px;
     border-radius: 30px;
-    border: 2px solid #7DBF45;
+    border: 2px solid #1f6dc1;
     animation: embedPulse 2.6s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
     pointer-events: none;
   }
@@ -886,7 +898,7 @@
   }
   .embed-toggle:hover {
     transform: translateY(-2px) scale(1.04);
-    box-shadow: 0 12px 32px rgba(125, 191, 69, 0.7), 0 4px 10px rgba(15,31,44,0.22);
+    box-shadow: 0 12px 32px rgba(31, 109, 193, 0.7), 0 4px 10px rgba(15,31,44,0.22);
   }
   .embed-toggle:hover .arrow { transform: translateX(5px); }
   .embed-toggle:active { transform: translateY(0) scale(0.98); }
@@ -1017,9 +1029,17 @@
   .ap-badge,
   .hero, .hero *,
   table, table *,
-  code, pre {
+  code, pre,
+  .company-motto, .company-motto *,
+  .customer-card, .customer-card *,
+  .pinnacle-tagline,
+  .pinnacle-tiers, .pinnacle-tiers *,
+  .pinnacle-stats, .pinnacle-stats *,
+  .pinnacle-rule, .pinnacle-rule * {
     text-shadow: none;
   }
+
+
 
   /* ============== Hero illustration as faded full-page background ============== */
   .hero-bg {
@@ -1030,2442 +1050,451 @@
     pointer-events: none;
     z-index: -1;
     overflow: hidden;
-    opacity: 0.35;
+    opacity: 0.28;
   }
   .hero-bg svg {
     width: 100%;
     height: 100%;
     display: block;
   }
-</style>
-</head>
-<body>
 
-<div class="hero-bg" aria-hidden="true">
-  <svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <linearGradient id="sky-bg" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#eaf2f9"/>
-        <stop offset="60%" stop-color="#f5e6e8"/>
-        <stop offset="100%" stop-color="#fbe9e2"/>
-      </linearGradient>
-      <linearGradient id="m1-bg" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#cdb2d4"/>
-        <stop offset="100%" stop-color="#a890b8"/>
-      </linearGradient>
-      <linearGradient id="m2-bg" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#9eb7d0"/>
-        <stop offset="100%" stop-color="#7691b0"/>
-      </linearGradient>
-      <linearGradient id="m3-bg" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#3a4d5c"/>
-        <stop offset="100%" stop-color="#2a3a48"/>
-      </linearGradient>
-      <linearGradient id="ground-bg" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#a8c4d6"/>
-        <stop offset="100%" stop-color="#7da5c0"/>
-      </linearGradient>
-    </defs>
-    <rect x="0" y="0" width="1200" height="320" fill="url(#sky-bg)"/>
-    <circle cx="950" cy="100" r="120" fill="#f8d4cc" opacity="0.55"/>
-    <circle cx="950" cy="100" r="70" fill="#fae0d8" opacity="0.5"/>
-    <g fill="#ffffff" opacity="0.92">
-      <ellipse cx="180" cy="100" rx="80" ry="22"/>
-      <ellipse cx="220" cy="90" rx="55" ry="18"/>
-      <ellipse cx="600" cy="70" rx="90" ry="20"/>
-      <ellipse cx="650" cy="60" rx="55" ry="14"/>
-      <ellipse cx="1080" cy="140" rx="70" ry="18"/>
-    </g>
-    <path d="M0 240 L120 170 L220 210 L340 130 L470 200 L580 160 L720 220 L860 150 L990 200 L1120 170 L1200 220 L1200 320 L0 320 Z" fill="url(#m1-bg)" opacity="0.85"/>
-    <path d="M0 270 L80 230 L200 260 L300 200 L420 250 L540 220 L660 270 L800 220 L920 250 L1060 230 L1200 260 L1200 320 L0 320 Z" fill="url(#m2-bg)" opacity="0.9"/>
-    <path d="M0 295 L100 260 L180 285 L280 240 L380 280 L500 250 L620 290 L740 250 L860 290 L1000 260 L1120 285 L1200 270 L1200 320 L0 320 Z" fill="url(#m3-bg)"/>
-    <path d="M280 240 L295 252 L260 252 Z" fill="#ffffff" opacity="0.55"/>
-    <path d="M740 250 L755 262 L720 262 Z" fill="#ffffff" opacity="0.55"/>
-    <path d="M1000 260 L1015 272 L980 272 Z" fill="#ffffff" opacity="0.55"/>
-    <rect x="0" y="305" width="1200" height="15" fill="url(#ground-bg)" opacity="0.7"/>
-    <g fill="#1f3543" opacity="0.78">
-      <polygon points="1080,300 1095,260 1110,300"/>
-      <polygon points="1110,300 1130,250 1150,300"/>
-      <polygon points="1150,300 1165,265 1180,300"/>
-      <polygon points="1175,300 1190,270 1200,290 1200,300"/>
-    </g>
-  </svg>
-</div>
-
-<div class="brand-bar" aria-hidden="true"></div>
-<button class="embed-toggle" id="embed-toggle" aria-label="Open Pinnacle Series alongside">
-  <span>Open Pinnacle Series</span>
-  <span class="arrow" aria-hidden="true">&rarr;</span>
-</button>
-
-<aside class="embed-panel" id="embed-panel" aria-label="Pinnacle Series">
-  <header class="embed-header">
-    <span class="embed-title"><span class="accent">&#9650;</span> Pinnacle Series</span>
-    <a href="#" target="_blank" rel="noopener" class="embed-popout" id="embed-popout">Open in new tab &nearr;</a>
-    <button class="embed-close" id="embed-close" aria-label="Close">&#x2715;</button>
-  </header>
-  <div class="embed-banner">
-    Some pages may not load embedded due to security settings &mdash;
-    <a href="#" target="_blank" rel="noopener" id="embed-banner-link">open in a new tab</a> if so.
-  </div>
-  <div class="embed-body">
-    <iframe id="embed-frame" title="Pinnacle Series" referrerpolicy="no-referrer-when-downgrade" loading="lazy" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
-  </div>
-</aside>
-
-
-<div class="arch-layer" aria-hidden="true">
-
-  <!-- 1. Cable-stayed bridge elevation -->
-  <div class="arch-shape s1">
-    <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
-      <line x1="0" y1="280" x2="720" y2="280" stroke-width="0.8"/>
-      <path d="M 50 290 Q 60 285 70 290 T 90 290 T 110 290" stroke-width="0.6"/>
-      <path d="M 200 295 Q 215 290 230 295 T 260 295" stroke-width="0.6"/>
-      <path d="M 380 290 Q 395 285 410 290 T 440 290" stroke-width="0.6"/>
-      <path d="M 540 295 Q 555 290 570 295 T 600 295" stroke-width="0.6"/>
-      <line x1="218" y1="280" x2="218" y2="40" stroke-width="2"/>
-      <line x1="226" y1="280" x2="226" y2="40" stroke-width="2"/>
-      <line x1="497" y1="280" x2="497" y2="40" stroke-width="2"/>
-      <line x1="505" y1="280" x2="505" y2="40" stroke-width="2"/>
-      <line x1="218" y1="60" x2="226" y2="60"/>
-      <line x1="218" y1="80" x2="226" y2="80"/>
-      <line x1="497" y1="60" x2="505" y2="60"/>
-      <line x1="497" y1="80" x2="505" y2="80"/>
-      <line x1="20" y1="218" x2="700" y2="218" stroke-width="1.6"/>
-      <line x1="20" y1="232" x2="700" y2="232" stroke-width="1"/>
-      <line x1="20" y1="225" x2="700" y2="225" stroke-width="0.5"/>
-      <line x1="222" y1="50" x2="40" y2="218"/>
-      <line x1="222" y1="50" x2="80" y2="218"/>
-      <line x1="222" y1="50" x2="120" y2="218"/>
-      <line x1="222" y1="50" x2="160" y2="218"/>
-      <line x1="222" y1="50" x2="260" y2="218"/>
-      <line x1="222" y1="50" x2="300" y2="218"/>
-      <line x1="222" y1="50" x2="340" y2="218"/>
-      <line x1="222" y1="50" x2="380" y2="218"/>
-      <line x1="501" y1="50" x2="340" y2="218"/>
-      <line x1="501" y1="50" x2="380" y2="218"/>
-      <line x1="501" y1="50" x2="420" y2="218"/>
-      <line x1="501" y1="50" x2="460" y2="218"/>
-      <line x1="501" y1="50" x2="540" y2="218"/>
-      <line x1="501" y1="50" x2="580" y2="218"/>
-      <line x1="501" y1="50" x2="620" y2="218"/>
-      <line x1="501" y1="50" x2="660" y2="218"/>
-      <line x1="501" y1="50" x2="700" y2="218"/>
-      <line x1="216" y1="280" x2="216" y2="320"/>
-      <line x1="228" y1="280" x2="228" y2="320"/>
-      <line x1="495" y1="280" x2="495" y2="320"/>
-      <line x1="507" y1="280" x2="507" y2="320"/>
-      <rect x="200" y="320" width="44" height="14"/>
-      <rect x="479" y="320" width="44" height="14"/>
-      <line x1="20" y1="20" x2="700" y2="20" stroke-width="0.5"/>
-      <line x1="20" y1="14" x2="20" y2="26" stroke-width="0.5"/>
-      <line x1="700" y1="14" x2="700" y2="26" stroke-width="0.5"/>
-      <line x1="222" y1="14" x2="222" y2="26" stroke-width="0.5"/>
-      <line x1="501" y1="14" x2="501" y2="26" stroke-width="0.5"/>
-      <text x="120" y="14" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">120 m</text>
-      <text x="361" y="14" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">280 m  MAIN SPAN</text>
-      <text x="600" y="14" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">120 m</text>
-      <rect x="510" y="340" width="190" height="32"/>
-      <line x1="510" y1="352" x2="700" y2="352"/>
-      <line x1="600" y1="340" x2="600" y2="372"/>
-      <text x="514" y="350" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">CABLE-STAYED BRIDGE</text>
-      <text x="514" y="364" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">SCALE 1:1500</text>
-      <text x="606" y="350" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">DWG</text>
-      <text x="606" y="364" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">S-101</text>
-    </svg>
-  </div>
-
-  <!-- 2. Detailed floor plan with fixtures and dimensions -->
-  <div class="arch-shape s2">
-    <svg viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg">
-      <rect x="40" y="40" width="640" height="380" stroke-width="2"/>
-      <rect x="48" y="48" width="624" height="364" stroke-width="0.7"/>
-      <rect x="280" y="48" width="6" height="200" fill="#3a4d5c" stroke="none" opacity="0.55"/>
-      <rect x="48" y="248" width="540" height="6" fill="#3a4d5c" stroke="none" opacity="0.55"/>
-      <rect x="440" y="48" width="6" height="100" fill="#3a4d5c" stroke="none" opacity="0.55"/>
-      <rect x="448" y="60" width="38" height="22" rx="3"/>
-      <line x1="448" y1="71" x2="486" y2="71" stroke-width="0.5"/>
-      <ellipse cx="520" cy="74" rx="22" ry="14"/>
-      <circle cx="520" cy="74" r="3"/>
-      <rect x="560" y="56" width="60" height="60"/>
-      <line x1="560" y1="56" x2="620" y2="116" stroke-width="0.5"/>
-      <line x1="560" y1="116" x2="620" y2="56" stroke-width="0.5"/>
-      <circle cx="590" cy="86" r="3"/>
-      <rect x="450" y="270" width="220" height="40"/>
-      <circle cx="490" cy="285" r="6"/>
-      <circle cx="510" cy="285" r="6"/>
-      <circle cx="490" cy="300" r="6"/>
-      <circle cx="510" cy="300" r="6"/>
-      <rect x="540" y="278" width="50" height="24"/>
-      <rect x="615" y="278" width="40" height="24"/>
-      <line x1="615" y1="290" x2="655" y2="290" stroke-width="0.5"/>
-      <rect x="60" y="270" width="120" height="130"/>
-      <line x1="60" y1="280" x2="180" y2="280"/>
-      <line x1="60" y1="290" x2="180" y2="290"/>
-      <line x1="60" y1="300" x2="180" y2="300"/>
-      <line x1="60" y1="310" x2="180" y2="310"/>
-      <line x1="60" y1="320" x2="180" y2="320"/>
-      <line x1="60" y1="330" x2="180" y2="330"/>
-      <line x1="60" y1="340" x2="180" y2="340"/>
-      <line x1="60" y1="350" x2="180" y2="350"/>
-      <line x1="60" y1="360" x2="180" y2="360"/>
-      <line x1="60" y1="370" x2="180" y2="370"/>
-      <line x1="60" y1="380" x2="180" y2="380"/>
-      <line x1="60" y1="390" x2="180" y2="390"/>
-      <line x1="120" y1="395" x2="120" y2="320"/>
-      <polygon points="116,322 120,316 124,322" fill="#3a4d5c" stroke="none" opacity="0.6"/>
-      <text x="130" y="395" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">UP 14R</text>
-      <path d="M 280 100 A 36 36 0 0 1 316 136"/>
-      <line x1="280" y1="100" x2="316" y2="100" stroke-width="0.7"/>
-      <path d="M 440 200 A 36 36 0 0 0 476 236"/>
-      <line x1="440" y1="200" x2="476" y2="200" stroke-width="0.7"/>
-      <path d="M 220 248 A 30 30 0 0 1 250 278"/>
-      <line x1="120" y1="40" x2="200" y2="40" stroke-width="3"/>
-      <line x1="120" y1="42" x2="200" y2="42" stroke-width="0.6"/>
-      <line x1="120" y1="46" x2="200" y2="46" stroke-width="0.6"/>
-      <line x1="320" y1="40" x2="400" y2="40" stroke-width="3"/>
-      <line x1="320" y1="42" x2="400" y2="42" stroke-width="0.6"/>
-      <line x1="320" y1="46" x2="400" y2="46" stroke-width="0.6"/>
-      <line x1="40" y1="280" x2="40" y2="340" stroke-width="3"/>
-      <line x1="42" y1="280" x2="42" y2="340" stroke-width="0.6"/>
-      <line x1="46" y1="280" x2="46" y2="340" stroke-width="0.6"/>
-      <line x1="40" y1="20" x2="680" y2="20" stroke-width="0.5"/>
-      <line x1="40" y1="14" x2="40" y2="26" stroke-width="0.5"/>
-      <line x1="680" y1="14" x2="680" y2="26" stroke-width="0.5"/>
-      <line x1="280" y1="14" x2="280" y2="26" stroke-width="0.5"/>
-      <line x1="440" y1="14" x2="440" y2="26" stroke-width="0.5"/>
-      <text x="160" y="14" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">4800</text>
-      <text x="360" y="14" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">3200</text>
-      <text x="560" y="14" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">4800</text>
-      <line x1="20" y1="40" x2="20" y2="420" stroke-width="0.5"/>
-      <line x1="14" y1="40" x2="26" y2="40" stroke-width="0.5"/>
-      <line x1="14" y1="420" x2="26" y2="420" stroke-width="0.5"/>
-      <line x1="14" y1="248" x2="26" y2="248" stroke-width="0.5"/>
-      <text x="20" y="144" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" transform="rotate(-90 20 144)" text-anchor="middle">4160</text>
-      <text x="20" y="334" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" transform="rotate(-90 20 334)" text-anchor="middle">3440</text>
-      <circle cx="640" cy="380" r="20"/>
-      <polygon points="640,365 645,380 640,395 635,380"/>
-      <line x1="640" y1="365" x2="640" y2="395" stroke-width="0.5"/>
-      <text x="640" y="362" font-size="10" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">N</text>
-      <rect x="40" y="430" width="220" height="40"/>
-      <line x1="40" y1="445" x2="260" y2="445"/>
-      <line x1="170" y1="430" x2="170" y2="470"/>
-      <text x="46" y="442" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">FLOOR PLAN</text>
-      <text x="46" y="458" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">SCALE 1:50</text>
-      <text x="176" y="442" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">A-101</text>
-      <text x="176" y="458" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">SHEET 01/12</text>
-    </svg>
-  </div>
-
-  <!-- 3. High-rise tower elevation -->
-  <div class="arch-shape s3">
-    <svg viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg">
-      <line x1="0" y1="450" x2="720" y2="450" stroke-width="2"/>
-      <line x1="0" y1="455" x2="720" y2="455" stroke-width="0.4"/>
-      <line x1="0" y1="460" x2="720" y2="460" stroke-width="0.4"/>
-      <rect x="220" y="50" width="280" height="400" stroke-width="2"/>
-      <rect x="240" y="50" width="240" height="20"/>
-      <rect x="260" y="30" width="200" height="20"/>
-      <line x1="350" y1="0" x2="350" y2="30" stroke-width="0.7"/>
-      <line x1="370" y1="0" x2="370" y2="30" stroke-width="0.7"/>
-      <line x1="220" y1="100" x2="500" y2="100"/>
-      <line x1="220" y1="130" x2="500" y2="130"/>
-      <line x1="220" y1="160" x2="500" y2="160"/>
-      <line x1="220" y1="190" x2="500" y2="190"/>
-      <line x1="220" y1="220" x2="500" y2="220"/>
-      <line x1="220" y1="250" x2="500" y2="250"/>
-      <line x1="220" y1="280" x2="500" y2="280"/>
-      <line x1="220" y1="310" x2="500" y2="310"/>
-      <line x1="220" y1="340" x2="500" y2="340"/>
-      <line x1="220" y1="370" x2="500" y2="370"/>
-      <line x1="220" y1="400" x2="500" y2="400"/>
-      <g stroke-width="0.7">
-        <line x1="245" y1="80" x2="245" y2="430"/>
-        <line x1="280" y1="80" x2="280" y2="430"/>
-        <line x1="320" y1="80" x2="320" y2="430"/>
-        <line x1="360" y1="80" x2="360" y2="430"/>
-        <line x1="400" y1="80" x2="400" y2="430"/>
-        <line x1="440" y1="80" x2="440" y2="430"/>
-        <line x1="475" y1="80" x2="475" y2="430"/>
-      </g>
-      <rect x="320" y="410" width="80" height="40"/>
-      <line x1="360" y1="410" x2="360" y2="450"/>
-      <circle cx="350" cy="430" r="1.5" fill="#3a4d5c" stroke="none"/>
-      <circle cx="370" cy="430" r="1.5" fill="#3a4d5c" stroke="none"/>
-      <line x1="280" y1="450" x2="280" y2="430"/>
-      <line x1="280" y1="430" x2="320" y2="430"/>
-      <line x1="320" y1="430" x2="320" y2="410"/>
-      <line x1="400" y1="410" x2="400" y2="430"/>
-      <line x1="400" y1="430" x2="440" y2="430"/>
-      <line x1="440" y1="430" x2="440" y2="450"/>
-      <rect x="60" y="370" width="120" height="80"/>
-      <line x1="60" y1="385" x2="180" y2="385"/>
-      <line x1="60" y1="400" x2="180" y2="400"/>
-      <line x1="60" y1="415" x2="180" y2="415"/>
-      <line x1="60" y1="430" x2="180" y2="430"/>
-      <line x1="90" y1="370" x2="90" y2="450"/>
-      <line x1="120" y1="370" x2="120" y2="450"/>
-      <line x1="150" y1="370" x2="150" y2="450"/>
-      <rect x="540" y="320" width="120" height="130"/>
-      <line x1="540" y1="335" x2="660" y2="335"/>
-      <line x1="540" y1="355" x2="660" y2="355"/>
-      <line x1="540" y1="375" x2="660" y2="375"/>
-      <line x1="540" y1="395" x2="660" y2="395"/>
-      <line x1="540" y1="415" x2="660" y2="415"/>
-      <line x1="570" y1="320" x2="570" y2="450"/>
-      <line x1="600" y1="320" x2="600" y2="450"/>
-      <line x1="630" y1="320" x2="630" y2="450"/>
-      <line x1="200" y1="50" x2="200" y2="450" stroke-width="0.5"/>
-      <line x1="194" y1="50" x2="206" y2="50" stroke-width="0.5"/>
-      <line x1="194" y1="450" x2="206" y2="450" stroke-width="0.5"/>
-      <text x="200" y="250" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace" transform="rotate(-90 200 250)" text-anchor="middle">+45.0 m</text>
-      <rect x="510" y="430" width="190" height="36"/>
-      <line x1="510" y1="445" x2="700" y2="445"/>
-      <line x1="610" y1="430" x2="610" y2="466"/>
-      <text x="514" y="442" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">NORTH ELEVATION</text>
-      <text x="514" y="458" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">SCALE 1:200</text>
-      <text x="616" y="442" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">A-201</text>
-    </svg>
-  </div>
-
-  <!-- 4. Mechanical part: shaft assembly with section view + dimensions -->
-  <div class="arch-shape s4">
-    <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
-      <line x1="80" y1="180" x2="640" y2="180" stroke-width="0.6" stroke-dasharray="14 3 1 3"/>
-      <rect x="100" y="160" width="80" height="40"/>
-      <rect x="180" y="140" width="180" height="80"/>
-      <rect x="360" y="160" width="60" height="40"/>
-      <rect x="420" y="120" width="160" height="120"/>
-      <rect x="580" y="160" width="40" height="40"/>
-      <line x1="100" y1="160" x2="180" y2="160" stroke-width="0.6"/>
-      <line x1="100" y1="200" x2="180" y2="200" stroke-width="0.6"/>
-      <line x1="200" y1="155" x2="220" y2="155" stroke-width="0.6"/>
-      <line x1="200" y1="205" x2="220" y2="205" stroke-width="0.6"/>
-      <g stroke-width="0.5" opacity="0.7">
-        <line x1="190" y1="148" x2="350" y2="148"/>
-        <line x1="195" y1="155" x2="355" y2="155"/>
-        <line x1="190" y1="162" x2="350" y2="162"/>
-        <line x1="195" y1="168" x2="355" y2="168"/>
-        <line x1="190" y1="175" x2="350" y2="175"/>
-        <line x1="195" y1="195" x2="355" y2="195"/>
-        <line x1="190" y1="202" x2="350" y2="202"/>
-        <line x1="195" y1="208" x2="355" y2="208"/>
-        <line x1="190" y1="215" x2="350" y2="215"/>
-      </g>
-      <g stroke-width="0.5" opacity="0.7">
-        <line x1="430" y1="128" x2="570" y2="128"/>
-        <line x1="435" y1="135" x2="575" y2="135"/>
-        <line x1="430" y1="142" x2="570" y2="142"/>
-        <line x1="435" y1="220" x2="575" y2="220"/>
-        <line x1="430" y1="228" x2="570" y2="228"/>
-        <line x1="435" y1="234" x2="575" y2="234"/>
-      </g>
-      <ellipse cx="500" cy="180" rx="30" ry="50" stroke-width="0.7" stroke-dasharray="3 2"/>
-      <line x1="180" y1="160" x2="180" y2="140"/>
-      <line x1="360" y1="160" x2="360" y2="140"/>
-      <line x1="180" y1="200" x2="180" y2="220"/>
-      <line x1="360" y1="200" x2="360" y2="220"/>
-      <line x1="100" y1="100" x2="180" y2="100" stroke-width="0.5"/>
-      <line x1="100" y1="160" x2="100" y2="100" stroke-width="0.4" stroke-dasharray="2 2"/>
-      <line x1="180" y1="160" x2="180" y2="100" stroke-width="0.4" stroke-dasharray="2 2"/>
-      <polygon points="105,98 100,102 95,98" fill="#3a4d5c" stroke="none"/>
-      <polygon points="175,98 180,102 185,98" fill="#3a4d5c" stroke="none"/>
-      <text x="140" y="94" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">80</text>
-      <line x1="180" y1="100" x2="360" y2="100" stroke-width="0.5"/>
-      <polygon points="185,98 180,102 175,98" fill="#3a4d5c" stroke="none"/>
-      <polygon points="355,98 360,102 365,98" fill="#3a4d5c" stroke="none"/>
-      <text x="270" y="94" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">180 ±0.05</text>
-      <line x1="600" y1="120" x2="640" y2="120" stroke-width="0.5"/>
-      <line x1="580" y1="120" x2="580" y2="160" stroke-width="0.4" stroke-dasharray="2 2"/>
-      <line x1="620" y1="120" x2="620" y2="160" stroke-width="0.4" stroke-dasharray="2 2"/>
-      <polygon points="585,118 580,122 575,118" fill="#3a4d5c" stroke="none"/>
-      <polygon points="615,118 620,122 625,118" fill="#3a4d5c" stroke="none"/>
-      <text x="600" y="114" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">40 H7</text>
-      <line x1="660" y1="120" x2="660" y2="240" stroke-width="0.5"/>
-      <polygon points="658,125 662,125 660,120" fill="#3a4d5c" stroke="none"/>
-      <polygon points="658,235 662,235 660,240" fill="#3a4d5c" stroke="none"/>
-      <text x="666" y="180" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" transform="rotate(-90 666 180)" text-anchor="middle">120</text>
-      <text x="500" y="290" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">SECT A-A</text>
-      <line x1="488" y1="295" x2="512" y2="295" stroke-width="0.5"/>
-      <rect x="500" y="310" width="200" height="40"/>
-      <line x1="500" y1="325" x2="700" y2="325"/>
-      <line x1="600" y1="310" x2="600" y2="350"/>
-      <text x="504" y="322" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">SHAFT ASSEMBLY</text>
-      <text x="504" y="338" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">MAT'L: AISI 4140</text>
-      <text x="606" y="322" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">M-024</text>
-      <text x="606" y="338" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">REV B</text>
-    </svg>
-  </div>
-
-  <!-- 5. Steel beam connection detail -->
-  <div class="arch-shape s5">
-    <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
-      <rect x="40" y="160" width="280" height="14"/>
-      <rect x="40" y="186" width="280" height="14"/>
-      <line x1="160" y1="160" x2="160" y2="200" stroke-width="6"/>
-      <rect x="380" y="60" width="14" height="280"/>
-      <rect x="406" y="60" width="14" height="280"/>
-      <line x1="394" y1="60" x2="394" y2="340" stroke-width="6"/>
-      <rect x="320" y="120" width="100" height="120" stroke-width="2"/>
-      <g fill="#3a4d5c" stroke="none" opacity="0.7">
-        <circle cx="335" cy="135" r="3.5"/>
-        <circle cx="370" cy="135" r="3.5"/>
-        <circle cx="405" cy="135" r="3.5"/>
-        <circle cx="335" cy="180" r="3.5"/>
-        <circle cx="370" cy="180" r="3.5"/>
-        <circle cx="405" cy="180" r="3.5"/>
-        <circle cx="335" cy="225" r="3.5"/>
-        <circle cx="370" cy="225" r="3.5"/>
-        <circle cx="405" cy="225" r="3.5"/>
-      </g>
-      <g opacity="0.5">
-        <circle cx="335" cy="135" r="6"/>
-        <circle cx="370" cy="135" r="6"/>
-        <circle cx="405" cy="135" r="6"/>
-        <circle cx="335" cy="180" r="6"/>
-        <circle cx="370" cy="180" r="6"/>
-        <circle cx="405" cy="180" r="6"/>
-        <circle cx="335" cy="225" r="6"/>
-        <circle cx="370" cy="225" r="6"/>
-        <circle cx="405" cy="225" r="6"/>
-      </g>
-      <line x1="320" y1="160" x2="320" y2="200"/>
-      <line x1="380" y1="170" x2="380" y2="170"/>
-      <path d="M 320 160 L 326 154 L 332 160" stroke-width="0.7" fill="none"/>
-      <path d="M 320 200 L 326 206 L 332 200" stroke-width="0.7" fill="none"/>
-      <line x1="80" y1="80" x2="160" y2="160" stroke-width="0.5"/>
-      <text x="40" y="76" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">W14x90</text>
-      <line x1="500" y1="100" x2="430" y2="180" stroke-width="0.5"/>
-      <text x="510" y="96" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">W14x90</text>
-      <line x1="500" y1="280" x2="430" y2="220" stroke-width="0.5"/>
-      <text x="510" y="285" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">9 — 7/8" A325-X</text>
-      <line x1="200" y1="280" x2="345" y2="240" stroke-width="0.5"/>
-      <text x="60" y="285" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">SHEAR PLATE PL 1/2"</text>
-      <line x1="40" y1="40" x2="320" y2="40" stroke-width="0.5"/>
-      <line x1="40" y1="34" x2="40" y2="46" stroke-width="0.5"/>
-      <line x1="320" y1="34" x2="320" y2="46" stroke-width="0.5"/>
-      <text x="180" y="34" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">2'-4"</text>
-      <rect x="500" y="310" width="200" height="40"/>
-      <line x1="500" y1="325" x2="700" y2="325"/>
-      <line x1="610" y1="310" x2="610" y2="350"/>
-      <text x="504" y="322" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">BEAM CONNECTION</text>
-      <text x="504" y="338" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">DETAIL B-3</text>
-      <text x="616" y="322" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">S-302</text>
-      <text x="616" y="338" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">SCALE 3" = 1'</text>
-    </svg>
-  </div>
-
-  <!-- 6. Gear assembly with shaft + bearings -->
-  <div class="arch-shape s6">
-    <svg viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg">
-      <g transform="translate(260,220)">
-        <circle r="120" stroke-width="1.6"/>
-        <circle r="105"/>
-        <g stroke-width="1">
-          <path d="M 104.6 -9.2 L 119.5 -10.5 L 119.5 10.5 L 104.6 9.2"/>
-          <path d="M 103.4 18.2 L 118.2 20.8 L 112.8 41.0 L 98.7 35.9"/>
-          <path d="M 95.2 44.4 L 108.8 50.7 L 98.3 68.8 L 86.0 60.2"/>
-          <path d="M 80.4 67.5 L 91.9 77.1 L 77.1 91.9 L 67.5 80.4"/>
-          <path d="M 60.2 86.0 L 68.8 98.3 L 50.7 108.8 L 44.4 95.2"/>
-          <path d="M 35.9 98.7 L 41.0 112.8 L 20.8 118.2 L 18.2 103.4"/>
-          <path d="M 9.2 104.6 L 10.5 119.5 L -10.5 119.5 L -9.2 104.6"/>
-          <path d="M -18.2 103.4 L -20.8 118.2 L -41.0 112.8 L -35.9 98.7"/>
-          <path d="M -44.4 95.2 L -50.7 108.8 L -68.8 98.3 L -60.2 86.0"/>
-          <path d="M -67.5 80.4 L -77.1 91.9 L -91.9 77.1 L -80.4 67.5"/>
-          <path d="M -86.0 60.2 L -98.3 68.8 L -108.8 50.7 L -95.2 44.4"/>
-          <path d="M -98.7 35.9 L -112.8 41.0 L -118.2 20.8 L -103.4 18.2"/>
-          <path d="M -104.6 9.2 L -119.5 10.5 L -119.5 -10.5 L -104.6 -9.2"/>
-          <path d="M -103.4 -18.2 L -118.2 -20.8 L -112.8 -41.0 L -98.7 -35.9"/>
-          <path d="M -95.2 -44.4 L -108.8 -50.7 L -98.3 -68.8 L -86.0 -60.2"/>
-          <path d="M -80.4 -67.5 L -91.9 -77.1 L -77.1 -91.9 L -67.5 -80.4"/>
-          <path d="M -60.2 -86.0 L -68.8 -98.3 L -50.7 -108.8 L -44.4 -95.2"/>
-          <path d="M -35.9 -98.7 L -41.0 -112.8 L -20.8 -118.2 L -18.2 -103.4"/>
-          <path d="M -9.2 -104.6 L -10.5 -119.5 L 10.5 -119.5 L 9.2 -104.6"/>
-          <path d="M 18.2 -103.4 L 20.8 -118.2 L 41.0 -112.8 L 35.9 -98.7"/>
-          <path d="M 44.4 -95.2 L 50.7 -108.8 L 68.8 -98.3 L 60.2 -86.0"/>
-          <path d="M 67.5 -80.4 L 77.1 -91.9 L 91.9 -77.1 L 80.4 -67.5"/>
-          <path d="M 86.0 -60.2 L 98.3 -68.8 L 108.8 -50.7 L 95.2 -44.4"/>
-          <path d="M 98.7 -35.9 L 112.8 -41.0 L 118.2 -20.8 L 103.4 -18.2"/>
-        </g>
-        <circle r="22" stroke-width="1.4"/>
-        <circle r="14"/>
-        <line x1="-130" y1="0" x2="130" y2="0" stroke-width="0.5" stroke-dasharray="14 3 1 3"/>
-        <line x1="0" y1="-130" x2="0" y2="130" stroke-width="0.5" stroke-dasharray="14 3 1 3"/>
-        <line x1="-22" y1="-22" x2="22" y2="22" stroke-width="0.5" opacity="0.5"/>
-        <line x1="-22" y1="22" x2="22" y2="-22" stroke-width="0.5" opacity="0.5"/>
-      </g>
-      <g transform="translate(440,220)">
-        <circle r="60" stroke-width="1.4"/>
-        <circle r="50"/>
-        <g stroke-width="0.9">
-          <path d="M 49.5 -7.0 L 59.4 -8.4 L 59.4 8.4 L 49.5 7.0"/>
-          <path d="M 46.4 18.7 L 55.6 22.5 L 47.3 36.9 L 39.4 30.8"/>
-          <path d="M 30.8 39.4 L 36.9 47.3 L 22.5 55.6 L 18.7 46.4"/>
-          <path d="M 7.0 49.5 L 8.4 59.4 L -8.4 59.4 L -7.0 49.5"/>
-          <path d="M -18.7 46.4 L -22.5 55.6 L -36.9 47.3 L -30.8 39.4"/>
-          <path d="M -39.4 30.8 L -47.3 36.9 L -55.6 22.5 L -46.4 18.7"/>
-          <path d="M -49.5 7.0 L -59.4 8.4 L -59.4 -8.4 L -49.5 -7.0"/>
-          <path d="M -46.4 -18.7 L -55.6 -22.5 L -47.3 -36.9 L -39.4 -30.8"/>
-          <path d="M -30.8 -39.4 L -36.9 -47.3 L -22.5 -55.6 L -18.7 -46.4"/>
-          <path d="M -7.0 -49.5 L -8.4 -59.4 L 8.4 -59.4 L 7.0 -49.5"/>
-          <path d="M 18.7 -46.4 L 22.5 -55.6 L 36.9 -47.3 L 30.8 -39.4"/>
-          <path d="M 39.4 -30.8 L 47.3 -36.9 L 55.6 -22.5 L 46.4 -18.7"/>
-        </g>
-        <circle r="14" stroke-width="1.2"/>
-        <circle r="8"/>
-        <line x1="-65" y1="0" x2="65" y2="0" stroke-width="0.5" stroke-dasharray="10 3 1 3"/>
-        <line x1="0" y1="-65" x2="0" y2="65" stroke-width="0.5" stroke-dasharray="10 3 1 3"/>
-      </g>
-      <line x1="120" y1="220" x2="170" y2="220" stroke-width="2"/>
-      <line x1="350" y1="220" x2="380" y2="220" stroke-width="2"/>
-      <line x1="500" y1="220" x2="560" y2="220" stroke-width="2"/>
-      <rect x="120" y="210" width="50" height="20"/>
-      <rect x="350" y="210" width="30" height="20"/>
-      <rect x="500" y="210" width="60" height="20"/>
-      <line x1="125" y1="215" x2="125" y2="225" stroke-width="0.5"/>
-      <line x1="135" y1="215" x2="135" y2="225" stroke-width="0.5"/>
-      <line x1="145" y1="215" x2="145" y2="225" stroke-width="0.5"/>
-      <line x1="155" y1="215" x2="155" y2="225" stroke-width="0.5"/>
-      <line x1="510" y1="215" x2="510" y2="225" stroke-width="0.5"/>
-      <line x1="520" y1="215" x2="520" y2="225" stroke-width="0.5"/>
-      <line x1="530" y1="215" x2="530" y2="225" stroke-width="0.5"/>
-      <line x1="540" y1="215" x2="540" y2="225" stroke-width="0.5"/>
-      <line x1="550" y1="215" x2="550" y2="225" stroke-width="0.5"/>
-      <line x1="100" y1="60" x2="260" y2="100" stroke-width="0.5"/>
-      <text x="40" y="56" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">DRIVE GEAR Z=24 m=10</text>
-      <line x1="600" y1="60" x2="440" y2="160" stroke-width="0.5"/>
-      <text x="540" y="56" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">PINION Z=12</text>
-      <line x1="180" y1="380" x2="260" y2="350" stroke-width="0.5"/>
-      <text x="60" y="385" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">RATIO 2:1   MOD 10</text>
-      <line x1="140" y1="180" x2="140" y2="220" stroke-width="0.5"/>
-      <line x1="160" y1="180" x2="160" y2="220" stroke-width="0.5"/>
-      <line x1="140" y1="170" x2="160" y2="170" stroke-width="0.5"/>
-      <polygon points="143,170 140,166 137,170" fill="#3a4d5c" stroke="none"/>
-      <polygon points="157,170 160,166 163,170" fill="#3a4d5c" stroke="none"/>
-      <text x="150" y="164" font-size="8" stroke="none" fill="#3a4d5c" font-family="monospace" text-anchor="middle">25H7</text>
-      <rect x="500" y="410" width="200" height="40"/>
-      <line x1="500" y1="425" x2="700" y2="425"/>
-      <line x1="610" y1="410" x2="610" y2="450"/>
-      <text x="504" y="422" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">GEAR ASSEMBLY</text>
-      <text x="504" y="438" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">MAT'L: 20MnCr5</text>
-      <text x="616" y="422" font-size="9" stroke="none" fill="#3a4d5c" font-family="monospace">M-117</text>
-      <text x="616" y="438" font-size="7.5" stroke="none" fill="#3a4d5c" font-family="monospace">REV A</text>
-    </svg>
-  </div>
-</div>
-
-
-
-<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰ Menu</button>
-
-<aside class="sidebar">
-  <div class="sidebar-header">
-    <div class="logo-row">
-      <!-- Stylized EPS-style mark: dark wedge with green accent triangle -->
-      <svg class="logo-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M2 18 L12 4 L22 18 Z" fill="#ffffff" opacity="0.92"/>
-        <path d="M12 4 L22 18 L17 18 Z" fill="#7DBF45"/>
-      </svg>
-      <h1>Pinnacle Series</h1>
-    </div>
-    <div class="by">by Eagle Point Software</div>
-    <div class="subtitle">Internal Wiki · POC</div>
-  </div>
-  <div class="sidebar-search">
-    <input type="text" id="nav-search" placeholder="Filter sections…" oninput="filterNav(this.value)">
-  </div>
-  <nav id="sidebar-nav">
-    <div class="group-title">Getting Started</div>
-    <a href="#welcome">Welcome / Overview</a>
-    <a href="#peak-vs-classic">Peak vs Classic</a>
-    <a href="#sign-in">Sign In &amp; Authentication</a>
-    <a href="#glossary">Glossary</a>
-
-    <div class="group-title">End-User Experience</div>
-    <a href="#home">Home Page</a>
-    <a href="#assignments">Assignments</a>
-    <a href="#libraries">Libraries</a>
-    <a href="#bookmarks">Bookmarks</a>
-    <a href="#ai-chat">AI Chat</a>
-    <a href="#spark">SPARK</a>
-    <a href="#my-account">My Account</a>
-
-    <div class="group-title">Administration Portal</div>
-    <a href="#admin-portal">Overview</a>
-    <a href="#admin-home">Admin Home</a>
-    <a href="#assignment-management">Assignments &amp; Auto-Assignments</a>
-    <a href="#content">Content</a>
-    <a href="#admin-libraries">Libraries</a>
-    <a href="#external-learning">External Learning</a>
-    <a href="#reports">Reports</a>
-    <a href="#users">Users</a>
-    <a href="#groups">Groups</a>
-    <a href="#theme">Theme Customization</a>
-    <a href="#settings">Settings</a>
-    <a href="#security-auth">Security &amp; Authentication</a>
-    <a href="#integrations">Integrations</a>
-    <a href="#ks-admin">KnowledgeSmart Admin Area</a>
-    <a href="#scorm-export">SCORM Export</a>
-
-    <div class="group-title">Reference</div>
-    <a href="#permissions">Permissions Reference</a>
-    <a href="#faq">Common Questions</a>
-  </nav>
-</aside>
-
-<main>
-
-<div class="poc-banner">
-  <strong>Proof of concept</strong> — This is a draft internal wiki for review by Sales, CSM, Support, and QA. Content is sourced from <code>Pinnacle_UI_Facts.md</code>, the project knowledge base, and the Pinnacle Series tutorial library. Send feedback to Nick before this is published more broadly.
-</div>
-
-<!-- ====================================================================== -->
-<section id="welcome">
-<h1>Pinnacle Series Wiki</h1>
-<p class="lead">A shared reference for how Pinnacle Series actually behaves — what's where, who can do what, and the small details that trip people up.</p>
-
-
-<h2>Welcome / Overview</h2>
-<p>Pinnacle Series is Eagle Point Software's learning and productivity platform. It combines a structured library of curated learning content with on-demand search, AI chat, and personalized skill development tools. It's used by AEC and manufacturing organizations to onboard new hires, support continuing education, and answer in-the-moment "how do I do this?" questions.</p>
-
-<h3>Three ways users find what they need</h3>
-<ul>
-  <li><strong>Global Search.</strong> A keyword or phrase typed into the top-right search bar returns videos, guides, workflows, and documents — filtered to what the user has access to.</li>
-  <li><strong>Library Browsing.</strong> Structured content organized by discipline, product, or job function. Good for discovering new topics or working through a learning path.</li>
-  <li><strong>AI Chat.</strong> Natural-language Q&amp;A backed by Pinnacle's content. Pulls only from content the user is authorized to see. <a href="#ai-chat">More on AI Chat →</a></li>
-</ul>
-
-<h3>Two experiences: Peak and Classic</h3>
-<p>Pinnacle Series ships in two UIs — <strong>Peak Experience</strong> (the modern UI, default for new tenants) and <strong>Classic</strong> (the legacy UI, still in use at some tenants mid-migration). All new feature work targets Peak. <a href="#peak-vs-classic">More on Peak vs Classic →</a></p>
-
-<div class="callout">
-  <strong>Who uses this wiki:</strong> Sales, CSM, Support, QA, new hires. The goal is a single trustworthy reference for "what does this do, and what permissions does it need." If you find something wrong or missing, flag it to Nick.
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="peak-vs-classic">
-<h2>Peak Experience vs Classic</h2>
-<p>Peak Experience is the redesigned Pinnacle Series UI. Classic is the older interface that some tenants are still on while they migrate. The two experiences are controlled by tenant-level toggles — and importantly, those toggles are split for admin and end-user UIs.</p>
-
-<h3>The two Peak Experience toggles</h3>
-<p>Peak Experience is controlled by <strong>two independent tenant-level toggles</strong> at <strong>Administration Portal → Settings → General → Peak Experience</strong>:</p>
-<table>
-  <tr><th>Toggle</th><th>Controls</th></tr>
-  <tr><td><strong>Peak Experience Configuration</strong></td><td>Enables Peak for the <strong>Administration Portal</strong> (admin-side UI).</td></tr>
-  <tr><td><strong>Peak Experience for End Users</strong></td><td>Enables Peak for the <strong>Home page / end-user experience</strong>.</td></tr>
-</table>
-<p>The two are intentionally independent so a tenant can configure Peak in the admin portal first — at their own pace — before flipping the end-user experience.</p>
-
-<h3>Why move to Peak</h3>
-<ul>
-  <li><strong>Modern UI.</strong> Streamlined nav, bulk modification tools, enhanced search.</li>
-  <li><strong>Library-based content management.</strong> Libraries, Topics, and Subtopics replace the old folder-based structure.</li>
-  <li><strong>Library-driven permissions.</strong> Access is now controlled at the library level rather than per-folder, with less manual effort.</li>
-  <li><strong>Centralized assignments.</strong> Both skills assessments and learning tasks managed in one place; strong visual markers for due dates and progress.</li>
-  <li><strong>Future-proofed.</strong> Peak is the foundation for AI-driven assistance, smarter reporting, and continuous feature development.</li>
-</ul>
-
-<h3>What's not yet in Peak</h3>
-<ul>
-  <li><strong>Live Events</strong> — not yet available.</li>
-  <li><strong>Workgroups</strong> — still in development. Note the related <em>Work Group Management</em> permissions exist but apply only to Classic.</li>
-  <li><strong>Document conversion for search &amp; translation</strong> — converting external docs into Pinnacle Documents for enhanced searchability and translation isn't yet supported.</li>
-</ul>
-</section>
-
-<!-- ====================================================================== -->
-<section id="sign-in">
-<h2>Sign In &amp; Authentication</h2>
-
-<div class="where">
-  <span class="label">Where</span>
-  <code>https://portal.pinnacleseries.com/</code> (or tenant-specific URL)
-</div>
-
-<h3>The 2-step email-first sign-in</h3>
-<p>The Pinnacle Series sign-in page is <strong>email-first</strong>. The flow is:</p>
-<ol>
-  <li>Page opens with the <strong>Email</strong> field, a <strong>Set Your Language</strong> selector (default: English), and a green <strong>Continue</strong> button.</li>
-  <li>User enters their email and clicks Continue.</li>
-  <li>The page updates: if the user signs in with a password, a <strong>Password</strong> field, <strong>Remember this device</strong> checkbox, and <strong>Forgot password?</strong> link appear. User enters password and clicks <strong>Sign In</strong>.</li>
-  <li>User lands on Home.</li>
-</ol>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_001.jpg" alt="Sign-in page (step 1) — Email field, Set Your Language selector, and green Continue button. The hero shows the "Pinnacle Series — Applied Learning Solutions" branding." loading="lazy">
-  <figcaption>Sign-in page (step 1) — Email field, Set Your Language selector, and green Continue button. The hero shows the "Pinnacle Series — Applied Learning Solutions" branding.</figcaption>
-</figure>
-
-<div class="callout">
-  <strong>Default-tenant caching.</strong> The browser may cache a default tenant in local storage from a previous session. A user signing in for the first time on a device may see different behavior than a returning user. Clearing local storage / using a private window resets this.
-</div>
-
-<h3>Single Sign-On (SSO)</h3>
-<p>SSO is <strong>tenant-scoped and user-scoped</strong> — both have to line up for a user to be routed through SSO instead of password sign-in.</p>
-<ul>
-  <li><strong>Tenant prerequisite:</strong> SSO integration must be configured for the tenant via Admin Portal → Security &amp; Authentication.</li>
-  <li><strong>Per-user override:</strong> Each user has an "Exclude User from SSO" toggle (Admin Portal → Users → Edit User Details → User Settings). When ON, that user signs in with a password even if their tenant has SSO.</li>
-</ul>
-<p>When an SSO-eligible user enters their email and clicks Continue:</p>
-<ul>
-  <li>The Password field is <strong>not</strong> shown.</li>
-  <li>If the user already has a valid IdP session, they're taken directly into Pinnacle Series.</li>
-  <li>Otherwise, they're redirected to the Identity Provider to authenticate, then returned to Pinnacle Series.</li>
-</ul>
-
-<h3>Naviate (custom SSO for a specific customer)</h3>
-<p><strong>Naviate is NOT a typo.</strong> Naviate is a named customer (a Symetri subsidiary) for whom we built a custom SSO integration. Naviate users authenticate via My.Symetri.com, not the Pinnacle password field.</p>
-<ul>
-  <li>URLs that include a <code>NaviateID=&lt;email&gt;</code> query parameter route the user through the Naviate SSO flow.</li>
-  <li>If the user is logged into My.Symetri.com, Pinnacle authenticates the user via Naviate. If no Pinnacle account exists, one is created on the fly with a Terms &amp; Conditions modal before landing.</li>
-  <li>If not logged into My.Symetri.com, the user is sent to the Naviate sign-in page first.</li>
-  <li>If the user has no valid Naviate account, no Pinnacle account is created and the user is not signed in.</li>
-  <li>URLs without <code>NaviateID</code> follow the standard Pinnacle sign-in flow.</li>
-  <li><em>Naviate integration is production-only — test environments may have limited coverage.</em></li>
-</ul>
-
-<div class="callout permissions">
-  <strong>SSO configuration permission:</strong> Configuring SSO for a tenant requires the <a href="#permissions">Administrator</a> permission (under User Administration). Configuring an individual user's "Exclude from SSO" toggle requires the same permission.
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="glossary">
-<h2>Glossary</h2>
-<p>Common Pinnacle Series terms, grouped by audience.</p>
-
-<h3>For end users</h3>
-<table>
-  <tr><th>Term</th><th>Meaning</th></tr>
-  <tr><td>Global Search</td><td>The universal search bar at the top-right of the platform. Searches across all content the user has access to.</td></tr>
-  <tr><td>Library Search Bar</td><td>A search bar specific to the current library (top-left of the library page).</td></tr>
-  <tr><td>Filter Panel</td><td>Left-side panel on search results allowing filtering by Publisher, Topic, Sub-topic, Content type, Duration, Difficulty.</td></tr>
-  <tr><td>Library</td><td>A collection of related content grouped together (typically by discipline, product, or job function). Users only see libraries shared with them.</td></tr>
-  <tr><td>Featured Library</td><td>A library flagged as featured by an admin. Featured libraries appear in their own section on the Home page above the regular Libraries section.</td></tr>
-  <tr><td>Topic / Subtopic</td><td>Categorization metadata applied to content. Used for filtering and discovery.</td></tr>
-  <tr><td>Learning Path</td><td>A structured sequence of courses or modules, often with a difficulty level and enrollment status.</td></tr>
-  <tr><td>Assignment</td><td>Learning content (course, learning path, or assessment) assigned to a user with a due date.</td></tr>
-  <tr><td>Enrollment History</td><td>The user's full record of completed, in-progress, and dropped courses.</td></tr>
-  <tr><td>Bookmark</td><td>A saved reference to a piece of content for quick access later.</td></tr>
-  <tr><td>SPARK</td><td>Personalized "nano-learning" feed of short videos curated by AI from the user's interests, group interests, and shared libraries. <a href="#spark">More →</a></td></tr>
-  <tr><td>AI Chat</td><td>Pinnacle's natural-language chat assistant. <a href="#ai-chat">More →</a></td></tr>
-  <tr><td>Pinnacle User Tools</td><td>An optional desktop add-on that surfaces Pinnacle content inside Autodesk products via Related Learning Commands.</td></tr>
-  <tr><td>Re-Enroll</td><td>Register again for content the user previously completed or dropped.</td></tr>
-</table>
-
-<h3>For users with elevated permissions</h3>
-<table>
-  <tr><th>Term</th><th>Meaning</th></tr>
-  <tr><td>Tenant</td><td>A customer's instance of Pinnacle Series. Tenant-level settings (like Peak toggles, SSO config, branding) apply to all users in that tenant.</td></tr>
-  <tr><td>Subscription Library</td><td>A library of content provided by Eagle Point as part of the customer's subscription. Visible to all users by default unless the admin restricts visibility.</td></tr>
-  <tr><td>Custom Library</td><td>A library created by the customer's Content Administrator using their own content.</td></tr>
-  <tr><td>Copy from Subscription</td><td>An action that duplicates content from a subscription library into the customer's own library, allowing them to modify it.</td></tr>
-  <tr><td>Bulk Modify</td><td>Edit multiple content items simultaneously (metadata, keywords, learning tags).</td></tr>
-  <tr><td>Search and Replace</td><td>Find and replace text globally across content items in libraries the admin manages.</td></tr>
-  <tr><td>Recycle Bin</td><td>Temporary storage for deleted content. Reachable from Content → Tools Menu → Recycle Bin.</td></tr>
-  <tr><td>Learning Tag</td><td>A tag applied to content that maps it to specific skills or assessment outcomes.</td></tr>
-  <tr><td>Related Learning Command</td><td>A tag that associates content with an Autodesk command (e.g., AutoCAD <em>HATCH</em>) so it appears via the Pinnacle Series Related Learning plugin inside the host application.</td></tr>
-  <tr><td>Auto-Assignment</td><td>A rule that automatically assigns content or assessments to users based on group membership, skill gaps, or thresholds.</td></tr>
-  <tr><td>Training Threshold</td><td>The score boundary used to decide whether a user needs full, partial, or no training based on assessment results (e.g., below 30% gets full path, above 80% skips training).</td></tr>
-  <tr><td>External User</td><td>A user account for someone outside the customer's organization (vendors, contractors, project partners). Has limited access scoped to the libraries shared with them. <a href="#users">More →</a></td></tr>
-  <tr><td>External Learning</td><td>Training the user completed outside Pinnacle Series, tracked inside the platform for credit.</td></tr>
-  <tr><td>Group Owner</td><td>A user designated as the owner of a group. Can manage membership and (in future releases) assign content directly to group members.</td></tr>
-  <tr><td>Inherit Permissions</td><td>Toggle on a user account: when ON, the user inherits all permissions granted to groups they belong to.</td></tr>
-  <tr><td>KnowledgeSmart (KS)</td><td>Eagle Point's skill assessment product, integrated with Pinnacle Series. Assessment results can drive personalized learning paths.</td></tr>
-</table>
-</section>
-
-<!-- ====================================================================== -->
-<section id="home">
-<h2>Home Page (End User)</h2>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_004.jpg" alt="End-user Home page — left nav (Home, Assignments, Libraries, Bookmarks, MANAGEMENT), top bar with Search All Content / AI Chat / notification bell / avatar, and the Assignments + Libraries carousels." loading="lazy">
-  <figcaption>End-user Home page — left nav (Home, Assignments, Libraries, Bookmarks, MANAGEMENT), top bar with Search All Content / AI Chat / notification bell / avatar, and the Assignments + Libraries carousels.</figcaption>
-</figure>
-
-<div class="where">
-  <span class="label">Where</span>
-  Default landing page after sign-in.
-</div>
-
-<h3>Left navigation</h3>
-<p>The end-user left nav, in order:</p>
-<ol>
-  <li><strong>Home</strong></li>
-  <li><strong>Assignments</strong></li>
-  <li><strong>Libraries</strong></li>
-  <li><strong>Bookmarks</strong></li>
-  <li><strong>SPARK</strong> — only if the user belongs to a group with SPARK enabled.</li>
-  <li><strong>AI Chat</strong></li>
-  <li><strong>MANAGEMENT</strong> section (containing <strong>Administration Portal</strong>) — only if the user has any admin-tier permission.</li>
-</ol>
-
-<div class="callout">
-  <strong>MANAGEMENT section behavior.</strong> The MANAGEMENT section is rendered only for users whose permissions grant access to the Administration Portal. It is <strong>expanded by default</strong> on every fresh Home page load (the user can collapse it, but it re-expands next time). End users without any Admin-Portal-granting permission see no placeholder — the section is simply absent.
-</div>
-
-<h3>Page body</h3>
-<p>The Home page body shows:</p>
-<ul>
-  <li><strong>Assignments</strong> section — the user's currently assigned content.</li>
-  <li><strong>SPARK</strong> section (if SPARK is enabled for the user's group) — header reads "SPARK — AI-powered learning bursts" with an "Up Next" panel and a playlist of short video cards.</li>
-  <li><strong>Featured Libraries</strong> — appears <em>only</em> if at least one library is flagged as Featured in Admin Portal → Libraries. Absent entirely otherwise.</li>
-  <li><strong>Libraries</strong> — always present. The non-featured carousel of all libraries shared with the user.</li>
-</ul>
-
-<h3>Top bar</h3>
-<ul>
-  <li>Global Search (top-right).</li>
-  <li>User avatar (top-right) → menu opens with <strong>Profile &amp; Settings</strong>, <strong>Switch Tenant</strong>, <strong>Sign Out</strong>.</li>
-</ul>
-</section>
-
-<!-- ====================================================================== -->
-<section id="assignments">
-<h2>Assignments (End User)</h2>
-
-<div class="where">
-  <span class="label">Where</span>
-  Home page → left nav → <strong>Assignments</strong>
-</div>
-
-<p>The end-user Assignments page shows the user's currently assigned learning content with strong visual markers for due dates, progress, and completion status.</p>
-
-<h3>What's there</h3>
-<ul>
-  <li><strong>Currently Assigned.</strong> Active assignments, sortable by due date.</li>
-  <li><strong>Enrollment History.</strong> All completed, in-progress, and dropped courses.</li>
-  <li>Per-row kebab menu with quick actions: View details, Re-Enroll, View Certificate, Drop (where allowed).</li>
-</ul>
-
-<h3>Common end-user actions</h3>
-<ul>
-  <li><strong>Self-enroll.</strong> User can browse libraries and enroll themselves in a course or learning path without admin involvement.</li>
-  <li><strong>Re-Enroll.</strong> Take a course again — useful after content updates or for re-certification.</li>
-  <li><strong>View Certificate.</strong> Available for completed enrollments.</li>
-  <li><strong>Pause Learning.</strong> Stop progress temporarily and resume later.</li>
-</ul>
-
-<div class="callout permissions">
-  <strong>Required permissions:</strong> None. Every user has access to their own Assignments page.
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="libraries">
-<h2>Libraries (End User)</h2>
-
-<div class="where">
-  <span class="label">Where</span>
-  Home page → left nav → <strong>Libraries</strong>
-</div>
-
-<p>The Libraries page shows all libraries the user has been granted access to. Users only see libraries that an admin has shared with them, their group, or all users.</p>
-
-<h3>Library views</h3>
-<ul>
-  <li><strong>Library cards</strong> grouped by visibility (Featured, Subscription, Custom).</li>
-  <li>Per-library: <strong>Topics</strong> button to jump to a topic-filtered view.</li>
-  <li>Library Search Bar (top-left of a library page) for search scoped to that library.</li>
-</ul>
-
-<h3>Inside a library</h3>
-<ul>
-  <li>Filter panel with Publisher, Topic, Sub-topic, Content Type, Duration, Difficulty.</li>
-  <li>Content cards for videos, documents, workflows, courses, learning paths, and quizzes.</li>
-  <li>Per-content actions: Like, Share, Bookmark, Send Feedback.</li>
-</ul>
-
-<div class="callout permissions">
-  <strong>Required permissions:</strong> None. Library access is controlled by the admin via library sharing — once shared, no special permission is needed to view.
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="bookmarks">
-<h2>Bookmarks</h2>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_261.jpg" alt="Bookmarks page — saved items in a card grid. Each card shows the bookmark icon (top-right), content type, title, publisher, and meta (e.g., "16 Courses" for a Learning Path)." loading="lazy">
-  <figcaption>Bookmarks page — saved items in a card grid. Each card shows the bookmark icon (top-right), content type, title, publisher, and meta (e.g., "16 Courses" for a Learning Path).</figcaption>
-</figure>
-
-<div class="where">
-  <span class="label">Where</span>
-  Home page → left nav → <strong>Bookmarks</strong>
-</div>
-
-<p>The Bookmarks page lists every piece of content the user has bookmarked. Bookmarking is the user's way of saving a reference for quick access later.</p>
-
-<ul>
-  <li>Each piece of content has an "Add to Bookmarks" action available from its detail view or kebab menu.</li>
-  <li>Bookmarks persist across sessions and devices for that user.</li>
-</ul>
-</section>
-
-<!-- ====================================================================== -->
-<section id="ai-chat">
-<h2>AI Chat</h2>
-
-<div class="where">
-  <span class="label">Where</span>
-  Home page → left nav → <strong>AI Chat</strong> (only when the tenant has AI Chat enabled in Admin Portal → Settings → General)
-</div>
-
-<p>AI Chat is a context-aware chat feature that helps users find answers and content within Pinnacle Series using natural language. It's intended for in-the-moment troubleshooting, learning suggestions, and quick references — not for replacing structured learning paths.</p>
-
-<h3>How it works</h3>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_253.jpg" alt="AI Chat panel — empty conversation state. Reached via the top-bar "AI Chat" button (not a left-nav item). The persona is named "Pinnacle AI". Bottom: New Chat button + Ask a question input." loading="lazy">
-  <figcaption>AI Chat panel — empty conversation state. Reached via the top-bar "AI Chat" button (not a left-nav item). The persona is named "Pinnacle AI". Bottom: New Chat button + Ask a question input.</figcaption>
-</figure>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_254.jpg" alt="AI Chat reply with citations and content cards. Each numbered citation marker links to a specific Pinnacle Series content item; clickable cards at the bottom navigate directly to the source. Disclaimer: "AI-generated content may be incorrect."" loading="lazy">
-  <figcaption>AI Chat reply with citations and content cards. Each numbered citation marker links to a specific Pinnacle Series content item; clickable cards at the bottom navigate directly to the source. Disclaimer: "AI-generated content may be incorrect."</figcaption>
-</figure>
-<ul>
-  <li>Built on <strong>Microsoft Azure OpenAI Service</strong>, using the GPT-3.5 Turbo model.</li>
-  <li>Uses <strong>Retrieval-Augmented Generation (RAG)</strong> — answers are drawn from Pinnacle Series content the user has explicit access to.</li>
-  <li>The model is shared across all tenants, but content access is strictly isolated per tenant. AI Chat will never surface content from another customer's library.</li>
-</ul>
-
-<h3>Tips for users</h3>
-<ul>
-  <li>Be specific with queries.</li>
-  <li>Add content-type words like "video," "guide," or "tutorial" to narrow what gets returned.</li>
-  <li>Use Boolean operators (AND, OR, NOT) for refinement.</li>
-  <li>Click "New Chat" to reset conversation context.</li>
-</ul>
-
-<h3>Data privacy</h3>
-<table>
-  <tr><th>Aspect</th><th>How AI Chat handles it</th></tr>
-  <tr><td>What gets sent</td><td>Only user queries. AI Chat is not designed to handle sensitive personal or commercial information.</td></tr>
-  <tr><td>Data retention</td><td>Inputs and outputs are <strong>not retained</strong>.</td></tr>
-  <tr><td>Model training</td><td>Microsoft Azure OpenAI does <strong>not</strong> use customer data to train or improve the model. Customer inputs are isolated from Microsoft and OpenAI.</td></tr>
-  <tr><td>Compliance</td><td>CCPA, GDPR, SOC 2, SOC 3, CSA Star.</td></tr>
-</table>
-
-<div class="callout permissions">
-  <strong>Required permissions for end users:</strong> None — once enabled at the tenant level, AI Chat is available to all users in the tenant.<br>
-  <strong>Required permissions to enable AI Chat for a tenant:</strong> <a href="#permissions">Administrator</a> (toggle is in Admin Portal → Settings → General).
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="spark">
-<h2>SPARK</h2>
-
-<div class="where">
-  <span class="label">Where</span>
-  Home page (left nav and body section) — only if the user is in a group with SPARK enabled.
-</div>
-
-<p>SPARK is Pinnacle Series' personalized nano-learning feed. It curates short videos (under 5 minutes) from libraries the user can access, prioritizing content that matches the user's interests and group's focus areas.</p>
-
-<h3>How users experience SPARK</h3>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_256.jpg" alt="SPARK dedicated page — hero "Light The Fuse — Your Next Idea Starts With A SPARK". Center: video player with standard controls plus an inline bookmark icon. Right: "Up Next..." playlist (toggleable to a Transcripts view with auto-scrolling). Top-right: Edit Preferences button." loading="lazy">
-  <figcaption>SPARK dedicated page — hero "Light The Fuse — Your Next Idea Starts With A SPARK". Center: video player with standard controls plus an inline bookmark icon. Right: "Up Next..." playlist (toggleable to a Transcripts view with auto-scrolling). Top-right: Edit Preferences button.</figcaption>
-</figure>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_260.jpg" alt="SPARK Edit Preferences modal — Industries (8 chips), Topics (full Pinnacle topic catalog as chips), and "Just for You" free-text field for personal interests." loading="lazy">
-  <figcaption>SPARK Edit Preferences modal — Industries (8 chips), Topics (full Pinnacle topic catalog as chips), and "Just for You" free-text field for personal interests.</figcaption>
-</figure>
-<ul>
-  <li><strong>First-time setup.</strong> On first sign-in after SPARK is enabled for their group, users see a welcome screen with optional preference capture: Industries (multi-select), Topics &amp; Interests (software tools), and a free-text "Gist for you" field. Skippable.</li>
-  <li><strong>Daily feed.</strong> Up to 25 videos in a session queue, each 3–5 minutes. The intent is "1–2 SPARKs a day."</li>
-  <li><strong>Progress tracking.</strong> Completed videos get a green check; the queue refreshes as videos are completed.</li>
-  <li><strong>Save &amp; share.</strong> Bookmark a SPARK or share its link with a colleague.</li>
-</ul>
-
-<h3>How SPARK picks content</h3>
-<p>SPARK uses a weighted match across:</p>
-<ol>
-  <li><strong>User preferences</strong> (highest priority — the user's "Just for You" settings)</li>
-  <li><strong>Group interests</strong> (set by an admin at the group level)</li>
-  <li><strong>Hero Products</strong> from shared libraries — fallback when no preferences are set: AutoCAD, AutoCAD Civil 3D, InfraWorks, Revit (Architecture / MEP / Structure), Bluebeam, Inventor, Navisworks, Autodesk Construction Cloud.</li>
-</ol>
-<p>Match conditions:</p>
-<ul>
-  <li>Content has not been viewed by the user in the last 90 days.</li>
-  <li>Content is under 5 minutes.</li>
-  <li>The match phrase appears in Title, Description, Keywords, Topics, Chapters, or Transcript.</li>
-</ul>
-
-<h3>Configuring SPARK (admin side)</h3>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_191.jpg" alt="SPARK Notifications panel — independently toggleable In-App and Email channels, frequency dropdown (Daily / Weekly / Monthly), and customizable Welcome Email + Notification Email templates accessible via the buttons in the top-right." loading="lazy">
-  <figcaption>SPARK Notifications panel — independently toggleable In-App and Email channels, frequency dropdown (Daily / Weekly / Monthly), and customizable Welcome Email + Notification Email templates accessible via the buttons in the top-right.</figcaption>
-</figure>
-<ol>
-  <li><strong>Define interests</strong>: Admin Portal → Settings → Users → User Interests area → <strong>Add Interest</strong>.</li>
-  <li><strong>Enable per group</strong>: Admin Portal → Groups → select group → Edit Group → SPARK toggle (top right) → Enable.</li>
-  <li><strong>Set notification cadence</strong>: Daily / Weekly / Monthly. Weekly is the default recommendation for most teams.</li>
-  <li><strong>Choose group interests</strong>: select from the User Interests catalog the topics most relevant to this group.</li>
-</ol>
-
-<div class="callout">
-  <strong>Best practice for group interests.</strong> Plan around <em>workflows and deliverables</em>, not departments or job titles. "Drainage Modeling" produces better SPARK matches than "Civil Team."
-</div>
-
-<div class="callout permissions">
-  <strong>Required permissions:</strong>
-  <ul>
-    <li>Defining User Interests / enabling SPARK at the group level: <a href="#permissions">Administrator</a> (User Administration).</li>
-    <li>End users seeing SPARK: must be a member of a group where SPARK has been toggled on.</li>
-  </ul>
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="my-account">
-<h2>My Account / Profile &amp; Settings</h2>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_022.jpg" alt="My Account → Transcripts tab — full learning history with kebab menu per row. The Quiz Result modal (open in this view) shows per-question detail, correct/incorrect marking, and the user's score. The "Submit External Learning" button (top-right) appears only when the tenant has the corresponding setting enabled." loading="lazy">
-  <figcaption>My Account → Transcripts tab — full learning history with kebab menu per row. The Quiz Result modal (open in this view) shows per-question detail, correct/incorrect marking, and the user's score. The "Submit External Learning" button (top-right) appears only when the tenant has the corresponding setting enabled.</figcaption>
-</figure>
-
-<div class="where">
-  <span class="label">Where</span>
-  Top-right user avatar → <strong>Profile &amp; Settings</strong>
-</div>
-
-<div class="callout">
-  <strong>Naming note:</strong> The menu item reads <em>Profile &amp; Settings</em>, but the destination page header reads <em>My Account</em>. They are the same page.
-</div>
-
-<h3>The user avatar dropdown</h3>
-<p>Clicking the user avatar in the top-right of the end-user UI opens a small menu:</p>
-<ul>
-  <li><strong>Profile &amp; Settings</strong> — always shown. Opens the My Account page.</li>
-  <li><strong>Submit External Learning</strong> — <em>conditionally shown.</em> Only appears when the tenant has <strong>"Allow Users to Submit External Learning"</strong> toggled on at <a href="#settings">Admin Portal → Settings → General</a>. If the toggle is off, this menu item is absent for every end user in the tenant.</li>
-  <li><strong>Switch Tenant</strong> — shown for users who have access to more than one tenant.</li>
-  <li><strong>Sign Out</strong> — always shown.</li>
-</ul>
-
-<div class="callout">
-  <strong>Pattern note:</strong> Like AI Chat, "Submit External Learning" is gated at the tenant level — it's a configuration toggle, not a per-user permission. If end users at a tenant are reporting that they can't find a way to submit external learning, the first thing to check is the tenant setting in Admin Portal → Settings → General.
-</div>
-
-<h3>Tabs</h3>
-<ul>
-  <li><strong>Account Info</strong> (default tab)</li>
-  <li><strong>Transcripts</strong> — the user's full learning transcript / completion history.</li>
-</ul>
-
-<h3>Editing your username</h3>
-
-<p>The user's <strong>Username</strong> is the editable display name shown in the Welcome heading on Home (`Welcome, [Username]`) and at the top of the My Account page. Click the pencil icon next to the username on the Account Info tab to open the <strong>Edit Username</strong> modal — a single text field plus Cancel / Save.</p>
-
-<div class="callout">
-  <strong>Note on the Welcome heading:</strong> the Home page heading reads <code>Welcome, [Username]</code> — always the Username, never a tenant name. The Username is freely editable by the end user, so it can look like a real name, a company name, or anything else.
-</div>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_268.jpg" alt="My Account page with the Edit Username modal open" loading="lazy">
-  <figcaption>My Account → Account Info tab with the <strong>Edit Username</strong> modal open. Click the pencil icon next to the username at the top of the page to open this modal. The Username field is free text — the value shown here ("Eagle Point Software") is one user's chosen username; this is what the Welcome heading on Home displays.</figcaption>
-</figure>
-
-<h3>Account Info sections</h3>
-<ul>
-  <li><strong>Commands in Autodesk Products</strong> — manage Related Learning Command preferences (which Autodesk products show Pinnacle suggestions in-app).</li>
-  <li><strong>Language</strong> — set preferred language. Pinnacle supports 130+ languages with auto-translated asset titles, descriptions, and transcripts.</li>
-  <li><strong>Password</strong> — Change Password (only available for users who sign in with a password — i.e., not SSO-only users).</li>
-  <li><strong>Notifications</strong> — toggle email notifications. Note: an admin can also disable email notifications tenant-wide.</li>
-  <li><strong>Download Add-Ons</strong> — links to download <strong>Pinnacle Management Utility</strong> and <strong>Pinnacle User Tools</strong> (MSI installers).</li>
-</ul>
-
-<h3>Activate on This Device</h3>
-<p>After installing Pinnacle User Tools, an "Activate on This Device" button appears in Account Info. Clicking it activates the plugin in the user's installed Autodesk products. Close any open Autodesk applications first.</p>
-</section>
-
-<!-- ====================================================================== -->
-<section id="admin-portal">
-<h2>Administration Portal Overview <span class="ap-badge">Admin Portal</span></h2>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_028.jpg" alt="Administration Portal — Admin Home / Welcome view, with the full left nav expanded. Note: the visible nav items are filtered to the user's permissions; this admin has all permissions granted." loading="lazy">
-  <figcaption>Administration Portal — Admin Home / Welcome view, with the full left nav expanded. Note: the visible nav items are filtered to the user's permissions; this admin has all permissions granted.</figcaption>
-</figure>
-
-<div class="where">
-  <span class="label">Where</span>
-  Home page → left nav → <strong>MANAGEMENT</strong> section → <strong>Administration Portal</strong>
-</div>
-
-<p>The Administration Portal is the admin-side UI for Pinnacle Series. It's where users with admin-tier permissions manage content, users, groups, libraries, settings, and reports.</p>
-
-<h3>Accessing the Admin Portal</h3>
-<p>From the Home page, the MANAGEMENT section appears in the left nav (only if the user has any admin-tier permission). Below the section header, the only item visible to most users is <strong>Administration Portal</strong>. Click it to enter the admin UI.</p>
-
-<div class="callout warn">
-  <strong>Classic UI legacy:</strong> Older training material may say "click the cogwheel icon in the top right." That's the Classic UI. In Peak Experience, the path is via the MANAGEMENT section in the left nav.
-</div>
-
-<h3>Admin Portal left navigation (full)</h3>
-<p>The Admin Portal left nav is a flat list of top-level items. When all admin permissions are granted, the order is:</p>
-<ol>
-  <li>Admin Home</li>
-  <li>Assignments ▸ <em>(expandable: Assignment Management, Auto-Assignments)</em></li>
-  <li>Content</li>
-  <li>Libraries</li>
-  <li>External Learning ▸ <em>(expandable: Records Management, Setup)</em></li>
-  <li>Reports</li>
-  <li>Users ▸ <em>(expandable: Standard Users, External Users)</em></li>
-  <li>Groups</li>
-  <li>Theme Customization</li>
-  <li>Settings ▸ <em>(expandable: General, Users, Groups)</em> — does <strong>not</strong> contain Security &amp; Authentication or Integrations</li>
-  <li><strong>Security &amp; Authentication</strong> — top-level (sibling of Settings, not a child)</li>
-  <li><strong>Integrations</strong> — top-level</li>
-  <li><strong>KnowledgeSmart Admin Area</strong> — top-level</li>
-</ol>
-
-<div class="callout warn">
-  <strong>Common mistake:</strong> Earlier docs and some test cases described Security &amp; Authentication and Integrations as children of Settings. They are <strong>top-level</strong> items. Settings only contains General, Users, and Groups subpages.
-</div>
-
-<h3>Permission-filtered nav</h3>
-<p>The left nav only renders the items the user's permissions grant access to. Examples:</p>
-<table>
-  <tr><th>User's permission</th><th>What they see in the left nav</th></tr>
-  <tr><td>Assignment Administrator only</td><td>Admin Home, Assignments ▸, External Learning ▸</td></tr>
-  <tr><td>Content Administrator only</td><td>Admin Home, Content, Libraries</td></tr>
-  <tr><td>Administrator (User Administration) only</td><td>Admin Home, Users ▸, Groups, Settings ▸ (subset)</td></tr>
-  <tr><td>All admin permissions</td><td>Every item in the list above</td></tr>
-</table>
-
-<h3>Top bar</h3>
-<ul>
-  <li>User avatar (top-right) → <strong>Switch Tenant</strong>, <strong>Sign Out</strong>.</li>
-  <li>Tenant name displayed near the top.</li>
-</ul>
-</section>
-
-<!-- ====================================================================== -->
-<section id="admin-home">
-<h2>Admin Home</h2>
-
-<div class="where">
-  <span class="label">Where</span>
-  Admin Portal → left nav → <strong>Admin Home</strong>
-</div>
-
-<p>The default landing page when an admin enters the Administration Portal. Acts as a dashboard / launchpad for the admin's primary tasks.</p>
-
-<div class="callout permissions">
-  <strong>Required permissions:</strong> Any admin-tier permission. The page itself is not gated separately — if you can enter the Admin Portal, you see Admin Home.
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="assignment-management">
-<h2>Assignments &amp; Auto-Assignments <span class="ap-badge">Admin Portal</span></h2>
-
-<div class="where">
-  <span class="label">Where</span>
-  Admin Portal → <strong>Assignments ▸</strong> → <strong>Assignment Management</strong> or <strong>Auto-Assignments</strong>
-</div>
-
-<h3>Assignment Management</h3>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_029.jpg" alt="Assignment Management list view — toolbar with Search, Filter, built-in Assignment Date Range picker, and the green Assign New button (top-right). Table columns: User, Email, Content Type, Content Title, Learning Path, Assigned By, Date Assigned, Due/Expiration Date, Status." loading="lazy">
-  <figcaption>Assignment Management list view — toolbar with Search, Filter, built-in Assignment Date Range picker, and the green Assign New button (top-right). Table columns: User, Email, Content Type, Content Title, Learning Path, Assigned By, Date Assigned, Due/Expiration Date, Status.</figcaption>
-</figure>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_051.jpg" alt="Assign New → Assessment sub-page with the "Add Users to Assignment" modal open. The modal differentiates Standard Users from External Users in the same picker, and tracks selected counts separately." loading="lazy">
-  <figcaption>Assign New → Assessment sub-page with the "Add Users to Assignment" modal open. The modal differentiates Standard Users from External Users in the same picker, and tracks selected counts separately.</figcaption>
-</figure>
-<p>The Assignment Management page is where admins create, monitor, and manage all assigned learning and assessments.</p>
-
-<h4>Assign New flow</h4>
-<ol>
-  <li>Click the green <strong>Assign New</strong> button (top-right of the Assignment Management page).</li>
-  <li>A menu appears — select <strong>Content</strong> or <strong>Assessment</strong>.</li>
-  <li>The Assign Content / Assign Assessment sub-page opens with a search-and-filter panel for picking what to assign and a user/group picker for who to assign to.</li>
-  <li>Set due date, training thresholds (if applicable), and exclusion rules, then click <strong>Assign</strong>.</li>
-</ol>
-<p>Breadcrumb on sub-pages: <em>Assignment Management &gt; Assign New</em>.</p>
-
-<h4>Common admin actions</h4>
-<ul>
-  <li><strong>Filter</strong> existing assignments by date range, content type, status.</li>
-  <li><strong>Re-Enroll</strong> a user in an assignment.</li>
-  <li><strong>Resend</strong> assignment notification email.</li>
-  <li><strong>Set expiration dates</strong> for assessments.</li>
-  <li><strong>Exclude users</strong> who already completed prior versions.</li>
-</ul>
-
-<h3>Auto-Assignments</h3>
-<p>Auto-Assignments are rules that automatically assign content or assessments based on conditions — typically group membership or assessment results.</p>
-
-<h4>Creating an auto-assignment</h4>
-<ol>
-  <li>Click <strong>Create New Auto-Assignment</strong>.</li>
-  <li>Select the trigger type: <strong>Select Content</strong> or <strong>Select Assessment</strong>.</li>
-  <li>Pick the target group(s).</li>
-  <li>If assessment-driven: define training thresholds (e.g., users scoring &lt;30% get full path; users scoring &gt;80% are excluded).</li>
-  <li>Save and activate.</li>
-</ol>
-
-<div class="callout permissions">
-  <strong>Required permissions:</strong>
-  <ul>
-    <li><a href="#permissions">Assignment Administrator</a> — assign &amp; track for any user/group.</li>
-    <li><a href="#permissions">Assignor</a> — assign &amp; track for users they manage or groups they own (scoped).</li>
-  </ul>
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="content">
-<h2>Content <span class="ap-badge">Admin Portal</span></h2>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_060.jpg" alt="Admin Portal → Content — folder structure showing the standard content types (Documents, Learning Paths, Quizzes, Videos, Workflows, plus Archived Content). Toolbar includes Search, Filter, Tools dropdown (which contains Recycle Bin), and Add New." loading="lazy">
-  <figcaption>Admin Portal → Content — folder structure showing the standard content types (Documents, Learning Paths, Quizzes, Videos, Workflows, plus Archived Content). Toolbar includes Search, Filter, Tools dropdown (which contains Recycle Bin), and Add New.</figcaption>
-</figure>
-
-<div class="where">
-  <span class="label">Where</span>
-  Admin Portal → <strong>Content</strong>
-</div>
-
-<p>The Content area is where admins author, organize, publish, and manage all custom content. Pinnacle supports several content types, each with its own authoring page.</p>
-
-<h3>Content types</h3>
-<ul>
-  <li><strong>Pinnacle Document</strong> — native authored doc (cheatsheet-style).</li>
-  <li><strong>Video</strong> — uploaded or referenced video, with chapters, transcripts, and auto-transcribe.</li>
-  <li><strong>External Document</strong> — Word, Excel, PowerPoint, PDF.</li>
-  <li><strong>Quiz</strong> — for embedded knowledge checks.</li>
-  <li><strong>Workflow</strong> — step-by-step process diagrams (with a visual editor; "Launch Editor" button).</li>
-  <li><strong>Course</strong> — a structured collection of content with sections.</li>
-  <li><strong>Learning Path</strong> — a sequence of courses.</li>
-  <li><strong>SCORM Course</strong> — imported SCORM package.</li>
-  <li><strong>Live Event</strong> — live training session (Classic only — not yet in Peak).</li>
-</ul>
-
-<h3>Common content actions</h3>
-<ul>
-  <li><strong>Add New</strong> — opens menu for picking content type.</li>
-  <li><strong>Bulk Modify</strong> — select multiple items via checkboxes, then update metadata (keywords, tags, topics) in one go.</li>
-  <li><strong>Search and Replace</strong> — global find/replace across content. Supports preview before applying.</li>
-  <li><strong>Move</strong> — relocate content between folders.</li>
-  <li><strong>Duplicate</strong> — exact copy for reuse or customization.</li>
-  <li><strong>Recycle</strong> — temporarily delete (sends to Recycle Bin).</li>
-  <li><strong>Share</strong> — generate a shareable link for selected content.</li>
-</ul>
-
-<h3>Tools Menu &amp; Recycle Bin</h3>
-<p>The Tools Menu (kebab icon on the Content page toolbar) provides:</p>
-<ul>
-  <li><strong>Recycle Bin</strong> — review and restore deleted content. <em>This is the only entry point to the Recycle Bin.</em></li>
-  <li><strong>Bulk Actions</strong> — Move, Copy, Delete, Bulk Modify icons.</li>
-  <li><strong>KnowledgeSmart Mapping</strong> — link content to KS assessment outcomes.</li>
-</ul>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_263.jpg" alt="Admin Portal → Content → Tools (kebab) → Recycle Bin. Columns: Name, Path (where the item was deleted from), Recycled By, Recycled On. Top-right icons restore or permanently delete selected items. Per-item kebab offers Restore to Previous Location or Delete (permanent)." loading="lazy">
-  <figcaption>Admin Portal → Content → Tools (kebab) → Recycle Bin. Columns: Name, Path (where the item was deleted from), Recycled By, Recycled On. Top-right icons restore or permanently delete selected items. Per-item kebab offers Restore to Previous Location or Delete (permanent).</figcaption>
-</figure>
-
-<div class="callout warn">
-  <strong>Recycle Bin path:</strong> <code>Admin Portal → Content → Tools Menu (kebab) → Recycle Bin</code>. It is <strong>not</strong> a left-nav item.
-</div>
-
-<h3>Folders</h3>
-<p>The Content area uses folders to organize content. Common per-folder actions: <strong>Create Copy</strong>, <strong>Share</strong> (Add Groups, Add Users), <strong>Topics</strong> association, <strong>Start Modifying</strong> (enters bulk-edit mode).</p>
-
-<div class="callout permissions">
-  <strong>Required permissions (descending access):</strong>
-  <ul>
-    <li><a href="#permissions">Content Administrator</a> — full access to all content and metadata, can create/manage libraries.</li>
-    <li><a href="#permissions">Content Publisher</a> — author, publish, and manage content within libraries shared with them.</li>
-    <li><a href="#permissions">Content Author</a> — author and manage draft content; can't publish independently.</li>
-  </ul>
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="admin-libraries">
-<h2>Libraries <span class="ap-badge">Admin Portal</span></h2>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_087.jpg" alt="Admin Portal → Libraries — Subscription Libraries tab showing the catalog of Eagle Point-provided libraries. Tabs at top switch between the admin's custom libraries and subscription libraries; grid/list view toggle in the top-right." loading="lazy">
-  <figcaption>Admin Portal → Libraries — Subscription Libraries tab showing the catalog of Eagle Point-provided libraries. Tabs at top switch between the admin's custom libraries and subscription libraries; grid/list view toggle in the top-right.</figcaption>
-</figure>
-
-<div class="where">
-  <span class="label">Where</span>
-  Admin Portal → <strong>Libraries</strong>
-</div>
-
-<p>The Libraries page is where admins create, manage, and share libraries — the top-level containers that group content for visibility control.</p>
-
-<h3>Library types</h3>
-<ul>
-  <li><strong>Subscription Libraries</strong> — Eagle Point-provided. Visibility can be managed by a Content Administrator.</li>
-  <li><strong>Custom Libraries</strong> — created by the customer. Listed under the admin's name (e.g., "Nick Cartony Libraries").</li>
-  <li><strong>Featured Libraries</strong> — any library the admin flags as featured. Featured libraries appear in their own section above the regular Libraries section on the end-user Home page.</li>
-</ul>
-
-<h3>Common actions</h3>
-<ul>
-  <li><strong>Create Library</strong> — make a new custom library.</li>
-  <li><strong>Delete</strong> — remove a custom library (Content Administrator only).</li>
-  <li><strong>Topics</strong> — assign topics/subtopics to organize the library.</li>
-  <li><strong>Share</strong> — grant access to specific users or groups.</li>
-  <li><strong>Feature</strong> — flag a library as Featured for the tenant.</li>
-</ul>
-
-<div class="callout permissions">
-  <strong>Required permissions:</strong>
-  <ul>
-    <li><a href="#permissions">Content Administrator</a> — full access: create, delete, share, feature.</li>
-    <li><a href="#permissions">Content Publisher</a> — limited: only views/manages libraries explicitly shared with them.</li>
-  </ul>
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="external-learning">
-<h2>External Learning <span class="ap-badge">Admin Portal</span></h2>
-
-<div class="where">
-  <span class="label">Where</span>
-  Admin Portal → <strong>External Learning ▸</strong> → <strong>Records Management</strong> or <strong>Setup</strong>
-</div>
-
-<p>External Learning is the area for tracking training a user completed <strong>outside</strong> Pinnacle Series — third-party courses, conferences, certifications — so it shows up in the user's record alongside in-platform learning.</p>
-
-<h3>Records Management</h3>
-<p>Where admins view, create, approve, and manage external learning records.</p>
-<ul>
-  <li><strong>Create Record</strong> — manual entry: Training Title, Completed Date, Training Provider, Duration, Rating, Feedback, optional file upload.</li>
-  <li><strong>Approve / Deny</strong> — for pending external learning requests submitted by users (Assignment Administrator scope).</li>
-  <li><strong>Bulk import</strong> — Browse Files → Preview Import → Continue Import → Process Import flow.</li>
-  <li><strong>Filter</strong> by user, group, manager, parent/child group.</li>
-</ul>
-
-<h3>Setup</h3>
-<p>Where admins define the catalog of <strong>External Learning Activities</strong> users can request credit for.</p>
-<ul>
-  <li><strong>Create Activity</strong> — Training Title (required), Training Provider, Duration (Minutes).</li>
-  <li>Edit / Delete existing activities.</li>
-</ul>
-
-<div class="callout permissions">
-  <strong>Required permissions:</strong>
-  <ul>
-    <li><a href="#permissions">Assignment Administrator</a> — manage and approve external learning for all users.</li>
-    <li><a href="#permissions">Assignor</a> — manage and approve only for their managed users / owned groups.</li>
-  </ul>
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="reports">
-<h2>Reports (Peak Reporting) <span class="ap-badge">Admin Portal</span></h2>
-
-<div class="where">
-  <span class="label">Where</span>
-  Admin Portal → <strong>Reports</strong>
-</div>
-
-<p>Peak Reporting is a unified reporting suite launched in <strong>August 2025</strong>. It replaces the older Management Utility-based reporting for most use cases.</p>
-
-<h3>The five reporting pillars</h3>
-<table>
-  <tr><th>Pillar</th><th>Answers questions about</th></tr>
-  <tr><td><strong>User Management Reports</strong></td><td>Engagement, login activity, adoption trends. Who is provisioned? Who is active in Pinnacle and KnowledgeSmart?</td></tr>
-  <tr><td><strong>Usage Reports</strong></td><td>Content access, search behavior, user interest. What are people doing? What resource types are most popular? What are users searching for?</td></tr>
-  <tr><td><strong>Learning Reports</strong></td><td>Course progression, completions, learning paths. How are learners progressing? How much time are users spending?</td></tr>
-  <tr><td><strong>Assessment Reports</strong></td><td>Competency, scores, time taken, gaps. What competencies and skill gaps do we have?</td></tr>
-  <tr><td><strong>Content Reports</strong></td><td>Inventory, content types, publishers, governance, library structure. What content do we own or need to govern?</td></tr>
-</table>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_142.jpg" alt="Per-report context menu — every Peak Reporting view exposes Original analysis (the default view), Export... (ad-hoc export), and Schedule export... (recurring/scheduled export)." loading="lazy">
-  <figcaption>Per-report context menu — every Peak Reporting view exposes Original analysis (the default view), Export... (ad-hoc export), and Schedule export... (recurring/scheduled export).</figcaption>
-</figure>
-
-<h3>Key features</h3>
-<ul>
-  <li><strong>Saved Views</strong> — admins can save filtered report configurations for reuse.</li>
-  <li><strong>Scheduled Report Alerts</strong> — automatic email alerts when a report meets a defined threshold.</li>
-  <li><strong>Targeted permissions</strong> — Reporting Administrator (sees all users) vs. Reporting Manager (sees only managed users).</li>
-  <li><strong>Power BI export</strong> — Usage Reports support export for use in Power BI dashboards.</li>
-</ul>
-
-<div class="callout permissions">
-  <strong>Required permissions:</strong>
-  <ul>
-    <li><a href="#permissions">Reporting Administrator</a> — full reporting access for all users.</li>
-    <li><a href="#permissions">Reporting Manager</a> — scoped to users the person manages or groups they own. Includes non-user-specific Content data.</li>
-  </ul>
-</div>
-
-<div class="callout warn">
-  <strong>Naming note:</strong> The "Reporting Administrator" permission was previously called "View Reports." Older training material may still use the old name. The "Reporting Manager" scoped role is new and didn't exist under the old naming.
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="users">
-<h2>Users <span class="ap-badge">Admin Portal</span></h2>
-
-<div class="where">
-  <span class="label">Where</span>
-  Admin Portal → <strong>Users ▸</strong> → <strong>Standard Users</strong> or <strong>External Users</strong>
-</div>
-
-<p>The Users dropdown in the Admin Portal expands to two sub-pages: <strong>Standard Users</strong> (your organization's users) and <strong>External Users</strong> (vendors, contractors, project partners). Groups is a separate top-level item — <em>not</em> nested under Users.</p>
-
-<h3>Standard Users page</h3>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_154.jpg" alt="Admin Portal → Users → Standard Users — list view of all users in the tenant. Each row has a kebab for per-user actions (Edit, Delete, Send Sign-in Credentials, etc.)." loading="lazy">
-  <figcaption>Admin Portal → Users → Standard Users — list view of all users in the tenant. Each row has a kebab for per-user actions (Edit, Delete, Send Sign-in Credentials, etc.).</figcaption>
-</figure>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_155.jpg" alt="Add User menu — clicking the green Add User icon-button opens a menu with three options: Sync with Active Directory, Import Users from Spreadsheet, and Add User (manual)." loading="lazy">
-  <figcaption>Add User menu — clicking the green Add User icon-button opens a menu with three options: Sync with Active Directory, Import Users from Spreadsheet, and Add User (manual).</figcaption>
-</figure>
-<p>Lists all users in the tenant. Filterable by domain, group, manager.</p>
-
-<h4>Adding users</h4>
-<ul>
-  <li><strong>Add User</strong> button → opens a menu with <strong>Manual</strong> and <strong>Import from Spreadsheet</strong> options.</li>
-  <li><strong>Manual</strong>: enter Full Name (required), Email (required), then Add User.</li>
-  <li><strong>Import from Spreadsheet</strong>: Browse Files (one file at a time) → Import Options (Add new / Update existing / Delete missing / Use first row as headers / Create groups if missing) → Map fields (Display Name and Email are required) → Preview Import → Process Import.</li>
-</ul>
-
-<h4>Bulk edit</h4>
-<p>Select users via checkboxes → <strong>Edit Users</strong> menu offers:</p>
-<ul>
-  <li>Exclude Users from SSO</li>
-  <li>Exclude Users from Active Directory Sync</li>
-  <li>Exclude Users from Synchronized Groups</li>
-  <li>Users Must Change Password at Next Sign-in</li>
-</ul>
-
-<h4>Per-user actions</h4>
-<ul>
-  <li><strong>View Full Profile</strong> — opens User Details page with Edit Profile button.</li>
-  <li><strong>Edit User</strong> — modify user details, permissions, group membership.</li>
-  <li><strong>Delete User</strong> — confirmation prompt, then soft-delete.</li>
-  <li><strong>Send Sign-in Credentials</strong> — emails the user a sign-in link with a customizable message.</li>
-</ul>
-
-<h4>Common user attributes</h4>
-<ul>
-  <li>Full Name, Email</li>
-  <li>Group membership (one or many)</li>
-  <li>Manager (drives Reporting Manager / Assignor scope)</li>
-  <li>Permissions (set per user OR inherited from groups via the Inherit Permissions toggle)</li>
-  <li>Exclude from SSO toggle (under User Settings)</li>
-  <li>Product Expertise / Areas of Interest</li>
-</ul>
-
-<h3>External Users page</h3>
-<p>External Users is a separate user type for people outside your organization who need scoped access to your Pinnacle Series tenant — typically vendors, contractors, or project partners.</p>
-<ul>
-  <li>External Users have their own page (sub-item under Users dropdown).</li>
-  <li>Lifecycle: Invite → Activate → Assign content → Expire on demand.</li>
-  <li>Same person can be an External User in multiple organizations.</li>
-  <li>Their activity does show up in your internal reports.</li>
-  <li>External Users <strong>do not</strong> count against your standard user license.</li>
-  <li>Bulk-edit is supported for expiring or updating multiple at once.</li>
-</ul>
-
-<h3>User Details page</h3>
-<p>Reached via "View Full Profile" from the Users list. Single-user view with <strong>Edit Profile</strong> button. The Edit User Details flow opens to a page with sections including:</p>
-<ul>
-  <li><strong>User Settings</strong> — includes the "Exclude User from SSO" toggle.</li>
-  <li><strong>Permissions</strong> — per-user permissions or "Inherit Permissions" toggle.</li>
-  <li>Group membership.</li>
-  <li>Areas of Expertise / Interests (drives SPARK relevance).</li>
-</ul>
-
-<div class="callout permissions">
-  <strong>Required permission to manage users:</strong> <a href="#permissions">Administrator</a> (under User Administration).
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="groups">
-<h2>Groups <span class="ap-badge">Admin Portal</span></h2>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_181.jpg" alt="Add Group Manually modal — note the Group Type dropdown with two values: General (default) and Job Role. Pinnacle Series groups are typed at creation." loading="lazy">
-  <figcaption>Add Group Manually modal — note the Group Type dropdown with two values: General (default) and Job Role. Pinnacle Series groups are typed at creation.</figcaption>
-</figure>
-
-<div class="where">
-  <span class="label">Where</span>
-  Admin Portal → <strong>Groups</strong> (top-level — not nested under Users)
-</div>
-
-<p>The Groups page lists all user groups in the tenant. Groups are the primary organizational unit for content sharing, permission inheritance, and SPARK enablement.</p>
-
-<h3>Common actions</h3>
-<ul>
-  <li><strong>Edit Group</strong> — opens Group Details page with Members, Owners &amp; Partners, Parent &amp; Child Groups, and SPARK toggle.</li>
-  <li><strong>Delete Group</strong> — remove a group (members not deleted).</li>
-  <li><strong>Export as CSV / Export as Excel</strong> — list export for offline review.</li>
-  <li><strong>Filter Toggle Dropdown</strong> — filter the group list.</li>
-</ul>
-
-<h3>Group Details page</h3>
-<ul>
-  <li><strong>Members</strong> — users in this group.</li>
-  <li><strong>Group Owners</strong> — users designated as owners (in future releases, owners will gain enhanced autonomy to assign content directly to their group).</li>
-  <li><strong>Partners</strong> — additional managers without full owner rights.</li>
-  <li><strong>Parent &amp; Child Groups</strong> — group hierarchy. Permissions and content visibility can cascade if Inherit Permissions is enabled.</li>
-  <li><strong>SPARK toggle</strong> (Features panel, top-right) — enable SPARK for this group; opens cadence and interest selection.</li>
-</ul>
-
-<h3>Group sync (Active Directory / Entra ID)</h3>
-<p>Groups can be synced from Microsoft Entra ID (Azure AD) or on-prem Active Directory. Configuration lives at Admin Portal → Integrations. Synced groups can be excluded per-user via the "Exclude from Synchronized Groups" bulk action.</p>
-
-<div class="callout permissions">
-  <strong>Required permission:</strong> <a href="#permissions">Administrator</a> (under User Administration).
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="theme">
-<h2>Theme Customization <span class="ap-badge">Admin Portal</span></h2>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_207.jpg" alt="Create New Theme modal — Pinnacle supports multiple saved themes. Each theme has three independently-configurable color slots: Navigation Color, Primary Color, and Secondary Color, with eyedropper, HEX, or full RGB color picker." loading="lazy">
-  <figcaption>Create New Theme modal — Pinnacle supports multiple saved themes. Each theme has three independently-configurable color slots: Navigation Color, Primary Color, and Secondary Color, with eyedropper, HEX, or full RGB color picker.</figcaption>
-</figure>
-
-<div class="where">
-  <span class="label">Where</span>
-  Admin Portal → <strong>Theme Customization</strong>
-</div>
-
-<p>The Theme Customization page lets admins brand the Pinnacle Series UI for their tenant — logo, colors, layout.</p>
-
-<h3>What you can customize</h3>
-<ul>
-  <li><strong>Branding</strong> — upload a tenant logo and background image.</li>
-  <li><strong>Primary Button</strong> color and theme accent.</li>
-  <li><strong>Font</strong> selection.</li>
-  <li>Apply changes to preview before save.</li>
-</ul>
-
-<div class="callout permissions">
-  <strong>Required permission:</strong> <a href="#permissions">Manage Portal Branding and Customization</a>.
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="settings">
-<h2>Settings <span class="ap-badge">Admin Portal</span></h2>
-
-<div class="where">
-  <span class="label">Where</span>
-  Admin Portal → <strong>Settings ▸</strong> → <strong>General</strong>, <strong>Users</strong>, or <strong>Groups</strong>
-</div>
-
-<div class="callout warn">
-  <strong>Reminder:</strong> Settings does <strong>not</strong> contain Security &amp; Authentication or Integrations. Both are top-level items in the left nav.
-</div>
-
-<h3>Settings → General</h3>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_265.jpg" alt="Settings → General — exact toggle names. Note "Allow Users to Access AI Chat (Preview)" includes the "(Preview)" qualifier; AI Chat is a preview feature. The Peak Experience block contains two independent toggles for the admin UI and the end-user experience." loading="lazy">
-  <figcaption>Settings → General — exact toggle names. Note "Allow Users to Access AI Chat (Preview)" includes the "(Preview)" qualifier; AI Chat is a preview feature. The Peak Experience block contains two independent toggles for the admin UI and the end-user experience.</figcaption>
-</figure>
-<p>Tenant-wide configuration, including:</p>
-<ul>
-  <li><strong>Peak Experience Configuration</strong> toggle — enables the new Peak admin UI.</li>
-  <li><strong>Peak Experience for End Users</strong> toggle — enables the new Peak end-user UI.</li>
-  <li><strong>AI Chat</strong> enable / disable.</li>
-  <li><strong>Allow Users to Submit External Learning</strong> — when enabled, end users see a "Submit External Learning" item in their <a href="#my-account">user avatar dropdown</a>. When off, that menu item is hidden for everyone in the tenant.</li>
-  <li>Email notification policies.</li>
-  <li>License management.</li>
-</ul>
-
-<h3>Settings → Users</h3>
-<p>User-attribute configuration:</p>
-<ul>
-  <li><strong>User Attributes</strong> — define custom attributes (Attribute name, Data Type) that show up on every user record.</li>
-  <li><strong>User Interests</strong> — manage the catalog of Interests selectable for SPARK group configuration. Add Interest opens a quick-add dialog.</li>
-  <li><strong>Areas of Expertise</strong> — define the catalog of expertise areas users can be tagged with.</li>
-</ul>
-
-<h3>Settings → Groups</h3>
-<p>Group-attribute configuration:</p>
-<ul>
-  <li><strong>Add Attribute</strong> — define custom group-level attributes (Attribute name, Data Type).</li>
-</ul>
-
-<div class="callout permissions">
-  <strong>Required permission:</strong> <a href="#permissions">Administrator</a> (under User Administration). Some sub-pages may require additional permissions; consult the Permissions Reference for specifics.
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="security-auth">
-<h2>Security &amp; Authentication <span class="ap-badge">Admin Portal</span></h2>
-
-<div class="where">
-  <span class="label">Where</span>
-  Admin Portal → <strong>Security &amp; Authentication</strong> (top-level — sibling of Settings)
-</div>
-
-<p>Security &amp; Authentication is where all tenant-level authentication and password policy is configured. It's split into two sections.</p>
-
-<h3>Password Authentication</h3>
-<p>Settings that govern password-based sign-in:</p>
-<ul>
-  <li>Complex password requirements</li>
-  <li>Password history (prevent reuse)</li>
-  <li>Remove "Forgot Password" availability</li>
-  <li>Password expiration</li>
-  <li>Account lockout settings</li>
-</ul>
-
-<h3>Single Sign-On Authentication</h3>
-<p>SSO integration setup. Pinnacle supports:</p>
-<ul>
-  <li><strong>SAML</strong> — Identity Provider, Email Parameter, SAML Issuer ID, Encryption Type, Encryption Key, Browse for file (cert upload), Copy URL (ACS endpoint).</li>
-  <li><strong>OpenID Connect</strong></li>
-  <li><strong>Exchange Web Services (EWS)</strong></li>
-</ul>
-
-<h3>Per-user override</h3>
-<p>Even after tenant-level SSO is configured, individual users can be excluded from SSO via the per-user toggle: Admin Portal → Users → Edit User Details → User Settings → "Exclude User from SSO."</p>
-
-<div class="callout permissions">
-  <strong>Required permission:</strong> <a href="#permissions">Administrator</a> (under User Administration).
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="integrations">
-<h2>Integrations <span class="ap-badge">Admin Portal</span></h2>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_226.jpg" alt="Admin Portal → Integrations — top section toggles KnowledgeSmart and Extended Search; bottom section configures Active Directory sync via three mutually-exclusive options: Do Not Sync, On-Premises Active Directory (via Management Utility), or Microsoft Entra ID. When Entra ID is selected, four sub-configurations appear: Group Synchronization Options, Rule Sets, Map User Attributes, and Sync Logs (30-day window)." loading="lazy">
-  <figcaption>Admin Portal → Integrations — top section toggles KnowledgeSmart and Extended Search; bottom section configures Active Directory sync via three mutually-exclusive options: Do Not Sync, On-Premises Active Directory (via Management Utility), or Microsoft Entra ID. When Entra ID is selected, four sub-configurations appear: Group Synchronization Options, Rule Sets, Map User Attributes, and Sync Logs (30-day window).</figcaption>
-</figure>
-
-<div class="where">
-  <span class="label">Where</span>
-  Admin Portal → <strong>Integrations</strong> (top-level)
-</div>
-
-<p>The Integrations page is where admins configure third-party connections.</p>
-
-<h3>Supported integrations</h3>
-<ul>
-  <li><strong>Microsoft Entra ID (Azure AD) Sync</strong> — Client Identifier, Client Secret, Directory Identifier, Email Attribute to Synchronize, Display Name Attribute to Synchronize. Read-only integration with built-in safeguards.</li>
-  <li><strong>KnowledgeSmart</strong> — connect the tenant to its KnowledgeSmart account for skill assessment integration.</li>
-  <li><strong>On-premises Active Directory</strong> — covered by a separate PDF guide.</li>
-  <li><strong>Extended Search</strong> — integration with external search providers (API Key, Title, Description, Search URL).</li>
-  <li><strong>Management Utility launcher</strong> — Launch Management Utility button for legacy admin tasks not yet in Peak.</li>
-</ul>
-
-<h3>Common actions</h3>
-<ul>
-  <li><strong>Configure</strong> — open the integration's setup form.</li>
-  <li><strong>Save</strong> credentials.</li>
-  <li><strong>Request</strong> — submit a request for a new integration (Email of Requester).</li>
-</ul>
-
-<div class="callout permissions">
-  <strong>Required permission:</strong> <a href="#permissions">Administrator</a> for most integrations. The KnowledgeSmart integration also requires a separate KnowledgeSmart Administrator role configured in the KS Admin Dashboard.
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="ks-admin">
-<h2>KnowledgeSmart Admin Area <span class="ap-badge">Admin Portal</span></h2>
-
-<div class="where">
-  <span class="label">Where</span>
-  Admin Portal → <strong>KnowledgeSmart Admin Area</strong> (top-level)
-</div>
-
-<p>The KnowledgeSmart Admin Area is the embedded administrative interface for managing skill assessments through KnowledgeSmart, Eagle Point's assessment product. KnowledgeSmart and Pinnacle Series are integrated but have separate admin roles.</p>
-
-<h3>Common tasks</h3>
-<ul>
-  <li>Map KnowledgeSmart assessment outcomes to learning content via Learning Tags.</li>
-  <li>Synchronize KnowledgeSmart users with Pinnacle Series users.</li>
-  <li>Manage KnowledgeSmart invitations and assessment campaigns.</li>
-</ul>
-
-<div class="callout permissions">
-  <strong>Required role:</strong> <strong>KnowledgeSmart Administrator</strong> — this is a separate role configured in the KnowledgeSmart Admin Dashboard, not in Pinnacle Series itself. A user can have full Pinnacle admin permissions and still see "You do not have permission to log in to KnowledgeSmart" in this section if their KS admin role hasn't been set up.
-</div>
-</section>
-
-
-<!-- ====================================================================== -->
-<section id="scorm-export">
-<h2>SCORM Export <span class="ap-badge">Admin Portal</span> <span class="ap-badge" style="background:#fff8e1;border-color:#f0c75e;color:#7a5a00;">New feature</span></h2>
-
-<div class="where">
-  <span class="label">Where</span>
-  Admin Portal &rarr; Content / Learning Paths &rarr; Export as SCORM (on eligible learning paths or courses)
-</div>
-
-<p>SCORM Export lets a customer package selected Pinnacle Series learning content into SCORM files for upload to their own LMS (Cornerstone, Workday Learning, a corporate LMS, etc.). Learners launch the activity from inside that external LMS, but their progress, completions, and scores are reported back to Pinnacle Series.</p>
-
-<div class="callout">
-  <strong>This is new functionality.</strong> Detailed UI flow and test coverage are still being developed. Behavior captured here may evolve. Check <code>Pinnacle_UI_Facts.md</code> &sect;6a for the most current capture.
-</div>
-
-<h3>What can be exported</h3>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_266.jpg" alt="SCORM Export per-item kebab on a Learning Path — two options: "Export Learning Path to SCORM" (entire LP) or "Export Course to SCORM" (opens the Select Course to Export modal)." loading="lazy">
-  <figcaption>SCORM Export per-item kebab on a Learning Path — two options: "Export Learning Path to SCORM" (entire LP) or "Export Course to SCORM" (opens the Select Course to Export modal).</figcaption>
-</figure>
-
-<figure class="screenshot">
-  <img src="screenshots/web/shot_267.jpg" alt=""Select Course to Export" modal — opened from the per-item kebab. Each course in the LP is row-selectable; the green Export Course button finalizes the export." loading="lazy">
-  <figcaption>"Select Course to Export" modal — opened from the per-item kebab. Each course in the LP is row-selectable; the green Export Course button finalizes the export.</figcaption>
-</figure>
-<ul>
-  <li><strong>Learning Paths</strong> &mdash; only a <em>limited</em> subset of learning paths is eligible for SCORM export. Not every learning path will have the option.</li>
-  <li><strong>Courses within a learning path</strong> &mdash; when exporting, the admin can choose to export the entire learning path OR specific course(s) from within it.</li>
-</ul>
-
-<h3>How it works for the learner</h3>
-<ol>
-  <li>An admin exports an eligible learning path (or selected courses) as a SCORM package from Pinnacle Series.</li>
-  <li>The customer uploads the SCORM package into their own LMS.</li>
-  <li>A learner launches the SCORM activity from inside that LMS &mdash; they do <strong>not</strong> sign in to Pinnacle Series directly.</li>
-  <li>The learner consumes the content. Progress and completion are reported back to Pinnacle Series via the SCORM package's link to the issuing tenant.</li>
-</ol>
-
-<h3>Prerequisites for the learner to consume the content</h3>
-<p>All four conditions must be true at the moment the learner launches the SCORM activity, not just at export time:</p>
-<ol>
-  <li>The learner has an active <strong>Pinnacle Series account in the same tenant</strong> the SCORM package was exported from.</li>
-  <li>The learner's <strong>email in the external LMS matches</strong> their email in Pinnacle Series &mdash; email is the identity correlation key.</li>
-  <li>The learner's <strong>Pinnacle Series permissions and content visibility</strong> still allow access to the underlying content (libraries shared with their group, content not deleted, etc.).</li>
-  <li>The tenant's <strong>Pinnacle Series subscription is active</strong>.</li>
-</ol>
-
-<h3>What blocks access</h3>
-<p>If any of the conditions above fails, the SCORM activity will not launch successfully or will not report progress back. Common blocking conditions:</p>
-<ul>
-  <li>Pinnacle Series subscription has expired.</li>
-  <li>The learner does not have a Pinnacle Series account in the tenant the package was exported from. (E.g., a vendor or external partner who is not in the tenant cannot consume the package.)</li>
-  <li>The learner's email in the external LMS does not match their email in Pinnacle Series.</li>
-  <li>The underlying content is no longer accessible to the learner in Pinnacle Series &mdash; library not shared with their group, content unpublished, or content deleted.</li>
-</ul>
-
-<div class="callout permissions">
-  <strong>What CSM / Support should ask first when learners report broken SCORM activities:</strong>
-  <ol>
-    <li>Is the learner's email the same in both the external LMS and Pinnacle Series?</li>
-    <li>Is the learner still active in Pinnacle Series in the tenant the package was exported from?</li>
-    <li>Does the learner still have access to that specific content in Pinnacle Series (library sharing intact, content still published)?</li>
-    <li>Is the tenant's subscription still active?</li>
-  </ol>
-</div>
-
-<div class="callout warn">
-  <strong>Common Sales question:</strong> "Can a vendor or external partner who isn't in our Pinnacle tenant consume our SCORM package?" Answer: <strong>No.</strong> The package is bound to the issuing tenant. Each learner consuming the SCORM package must have an active account in that same tenant.
-</div>
-
-<div class="callout permissions">
-  <strong>Required permission to export SCORM:</strong> Likely <a href="#permissions">Content Administrator</a> or <a href="#permissions">Content Publisher</a>, but this has not been visually confirmed yet. Will be updated as test cases are authored.
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="permissions">
-<h2>Permissions Reference</h2>
-
-<p>The authoritative list of Pinnacle Series user permissions. Permissions can be set per-user or inherited from group membership via the <strong>Inherit Permissions</strong> toggle on the user record.</p>
-
-<div class="where">
-  <span class="label">Where to manage</span>
-  Admin Portal → Users → Edit User Details → Permissions section (right side)
-</div>
-
-<h3>Inherit Permissions</h3>
-<p>When enabled, the user inherits permissions included in the user group(s) they belong to. When disabled, only per-user permissions apply.</p>
-
-<h3>Assignments and External Learning</h3>
-<table>
-  <tr><th>Permission</th><th>What it grants</th></tr>
-  <tr>
-    <td><strong>Assignment Administrator</strong></td>
-    <td>Full access to <a href="#assignment-management">Assignments</a> and <a href="#external-learning">External Learning</a>. Approve/deny external learning for all users. Manage assignments and assessment assignments for any user or group.</td>
-  </tr>
-  <tr>
-    <td><strong>Assignor</strong></td>
-    <td>Access to Assignments and External Learning, but scoped to:
-      <ul>
-        <li>Users they are the manager of</li>
-        <li>Users in groups they own (or child groups, if Inherit Permissions enabled)</li>
-        <li>Assessment assignments for interviewees</li>
-      </ul>
-    </td>
-  </tr>
-</table>
-
-<h3>Content Management</h3>
-<table>
-  <tr><th>Permission</th><th>What it grants</th></tr>
-  <tr>
-    <td><strong>Content Administrator</strong></td>
-    <td>Full visibility and rights to all content and metadata. Can:
-      <ul>
-        <li>Create and manage all content types (Workflows, Documents, External Docs, Quizzes, Videos, Live Events, Learning Paths, Courses)</li>
-        <li>Create and manage all metadata (Topics, Subtopics, Keywords, Learning Tags, Related Learning Commands)</li>
-        <li>Assign all metadata to custom content</li>
-        <li>Create, modify, delete <a href="#admin-libraries">libraries</a> and share with groups/users</li>
-        <li>Manage Subscription Library visibility</li>
-        <li>Customize Content Templates</li>
-        <li>Delete content at any scale; restore from <a href="#content">Recycle Bin</a></li>
-        <li>View Content Suggestions</li>
-        <li>Customize Company Certificate</li>
-        <li>Modify transcripts</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>Content Publisher</strong></td>
-    <td>Author, publish, and manage content. Visibility/rights granted by a Content Administrator. Can:
-      <ul>
-        <li>Create and manage Custom Content (all types except Live Events visibility</li>
-        <li>Delete content at any scale within libraries shared with them; restore from Recycle Bin</li>
-        <li><strong>Cannot</strong> create, edit, or delete libraries; cannot share libraries with groups/users</li>
-        <li>Assign metadata to Custom Content</li>
-        <li>Publish content to libraries</li>
-        <li>View Content Suggestions and Content Changes</li>
-        <li>Modify transcripts</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>Content Author</strong></td>
-    <td>Author and manage content; narrower than Publisher. Can:
-      <ul>
-        <li>Create and manage Custom Content while not published</li>
-        <li>View libraries they're shared into (no library create/delete/share)</li>
-        <li>Delete content at draft</li>
-        <li>Create folders, move unpublished content</li>
-        <li>Assign metadata to unpublished content</li>
-        <li>Modify transcripts on videos that aren't published</li>
-      </ul>
-    </td>
-  </tr>
-</table>
-
-<h3>User Administration</h3>
-<table>
-  <tr><th>Permission</th><th>What it grants</th></tr>
-  <tr>
-    <td><strong>Administrator</strong></td>
-    <td>Top-level user management. Can:
-      <ul>
-        <li>Add and manage users (manual or via Active Directory / Entra ID sync)</li>
-        <li>Enable Single Sign-On</li>
-        <li>Assign users to <a href="#groups">groups</a></li>
-        <li>Assign platform permissions</li>
-        <li>Assign Product Expertise</li>
-        <li>Enable KnowledgeSmart integration</li>
-        <li>Allow visibility of Software Downloads (Management Utility, User Tools)</li>
-        <li>Create and manage <a href="#users">External Users</a></li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>Reporting Administrator</strong></td>
-    <td>View reporting in the Administration Portal and Management Utility. Provides access to all data points for all users.</td>
-  </tr>
-  <tr>
-    <td><strong>Reporting Manager</strong></td>
-    <td>View reporting in the Administration Portal. Scoped to:
-      <ul>
-        <li>Users they are the manager of</li>
-        <li>Users in groups they own (or child groups)</li>
-        <li>Non-user-specific Content data</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>View Sensitive Information</strong></td>
-    <td>View user or group attributes that have been marked as sensitive data.</td>
-  </tr>
-  <tr>
-    <td><strong>Technical Support Disabled</strong></td>
-    <td>Restricts/blocks the user from using Eagle Point Software support — disables the Support button in the Web Portal.</td>
-  </tr>
-  <tr>
-    <td><strong>Manage Portal Branding and Customization</strong></td>
-    <td>Access the <a href="#theme">Branding &amp; Customization</a> area; customize logo, colors, theme, and platform layout.</td>
-  </tr>
-</table>
-
-<h3>Permission hierarchy at a glance</h3>
-<ul>
-  <li><strong>Content Administrator</strong> &gt; Content Publisher &gt; Content Author</li>
-  <li><strong>Reporting Administrator</strong> (all users) &gt; <strong>Reporting Manager</strong> (managed users / owned groups)</li>
-  <li><strong>Administrator</strong> is the top-level user-management permission</li>
-</ul>
-
-<div class="callout warn">
-  <strong>Out of scope for Peak:</strong> The legacy <em>Work Group Management</em> permissions (Administer Work Groups / Create Work Groups / Invite External Users into Work Groups) are <strong>Classic-only</strong>. They appear in older permissions documentation but apply only to tenants on Classic.
-</div>
-
-<div class="callout warn">
-  <strong>Permission rename history:</strong>
-  <ul>
-    <li><em>View Reports</em> → <strong>Reporting Administrator</strong> (rename in current Pinnacle UI).</li>
-    <li><em>User Administration - Administrator</em> → <strong>Administrator</strong> (shortened label).</li>
-    <li><strong>Reporting Manager</strong> is a new permission introduced with Peak Reporting; it didn't exist under the old naming.</li>
-  </ul>
-  Older training material, the Role-Based Permissions Guide PDF, and some legacy test cases use the pre-rename labels. The list above is current.
-</div>
-</section>
-
-<!-- ====================================================================== -->
-<section id="faq">
-<h2>Common Questions</h2>
-
-<h3>What permissions does someone need to add users to Pinnacle Series?</h3>
-<p><strong>Administrator</strong> (under User Administration). This grants the ability to add users manually, import them via spreadsheet, sync them from Entra ID / Active Directory, and assign them to groups. See <a href="#users">Users</a> and <a href="#permissions">Permissions Reference</a>.</p>
-
-<h3>What permissions are needed to publish content?</h3>
-<p><strong>Content Administrator</strong> (full) or <strong>Content Publisher</strong> (limited to libraries shared with the publisher). A Content Author can create content but cannot publish it independently.</p>
-
-<h3>What permissions are needed to view reports?</h3>
-<p><strong>Reporting Administrator</strong> for all users, or <strong>Reporting Manager</strong> for users the person manages or groups they own. (Older docs may call this "View Reports" — that name has been renamed.)</p>
-
-<h3>How do I get to the Recycle Bin?</h3>
-<p>Admin Portal → Content → Tools Menu (kebab icon on the toolbar) → Recycle Bin. It is <strong>not</strong> a left-nav item.</p>
-
-<h3>Where do I configure SSO?</h3>
-<p>Admin Portal → <strong>Security &amp; Authentication</strong> (top-level item, not under Settings). Then scroll to the Single Sign-On Authentication section.</p>
-
-<h3>Why doesn't a user see SPARK?</h3>
-<p>SPARK is enabled per group. If the user's group does not have SPARK toggled on, they won't see SPARK in the left nav or on the Home page. Check Admin Portal → Groups → select the group → Edit Group → SPARK toggle. Also note: if no relevant libraries are shared with the group, the SPARK feed may appear empty.</p>
-
-<h3>Why does an Admin Portal user see fewer nav items than expected?</h3>
-<p>The Admin Portal left nav is permission-filtered. Each user only sees the sections their permissions grant access to. If a user has only Content Administrator, they'll see Admin Home, Content, and Libraries — and nothing else. Granting additional permissions (e.g., Administrator for Users, Assignment Administrator for Assignments) expands what they see.</p>
-
-<h3>Why is "Naviate" spelled that way?</h3>
-<p>Naviate is the name of a specific customer (a Symetri subsidiary) for whom Eagle Point built a custom SSO integration. It is <strong>not</strong> a typo of "Navigate." See <a href="#sign-in">Sign In &amp; Authentication</a> for the Naviate auth flow.</p>
-
-<h3>What's the difference between Peak and Classic?</h3>
-<p>Peak Experience is the modern UI; Classic is the legacy UI. Tenants migrate at their own pace. Peak is enabled by two independent tenant toggles: <em>Peak Experience Configuration</em> (admin UI) and <em>Peak Experience for End Users</em> (Home page). See <a href="#peak-vs-classic">Peak vs Classic</a>.</p>
-
-<h3>Does AI Chat use customer data to train the model?</h3>
-<p>No. Microsoft Azure OpenAI does not use customer data to train or improve the model. Inputs and outputs are not retained. AI Chat uses RAG to pull from content the user has explicit access to. See <a href="#ai-chat">AI Chat</a>.</p>
-
-<h3>Where do users download Pinnacle User Tools?</h3>
-<p>Top-right user avatar → <strong>Profile &amp; Settings</strong> → <strong>Account Info</strong> tab → <strong>Download Add-Ons</strong> section. The page lists both <strong>Pinnacle Management Utility</strong> and <strong>Pinnacle User Tools</strong>. Visibility of these download links is controlled by the Administrator permission on the tenant.</p>
-</section>
-
-<footer>
-  <p>Pinnacle Series Wiki · Internal POC · Generated from <code>Pinnacle_UI_Facts.md</code> + Pinnacle Series tutorial library.</p>
-  <p>Maintained by Nick Cartony &middot; For corrections or additions, send a note before this is rolled out to a broader audience.</p>
-</footer>
-
-</main>
-
-<!-- Lightbox for screenshot zoom -->
-<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged screenshot">
-  <img id="lightbox-img" alt="">
-</div>
-
-<!-- Eagle Point Mascot Launcher -->
-<button class="mascot-launcher" id="mascot-launcher" aria-label="Open Eagle assistant">
-  <span class="pulse-ring" aria-hidden="true"></span>
-  <span class="talk-bubble">Need help? Ask me!</span>
-  <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <defs>
-      <radialGradient id="lf-feather" cx="50%" cy="40%" r="60%">
-        <stop offset="0%" stop-color="#fff8ec"/>
-        <stop offset="100%" stop-color="#d8c89a"/>
-      </radialGradient>
-    </defs>
-    <ellipse cx="40" cy="44" rx="26" ry="22" fill="url(#lf-feather)"/>
-    <path d="M22 30 Q26 18 32 26" stroke="#a89668" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <path d="M40 22 Q40 14 44 24" stroke="#a89668" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <path d="M58 30 Q54 18 48 26" stroke="#a89668" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <circle cx="32" cy="42" r="4" fill="#1a2332"/>
-    <circle cx="33" cy="41" r="1.4" fill="#fff"/>
-    <circle cx="48" cy="42" r="4" fill="#1a2332"/>
-    <circle cx="49" cy="41" r="1.4" fill="#fff"/>
-    <path d="M27 36 Q32 33 37 37" stroke="#a89668" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-    <path d="M43 37 Q48 33 53 36" stroke="#a89668" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-    <path d="M40 46 L34 54 Q40 58 46 54 Z" fill="#f5b942" stroke="#c08e1f" stroke-width="1"/>
-    <path d="M40 50 L37 53 L43 53 Z" fill="#c08e1f"/>
-    <ellipse cx="26" cy="50" rx="3" ry="1.5" fill="#f5c4c8" opacity="0.5"/>
-    <ellipse cx="54" cy="50" rx="3" ry="1.5" fill="#f5c4c8" opacity="0.5"/>
-  </svg>
-</button>
-
-<!-- Chatbot Panel: Eagle behind a desk -->
-<div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-label="Pinnacle Wiki Assistant">
-  <div class="chatbot-scene">
-    <button class="close-x" id="chat-close" aria-label="Close">&#x2715;</button>
-    <svg viewBox="0 0 380 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <linearGradient id="sky-bg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#eaf2f9"/>
-          <stop offset="100%" stop-color="#d4e4f0"/>
-        </linearGradient>
-        <linearGradient id="desk-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#8b6d4f"/>
-          <stop offset="100%" stop-color="#6b5238"/>
-        </linearGradient>
-        <radialGradient id="body-feather" cx="50%" cy="40%" r="60%">
-          <stop offset="0%" stop-color="#fff8ec"/>
-          <stop offset="100%" stop-color="#c9b888"/>
-        </radialGradient>
-        <linearGradient id="monitor-screen" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#7DBF45"/>
-          <stop offset="100%" stop-color="#5fa030"/>
-        </linearGradient>
-      </defs>
-      <rect x="0" y="0" width="380" height="160" fill="url(#sky-bg)"/>
-      <rect x="20" y="14" width="100" height="70" fill="#fafbfc" stroke="#b8c4d1" stroke-width="2" opacity="0.7"/>
-      <line x1="70" y1="14" x2="70" y2="84" stroke="#b8c4d1" stroke-width="2" opacity="0.7"/>
-      <line x1="20" y1="49" x2="120" y2="49" stroke="#b8c4d1" stroke-width="2" opacity="0.7"/>
-      <path d="M22 75 L50 55 L72 70 L95 50 L118 75 Z" fill="#a890b8" opacity="0.7"/>
-      <ellipse cx="335" cy="98" rx="22" ry="8" fill="#6b5238" opacity="0.6"/>
-      <path d="M335 98 Q325 80 320 65 Q335 75 340 60 Q345 78 355 70 Q345 85 335 98 Z" fill="#5fa030"/>
-      <path d="M335 98 Q330 88 325 80" stroke="#7DBF45" stroke-width="2" fill="none"/>
-      <rect x="0" y="115" width="380" height="45" fill="url(#desk-grad)"/>
-      <rect x="0" y="113" width="380" height="4" fill="#a08560"/>
-      <rect x="220" y="58" width="100" height="62" rx="4" fill="#1a2332"/>
-      <rect x="225" y="63" width="90" height="48" rx="2" fill="url(#monitor-screen)" class="monitor-glow"/>
-      <rect x="232" y="70" width="40" height="3" fill="#fff" opacity="0.85"/>
-      <rect x="232" y="78" width="60" height="2" fill="#fff" opacity="0.6"/>
-      <rect x="232" y="84" width="50" height="2" fill="#fff" opacity="0.6"/>
-      <rect x="232" y="90" width="55" height="2" fill="#fff" opacity="0.6"/>
-      <rect x="232" y="98" width="35" height="2" fill="#fff" opacity="0.6"/>
-      <rect x="262" y="120" width="16" height="6" fill="#0f1f2c"/>
-      <rect x="252" y="124" width="36" height="4" fill="#0f1f2c"/>
-      <rect x="40" y="125" width="22" height="22" rx="2" fill="#7DBF45"/>
-      <path d="M62 130 Q72 132 72 138 Q72 144 62 144" stroke="#7DBF45" stroke-width="3" fill="none"/>
-      <ellipse cx="51" cy="125" rx="11" ry="3" fill="#5a3d20"/>
-      <path d="M48 122 Q46 116 50 110 Q52 104 48 100" stroke="#fff" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <path d="M54 122 Q56 116 52 110 Q50 104 54 100" stroke="#fff" stroke-width="1.5" fill="none" opacity="0.5"/>
-      <rect x="78" y="128" width="32" height="22" fill="#fff" stroke="#b8c4d1" stroke-width="1"/>
-      <line x1="82" y1="134" x2="106" y2="134" stroke="#b8c4d1" stroke-width="0.7"/>
-      <line x1="82" y1="139" x2="106" y2="139" stroke="#b8c4d1" stroke-width="0.7"/>
-      <line x1="82" y1="144" x2="100" y2="144" stroke="#b8c4d1" stroke-width="0.7"/>
-      <g class="wing-flap">
-        <path d="M100 110 Q75 90 85 130 Q105 135 115 125 Z" fill="#a89668"/>
-        <path d="M88 105 Q92 100 96 108" stroke="#7a6b4a" stroke-width="1.5" fill="none"/>
-        <path d="M85 115 Q90 110 94 118" stroke="#7a6b4a" stroke-width="1.5" fill="none"/>
-      </g>
-      <ellipse cx="170" cy="135" rx="48" ry="28" fill="url(#body-feather)"/>
-      <path d="M170 122 L160 145 L170 152 L180 145 Z" fill="#7DBF45"/>
-      <circle cx="170" cy="135" r="4" fill="#fff"/>
-      <text x="170" y="138" font-size="6" font-weight="bold" text-anchor="middle" fill="#5fa030">EP</text>
-      <ellipse cx="170" cy="92" rx="32" ry="28" fill="url(#body-feather)"/>
-      <path d="M148 78 Q152 64 158 74" stroke="#a89668" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M163 70 Q167 60 171 70" stroke="#a89668" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M178 70 Q182 60 186 70" stroke="#a89668" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M192 78 Q188 64 182 74" stroke="#a89668" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <circle cx="160" cy="92" r="5" fill="#fff"/>
-      <circle cx="180" cy="92" r="5" fill="#fff"/>
-      <circle cx="161" cy="93" r="3" fill="#1a2332"/>
-      <circle cx="181" cy="93" r="3" fill="#1a2332"/>
-      <circle cx="162" cy="92" r="1" fill="#fff"/>
-      <circle cx="182" cy="92" r="1" fill="#fff"/>
-      <ellipse class="eye-lid" cx="160" cy="92" rx="5" ry="5" fill="#d8c89a"/>
-      <ellipse class="eye-lid" cx="180" cy="92" rx="5" ry="5" fill="#d8c89a"/>
-      <path d="M153 85 Q160 81 167 86" stroke="#a89668" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M173 86 Q180 81 187 85" stroke="#a89668" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M170 100 L160 113 Q170 119 180 113 Z" fill="#f5b942" stroke="#c08e1f" stroke-width="1.2"/>
-      <path d="M170 106 L165 111 L175 111 Z" fill="#c08e1f"/>
-      <ellipse cx="146" cy="103" rx="4" ry="2" fill="#f5c4c8" opacity="0.5"/>
-      <ellipse cx="194" cy="103" rx="4" ry="2" fill="#f5c4c8" opacity="0.5"/>
-      <path d="M212 122 Q230 115 235 130 Q220 135 210 130 Z" fill="#a89668"/>
-      <ellipse cx="170" cy="158" rx="50" ry="3" fill="#0f1f2c" opacity="0.15"/>
-    </svg>
-  </div>
-  <div class="chatbot-header-text">
-    <strong>Pinnacle Eagle</strong> &middot; Wiki Assistant
-    <div class="sub">Ask me about anything in this wiki &mdash; I'll find the right section.</div>
-  </div>
-  <div class="chatbot-messages" id="chat-messages"></div>
-  <div class="chatbot-suggestions" id="chat-suggestions">
-    <button data-q="What permissions do I need to publish content?">Publishing perms?</button>
-    <button data-q="Where do I configure SSO?">Where's SSO?</button>
-    <button data-q="What is the difference between Peak and Classic?">Peak vs Classic</button>
-    <button data-q="How do I set up auto-assignments?">Auto-assignments</button>
-    <button data-q="Where is the Recycle Bin?">Recycle Bin</button>
-  </div>
-  <form class="chatbot-input" id="chat-form" autocomplete="off">
-    <input type="text" id="chat-input" placeholder="Ask the Eagle&hellip;" aria-label="Ask the Eagle">
-    <button type="submit" aria-label="Send">&rarr;</button>
-  </form>
-</div>
-
-<script>
-  const sections = document.querySelectorAll('main section');
-  const navLinks = document.querySelectorAll('#sidebar-nav a');
-
-  function setActive() {
-    let current = '';
-    const scrollY = window.scrollY + 80;
-    sections.forEach(s => { if (s.offsetTop <= scrollY) current = s.id; });
-    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+  /* Panel scene now displays the real EPS logo on a clean surface */
+  .chatbot-scene .eps-logo-display {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #ffffff 0%, #f0f6fc 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 24px;
   }
-  window.addEventListener('scroll', setActive, { passive: true });
-  setActive();
-
-  function filterNav(q) {
-    q = q.trim().toLowerCase();
-    navLinks.forEach(a => {
-      a.style.display = !q || a.textContent.toLowerCase().includes(q) ? '' : 'none';
-    });
-    document.querySelectorAll('#sidebar-nav .group-title').forEach(g => {
-      let next = g.nextElementSibling, anyVisible = false;
-      while (next && !next.classList.contains('group-title')) {
-        if (next.style.display !== 'none') anyVisible = true;
-        next = next.nextElementSibling;
-      }
-      g.style.display = anyVisible ? '' : 'none';
-    });
-  }
-  window.filterNav = filterNav;
-
-  navLinks.forEach(a => a.addEventListener('click', () => {
-    if (window.innerWidth <= 960) document.querySelector('.sidebar').classList.remove('open');
-  }));
-
-  /* Reveal-on-scroll */
-  (function setupReveal() {
-    sections.forEach(s => s.classList.add('reveal'));
-    if (!('IntersectionObserver' in window)) {
-      sections.forEach(s => s.classList.add('in-view'));
-      return;
-    }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in-view');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
-    sections.forEach(s => io.observe(s));
-  })();
-
-  /* Lightbox */
-  (function setupLightbox() {
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lightbox-img');
-    document.querySelectorAll('.screenshot img').forEach(img => {
-      img.addEventListener('click', e => {
-        e.stopPropagation();
-        lbImg.src = img.src;
-        lbImg.alt = img.alt || '';
-        lb.classList.add('open');
-      });
-    });
-    lb.addEventListener('click', () => lb.classList.remove('open'));
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') lb.classList.remove('open');
-    });
-  })();
-
-  /* Wiki-aware chatbot */
-  /* ============== CONFIG: paste your Cloudflare Worker URL here to enable Claude AI ============== */
-  /* When this is empty, the chatbot falls back to local keyword search.  */
-  /* When set, the chatbot calls your worker which forwards to Claude.    */
-  const CHATBOT_PROXY_URL = "https://pinnacle-eagle.nick-cartony.workers.dev"; // e.g. "https://pinnacle-eagle.your-account.workers.dev"
-
-  const STOPWORDS = new Set(['the','a','an','is','are','to','of','in','on','for','and','or','do','does','i','my','what','where','who','how','can','it','this','that','be','need']);
-
-  const wikiIndex = Array.from(sections).map(sec => {
-    const id = sec.id;
-    const titleEl = sec.querySelector('h2, h1');
-    const title = titleEl ? titleEl.textContent.replace(/\s+/g, ' ').trim() : id;
-    const bodyText = sec.textContent.replace(/\s+/g, ' ').trim();
-    const tokens = bodyText.toLowerCase().match(/[a-z][a-z0-9'-]+/g) || [];
-    const tf = {};
-    tokens.forEach(t => { if (!STOPWORDS.has(t)) tf[t] = (tf[t] || 0) + 1; });
-    const paragraphs = Array.from(sec.querySelectorAll('p, li')).map(el => el.textContent.replace(/\s+/g, ' ').trim()).filter(t => t.length > 30);
-    return { id, title, body: bodyText.toLowerCase(), tf, paragraphs, titleLower: title.toLowerCase() };
-  });
-
-  const df = {};
-  wikiIndex.forEach(d => Object.keys(d.tf).forEach(t => { df[t] = (df[t] || 0) + 1; }));
-  const N = wikiIndex.length;
-  const idf = t => Math.log(1 + N / (1 + (df[t] || 0)));
-
-  function searchWiki(query, n) {
-    const qTokens = (query.toLowerCase().match(/[a-z][a-z0-9'-]+/g) || []).filter(t => !STOPWORDS.has(t));
-    if (qTokens.length === 0) return [];
-    const scored = wikiIndex.map(doc => {
-      let score = 0;
-      qTokens.forEach(t => {
-        const tf = doc.tf[t] || 0;
-        if (tf) score += (1 + Math.log(tf)) * idf(t);
-        if (doc.titleLower.includes(t)) score += 3;
-      });
-      return { doc, score };
-    }).filter(s => s.score > 0).sort((a, b) => b.score - a.score);
-    return scored.slice(0, n || 2);
+  .chatbot-scene .eps-logo-display .eps-logo-img {
+    max-width: 80%;
+    max-height: 75%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
 
-  function bestSnippet(doc, qTokens) {
-    if (!doc.paragraphs.length) return '';
-    let best = doc.paragraphs[0], bestScore = -1;
-    doc.paragraphs.forEach(p => {
-      const lp = p.toLowerCase();
-      let s = 0;
-      qTokens.forEach(t => { if (lp.includes(t)) s++; });
-      if (s > bestScore) { bestScore = s; best = p; }
-    });
-    if (best.length > 240) best = best.slice(0, 240).replace(/\s\S*$/, '') + '…';
-    return best;
+  /* ============== Battle-card components ============== */
+  .pinnacle-tagline {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0a1722;
+    border-left: 4px solid var(--c-accent);
+    padding: 6px 16px;
+    margin: 18px 0 24px;
+    background: var(--c-accent-light);
+    border-radius: 0 6px 6px 0;
+  }
+  .pinnacle-tiers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin: 18px 0 28px;
+    align-items: stretch;
+  }
+  .pinnacle-tiers .tier {
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    position: relative;
+  }
+  .pinnacle-tiers .tier .tier-num {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--c-muted);
+    margin-bottom: 4px;
+  }
+  .pinnacle-tiers .tier h4 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #0a1722;
+  }
+  .pinnacle-tiers .tier .role {
+    font-size: 13px;
+    color: var(--c-muted);
+    margin-bottom: 8px;
+  }
+  .pinnacle-tiers .tier .examples {
+    font-size: 12.5px;
+    color: var(--c-text);
+  }
+  .pinnacle-tiers .tier.featured {
+    background: linear-gradient(135deg, #1f6dc1 0%, #0e4d96 100%);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(31, 109, 193, 0.25);
+  }
+  .pinnacle-tiers .tier.featured .tier-num,
+  .pinnacle-tiers .tier.featured h4,
+  .pinnacle-tiers .tier.featured .role,
+  .pinnacle-tiers .tier.featured .examples { color: #fff; }
+  .pinnacle-tiers .tier.featured .tier-num { color: #b4d2eb; }
+  .pinnacle-tiers .tier.featured .role { color: #d6e8f5; }
+  .pinnacle-tiers .arrow {
+    align-self: center;
+    color: var(--c-muted);
+    font-size: 20px;
+    font-weight: 300;
+  }
+  @media (max-width: 720px) {
+    .pinnacle-tiers { grid-template-columns: 1fr; }
   }
 
-  const launcher = document.getElementById('mascot-launcher');
-  const panel = document.getElementById('chatbot-panel');
-  const closeBtn = document.getElementById('chat-close');
-  const messagesEl = document.getElementById('chat-messages');
-  const form = document.getElementById('chat-form');
-  const input = document.getElementById('chat-input');
-  const suggestions = document.getElementById('chat-suggestions');
-
-  function openChat() {
-    panel.classList.add('open');
-    launcher.classList.add('hidden');
-    if (messagesEl.children.length === 0) {
-      const greeting = CHATBOT_PROXY_URL
-        ? "Hi! I'm the Pinnacle Eagle, powered by Claude. Ask me anything about the wiki and I'll answer from the source sections."
-        : "Hi! I'm the Pinnacle Eagle. I'll search the wiki by keyword and point you to the right section. Try a suggestion below or type your own question.";
-      addBotMsg(greeting);
-    }
-    setTimeout(() => input.focus(), 300);
+  .pinnacle-stats {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin: 18px 0 28px;
+    background: linear-gradient(135deg, #1f6dc1 0%, #0e4d96 100%);
+    padding: 18px 14px;
+    border-radius: 10px;
+    color: #fff;
   }
-  function closeChat() {
-    panel.classList.remove('open');
-    launcher.classList.remove('hidden');
+  .pinnacle-stats .stat {
+    text-align: center;
+    padding: 4px 6px;
   }
-  launcher.addEventListener('click', openChat);
-  closeBtn.addEventListener('click', closeChat);
-
-  function scrollMessages() { messagesEl.scrollTop = messagesEl.scrollHeight; }
-  function addUserMsg(text) {
-    const d = document.createElement('div');
-    d.className = 'chat-msg user';
-    d.textContent = text;
-    messagesEl.appendChild(d);
-    scrollMessages();
+  .pinnacle-stats .stat .num {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+    line-height: 1.1;
   }
-  function addBotMsg(html) {
-    const d = document.createElement('div');
-    d.className = 'chat-msg bot';
-    d.innerHTML = html;
-    messagesEl.appendChild(d);
-    scrollMessages();
+  .pinnacle-stats .stat .label {
+    font-size: 10.5px;
+    color: #d6e8f5;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
   }
-  function addTyping() {
-    const t = document.createElement('div');
-    t.className = 'chat-typing';
-    t.id = '_typing';
-    t.innerHTML = '<span></span><span></span><span></span>';
-    messagesEl.appendChild(t);
-    scrollMessages();
-  }
-  function removeTyping() {
-    const t = document.getElementById('_typing');
-    if (t) t.remove();
-  }
-  function escapeHtml(s) {
-    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  @media (max-width: 720px) {
+    .pinnacle-stats { grid-template-columns: repeat(3, 1fr); gap: 14px; }
   }
 
-  /* ============== Local TF-IDF fallback answer ============== */
-  function localAnswer(query) {
-    const qTokens = (query.toLowerCase().match(/[a-z][a-z0-9'-]+/g) || []).filter(t => !STOPWORDS.has(t));
-    const hits = searchWiki(query, 2);
-    if (!hits.length) {
-      return "I couldn't find anything in the wiki about that. Try keywords like <em>permissions</em>, <em>SSO</em>, <em>libraries</em>, <em>auto-assign</em>, or <em>Peak</em>.";
-    }
-    let html = '';
-    hits.forEach((h, i) => {
-      const snippet = escapeHtml(bestSnippet(h.doc, qTokens));
-      html += '<div class="src-title">' + escapeHtml(h.doc.title) + '</div>';
-      html += '<div>' + snippet + '</div>';
-      html += '<a class="jump" href="#' + h.doc.id + '">Jump to section &rarr;</a>';
-      if (i < hits.length - 1) html += '<hr style="margin:10px 0;border:none;border-top:1px dashed #e2e8f0;">';
-    });
-    return html;
+  .pinnacle-rule {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin: 18px 0 24px;
+  }
+  .pinnacle-rule .rule {
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-top: 3px solid var(--c-accent);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .pinnacle-rule .rule .num {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--c-accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .pinnacle-rule .rule h4 {
+    margin: 0 0 6px;
+    font-size: 14.5px;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #0a1722;
+  }
+  .pinnacle-rule .rule p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--c-muted);
+    line-height: 1.5;
+  }
+  @media (max-width: 720px) { .pinnacle-rule { grid-template-columns: 1fr; } }
+
+  /* ============== Customer highlight cards ============== */
+  .customer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 18px 0 24px;
+  }
+  .customer-card {
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .customer-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(15, 31, 44, 0.08);
+    border-color: var(--c-accent);
+  }
+  .customer-card .customer-name {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--c-accent-dark);
+    font-weight: 600;
+  }
+  .customer-card h4 {
+    margin: 0;
+    font-size: 16px;
+    color: #0a1722;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .customer-card p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--c-text);
+    line-height: 1.5;
+  }
+  .customer-card .impact-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .customer-card .impact-tags span {
+    font-size: 11px;
+    background: var(--c-accent-light);
+    color: var(--c-accent-dark);
+    padding: 2px 9px;
+    border-radius: 10px;
+    border: 1px solid #b4d2eb;
+  }
+  .customer-card .pdf-link {
+    margin-top: 8px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--c-accent-dark);
+    border-bottom: none;
+  }
+  .customer-card .pdf-link:hover {
+    color: var(--c-accent);
+    border-bottom: none;
+  }
+  @media (max-width: 720px) { .customer-grid { grid-template-columns: 1fr; } }
+
+
+  /* ============== Company motto banner ============== */
+  .company-motto {
+    position: relative;
+    margin: 32px 0 24px;
+    padding: 38px 44px 30px;
+    background: linear-gradient(135deg, #0a1f3a 0%, #1f6dc1 100%);
+    color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 32px rgba(10, 31, 58, 0.18);
+    text-align: center;
+  }
+  .company-motto::before {
+    content: "\201C";
+    position: absolute;
+    top: -36px;
+    left: 22px;
+    font-size: 160px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.08);
+    font-family: Georgia, "Times New Roman", serif;
+    pointer-events: none;
+  }
+  .company-motto .motto-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: #b4d2eb;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .company-motto .motto-quote {
+    font-size: 20px;
+    line-height: 1.55;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 1;
+  }
+  .company-motto .motto-quote strong {
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(180deg, transparent 60%, rgba(180, 210, 235, 0.35) 60%);
+    padding: 0 4px;
+    letter-spacing: 0.6px;
+  }
+  .company-motto .motto-quote strong.succeed {
+    font-size: 23px;
+    background: linear-gradient(180deg, transparent 55%, rgba(245, 185, 66, 0.55) 55%);
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  .company-motto .motto-attribution {
+    margin-top: 18px;
+    font-size: 12px;
+    color: #b4d2eb;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  @media (max-width: 720px) {
+    .company-motto { padding: 28px 22px 22px; }
+    .company-motto .motto-quote { font-size: 17px; }
+    .company-motto .motto-quote strong.succeed { font-size: 19px; }
   }
 
-  /* ============== Header status badge ============== */
-  function updateChatStatus() {
-    var sub = document.querySelector('.chatbot-header-text .sub');
-    if (!sub) return;
-    if (CHATBOT_PROXY_URL) {
-      sub.textContent = "Powered by Claude Haiku 4.5";
-    } else {
-      sub.textContent = "Wiki keyword search";
-    }
+
+  /* ============== Reusable visual components ============== */
+
+  /* Side-by-side comparison cards */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 18px 0 24px;
   }
-  updateChatStatus();
+  .compare-card {
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: 10px;
+    padding: 18px 20px 22px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .compare-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(15, 31, 44, 0.07);
+  }
+  .compare-card.featured {
+    border: 2px solid var(--c-accent);
+    background: linear-gradient(180deg, #ffffff 0%, var(--c-accent-light) 100%);
+  }
+  .compare-card .compare-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: var(--c-accent-light);
+    color: var(--c-accent-dark);
+    margin-bottom: 10px;
+  }
+  .compare-card.legacy .compare-tag {
+    background: #eef2f6;
+    color: #5b6b7a;
+  }
+  .compare-card h4 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    color: #0a1722;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+  }
+  .compare-card .compare-tagline {
+    font-size: 14px;
+    color: var(--c-muted);
+    margin: 0 0 12px;
+    line-height: 1.5;
+  }
+  .compare-card ul.compare-points {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .compare-card ul.compare-points li {
+    margin-bottom: 6px;
+  }
+  @media (max-width: 720px) { .compare-grid { grid-template-columns: 1fr; } }
 
-  /* ============== Render Claude's markdown-ish output ============== */
-  function renderClaudeOutput(text) {
-    var s = escapeHtml(text);
-    s = s.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
-    s = s.replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>');
-    s = s.replace(/`([^`\n]+)`/g, '<code>$1</code>');
-    s = s.replace(/\[source:\s*([a-z0-9-]+)\s*\]/gi, function(m, id) {
-      var doc = wikiIndex.find(function(d) { return d.id === id; });
-      if (!doc) return '';
-      return ' <a class="jump" href="#' + id + '">' + escapeHtml(doc.title) + ' &rarr;</a>';
-    });
-    s = s.replace(/\n{2,}/g, '</p><p style="margin:0 0 6px;">');
-    s = s.replace(/\n/g, '<br>');
-    return '<p style="margin:0 0 6px;">' + s + '</p>';
+  /* 5-card pillar grid (for Reports / multi-pillar layouts) */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin: 18px 0 24px;
+  }
+  .pillar {
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-top: 3px solid var(--c-accent);
+    border-radius: 8px;
+    padding: 16px 16px 18px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .pillar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(15, 31, 44, 0.08);
+  }
+  .pillar .pillar-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--c-accent);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .pillar h4 {
+    margin: 0 0 8px;
+    font-size: 15px;
+    color: #0a1722;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .pillar p {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--c-text);
+    line-height: 1.5;
   }
 
-  /* ============== Call the Cloudflare Worker proxy (RAG) ============== */
-  async function callClaude(query) {
-    if (!CHATBOT_PROXY_URL) {
-      var noProxy = new Error('NO_PROXY'); noProxy.code = 'NO_PROXY'; throw noProxy;
-    }
-    var hits = searchWiki(query, 4);
-    if (!hits.length) {
-      var noCtx = new Error('NO_CONTEXT'); noCtx.code = 'NO_CONTEXT'; throw noCtx;
-    }
-    var ctx = hits.slice(0, 3).map(function(h) {
-      var body = h.doc.body;
-      if (body.length > 2500) body = body.slice(0, 2500) + '...';
-      return '<wiki_section id="' + h.doc.id + '" title="' + h.doc.title.replace(/"/g, '\"') + '">\n' + body + '\n</wiki_section>';
-    }).join('\n\n');
-
-    var resp = await fetch(CHATBOT_PROXY_URL, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ query: query, context: ctx })
-    });
-
-    if (!resp.ok) {
-      var t = await resp.text();
-      var err = new Error('Proxy ' + resp.status + ': ' + t.slice(0, 200));
-      err.code = 'PROXY_ERROR';
-      err.status = resp.status;
-      throw err;
-    }
-    var data = await resp.json();
-    return data.text || '';
+  /* Feature cards (3-column) */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 18px 0 24px;
+  }
+  .feature {
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .feature:hover { border-color: var(--c-accent); transform: translateY(-2px); }
+  .feature h4 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    color: #0a1722;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+  }
+  .feature p {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--c-muted);
+    line-height: 1.5;
   }
 
-  /* ============== Top-level answer dispatcher ============== */
-  async function answer(query) {
-    if (!CHATBOT_PROXY_URL) {
-      addBotMsg(localAnswer(query));
-      return;
-    }
-    try {
-      var text = await callClaude(query);
-      addBotMsg(renderClaudeOutput(text));
-    } catch (err) {
-      console.error('Chatbot proxy failed:', err);
-      var note;
-      if (err.status === 429) note = 'Rate-limited. Used keyword search as fallback.';
-      else if (err.code === 'NO_CONTEXT') note = 'No matching wiki sections found.';
-      else note = 'AI assistant unavailable &mdash; used keyword search instead.';
-      addBotMsg(localAnswer(query) + '<div style="margin-top:8px; font-size:11px; color:#a32d2d;">' + note + '</div>');
-    }
-  }
-
-  /* ============== Form / suggestions handlers (async-aware) ============== */
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    var q = input.value.trim();
-    if (!q) return;
-    addUserMsg(q);
-    input.value = '';
-    addTyping();
-    try { await answer(q); } finally { removeTyping(); }
-  });
-
-  suggestions.addEventListener('click', async function(e) {
-    var btn = e.target.closest('button[data-q]');
-    if (!btn) return;
-    var q = btn.dataset.q;
-    addUserMsg(q);
-    addTyping();
-    try { await answer(q); } finally { removeTyping(); }
-  });
-
-  messagesEl.addEventListener('click', function(e) {
-    var a = e.target.closest('a.jump');
-    if (a && window.innerWidth <= 720) closeChat();
-  });
-
-
-  setTimeout(function() {
-    if (!panel.classList.contains('open')) launcher.classList.add('greet');
-    setTimeout(function() { launcher.classList.remove('greet'); }, 5500);
-  }, 1500);
-
-  /* ============== Pinnacle Series embed ============== */
-  const PINNACLE_URL = "https://portal.pinnacleseries.com/#/login";
-  (function setupEmbed() {
-    const toggle = document.getElementById('embed-toggle');
-    const panel = document.getElementById('embed-panel');
-    const closeBtn = document.getElementById('embed-close');
-    const frame = document.getElementById('embed-frame');
-    const popout = document.getElementById('embed-popout');
-    const bannerLink = document.getElementById('embed-banner-link');
-    if (!toggle || !panel) return;
-
-    if (popout) popout.href = PINNACLE_URL;
-    if (bannerLink) bannerLink.href = PINNACLE_URL;
-
-    function openEmbed() {
-      document.body.classList.add('embed-open');
-      panel.classList.add('open');
-      if (!frame.src || frame.src === 'about:blank' || frame.src === window.location.href) {
-        frame.src = PINNACLE_URL;
-      }
-    }
-    function closeEmbed() {
-      document.body.classList.remove('embed-open');
-      panel.classList.remove('open');
-    }
-    toggle.addEventListener('click', openEmbed);
-    closeBtn.addEventListener('click', closeEmbed);
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && panel.classList.contains('open')) closeEmbed();
-    });
-  })();
-
-</script>
-
-</body>
-</html>
+  /* Key-stat hero callouts */
+  .key-stat {
+    display: flex;
