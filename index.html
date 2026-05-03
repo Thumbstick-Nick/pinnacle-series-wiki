@@ -1543,6 +1543,119 @@
     text-shadow: none;
   }
 
+
+  /* ============== Permission cards + role hierarchy ============== */
+  .perm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+    margin: 14px 0 22px;
+  }
+  .perm-card {
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .perm-card:hover {
+    border-color: var(--c-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(15,31,44,0.06);
+  }
+  .perm-card .perm-name {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #0a1722;
+    margin: 0 0 4px;
+  }
+  .perm-card .perm-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+  .perm-card .perm-tag.scope-full   { background: var(--c-accent-light); color: var(--c-accent-dark); border: 1px solid #b4d2eb; }
+  .perm-card .perm-tag.scope-scoped { background: #fff3d9; color: #7a5a00; border: 1px solid #f0c75e; }
+  .perm-card .perm-tag.scope-other  { background: #eef2f6; color: #5b6b7a; border: 1px solid var(--c-border); }
+  .perm-card .perm-summary {
+    font-size: 13px;
+    color: var(--c-text);
+    line-height: 1.5;
+    margin: 0 0 8px;
+  }
+  .perm-card details {
+    font-size: 12.5px;
+    color: var(--c-muted);
+  }
+  .perm-card details summary {
+    cursor: pointer;
+    color: var(--c-accent-dark);
+    font-weight: 500;
+    list-style: none;
+    user-select: none;
+  }
+  .perm-card details summary::-webkit-details-marker { display: none; }
+  .perm-card details summary::before { content: "+ "; font-weight: 700; }
+  .perm-card details[open] summary::before { content: "- "; }
+  .perm-card details ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+    line-height: 1.5;
+  }
+
+  /* Role hierarchy visual */
+  .perm-hierarchy {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 14px 0 22px;
+  }
+  .perm-hierarchy .row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .perm-hierarchy .role-pill {
+    background: var(--c-accent-light);
+    border: 1px solid #b4d2eb;
+    color: var(--c-accent-dark);
+    border-radius: 16px;
+    padding: 5px 13px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .perm-hierarchy .role-pill.high   { background: var(--c-accent); color: #fff; border-color: var(--c-accent); }
+  .perm-hierarchy .role-pill.mid    { background: var(--c-accent-light); color: var(--c-accent-dark); }
+  .perm-hierarchy .role-pill.low    { background: #fff; color: var(--c-muted); }
+  .perm-hierarchy .arrow {
+    color: var(--c-muted);
+    font-size: 18px;
+    line-height: 1;
+  }
+  .perm-hierarchy .row .label {
+    font-size: 11.5px;
+    color: var(--c-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 600;
+    margin-right: 6px;
+    min-width: 90px;
+  }
+  @media (max-width: 720px) {
+    .perm-hierarchy .row { gap: 6px; }
+    .perm-hierarchy .row .label { min-width: auto; }
+  }
+
+  /* Exempt new components from text-shadow halos */
+  .perm-grid, .perm-grid *, .perm-hierarchy, .perm-hierarchy *,
+  .compare-card, .compare-card * { text-shadow: none; }
+
 </style>
 </head>
 <body>
@@ -2392,32 +2505,64 @@
 <!-- ====================================================================== -->
 <section id="peak-vs-classic">
 <h2>Peak Experience vs Classic</h2>
-<p>Peak Experience is the redesigned Pinnacle Series UI. Classic is the older interface that some tenants are still on while they migrate. The two experiences are controlled by tenant-level toggles — and importantly, those toggles are split for admin and end-user UIs.</p>
+<p>Pinnacle Series ships in two UIs. <strong>Peak Experience</strong> is the redesigned modern interface and the default for new tenants. <strong>Classic</strong> is the legacy UI that some tenants are still on while they migrate. Tenant-level toggles split for admin and end-user UIs let customers stage the rollout.</p>
+
+<div class="compare-grid">
+  <div class="compare-card featured">
+    <span class="compare-tag">Peak Experience</span>
+    <h4>The modern UI</h4>
+    <p class="compare-tagline">Default for new tenants. Foundation for all new feature work, AI features, and reporting.</p>
+    <ul class="compare-points">
+      <li><strong>Streamlined nav</strong> with bulk modification tools and enhanced search.</li>
+      <li><strong>Library-based content</strong> &mdash; Libraries, Topics, and Subtopics replace the old folder structure.</li>
+      <li><strong>Library-driven permissions</strong> &mdash; access controlled at the library level, less manual effort.</li>
+      <li><strong>Centralised assignments</strong> &mdash; skills assessments and learning tasks in one place.</li>
+      <li><strong>Future-proofed</strong> &mdash; the foundation for AI-driven assistance and smarter reporting.</li>
+    </ul>
+  </div>
+  <div class="compare-card legacy">
+    <span class="compare-tag">Classic</span>
+    <h4>The legacy UI</h4>
+    <p class="compare-tagline">Still in use at some tenants mid-migration. Receives no new feature work &mdash; all roadmap targets Peak.</p>
+    <ul class="compare-points">
+      <li>Folder-based content management.</li>
+      <li>Per-folder permissions (more manual).</li>
+      <li>Cogwheel-icon entry to Admin Portal (top-right).</li>
+      <li>Hosts <em>Work Group Management</em> features still being ported to Peak.</li>
+      <li>Hosts <em>Live Events</em> until that lands in Peak.</li>
+    </ul>
+  </div>
+</div>
 
 <h3>The two Peak Experience toggles</h3>
-<p>Peak Experience is controlled by <strong>two independent tenant-level toggles</strong> at <strong>Administration Portal → Settings → General → Peak Experience</strong>:</p>
-<table>
-  <tr><th>Toggle</th><th>Controls</th></tr>
-  <tr><td><strong>Peak Experience Configuration</strong></td><td>Enables Peak for the <strong>Administration Portal</strong> (admin-side UI).</td></tr>
-  <tr><td><strong>Peak Experience for End Users</strong></td><td>Enables Peak for the <strong>Home page / end-user experience</strong>.</td></tr>
-</table>
-<p>The two are intentionally independent so a tenant can configure Peak in the admin portal first — at their own pace — before flipping the end-user experience.</p>
+<p>Peak Experience is controlled by <strong>two independent tenant-level toggles</strong> at <code>Administration Portal &rarr; Settings &rarr; General &rarr; Peak Experience</code>. They're intentionally split so a tenant can configure Peak in the admin portal first, at their own pace, before flipping the end-user experience.</p>
 
-<h3>Why move to Peak</h3>
-<ul>
-  <li><strong>Modern UI.</strong> Streamlined nav, bulk modification tools, enhanced search.</li>
-  <li><strong>Library-based content management.</strong> Libraries, Topics, and Subtopics replace the old folder-based structure.</li>
-  <li><strong>Library-driven permissions.</strong> Access is now controlled at the library level rather than per-folder, with less manual effort.</li>
-  <li><strong>Centralized assignments.</strong> Both skills assessments and learning tasks managed in one place; strong visual markers for due dates and progress.</li>
-  <li><strong>Future-proofed.</strong> Peak is the foundation for AI-driven assistance, smarter reporting, and continuous feature development.</li>
-</ul>
+<div class="feature-grid">
+  <div class="feature">
+    <h4>Peak Experience Configuration</h4>
+    <p>Enables Peak for the <strong>Administration Portal</strong> (admin-side UI). Configure Peak first; users keep Classic until ready.</p>
+  </div>
+  <div class="feature">
+    <h4>Peak Experience for End Users</h4>
+    <p>Enables Peak for the <strong>Home page / end-user experience</strong>. Flip last, after admin team is ready to support it.</p>
+  </div>
+</div>
 
 <h3>What's not yet in Peak</h3>
-<ul>
-  <li><strong>Live Events</strong> — not yet available.</li>
-  <li><strong>Workgroups</strong> — still in development. Note the related <em>Work Group Management</em> permissions exist but apply only to Classic.</li>
-  <li><strong>Document conversion for search &amp; translation</strong> — converting external docs into Pinnacle Documents for enhanced searchability and translation isn't yet supported.</li>
-</ul>
+<div class="feature-grid">
+  <div class="feature">
+    <h4>Live Events</h4>
+    <p>Not yet available in Peak. In development: calendar &amp; tile views, recurring registration, customisable email comms.</p>
+  </div>
+  <div class="feature">
+    <h4>Work Groups</h4>
+    <p>Still in development. The related <em>Work Group Management</em> permissions apply only to Classic.</p>
+  </div>
+  <div class="feature">
+    <h4>Document conversion</h4>
+    <p>Converting external docs into Pinnacle Documents for enhanced searchability and translation isn't yet supported.</p>
+  </div>
+</div>
 </section>
 
 <!-- ====================================================================== -->
@@ -2660,41 +2805,79 @@
   Home page → left nav → <strong>AI Chat</strong> (only when the tenant has AI Chat enabled in Admin Portal → Settings → General)
 </div>
 
-<p>AI Chat is a context-aware chat feature that helps users find answers and content within Pinnacle Series using natural language. It's intended for in-the-moment troubleshooting, learning suggestions, and quick references — not for replacing structured learning paths.</p>
+<p>AI Chat is a context-aware chat feature that helps users find answers and content within Pinnacle Series using natural language. It's intended for in-the-moment troubleshooting, learning suggestions, and quick references &mdash; not for replacing structured learning paths.</p>
 
-<h3>How it works</h3>
+<div class="key-stat">
+  <span class="num">RAG</span>
+  <span class="text">Retrieval-Augmented Generation grounds every answer in the customer's own Pinnacle Series content. The model is shared across tenants but <strong>content access is strictly isolated</strong> &mdash; AI Chat will never surface content from another customer's library.</span>
+</div>
 
+<h3>The technology stack</h3>
+<div class="feature-grid">
+  <div class="feature">
+    <h4>Microsoft Azure OpenAI</h4>
+    <p>Built on Azure OpenAI Service using the GPT-3.5 Turbo model. Microsoft does <strong>not</strong> use customer data to train or improve the model.</p>
+  </div>
+  <div class="feature">
+    <h4>RAG-grounded answers</h4>
+    <p>Each response is drawn from Pinnacle Series content the user has explicit access to, with numbered citation markers and clickable source cards.</p>
+  </div>
+  <div class="feature">
+    <h4>Per-tenant isolation</h4>
+    <p>Content access is strictly scoped per tenant. AI Chat respects the same library-sharing rules as Search and Browse.</p>
+  </div>
+</div>
+
+<h3>What it looks like</h3>
 <figure class="screenshot">
-  <img src="screenshots/web/shot_253.jpg" alt="AI Chat panel — empty conversation state. Reached via the top-bar "AI Chat" button (not a left-nav item). The persona is named "Pinnacle AI". Bottom: New Chat button + Ask a question input." loading="lazy">
-  <figcaption>AI Chat panel — empty conversation state. Reached via the top-bar "AI Chat" button (not a left-nav item). The persona is named "Pinnacle AI". Bottom: New Chat button + Ask a question input.</figcaption>
+  <img src="screenshots/web/shot_253.jpg" alt='AI Chat panel — empty conversation state. Reached via the top-bar "AI Chat" button (not a left-nav item). The persona is named "Pinnacle AI". Bottom: New Chat button + Ask a question input.' loading="lazy">
+  <figcaption>AI Chat panel &mdash; empty conversation state. Reached via the top-bar "AI Chat" button (not a left-nav item). The persona is named "Pinnacle AI". Bottom: New Chat button + Ask a question input.</figcaption>
 </figure>
 
 <figure class="screenshot">
-  <img src="screenshots/web/shot_254.jpg" alt="AI Chat reply with citations and content cards. Each numbered citation marker links to a specific Pinnacle Series content item; clickable cards at the bottom navigate directly to the source. Disclaimer: "AI-generated content may be incorrect."" loading="lazy">
+  <img src="screenshots/web/shot_254.jpg" alt='AI Chat reply with citations and content cards. Each numbered citation marker links to a specific Pinnacle Series content item; clickable cards at the bottom navigate directly to the source. Disclaimer: "AI-generated content may be incorrect."' loading="lazy">
   <figcaption>AI Chat reply with citations and content cards. Each numbered citation marker links to a specific Pinnacle Series content item; clickable cards at the bottom navigate directly to the source. Disclaimer: "AI-generated content may be incorrect."</figcaption>
 </figure>
-<ul>
-  <li>Built on <strong>Microsoft Azure OpenAI Service</strong>, using the GPT-3.5 Turbo model.</li>
-  <li>Uses <strong>Retrieval-Augmented Generation (RAG)</strong> — answers are drawn from Pinnacle Series content the user has explicit access to.</li>
-  <li>The model is shared across all tenants, but content access is strictly isolated per tenant. AI Chat will never surface content from another customer's library.</li>
-</ul>
 
 <h3>Tips for users</h3>
-<ul>
-  <li>Be specific with queries.</li>
-  <li>Add content-type words like "video," "guide," or "tutorial" to narrow what gets returned.</li>
-  <li>Use Boolean operators (AND, OR, NOT) for refinement.</li>
-  <li>Click "New Chat" to reset conversation context.</li>
-</ul>
+<div class="feature-grid">
+  <div class="feature">
+    <h4>Be specific</h4>
+    <p>Narrow queries like "How do I add a topographic surface in Civil 3D?" beat broad ones like "Civil 3D help".</p>
+  </div>
+  <div class="feature">
+    <h4>Specify content type</h4>
+    <p>Add "video", "guide", or "tutorial" in the query to bias the result type.</p>
+  </div>
+  <div class="feature">
+    <h4>Use Boolean operators</h4>
+    <p>AND / OR / NOT to refine multi-concept questions.</p>
+  </div>
+  <div class="feature">
+    <h4>Reset with New Chat</h4>
+    <p>Clears conversation context so a follow-up question doesn't drag in unrelated history.</p>
+  </div>
+</div>
 
 <h3>Data privacy</h3>
-<table>
-  <tr><th>Aspect</th><th>How AI Chat handles it</th></tr>
-  <tr><td>What gets sent</td><td>Only user queries. AI Chat is not designed to handle sensitive personal or commercial information.</td></tr>
-  <tr><td>Data retention</td><td>Inputs and outputs are <strong>not retained</strong>.</td></tr>
-  <tr><td>Model training</td><td>Microsoft Azure OpenAI does <strong>not</strong> use customer data to train or improve the model. Customer inputs are isolated from Microsoft and OpenAI.</td></tr>
-  <tr><td>Compliance</td><td>CCPA, GDPR, SOC 2, SOC 3, CSA Star.</td></tr>
-</table>
+<div class="feature-grid">
+  <div class="feature">
+    <h4>What gets sent</h4>
+    <p>Only user queries. AI Chat is not designed to handle sensitive personal or commercial information.</p>
+  </div>
+  <div class="feature">
+    <h4>Data retention</h4>
+    <p>Inputs and outputs are <strong>not retained</strong> by Azure OpenAI.</p>
+  </div>
+  <div class="feature">
+    <h4>Model training</h4>
+    <p>Customer inputs are isolated from Microsoft and OpenAI. The model is <strong>not</strong> trained on customer data.</p>
+  </div>
+  <div class="feature">
+    <h4>Compliance</h4>
+    <p>CCPA, GDPR, SOC 2, SOC 3, CSA Star.</p>
+  </div>
+</div>
 
 <div class="callout permissions">
   <strong>Required permissions for end users:</strong> None — once enabled at the tenant level, AI Chat is available to all users in the tenant.<br>
@@ -2711,39 +2894,79 @@
   Home page (left nav and body section) — only if the user is in a group with SPARK enabled.
 </div>
 
-<p>SPARK is Pinnacle Series' personalized nano-learning feed. It curates short videos (under 5 minutes) from libraries the user can access, prioritizing content that matches the user's interests and group's focus areas.</p>
+<p>SPARK is Pinnacle Series' personalised nano-learning feed. It curates short videos (under 5 minutes) from libraries the user can access, prioritising content that matches the user's interests and group's focus areas.</p>
+
+<div class="key-stat">
+  <span class="num">1&ndash;2/day</span>
+  <span class="text">SPARK is designed for "1&ndash;2 SPARKs a day" &mdash; a sustainable pace that builds skill over time without overwhelming busy schedules. Up to 25 videos queued per session, each 3&ndash;5 minutes.</span>
+</div>
 
 <h3>How users experience SPARK</h3>
+<div class="feature-grid">
+  <div class="feature">
+    <h4>First-time setup</h4>
+    <p>On first sign-in after SPARK is enabled for their group, users see a welcome screen with optional preference capture: Industries, Topics &amp; Interests, and a free-text "Gist for you" field. Skippable.</p>
+  </div>
+  <div class="feature">
+    <h4>Daily feed</h4>
+    <p>Up to 25 videos in a session queue, each 3&ndash;5 minutes. Designed to fit between focused work blocks.</p>
+  </div>
+  <div class="feature">
+    <h4>Progress tracking</h4>
+    <p>Completed videos get a green check; the queue refreshes as videos are completed so the feed stays fresh.</p>
+  </div>
+  <div class="feature">
+    <h4>Save &amp; share</h4>
+    <p>Bookmark a SPARK for later or share its link with a colleague.</p>
+  </div>
+</div>
 
 <figure class="screenshot">
-  <img src="screenshots/web/shot_256.jpg" alt="SPARK dedicated page — hero "Light The Fuse — Your Next Idea Starts With A SPARK". Center: video player with standard controls plus an inline bookmark icon. Right: "Up Next..." playlist (toggleable to a Transcripts view with auto-scrolling). Top-right: Edit Preferences button." loading="lazy">
-  <figcaption>SPARK dedicated page — hero "Light The Fuse — Your Next Idea Starts With A SPARK". Center: video player with standard controls plus an inline bookmark icon. Right: "Up Next..." playlist (toggleable to a Transcripts view with auto-scrolling). Top-right: Edit Preferences button.</figcaption>
+  <img src="screenshots/web/shot_256.jpg" alt='SPARK dedicated page — hero "Light The Fuse — Your Next Idea Starts With A SPARK". Center: video player with standard controls plus an inline bookmark icon. Right: "Up Next..." playlist (toggleable to a Transcripts view with auto-scrolling). Top-right: Edit Preferences button.' loading="lazy">
+  <figcaption>SPARK dedicated page &mdash; hero "Light The Fuse &mdash; Your Next Idea Starts With A SPARK". Center: video player with standard controls plus an inline bookmark icon. Right: "Up Next..." playlist (toggleable to a Transcripts view with auto-scrolling). Top-right: Edit Preferences button.</figcaption>
 </figure>
 
 <figure class="screenshot">
-  <img src="screenshots/web/shot_260.jpg" alt="SPARK Edit Preferences modal — Industries (8 chips), Topics (full Pinnacle topic catalog as chips), and "Just for You" free-text field for personal interests." loading="lazy">
-  <figcaption>SPARK Edit Preferences modal — Industries (8 chips), Topics (full Pinnacle topic catalog as chips), and "Just for You" free-text field for personal interests.</figcaption>
+  <img src="screenshots/web/shot_260.jpg" alt='SPARK Edit Preferences modal — Industries (8 chips), Topics (full Pinnacle topic catalog as chips), and "Just for You" free-text field for personal interests.' loading="lazy">
+  <figcaption>SPARK Edit Preferences modal &mdash; Industries (8 chips), Topics (full Pinnacle topic catalog as chips), and "Just for You" free-text field for personal interests.</figcaption>
 </figure>
-<ul>
-  <li><strong>First-time setup.</strong> On first sign-in after SPARK is enabled for their group, users see a welcome screen with optional preference capture: Industries (multi-select), Topics &amp; Interests (software tools), and a free-text "Gist for you" field. Skippable.</li>
-  <li><strong>Daily feed.</strong> Up to 25 videos in a session queue, each 3–5 minutes. The intent is "1–2 SPARKs a day."</li>
-  <li><strong>Progress tracking.</strong> Completed videos get a green check; the queue refreshes as videos are completed.</li>
-  <li><strong>Save &amp; share.</strong> Bookmark a SPARK or share its link with a colleague.</li>
-</ul>
 
 <h3>How SPARK picks content</h3>
-<p>SPARK uses a weighted match across:</p>
-<ol>
-  <li><strong>User preferences</strong> (highest priority — the user's "Just for You" settings)</li>
-  <li><strong>Group interests</strong> (set by an admin at the group level)</li>
-  <li><strong>Hero Products</strong> from shared libraries — fallback when no preferences are set: AutoCAD, AutoCAD Civil 3D, InfraWorks, Revit (Architecture / MEP / Structure), Bluebeam, Inventor, Navisworks, Autodesk Construction Cloud.</li>
-</ol>
-<p>Match conditions:</p>
-<ul>
-  <li>Content has not been viewed by the user in the last 90 days.</li>
-  <li>Content is under 5 minutes.</li>
-  <li>The match phrase appears in Title, Description, Keywords, Topics, Chapters, or Transcript.</li>
-</ul>
+<p>SPARK uses a weighted match across three signal sources, in priority order:</p>
+
+<div class="pillar-grid">
+  <div class="pillar">
+    <div class="pillar-num">PRIORITY 1</div>
+    <h4>User preferences</h4>
+    <p>The user's own "Just for You" settings. Highest weight; overrides everything else when set.</p>
+  </div>
+  <div class="pillar">
+    <div class="pillar-num">PRIORITY 2</div>
+    <h4>Group interests</h4>
+    <p>Topics chosen by an admin at the group level. Used when individual prefs aren't set or to supplement them.</p>
+  </div>
+  <div class="pillar">
+    <div class="pillar-num">PRIORITY 3</div>
+    <h4>Hero Products</h4>
+    <p>Fallback when no preferences exist: AutoCAD, Civil 3D, InfraWorks, Revit (Arch/MEP/Structure), Bluebeam, Inventor, Navisworks, Autodesk Construction Cloud.</p>
+  </div>
+</div>
+
+<h4>Match conditions (all must be true)</h4>
+<div class="feature-grid">
+  <div class="feature">
+    <h4>Not viewed in 90 days</h4>
+    <p>Content the user has already watched in the last 90 days is excluded so the feed stays fresh.</p>
+  </div>
+  <div class="feature">
+    <h4>Under 5 minutes</h4>
+    <p>SPARK is nano-learning by design. Longer content lives in Libraries and Learning Paths.</p>
+  </div>
+  <div class="feature">
+    <h4>Phrase match in metadata</h4>
+    <p>Match phrase must appear in Title, Description, Keywords, Topics, Chapters, or Transcript.</p>
+  </div>
+</div>
 
 <h3>Configuring SPARK (admin side)</h3>
 
@@ -3451,14 +3674,23 @@
   Admin Portal → <strong>KnowledgeSmart Admin Area</strong> (top-level)
 </div>
 
-<p>The KnowledgeSmart Admin Area is the embedded administrative interface for managing skill assessments through KnowledgeSmart, Eagle Point's assessment product. KnowledgeSmart and Pinnacle Series are integrated but have separate admin roles.</p>
+<p>The KnowledgeSmart Admin Area is the embedded administrative interface for managing skill assessments through KnowledgeSmart, Eagle Point's assessment product. KnowledgeSmart and Pinnacle Series are integrated but have separate admin roles &mdash; a user with full Pinnacle admin permissions can still see "You do not have permission to log in to KnowledgeSmart" if their KS role isn't set up.</p>
 
-<h3>Common tasks</h3>
-<ul>
-  <li>Map KnowledgeSmart assessment outcomes to learning content via Learning Tags.</li>
-  <li>Synchronize KnowledgeSmart users with Pinnacle Series users.</li>
-  <li>Manage KnowledgeSmart invitations and assessment campaigns.</li>
-</ul>
+<h3>What admins do here</h3>
+<div class="feature-grid">
+  <div class="feature">
+    <h4>Map outcomes &rarr; content</h4>
+    <p>Tag learning content with Learning Tags that correspond to KnowledgeSmart assessment outcomes, so a low score on a KS assessment auto-targets the right learning path.</p>
+  </div>
+  <div class="feature">
+    <h4>User sync</h4>
+    <p>Synchronise KnowledgeSmart users with Pinnacle Series users so the same identity drives both systems.</p>
+  </div>
+  <div class="feature">
+    <h4>Campaign management</h4>
+    <p>Manage KnowledgeSmart invitations and assessment campaigns &mdash; who's been invited, who's completed, who needs a reminder.</p>
+  </div>
+</div>
 
 <div class="callout permissions">
   <strong>Required role:</strong> <strong>KnowledgeSmart Administrator</strong> — this is a separate role configured in the KnowledgeSmart Admin Dashboard, not in Pinnacle Series itself. A user can have full Pinnacle admin permissions and still see "You do not have permission to log in to KnowledgeSmart" in this section if their KS admin role hasn't been set up.
@@ -3550,56 +3782,94 @@
 
 <div class="where">
   <span class="label">Where to manage</span>
-  Admin Portal → Users → Edit User Details → Permissions section (right side)
+  Admin Portal &rarr; Users &rarr; Edit User Details &rarr; Permissions section (right side)
 </div>
 
-<h3>Inherit Permissions</h3>
-<p>When enabled, the user inherits permissions included in the user group(s) they belong to. When disabled, only per-user permissions apply.</p>
+<div class="callout">
+  <strong>Inherit Permissions</strong> &mdash; when ON, the user inherits permissions included in the group(s) they belong to. When OFF, only per-user permissions apply. Toggle lives on the user record.
+</div>
 
-<h3>Assignments and External Learning</h3>
-<table>
-  <tr><th>Permission</th><th>What it grants</th></tr>
-  <tr>
-    <td><strong>Assignment Administrator</strong></td>
-    <td>Full access to <a href="#assignment-management">Assignments</a> and <a href="#external-learning">External Learning</a>. Approve/deny external learning for all users. Manage assignments and assessment assignments for any user or group.</td>
-  </tr>
-  <tr>
-    <td><strong>Assignor</strong></td>
-    <td>Access to Assignments and External Learning, but scoped to:
+<h3>Permission hierarchy at a glance</h3>
+<div class="perm-hierarchy">
+  <div class="row">
+    <span class="label">Content</span>
+    <span class="role-pill high">Content Administrator</span>
+    <span class="arrow">&rarr;</span>
+    <span class="role-pill mid">Content Publisher</span>
+    <span class="arrow">&rarr;</span>
+    <span class="role-pill low">Content Author</span>
+  </div>
+  <div class="row">
+    <span class="label">Reporting</span>
+    <span class="role-pill high">Reporting Administrator</span>
+    <span class="arrow">&rarr;</span>
+    <span class="role-pill mid">Reporting Manager</span>
+  </div>
+  <div class="row">
+    <span class="label">Assignments</span>
+    <span class="role-pill high">Assignment Administrator</span>
+    <span class="arrow">&rarr;</span>
+    <span class="role-pill mid">Assignor</span>
+  </div>
+  <div class="row">
+    <span class="label">Users</span>
+    <span class="role-pill high">Administrator</span>
+    <span style="font-size:11.5px; color:var(--c-muted); margin-left:6px;">(top-level user management)</span>
+  </div>
+</div>
+
+<h3>Assignments &amp; External Learning</h3>
+<div class="perm-grid">
+  <div class="perm-card">
+    <div class="perm-tag scope-full">Full scope</div>
+    <h4 class="perm-name">Assignment Administrator</h4>
+    <p class="perm-summary">Full access to <a href="#assignment-management">Assignments</a> and <a href="#external-learning">External Learning</a>. Manage assignments and approve/deny external learning for all users.</p>
+  </div>
+  <div class="perm-card">
+    <div class="perm-tag scope-scoped">Scoped</div>
+    <h4 class="perm-name">Assignor</h4>
+    <p class="perm-summary">Access to Assignments and External Learning, scoped to specific users.</p>
+    <details>
+      <summary>Scope details</summary>
       <ul>
         <li>Users they are the manager of</li>
         <li>Users in groups they own (or child groups, if Inherit Permissions enabled)</li>
         <li>Assessment assignments for interviewees</li>
       </ul>
-    </td>
-  </tr>
-</table>
+    </details>
+  </div>
+</div>
 
 <h3>Content Management</h3>
-<table>
-  <tr><th>Permission</th><th>What it grants</th></tr>
-  <tr>
-    <td><strong>Content Administrator</strong></td>
-    <td>Full visibility and rights to all content and metadata. Can:
+<div class="perm-grid">
+  <div class="perm-card">
+    <div class="perm-tag scope-full">Full content rights</div>
+    <h4 class="perm-name">Content Administrator</h4>
+    <p class="perm-summary">Full visibility and rights to all content, metadata, and libraries. Can create and delete libraries, share with groups, customise templates and certificates.</p>
+    <details>
+      <summary>Full capabilities</summary>
       <ul>
         <li>Create and manage all content types (Workflows, Documents, External Docs, Quizzes, Videos, Live Events, Learning Paths, Courses)</li>
         <li>Create and manage all metadata (Topics, Subtopics, Keywords, Learning Tags, Related Learning Commands)</li>
         <li>Assign all metadata to custom content</li>
         <li>Create, modify, delete <a href="#admin-libraries">libraries</a> and share with groups/users</li>
         <li>Manage Subscription Library visibility</li>
-        <li>Customize Content Templates</li>
+        <li>Customise Content Templates</li>
         <li>Delete content at any scale; restore from <a href="#content">Recycle Bin</a></li>
         <li>View Content Suggestions</li>
-        <li>Customize Company Certificate</li>
+        <li>Customise Company Certificate</li>
         <li>Modify transcripts</li>
       </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>Content Publisher</strong></td>
-    <td>Author, publish, and manage content. Visibility/rights granted by a Content Administrator. Can:
+    </details>
+  </div>
+  <div class="perm-card">
+    <div class="perm-tag scope-scoped">Per shared library</div>
+    <h4 class="perm-name">Content Publisher</h4>
+    <p class="perm-summary">Author, publish, and manage content within libraries shared with them by a Content Administrator. <strong>Cannot</strong> create, edit, or delete libraries.</p>
+    <details>
+      <summary>Capabilities</summary>
       <ul>
-        <li>Create and manage Custom Content (all types except Live Events visibility</li>
+        <li>Create and manage Custom Content (all types except Live Events visibility)</li>
         <li>Delete content at any scale within libraries shared with them; restore from Recycle Bin</li>
         <li><strong>Cannot</strong> create, edit, or delete libraries; cannot share libraries with groups/users</li>
         <li>Assign metadata to Custom Content</li>
@@ -3607,11 +3877,14 @@
         <li>View Content Suggestions and Content Changes</li>
         <li>Modify transcripts</li>
       </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>Content Author</strong></td>
-    <td>Author and manage content; narrower than Publisher. Can:
+    </details>
+  </div>
+  <div class="perm-card">
+    <div class="perm-tag scope-other">Draft only</div>
+    <h4 class="perm-name">Content Author</h4>
+    <p class="perm-summary">Author and manage draft content; narrower than Publisher. Can't publish independently.</p>
+    <details>
+      <summary>Capabilities</summary>
       <ul>
         <li>Create and manage Custom Content while not published</li>
         <li>View libraries they're shared into (no library create/delete/share)</li>
@@ -3620,16 +3893,18 @@
         <li>Assign metadata to unpublished content</li>
         <li>Modify transcripts on videos that aren't published</li>
       </ul>
-    </td>
-  </tr>
-</table>
+    </details>
+  </div>
+</div>
 
 <h3>User Administration</h3>
-<table>
-  <tr><th>Permission</th><th>What it grants</th></tr>
-  <tr>
-    <td><strong>Administrator</strong></td>
-    <td>Top-level user management. Can:
+<div class="perm-grid">
+  <div class="perm-card">
+    <div class="perm-tag scope-full">Top-level</div>
+    <h4 class="perm-name">Administrator</h4>
+    <p class="perm-summary">Top-level user management. Add/manage users, enable SSO, assign permissions, manage groups, enable KnowledgeSmart, manage External Users.</p>
+    <details>
+      <summary>Full capabilities</summary>
       <ul>
         <li>Add and manage users (manual or via Active Directory / Entra ID sync)</li>
         <li>Enable Single Sign-On</li>
@@ -3640,42 +3915,42 @@
         <li>Allow visibility of Software Downloads (Management Utility, User Tools)</li>
         <li>Create and manage <a href="#users">External Users</a></li>
       </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>Reporting Administrator</strong></td>
-    <td>View reporting in the Administration Portal and Management Utility. Provides access to all data points for all users.</td>
-  </tr>
-  <tr>
-    <td><strong>Reporting Manager</strong></td>
-    <td>View reporting in the Administration Portal. Scoped to:
+    </details>
+  </div>
+  <div class="perm-card">
+    <div class="perm-tag scope-full">All users</div>
+    <h4 class="perm-name">Reporting Administrator</h4>
+    <p class="perm-summary">View reporting in the Admin Portal and Management Utility. All data points, all users.</p>
+  </div>
+  <div class="perm-card">
+    <div class="perm-tag scope-scoped">Scoped</div>
+    <h4 class="perm-name">Reporting Manager</h4>
+    <p class="perm-summary">View reporting in the Admin Portal, scoped to users they manage.</p>
+    <details>
+      <summary>Scope details</summary>
       <ul>
         <li>Users they are the manager of</li>
         <li>Users in groups they own (or child groups)</li>
         <li>Non-user-specific Content data</li>
       </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>View Sensitive Information</strong></td>
-    <td>View user or group attributes that have been marked as sensitive data.</td>
-  </tr>
-  <tr>
-    <td><strong>Technical Support Disabled</strong></td>
-    <td>Restricts/blocks the user from using Eagle Point Software support — disables the Support button in the Web Portal.</td>
-  </tr>
-  <tr>
-    <td><strong>Manage Portal Branding and Customization</strong></td>
-    <td>Access the <a href="#theme">Branding &amp; Customization</a> area; customize logo, colors, theme, and platform layout.</td>
-  </tr>
-</table>
-
-<h3>Permission hierarchy at a glance</h3>
-<ul>
-  <li><strong>Content Administrator</strong> &gt; Content Publisher &gt; Content Author</li>
-  <li><strong>Reporting Administrator</strong> (all users) &gt; <strong>Reporting Manager</strong> (managed users / owned groups)</li>
-  <li><strong>Administrator</strong> is the top-level user-management permission</li>
-</ul>
+    </details>
+  </div>
+  <div class="perm-card">
+    <div class="perm-tag scope-other">Specific scope</div>
+    <h4 class="perm-name">View Sensitive Information</h4>
+    <p class="perm-summary">View user or group attributes that have been marked as sensitive data.</p>
+  </div>
+  <div class="perm-card">
+    <div class="perm-tag scope-other">Restriction</div>
+    <h4 class="perm-name">Technical Support Disabled</h4>
+    <p class="perm-summary">Blocks the user from using Eagle Point Support &mdash; disables the Support button in the Web Portal.</p>
+  </div>
+  <div class="perm-card">
+    <div class="perm-tag scope-other">Branding</div>
+    <h4 class="perm-name">Manage Portal Branding &amp; Customisation</h4>
+    <p class="perm-summary">Access the <a href="#theme">Branding &amp; Customisation</a> area; customise logo, colours, theme, and platform layout.</p>
+  </div>
+</div>
 
 <div class="callout warn">
   <strong>Out of scope for Peak:</strong> The legacy <em>Work Group Management</em> permissions (Administer Work Groups / Create Work Groups / Invite External Users into Work Groups) are <strong>Classic-only</strong>. They appear in older permissions documentation but apply only to tenants on Classic.
