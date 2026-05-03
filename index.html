@@ -53,13 +53,17 @@
     height: 100vh;
     background: var(--c-sidebar-bg);
     color: var(--c-sidebar-text);
-    overflow-y: auto;
     border-right: 1px solid #0f1620;
     z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
   .sidebar-header {
     padding: 22px 22px 16px;
     border-bottom: 1px solid #1c3142;
+    flex-shrink: 0;
+    background: var(--c-sidebar-bg);
   }
   .sidebar-header .logo-row {
     display: flex;
@@ -99,7 +103,10 @@
     margin-top: 10px;
   }
   .sidebar-search {
-    padding: 14px 18px 8px;
+    padding: 14px 18px 12px;
+    flex-shrink: 0;
+    background: var(--c-sidebar-bg);
+    border-bottom: 1px solid #1c3142;
   }
   .sidebar-search input {
     width: 100%;
@@ -113,7 +120,7 @@
   }
   .sidebar-search input::placeholder { color: #7c8a98; }
   .sidebar-search input:focus { border-color: var(--c-accent); }
-  .sidebar nav { padding: 8px 0 40px; }
+  .sidebar nav { padding: 8px 0 40px; flex: 1; overflow-y: auto; min-height: 0; }
   .sidebar nav .group-title {
     font-size: 11px;
     font-weight: 600;
@@ -4229,12 +4236,216 @@
     return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  /* ============== Local TF-IDF fallback answer ============== */
+  /* ============== Curated Q&A library (50+ entries) ============== */
+  /* Each entry has: q (canonical question), kw (extra keyword tokens for fuzzy match),
+     a (HTML answer), src (wiki section id for "Jump to section" link). */
+  const QA_LIBRARY = [
+    // --- Sign-in / Authentication ---
+    { q: "how do I sign in to Pinnacle Series", kw: ["signin", "login", "log", "auth"], src: "sign-in",
+      a: "Pinnacle Series uses an <strong>email-first 2-step sign-in</strong>. Enter your email on the first screen, click <strong>Continue</strong>, and the page updates: password users see a Password field; SSO users get redirected to their Identity Provider." },
+    { q: "where do I configure SSO", kw: ["sso", "single sign on", "saml", "okta", "entra", "azure ad"], src: "security-auth",
+      a: "Admin Portal &rarr; <strong>Security &amp; Authentication</strong> (top-level item, NOT under Settings). Then scroll to the Single Sign-On Authentication section. Requires the <a href='#permissions'>Administrator</a> permission." },
+    { q: "how do I exclude a user from SSO", kw: ["exclude", "bypass", "sso", "password"], src: "sign-in",
+      a: "Admin Portal &rarr; Users &rarr; Edit User Details &rarr; <strong>User Settings</strong> &rarr; toggle <strong>Exclude User from SSO</strong> ON. That user will sign in with a password even if their tenant has SSO." },
+    { q: "what is Naviate", kw: ["naviate", "symetri", "spelled"], src: "sign-in",
+      a: "<strong>Naviate is NOT a typo of \"Navigate.\"</strong> Naviate is a named customer (a Symetri subsidiary) for whom Eagle Point built a custom SSO integration via My.Symetri.com. Naviate users authenticate there, not the Pinnacle password field." },
+    { q: "what if a user can't sign in", kw: ["cant", "trouble", "issue", "problem", "fail", "broken"], src: "sign-in",
+      a: "Check three things: (1) Is the tenant on SSO and is the user excluded? (2) Is browser cache caching a stale default tenant? Try a private window. (3) For Naviate users, are they signed into My.Symetri.com first?" },
+
+    // --- Peak vs Classic ---
+    { q: "what is the difference between Peak and Classic", kw: ["peak", "classic", "experience", "ui"], src: "peak-vs-classic",
+      a: "<strong>Peak Experience</strong> is the modern UI &mdash; default for new tenants, foundation for all new feature work. <strong>Classic</strong> is the legacy UI; some tenants are still on it mid-migration. All roadmap targets Peak." },
+    { q: "how do I enable Peak Experience", kw: ["enable", "turn on", "switch", "peak"], src: "peak-vs-classic",
+      a: "Admin Portal &rarr; Settings &rarr; General &rarr; <strong>Peak Experience</strong>. There are <strong>two independent toggles</strong>: <em>Peak Experience Configuration</em> (admin UI) and <em>Peak Experience for End Users</em> (Home page). Configure admin first; flip end-user when ready." },
+    { q: "why are there two Peak toggles", kw: ["two", "toggles", "split", "admin", "end user"], src: "peak-vs-classic",
+      a: "The split lets a tenant configure Peak in the admin portal first (at their own pace) before flipping the end-user experience. Stages the rollout so admins are ready to support users on Peak." },
+    { q: "what is not yet in Peak", kw: ["missing", "not yet", "still classic", "live events", "work groups"], src: "peak-vs-classic",
+      a: "<strong>Live Events</strong> (in development), <strong>Work Groups</strong> (still in dev; Work Group Management permissions are Classic-only), and <strong>document conversion for search/translation</strong> (converting external docs into Pinnacle Documents)." },
+
+    // --- Permissions ---
+    { q: "what permissions do I need to publish content", kw: ["publish", "publisher", "content"], src: "permissions",
+      a: "<strong>Content Administrator</strong> (full) or <strong>Content Publisher</strong> (limited to libraries shared with the publisher). A Content Author can create content but cannot publish independently." },
+    { q: "what permissions do I need to add users", kw: ["add", "create", "user", "users"], src: "permissions",
+      a: "<strong>Administrator</strong> (under User Administration). Grants the ability to add users manually, import them via spreadsheet, sync from Entra ID / Active Directory, and assign them to groups." },
+    { q: "what permissions do I need to view reports", kw: ["report", "reports", "reporting", "view"], src: "permissions",
+      a: "<strong>Reporting Administrator</strong> for all users, or <strong>Reporting Manager</strong> for users they manage / groups they own. (Older docs may call this \"View Reports\" &mdash; that name has been renamed.)" },
+    { q: "what is the difference between Content Administrator and Content Publisher", kw: ["admin", "publisher", "library"], src: "permissions",
+      a: "<strong>Content Administrator</strong> can create, modify, delete <em>libraries</em> and share them. <strong>Content Publisher</strong> can author/publish content within libraries shared with them, but cannot create or share libraries themselves." },
+    { q: "what is an Assignor", kw: ["assignor", "scope", "scoped"], src: "permissions",
+      a: "Scoped version of <a href='#permissions'>Assignment Administrator</a>. Can assign and track for users they manage and groups they own (or child groups, with Inherit Permissions enabled), plus assessment assignments for interviewees." },
+    { q: "how do permissions get inherited", kw: ["inherit", "group", "inherited"], src: "permissions",
+      a: "Each user has an <strong>Inherit Permissions</strong> toggle on their record. When ON, the user inherits permissions included in the group(s) they belong to. When OFF, only per-user permissions apply." },
+    { q: "what does Reporting Manager see", kw: ["reporting", "manager", "scope"], src: "permissions",
+      a: "Reporting in the Admin Portal scoped to: users they manage, users in groups they own (or child groups), plus non-user-specific Content data. Reporting Administrator (no scope) sees all users." },
+    { q: "who can change tenant branding", kw: ["brand", "branding", "theme", "logo", "colors"], src: "permissions",
+      a: "<strong>Manage Portal Branding and Customization</strong> permission. Grants access to the <a href='#theme'>Branding &amp; Customization</a> area to customise logo, colours, theme, and platform layout." },
+    { q: "what is Inherit Permissions", kw: ["inherit", "toggle", "permissions"], src: "permissions",
+      a: "A toggle on the user record. When ON, the user inherits permissions from their group(s). When OFF, only per-user permissions apply. Located on the user's edit page." },
+
+    // --- Content / Library ---
+    { q: "where is the Recycle Bin", kw: ["recycle", "trash", "deleted", "restore"], src: "content",
+      a: "Admin Portal &rarr; Content &rarr; <strong>Tools Menu</strong> (kebab icon on the toolbar) &rarr; <strong>Recycle Bin</strong>. It is <em>not</em> a left-nav item." },
+    { q: "what is the difference between Subscription and Custom libraries", kw: ["subscription", "custom", "library", "libraries"], src: "admin-libraries",
+      a: "<strong>Subscription Libraries</strong> are Eagle Point-provided content. <strong>Custom Libraries</strong> are created by the customer using their own content. Both can be flagged Featured." },
+    { q: "how do I create a Featured library", kw: ["featured", "feature", "library"], src: "admin-libraries",
+      a: "Admin Portal &rarr; Libraries &rarr; flag a library as <strong>Featured</strong>. Featured libraries appear in their own carousel above the regular Libraries section on the end-user Home page." },
+    { q: "how do I bulk modify content", kw: ["bulk", "modify", "edit", "many"], src: "content",
+      a: "Admin Portal &rarr; Content area &rarr; select items via checkboxes &rarr; <strong>Bulk Modify</strong>. You can update keywords, tags, topics across multiple items at once." },
+    { q: "what is Search and Replace", kw: ["search", "replace", "find"], src: "content",
+      a: "Global find/replace across content items in libraries the admin manages. Supports <strong>preview before applying</strong>. Available in the Content area Tools Menu." },
+    { q: "how do I share a library with a group", kw: ["share", "library", "group"], src: "admin-libraries",
+      a: "Admin Portal &rarr; Libraries &rarr; select library &rarr; <strong>Share</strong>. Add groups or specific users. Requires <a href='#permissions'>Content Administrator</a>." },
+    { q: "how do I copy from a Subscription library", kw: ["copy", "duplicate", "subscription"], src: "admin-libraries",
+      a: "<strong>Copy from Subscription</strong> action duplicates content from a Subscription library into your own custom library, where you can modify it. Original Subscription content stays untouched." },
+
+    // --- Assignments / Auto-Assignments ---
+    { q: "how do I assign content", kw: ["assign", "assignment", "give"], src: "assignment-management",
+      a: "Admin Portal &rarr; Assignments &rarr; click green <strong>Assign New</strong> &rarr; choose Content or Assessment. Pick what to assign, who to assign to, set due date, and click Assign." },
+    { q: "how do I set up auto-assignments", kw: ["auto", "auto-assign", "auto-assignment", "automatic"], src: "assignment-management",
+      a: "Admin Portal &rarr; Auto-Assignments &rarr; <strong>Create New Auto-Assignment</strong>. Pick trigger (Content or Assessment), target group(s), and (for assessments) define training thresholds." },
+    { q: "what are training thresholds", kw: ["threshold", "thresholds", "score"], src: "assignment-management",
+      a: "Score boundaries that decide whether a user gets full, partial, or no training. Example: users scoring &lt;30% on the assessment get the full path; users &gt;80% are excluded." },
+    { q: "how do I exclude users who already completed", kw: ["exclude", "completed", "prior"], src: "assignment-management",
+      a: "In the Assign New flow, set <strong>exclusion rules</strong> to skip users who completed prior versions. Available for both content and assessment assignments." },
+    { q: "can I re-enroll a user", kw: ["re-enroll", "reenroll", "again"], src: "assignment-management",
+      a: "Yes. From Assignment Management, use the <strong>kebab menu</strong> on the row &rarr; <strong>Re-Enroll</strong>. Useful after content updates or for re-certification cycles." },
+
+    // --- Users / Groups ---
+    { q: "how do I add users", kw: ["add user", "new user", "create user"], src: "users",
+      a: "Admin Portal &rarr; Users &rarr; click <strong>Add User</strong>. Three options: Manual (Full Name + Email), Import from Spreadsheet, or Sync with Active Directory / Entra ID." },
+    { q: "how do I import users from spreadsheet", kw: ["import", "spreadsheet", "csv", "bulk"], src: "users",
+      a: "Admin Portal &rarr; Users &rarr; Add User &rarr; <strong>Import from Spreadsheet</strong>. Browse Files &rarr; Import Options &rarr; Map fields (Display Name and Email required) &rarr; Preview &rarr; Process." },
+    { q: "what are External Users", kw: ["external", "vendor", "contractor", "partner"], src: "users",
+      a: "User accounts for people outside your organization (vendors, contractors, project partners). Have scoped access to libraries shared with them. <strong>Do not count against your standard user license.</strong>" },
+    { q: "how do I sync from Active Directory", kw: ["ad", "active directory", "entra", "azure", "sync"], src: "integrations",
+      a: "Admin Portal &rarr; Integrations &rarr; configure either On-Premises Active Directory (via Management Utility) or Microsoft Entra ID. Three mutually-exclusive options: Do Not Sync / On-Prem AD / Entra ID." },
+    { q: "what is a Group Owner", kw: ["group owner", "owner"], src: "groups",
+      a: "A user designated as the owner of a group. Can manage the group's membership and (in future releases) assign content directly to group members." },
+
+    // --- SPARK ---
+    { q: "what is SPARK", kw: ["spark", "nano", "short videos"], src: "spark",
+      a: "Personalised <strong>nano-learning feed</strong> &mdash; short videos (under 5 min) curated from libraries the user can access, prioritised by user interests, group focus areas, and Hero Products. Designed for 1&ndash;2 SPARKs/day." },
+    { q: "how do I enable SPARK", kw: ["enable spark", "turn on spark"], src: "spark",
+      a: "<strong>Per group.</strong> Admin Portal &rarr; Groups &rarr; select group &rarr; Edit Group &rarr; SPARK toggle (top right) &rarr; Enable. Define User Interests first under Settings &rarr; Users &rarr; User Interests." },
+    { q: "why doesn't a user see SPARK", kw: ["cant see", "missing spark", "no spark"], src: "spark",
+      a: "Two checks: (1) Is the user in a group with SPARK toggled ON? (2) If the group has no relevant libraries shared, the SPARK feed will appear empty even if enabled. See Admin Portal &rarr; Groups &rarr; Edit Group." },
+    { q: "how does SPARK pick content", kw: ["spark pick", "spark match", "algorithm"], src: "spark",
+      a: "Weighted match across three signals: <strong>(1) User preferences</strong> (highest), <strong>(2) Group interests</strong>, <strong>(3) Hero Products</strong>. Match conditions: not viewed in 90 days, under 5 min, phrase appears in Title/Description/Keywords/Topics/Chapters/Transcript." },
+
+    // --- AI Chat ---
+    { q: "what is AI Chat", kw: ["ai chat", "chat", "ai", "assistant"], src: "ai-chat",
+      a: "Context-aware natural-language chat that helps users find answers and content within Pinnacle Series. Built on Microsoft Azure OpenAI (GPT-3.5 Turbo) with <strong>Retrieval-Augmented Generation (RAG)</strong> grounded in the customer's own content." },
+    { q: "does AI Chat use customer data to train the model", kw: ["train", "training", "data", "privacy"], src: "ai-chat",
+      a: "<strong>No.</strong> Microsoft Azure OpenAI does not use customer data to train or improve the model. Inputs and outputs are not retained. Customer data is isolated from Microsoft and OpenAI." },
+    { q: "who can use AI Chat", kw: ["use ai", "access ai chat"], src: "ai-chat",
+      a: "Any user in a tenant where AI Chat is enabled. <strong>No per-user permission</strong> is required &mdash; once toggled on tenant-wide, it's available to all users." },
+    { q: "how do I enable AI Chat for a tenant", kw: ["enable ai", "turn on ai"], src: "ai-chat",
+      a: "Admin Portal &rarr; Settings &rarr; General &rarr; AI Chat toggle. Requires <a href='#permissions'>Administrator</a> permission. Once on, AI Chat is available to all users in the tenant." },
+
+    // --- Reports ---
+    { q: "what are the reporting pillars", kw: ["pillar", "pillars", "report types"], src: "reports",
+      a: "Five pillars in Peak Reporting: <strong>User Management</strong>, <strong>Usage</strong>, <strong>Learning</strong>, <strong>Assessment</strong>, <strong>Content</strong>. Each answers a different category of question (engagement, content access, learning progress, competency, governance)." },
+    { q: "when did Peak Reporting launch", kw: ["launch", "released", "new reports"], src: "reports",
+      a: "<strong>August 2025.</strong> Browser-based reporting suite that replaces the older Management Utility-based reporting for most use cases. Adds saved views, scheduled alerts, Power BI export." },
+    { q: "what is the difference between Reporting Administrator and Reporting Manager", kw: ["reporting admin", "reporting manager", "reporting scope"], src: "permissions",
+      a: "<strong>Reporting Administrator</strong>: full reporting access for all users. <strong>Reporting Manager</strong>: scoped to users they manage / groups they own, plus non-user-specific Content data. Both view in the Admin Portal." },
+
+    // --- KnowledgeSmart ---
+    { q: "what is KnowledgeSmart", kw: ["knowledgesmart", "ks", "assessment", "skill"], src: "ks-admin",
+      a: "Eagle Point's <strong>skill assessment product</strong>, integrated with Pinnacle Series. Assessment results can drive personalised learning paths via Learning Tags that map outcomes to content." },
+    { q: "who can manage KnowledgeSmart", kw: ["manage ks", "ks admin"], src: "ks-admin",
+      a: "<strong>KnowledgeSmart Administrator</strong> &mdash; a separate role configured in the KnowledgeSmart Admin Dashboard, NOT in Pinnacle Series. A user with full Pinnacle admin rights can still see \"You do not have permission to log in to KnowledgeSmart\" if their KS role isn't set up." },
+
+    // --- SCORM Export ---
+    { q: "what is SCORM Export", kw: ["scorm", "export", "lms"], src: "scorm-export",
+      a: "Package selected Pinnacle Series learning content into <strong>SCORM files</strong> for upload to your own LMS (Cornerstone, Workday Learning, etc.). Learners launch from inside the external LMS; progress reports back to Pinnacle Series." },
+    { q: "what does a learner need to consume an exported SCORM", kw: ["scorm", "learner", "requirements"], src: "scorm-export",
+      a: "Four conditions, all true at launch time: (1) Active Pinnacle account in the <strong>same tenant</strong> the package was exported from; (2) email matches between the external LMS and Pinnacle; (3) the learner still has access to the underlying content; (4) tenant subscription is active." },
+    { q: "can a non-tenant user consume our SCORM package", kw: ["external", "vendor", "non-tenant", "scorm"], src: "scorm-export",
+      a: "<strong>No.</strong> The SCORM package is bound to the issuing tenant. Each learner must have an active Pinnacle Series account in <em>that same tenant</em>. Vendors or partners not in your tenant can't consume the package." },
+
+    // --- Misc ---
+    { q: "where do users download Pinnacle User Tools", kw: ["download", "tools", "user tools", "management utility"], src: "my-account",
+      a: "Top-right user avatar &rarr; <strong>Profile &amp; Settings</strong> &rarr; <strong>Account Info</strong> tab &rarr; <strong>Download Add-Ons</strong> section. Lists both <strong>Pinnacle Management Utility</strong> and <strong>Pinnacle User Tools</strong>. Visibility controlled by Administrator permission." },
+    { q: "what is a Tenant", kw: ["tenant", "instance"], src: "glossary",
+      a: "A customer's instance of Pinnacle Series. Tenant-level settings (Peak toggles, SSO config, branding) apply to all users in that tenant. Users can belong to multiple tenants and switch between them via the avatar menu." },
+    { q: "what is the MANAGEMENT section in the left nav", kw: ["management", "section", "left nav", "admin portal"], src: "home",
+      a: "The MANAGEMENT section appears in the end-user Home left nav <em>only</em> if the user has any admin-tier permission. It contains the <strong>Administration Portal</strong> link. Expanded by default on every fresh load." },
+    { q: "how do I edit my username", kw: ["username", "name", "display name"], src: "my-account",
+      a: "My Account page &rarr; click the <strong>pencil icon</strong> next to the username at the top &rarr; Edit Username modal opens. Free-text field. The Username drives the \"Welcome, [Username]\" heading on Home." },
+    { q: "how do I bookmark content", kw: ["bookmark", "save"], src: "bookmarks",
+      a: "Each content item has an <strong>Add to Bookmarks</strong> action in its detail view or kebab menu. Bookmarks persist across sessions and devices for that user; viewable at Home &rarr; left nav &rarr; Bookmarks." },
+    { q: "how does language translation work", kw: ["language", "translate", "translation", "languages"], src: "my-account",
+      a: "Pinnacle Series supports <strong>130+ languages</strong> with auto-translated asset titles, descriptions, and transcripts. Set your preferred language in My Account &rarr; Account Info &rarr; Language." },
+    { q: "where is Submit External Learning", kw: ["external learning", "submit", "self-report"], src: "my-account",
+      a: "Top-right user avatar dropdown &mdash; <strong>only appears</strong> when the tenant has \"Allow Users to Submit External Learning\" toggled ON in Admin Portal &rarr; Settings &rarr; General. If the toggle is off, the menu item is absent for everyone." },
+  ];
+
+  /* ============== Fuzzy match against Q&A library ============== */
+  function tokenizeQuery(s) {
+    return (s.toLowerCase().match(/[a-z][a-z0-9'-]+/g) || []).filter(t => !STOPWORDS.has(t));
+  }
+
+  function scoreQA(entry, qTokens, qRaw) {
+    const qaQ = entry.q.toLowerCase();
+    const allKw = new Set([
+      ...tokenizeQuery(entry.q),
+      ...(entry.kw || []).map(k => k.toLowerCase())
+    ]);
+    let score = 0;
+    for (const t of qTokens) {
+      if (allKw.has(t)) { score += 3; continue; }
+      // Substring fuzzy: catches "perm" -> "permission", "config" -> "configure", etc.
+      let fuzzy = false;
+      for (const kw of allKw) {
+        if (kw.length >= 4 && t.length >= 3 && (kw.includes(t) || t.includes(kw))) {
+          score += 1.5; fuzzy = true; break;
+        }
+      }
+      if (fuzzy) continue;
+    }
+    // Bigram bonus: adjacent query terms appearing in the canonical question
+    if (qTokens.length >= 2) {
+      for (let i = 0; i < qTokens.length - 1; i++) {
+        const bi = qTokens[i] + ' ' + qTokens[i + 1];
+        if (qaQ.includes(bi)) score += 2;
+      }
+    }
+    // Direct phrase match in the canonical question text
+    if (qRaw.length >= 8 && qaQ.includes(qRaw)) score += 4;
+    return score;
+  }
+
+  function findBestQA(query) {
+    const tokens = tokenizeQuery(query);
+    if (tokens.length === 0) return null;
+    const qLower = query.toLowerCase().trim();
+    let best = null, bestScore = 0;
+    for (const entry of QA_LIBRARY) {
+      const s = scoreQA(entry, tokens, qLower);
+      if (s > bestScore) { bestScore = s; best = entry; }
+    }
+    // Confidence threshold: at least one strong match (3 pts) or two fuzzy matches
+    return bestScore >= 3 ? { entry: best, score: bestScore } : null;
+  }
+
+  /* ============== Local fallback answer (Q&A library, then TF-IDF) ============== */
   function localAnswer(query) {
+    // Try canned Q&A library first
+    const match = findBestQA(query);
+    if (match) {
+      let html = '';
+      const doc = wikiIndex.find(d => d.id === match.entry.src);
+      if (doc) html += '<div class="src-title">' + escapeHtml(doc.title) + '</div>';
+      html += '<div>' + match.entry.a + '</div>';
+      if (doc) html += '<a class="jump" href="#' + match.entry.src + '">Jump to section &rarr;</a>';
+      return html;
+    }
+    // Fall back to TF-IDF wiki search
     const qTokens = (query.toLowerCase().match(/[a-z][a-z0-9'-]+/g) || []).filter(t => !STOPWORDS.has(t));
     const hits = searchWiki(query, 2);
     if (!hits.length) {
-      return "I couldn't find anything in the wiki about that. Try keywords like <em>permissions</em>, <em>SSO</em>, <em>libraries</em>, <em>auto-assign</em>, or <em>Peak</em>.";
+      return "I couldn't find anything in the wiki about that. Try keywords like <em>permissions</em>, <em>SSO</em>, <em>libraries</em>, <em>auto-assign</em>, <em>SPARK</em>, or <em>Peak vs Classic</em>.";
     }
     let html = '';
     hits.forEach((h, i) => {
