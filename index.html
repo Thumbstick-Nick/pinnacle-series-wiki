@@ -2636,12 +2636,12 @@
   <code>https://portal.pinnacleseries.com/</code> (or tenant-specific URL)
 </div>
 
-<h3>Sign-in page hero layout</h3>
-<p>The sign-in page is a wide hero, not a centered form. When no tenant is cached in local storage, users see:</p>
+<h3>Sign-in page layout</h3>
+<p>The sign-in page is a full-width banner layout, not a small centered form. When no tenant is cached in local storage, users see:</p>
 <ul>
   <li><strong>Top-left:</strong> small Pinnacle Series wing/swoop logo.</li>
   <li><strong>Top-center:</strong> "Need help?" link → Contact Support.</li>
-  <li><strong>Hero text (large, center):</strong> <code>PINNACLE SERIES — APPLIED LEARNING SOLUTIONS</code>.</li>
+  <li><strong>Large text down the center:</strong> <code>PINNACLE SERIES — APPLIED LEARNING SOLUTIONS</code>.</li>
   <li><strong>Sign In form (left column):</strong> "Sign In" heading, Email field (required), <em>Set Your Language</em> with default <strong>Language: English</strong>, green <strong>Continue</strong> button.</li>
   <li><strong>Right column:</strong> stylized AECO worker imagery with brand color blocks (yellow + Pinnacle blue).</li>
   <li><strong>Bottom tagline (large):</strong> <code>BUILD SKILLS. APPLY FAST. DELIVER RESULTS.</code></li>
@@ -2659,8 +2659,8 @@
 </ol>
 
 <figure class="screenshot">
-  <img src="screenshots/web/shot_001.jpg" alt="Sign-in page (step 1) — Email field, Set Your Language selector, and green Continue button. The hero shows the "Pinnacle Series — Applied Learning Solutions" branding." loading="lazy">
-  <figcaption>Sign-in page (step 1) — Email field, Set Your Language selector, and green Continue button. The hero shows the "Pinnacle Series — Applied Learning Solutions" branding.</figcaption>
+  <img src="screenshots/web/shot_001.jpg" alt="Sign-in page (step 1) — Email field, Set Your Language selector, and green Continue button. The banner across the page shows the "Pinnacle Series — Applied Learning Solutions" branding." loading="lazy">
+  <figcaption>Sign-in page (step 1) — Email field, Set Your Language selector, and green Continue button. The banner across the page shows the "Pinnacle Series — Applied Learning Solutions" branding.</figcaption>
 </figure>
 
 <div class="callout">
@@ -2748,8 +2748,8 @@
 <h2>Home Page (End User)</h2>
 
 <figure class="screenshot">
-  <img src="screenshots/web/shot_004.jpg" alt="End-user Home page — left nav (Home, Assignments, Libraries, Bookmarks, MANAGEMENT), top bar with Search All Content / AI Chat / notification bell / avatar, and the Assignments + Libraries carousels." loading="lazy">
-  <figcaption>End-user Home page — left nav (Home, Assignments, Libraries, Bookmarks, MANAGEMENT), top bar with Search All Content / AI Chat / notification bell / avatar, and the Assignments + Libraries carousels.</figcaption>
+  <img src="screenshots/web/shot_004.jpg" alt="End-user Home page — left nav (Home, Assignments, Libraries, Bookmarks, MANAGEMENT), top bar with Search All Content / AI Chat / notification bell / avatar, and the Assignments + Libraries scrolling rows." loading="lazy">
+  <figcaption>End-user Home page — left nav (Home, Assignments, Libraries, Bookmarks, MANAGEMENT), top bar with Search All Content / AI Chat / notification bell / avatar, and the Assignments + Libraries scrolling rows.</figcaption>
 </figure>
 
 <div class="where">
@@ -2778,7 +2778,7 @@
   <li><strong>Assignments</strong> section — the user's currently assigned content.</li>
   <li><strong>SPARK</strong> section (if SPARK is enabled for the user's group) — header reads "SPARK — AI-powered learning bursts" with an "Up Next" panel and a playlist of short video cards.</li>
   <li><strong>Featured Libraries</strong> — appears <em>only</em> if at least one library is flagged as Featured in Admin Portal → Libraries. Absent entirely otherwise.</li>
-  <li><strong>Libraries</strong> — always present. The non-featured carousel of all libraries shared with the user.</li>
+  <li><strong>Libraries</strong> — always present. A scrolling row of all libraries shared with the user (non-featured).</li>
 </ul>
 
 <h3>Top bar (right-aligned, in a fully-featured tenant)</h3>
@@ -2787,14 +2787,14 @@
   <li><strong>AI Chat</strong> button — only when the tenant has <code>Allow Users to Access AI Chat (Preview)</code> enabled.</li>
   <li><strong>Submit External Learning</strong> button — only when the tenant has <code>Allow Users to Submit External Learning</code> enabled. <em>Surfaced as both a top-bar button AND an avatar-dropdown item.</em></li>
   <li><strong>Notification bell</strong> — surfaces SPARK notifications, enrollment-due reminders, and Entra ID Sync alerts. Badge count when unread.</li>
-  <li><strong>User avatar</strong> → dropdown opens with <strong>Profile &amp; Settings</strong>, <strong>Switch Tenant</strong> (when multi-tenant access), and <strong>Sign Out</strong>. Plus conditional <strong>Submit External Learning</strong> (when the tenant toggle is on).</li>
+  <li><strong>User avatar</strong> → dropdown opens with <strong>Profile &amp; Settings</strong>, <strong>Switch Tenant</strong> (only shown if the user has access to more than one tenant), and <strong>Sign Out</strong>. Plus conditional <strong>Submit External Learning</strong> (when the tenant toggle is on).</li>
 </ol>
 
 <h3>The Welcome heading</h3>
 <p>The Home page heading reads <code>Welcome, [Username]</code> — <strong>always</strong> the user's editable Username, never a tenant name. The Username is freely editable on My Account, so it can look like a real name, a company name, or anything else. Don't write tests or copy that assume tenant-name behavior — it doesn't exist.</p>
 
-<h3>Per-tile kebab menu (Home Assignments carousel)</h3>
-<p>Each tile on the Home Assignments carousel has a kebab (3-dot) at top-right. The Home tile kebab is <strong>broader</strong> than the kebab on the dedicated Assignments page — end users can self-mark courses complete and change their own due dates from here:</p>
+<h3>Per-tile kebab menu (Home Assignments scrolling row)</h3>
+<p>Each tile in the Home Assignments scrolling row has a <strong>kebab</strong> at the top-right — that's the three-vertical-dot icon many web apps use to open a per-row menu. The Home tile kebab is <strong>broader</strong> than the kebab on the dedicated Assignments page — end users can self-mark courses complete and change their own due dates from here:</p>
 <ul>
   <li><strong>Resume</strong> (play icon) — only when the course is in progress.</li>
   <li><strong>View</strong> (eye icon).</li>
@@ -2818,7 +2818,7 @@
 <p>The end-user Assignments page shows the user's currently assigned learning content with strong visual markers for due dates, progress, and completion status.</p>
 
 <div class="callout">
-  <strong>Two kebab surfaces, different actions.</strong> The kebab on the dedicated Assignments page is narrower than the kebab on the Home Assignments carousel. The <a href="#home">Home tile kebab</a> exposes self-service actions like <em>Mark as Completed</em>, <em>Change Due Date</em>, <em>Drop Course</em>, and <em>Drop Learning Path</em> &mdash; the Assignments-page kebab is for view/details actions. If end users say "I can't find Mark Completed on Assignments", point them at the Home tile.
+  <strong>Two kebab surfaces, different actions.</strong> The kebab on the dedicated Assignments page is narrower than the kebab on the Home Assignments scrolling row. The <a href="#home">Home tile kebab</a> exposes self-service actions like <em>Mark as Completed</em>, <em>Change Due Date</em>, <em>Drop Course</em>, and <em>Drop Learning Path</em> &mdash; the Assignments-page kebab is for view/details actions. If end users say "I can't find Mark Completed on Assignments", point them at the Home tile.
 </div>
 
 
@@ -3020,7 +3020,7 @@
 
 <h3>Dedicated SPARK page</h3>
 <ul>
-  <li><strong>Hero tagline:</strong> &#9889; <em>Light The Fuse &mdash; Your Next Idea Starts With A SPARK</em></li>
+  <li><strong>Page tagline (top of page):</strong> &#9889; <em>Light The Fuse &mdash; Your Next Idea Starts With A SPARK</em></li>
   <li><strong>Subtitle:</strong> "Quick, curated bursts of insight to keep your mind sharp and your ideas flowing."</li>
   <li><strong>Top-right:</strong> <strong>Edit Preferences</strong> button.</li>
   <li><strong>Center pane:</strong> video player with controls including an inline <strong>bookmark icon</strong> (bookmark while watching), captions toggle, fullscreen, settings, volume, and timestamp.</li>
@@ -3074,8 +3074,8 @@
 </div>
 
 <figure class="screenshot">
-  <img src="screenshots/web/shot_256.jpg" alt='SPARK dedicated page — hero "Light The Fuse — Your Next Idea Starts With A SPARK". Center: video player with standard controls plus an inline bookmark icon. Right: "Up Next..." playlist (toggleable to a Transcripts view with auto-scrolling). Top-right: Edit Preferences button.' loading="lazy">
-  <figcaption>SPARK dedicated page &mdash; hero "Light The Fuse &mdash; Your Next Idea Starts With A SPARK". Center: video player with standard controls plus an inline bookmark icon. Right: "Up Next..." playlist (toggleable to a Transcripts view with auto-scrolling). Top-right: Edit Preferences button.</figcaption>
+  <img src="screenshots/web/shot_256.jpg" alt='SPARK dedicated page — the banner reads "Light The Fuse — Your Next Idea Starts With A SPARK". Center: video player with standard controls plus an inline bookmark icon. Right: "Up Next..." playlist (toggleable to a Transcripts view with auto-scrolling). Top-right: Edit Preferences button.' loading="lazy">
+  <figcaption>SPARK dedicated page &mdash; the banner reads "Light The Fuse &mdash; Your Next Idea Starts With A SPARK". Center: video player with standard controls plus an inline bookmark icon. Right: "Up Next..." playlist (toggleable to a Transcripts view with auto-scrolling). Top-right: Edit Preferences button.</figcaption>
 </figure>
 
 <figure class="screenshot">
@@ -3169,7 +3169,7 @@
 <ul>
   <li><strong>Profile &amp; Settings</strong> — always shown. Opens the My Account page.</li>
   <li><strong>Submit External Learning</strong> — <em>conditionally shown.</em> Only appears when the tenant has <strong>"Allow Users to Submit External Learning"</strong> toggled on at <a href="#settings">Admin Portal → Settings → General</a>. If the toggle is off, this menu item is absent for every end user in the tenant.</li>
-  <li><strong>Switch Tenant</strong> — shown for users who have access to more than one tenant.</li>
+  <li><strong>Switch Tenant</strong> — shown only when the signed-in user has access to more than one Pinnacle tenant.</li>
   <li><strong>Sign Out</strong> — always shown.</li>
 </ul>
 
@@ -3193,7 +3193,7 @@
 
 <h3>Account Info user-profile header</h3>
 <ul>
-  <li><strong>Avatar</strong> with edit pencil overlay for upload/change.</li>
+  <li><strong>Avatar</strong> with a small edit-pencil icon for uploading or changing the picture.</li>
   <li><strong>Username</strong> displayed prominently with an inline edit pencil → opens the Edit Username modal.</li>
   <li><strong>Email</strong> displayed below the Username.</li>
   <li><strong>Display/full name</strong> on a secondary line below the email — distinct from the Username and sourced from the user record.</li>
@@ -3259,7 +3259,7 @@
 <p>The Administration Portal is the admin-side UI for Pinnacle Series. It's where users with admin-tier permissions manage content, users, groups, libraries, settings, and reports.</p>
 
 <h3>Accessing the Admin Portal</h3>
-<p><strong>Page header:</strong> "Admin Home". <strong>Hero:</strong> "Welcome to the Administration Portal" with a pastel mountain/cloud illustration. <strong>Body text (verbatim):</strong></p>
+<p><strong>Page header:</strong> "Admin Home". <strong>Page banner:</strong> "Welcome to the Administration Portal" with a pastel mountain/cloud illustration. <strong>Body text (verbatim):</strong></p>
 <blockquote style="border-left:3px solid var(--c-accent); padding:8px 16px; margin:12px 0; color:var(--c-text); font-style:italic; background:#f4f9fd;">
 "Welcome to your Administration Portal! Your available tools and features are tailored to your permissions, ensuring you see exactly what you need. Here, you can customize the application, manage users and permissions, create and publish content, assign learning and assessments, and deep dive into reporting. Jump in and make the experience your own!"
 </blockquote>
@@ -3532,7 +3532,7 @@
 <h3>Library Details page</h3>
 <p>Click into a library to open <strong>Library Details</strong>. Breadcrumb: <code>Libraries &gt; Library Details</code>.</p>
 <ul>
-  <li><strong>Hero:</strong> cover image + library title + 1-line description.</li>
+  <li><strong>Top of page:</strong> cover image + library title + 1-line description.</li>
   <li><strong>Sharing indicator:</strong> e.g., "Shared with all standard users" with a dropdown to change.</li>
   <li><strong>Top-right:</strong> green <strong>Share Library</strong> button.</li>
   <li><strong>Left filter panel:</strong> <strong>Filter by Title</strong> + Applied Filters + Clear All + categorized filters: Publisher, Topics, Content Type, Duration, Difficulty, Keywords.</li>
@@ -3654,7 +3654,7 @@
 <p>Often missed in marketing materials. Surfaces capability heatmaps and leaderboard views — useful for comparative skill analysis across teams or groups.</p>
 
 <h3>Filter panel — three tiers</h3>
-<p>The left-side filter drawer organizes filters into three named sections:</p>
+<p>The slide-out filter panel on the left organizes filters into three named sections:</p>
 <ol>
   <li><strong>Login Filters</strong> (or report-context filters): Date Dimension (Quarter / Month / Week / Day), Login Date (default "Last 6 months including this month"), User (multi-select).</li>
   <li><strong>Registered Users Filters</strong>: Created Date (date range), Number of Logins (min / max).</li>
@@ -4843,7 +4843,7 @@
     { q: "what is the difference between Subscription and Custom libraries", kw: ["subscription", "custom", "library", "libraries"], src: "admin-libraries",
       a: "<strong>Subscription Libraries</strong> are Eagle Point-provided content. <strong>Custom Libraries</strong> are created by the customer using their own content. Both can be flagged Featured." },
     { q: "how do I create a Featured library", kw: ["featured", "feature", "library"], src: "admin-libraries",
-      a: "Admin Portal &rarr; Libraries &rarr; flag a library as <strong>Featured</strong>. Featured libraries appear in their own carousel above the regular Libraries section on the end-user Home page." },
+      a: "Admin Portal &rarr; Libraries &rarr; flag a library as <strong>Featured</strong>. Featured libraries appear in their own row above the regular Libraries section on the end-user Home page." },
     { q: "how do I bulk modify content", kw: ["bulk", "modify", "edit", "many"], src: "content",
       a: "Admin Portal &rarr; Content area &rarr; select items via checkboxes &rarr; <strong>Bulk Modify</strong>. You can update keywords, tags, topics across multiple items at once." },
     { q: "what is Search and Replace", kw: ["search", "replace", "find"], src: "content",
