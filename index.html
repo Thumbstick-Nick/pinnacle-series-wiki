@@ -4594,4 +4594,13 @@
       document.body.classList.remove('embed-open');
       panel.classList.remove('open');
     }
-    toggle.addEventListener('cl
+    toggle.addEventListener('click', openEmbed);
+    closeBtn.addEventListener('click', closeEmbed);
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && panel.classList.contains('open')) closeEmbed();
+    });
+  })();
+</script>
+
+</body>
+</html>
