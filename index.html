@@ -278,6 +278,43 @@
   /* Section spacing */
   section { scroll-margin-top: 24px; padding-top: 4px; }
 
+  /* Copy section link button (injected per <h2>) */
+  main h2 { position: relative; }
+  .copy-anchor {
+    margin-left: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    border: 1px solid var(--c-border);
+    background: #fff;
+    color: var(--c-muted);
+    border-radius: 4px;
+    font-size: 11.5px;
+    font-weight: 500;
+    line-height: 1.2;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(-1px);
+    transition: opacity 0.15s, color 0.15s, border-color 0.15s, background 0.15s;
+    vertical-align: middle;
+    user-select: none;
+  }
+  main h2:hover .copy-anchor,
+  .copy-anchor:focus { opacity: 1; }
+  .copy-anchor:hover {
+    color: var(--c-accent);
+    border-color: var(--c-accent);
+    background: #f4f9fd;
+  }
+  .copy-anchor.copied {
+    opacity: 1;
+    color: #0d7a3a;
+    border-color: #16a34a;
+    background: #f0fdf4;
+  }
+  .copy-anchor svg { width: 11px; height: 11px; }
+
   /* Admin Portal badge inline with H2 */
   .ap-badge {
     display: inline-block;
@@ -2326,6 +2363,8 @@
 
     <div class="group-title">Reference</div>
     <a href="#permissions">Permissions Reference</a>
+    <a href="#platform">Browser &amp; Platform</a>
+    <a href="#it-support">IT Support</a>
     <a href="#faq">Common Questions</a>
   </nav>
 </aside>
@@ -2514,6 +2553,22 @@
 <h2>Peak Experience vs Classic</h2>
 <p>Pinnacle Series ships in two UIs. <strong>Peak Experience</strong> is the redesigned modern interface and the default for new tenants. <strong>Classic</strong> is the legacy UI that some tenants are still on while they migrate. Tenant-level toggles split for admin and end-user UIs let customers stage the rollout.</p>
 
+<div class="callout">
+  <strong>Important visual distinction.</strong> Classic Pinnacle Series uses a thin <strong>blue</strong> header bar with icon-only buttons. The yellow-headered UI you may have seen in old marketing material is the <strong>KnowledgeSmart admin dashboard</strong> — a completely different product. Don't conflate the two when demoing or comparing.
+</div>
+
+<h3>Classic UI — what users actually see</h3>
+<p>For tenants still on Classic, the end-user Home page looks like this:</p>
+<ul>
+  <li><strong>Top:</strong> thin blue navigation bar with icon-only buttons (right-aligned): home, briefcase, graduation cap, trophy, bell, chat, gear, user avatar.</li>
+  <li><strong>Left sidebar:</strong> <em>Asset Libraries</em> — flat hierarchical list of every library the user can access (Adobe, Autodesk, Autodesk Forma, Bentley, Bluebeam, Microsoft, Procore, Revizto, Solibri, SOLIDWORKS, etc.). Libraries with sub-content show a <code>+</code> to expand.</li>
+  <li><strong>Center column:</strong> Search bar at top; body has <strong>MY WORK GROUPS</strong>, <strong>MY COURSES</strong> (with progress bars), and <strong>TRENDING ASSETS</strong> sections.</li>
+  <li><strong>Right column (stacked):</strong> User profile card · <strong>Upcoming Live Events</strong> panel · <strong>My Assets</strong> · <strong>Download Add-ons</strong> with Pinnacle Management Utility, Pinnacle User Tools, and a Deployment Guide link.</li>
+  <li><strong>Bottom-right:</strong> floating Support button (blue).</li>
+</ul>
+<p>What disappears in Peak: the asset-library tree on the left, MY WORK GROUPS, TRENDING ASSETS, and Upcoming Live Events on the Home page. Peak's Home is Assignments + Libraries + (optional) SPARK.</p>
+
+
 <div class="compare-grid">
   <div class="compare-card featured">
     <span class="compare-tag">Peak Experience</span>
@@ -2580,6 +2635,19 @@
   <span class="label">Where</span>
   <code>https://portal.pinnacleseries.com/</code> (or tenant-specific URL)
 </div>
+
+<h3>Sign-in page hero layout</h3>
+<p>The sign-in page is a wide hero, not a centered form. When no tenant is cached in local storage, users see:</p>
+<ul>
+  <li><strong>Top-left:</strong> small Pinnacle Series wing/swoop logo.</li>
+  <li><strong>Top-center:</strong> "Need help?" link → Contact Support.</li>
+  <li><strong>Hero text (large, center):</strong> <code>PINNACLE SERIES — APPLIED LEARNING SOLUTIONS</code>.</li>
+  <li><strong>Sign In form (left column):</strong> "Sign In" heading, Email field (required), <em>Set Your Language</em> with default <strong>Language: English</strong>, green <strong>Continue</strong> button.</li>
+  <li><strong>Right column:</strong> stylized AECO worker imagery with brand color blocks (yellow + Pinnacle blue).</li>
+  <li><strong>Bottom tagline (large):</strong> <code>BUILD SKILLS. APPLY FAST. DELIVER RESULTS.</code></li>
+  <li><strong>Footer:</strong> © 2026 Eagle Point Software.</li>
+</ul>
+
 
 <h3>The 2-step email-first sign-in</h3>
 <p>The Pinnacle Series sign-in page is <strong>email-first</strong>. The flow is:</p>
@@ -2697,7 +2765,6 @@
   <li><strong>Libraries</strong></li>
   <li><strong>Bookmarks</strong></li>
   <li><strong>SPARK</strong> — only if the user belongs to a group with SPARK enabled.</li>
-  <li><strong>AI Chat</strong></li>
   <li><strong>MANAGEMENT</strong> section (containing <strong>Administration Portal</strong>) — only if the user has any admin-tier permission.</li>
 </ol>
 
@@ -2714,10 +2781,28 @@
   <li><strong>Libraries</strong> — always present. The non-featured carousel of all libraries shared with the user.</li>
 </ul>
 
-<h3>Top bar</h3>
+<h3>Top bar (right-aligned, in a fully-featured tenant)</h3>
+<ol>
+  <li><strong>Search All Content</strong> — global search bar, always present.</li>
+  <li><strong>AI Chat</strong> button — only when the tenant has <code>Allow Users to Access AI Chat (Preview)</code> enabled.</li>
+  <li><strong>Submit External Learning</strong> button — only when the tenant has <code>Allow Users to Submit External Learning</code> enabled. <em>Surfaced as both a top-bar button AND an avatar-dropdown item.</em></li>
+  <li><strong>Notification bell</strong> — surfaces SPARK notifications, enrollment-due reminders, and Entra ID Sync alerts. Badge count when unread.</li>
+  <li><strong>User avatar</strong> → dropdown opens with <strong>Profile &amp; Settings</strong>, <strong>Switch Tenant</strong> (when multi-tenant access), and <strong>Sign Out</strong>. Plus conditional <strong>Submit External Learning</strong> (when the tenant toggle is on).</li>
+</ol>
+
+<h3>The Welcome heading</h3>
+<p>The Home page heading reads <code>Welcome, [Username]</code> — <strong>always</strong> the user's editable Username, never a tenant name. The Username is freely editable on My Account, so it can look like a real name, a company name, or anything else. Don't write tests or copy that assume tenant-name behavior — it doesn't exist.</p>
+
+<h3>Per-tile kebab menu (Home Assignments carousel)</h3>
+<p>Each tile on the Home Assignments carousel has a kebab (3-dot) at top-right. The Home tile kebab is <strong>broader</strong> than the kebab on the dedicated Assignments page — end users can self-mark courses complete and change their own due dates from here:</p>
 <ul>
-  <li>Global Search (top-right).</li>
-  <li>User avatar (top-right) → menu opens with <strong>Profile &amp; Settings</strong>, <strong>Switch Tenant</strong>, <strong>Sign Out</strong>.</li>
+  <li><strong>Resume</strong> (play icon) — only when the course is in progress.</li>
+  <li><strong>View</strong> (eye icon).</li>
+  <li><strong>Mark as Completed</strong> (checkmark) — self-service completion.</li>
+  <li><strong>Change Due Date</strong> — self-service due date adjustment.</li>
+  <li><strong>Add to Bookmarks</strong>.</li>
+  <li><strong>Copy Link (Formatted)</strong> / <strong>Copy Link (Unformatted)</strong>.</li>
+  <li><strong>Drop Course</strong> / <strong>Drop Learning Path</strong>.</li>
 </ul>
 </section>
 
@@ -2731,6 +2816,11 @@
 </div>
 
 <p>The end-user Assignments page shows the user's currently assigned learning content with strong visual markers for due dates, progress, and completion status.</p>
+
+<div class="callout">
+  <strong>Two kebab surfaces, different actions.</strong> The kebab on the dedicated Assignments page is narrower than the kebab on the Home Assignments carousel. The <a href="#home">Home tile kebab</a> exposes self-service actions like <em>Mark as Completed</em>, <em>Change Due Date</em>, <em>Drop Course</em>, and <em>Drop Learning Path</em> &mdash; the Assignments-page kebab is for view/details actions. If end users say "I can't find Mark Completed on Assignments", point them at the Home tile.
+</div>
+
 
 <h3>What's there</h3>
 <ul>
@@ -2801,6 +2891,15 @@
 <ul>
   <li>Each piece of content has an "Add to Bookmarks" action available from its detail view or kebab menu.</li>
   <li>Bookmarks persist across sessions and devices for that user.</li>
+  <li><strong>Search Bookmarks</strong> field at the top filters the grid in place.</li>
+</ul>
+
+<h3>Per-card kebab menu</h3>
+<ul>
+  <li><strong>View</strong> — opens the bookmarked content.</li>
+  <li><strong>Remove from Bookmarks</strong> — un-bookmark the item.</li>
+  <li><strong>Copy Link (Formatted)</strong> — rich-text link for pasting into chat or email.</li>
+  <li><strong>Copy Link (Unformatted)</strong> — plain URL.</li>
 </ul>
 </section>
 
@@ -2811,6 +2910,21 @@
 <div class="where">
   <span class="label">Where</span>
   Home page → left nav → <strong>AI Chat</strong> (only when the tenant has AI Chat enabled in Admin Portal → Settings → General)
+
+<div class="callout">
+  <strong>Correction:</strong> AI Chat is reached via the <strong>AI Chat top-bar button</strong> (not a left-nav item) when the tenant has <code>Allow Users to Access AI Chat (Preview)</code> enabled. It opens a dedicated page titled "AI Chat" with the assistant persona named <strong>"Pinnacle AI"</strong>.
+</div>
+
+<h3>Conversation experience</h3>
+<ul>
+  <li><strong>Persona name:</strong> "Pinnacle AI" (alongside the user's "You" turn).</li>
+  <li><strong>Typing indicator:</strong> dots while the model is generating.</li>
+  <li><strong>Numbered citations</strong> (¹ ² ³ …) tie each assertion back to a specific Pinnacle Series content item.</li>
+  <li><strong>Clickable content cards</strong> at the bottom of the reply — each card shows the content title, content type (Video / Document / etc.), and a small icon. Clicking a card navigates straight to the source.</li>
+  <li><strong>Disclaimer line:</strong> "AI-generated content may be incorrect."</li>
+  <li><strong>Page footer:</strong> dark <strong>New Chat</strong> button (resets conversation) + "Ask a question" text input + send button (paper-plane icon).</li>
+</ul>
+
 </div>
 
 <p>AI Chat is a context-aware chat feature that helps users find answers and content within Pinnacle Series using natural language. It's intended for in-the-moment troubleshooting, learning suggestions, and quick references &mdash; not for replacing structured learning paths.</p>
@@ -2903,6 +3017,36 @@
 </div>
 
 <p>SPARK is Pinnacle Series' personalized nano-learning feed. It curates short videos (under 5 minutes) from libraries the user can access, prioritizing content that matches the user's interests and group's focus areas.</p>
+
+<h3>Dedicated SPARK page</h3>
+<ul>
+  <li><strong>Hero tagline:</strong> &#9889; <em>Light The Fuse &mdash; Your Next Idea Starts With A SPARK</em></li>
+  <li><strong>Subtitle:</strong> "Quick, curated bursts of insight to keep your mind sharp and your ideas flowing."</li>
+  <li><strong>Top-right:</strong> <strong>Edit Preferences</strong> button.</li>
+  <li><strong>Center pane:</strong> video player with controls including an inline <strong>bookmark icon</strong> (bookmark while watching), captions toggle, fullscreen, settings, volume, and timestamp.</li>
+  <li><strong>Right pane (toggleable):</strong> <strong>Up Next&hellip;</strong> playlist (cards with thumbnail, duration, title, 1-2 line description, publisher, kebab).</li>
+  <li><strong>Right pane alt view:</strong> when toggled, switches to <strong>Transcripts</strong> with an <strong>Auto-scrolling</strong> toggle (default on).</li>
+</ul>
+
+<h3>Per-video kebab menu</h3>
+<p>Three options &mdash; narrower than the Home assignment-tile kebab because Spark videos are not enrolled assignments:</p>
+<ul>
+  <li><strong>Add to Bookmarks</strong></li>
+  <li><strong>Copy Link (Formatted)</strong></li>
+  <li><strong>Copy Link (Unformatted)</strong></li>
+</ul>
+
+<h3>Edit Preferences modal &mdash; three sections</h3>
+<ul>
+  <li><strong>Industries</strong> (building icon) &mdash; chip multi-select. Eight options: Architecture, MEP, Structural Engineering, Civil Engineering, Manufacturing, Construction, Interior Design, Product Design.</li>
+  <li><strong>Topics</strong> (lightbulb icon) &mdash; chip multi-select drawn from the full Pinnacle topics catalog (3ds Max, AutoCAD, Civil 3D, Revit, Inventor, etc.).</li>
+  <li><strong>Just for You</strong> (sparkles icon) &mdash; free-text field. Helper text: "Use this space to share what you're curious about. Whether it's 'project leadership,' 'rendering tips,' or 'AI in design,' this helps us personalize your learning journey even more. Please separate items with commas."</li>
+</ul>
+<p>Bottom-right: <strong>Save Preferences</strong> button.</p>
+
+<h3>SPARK section on the Home page</h3>
+<p>When SPARK is enabled for the user's group, the Home page also includes a SPARK section with the subtitle <strong>"AI-powered learning bursts"</strong>. Layout: video player on the left, compact <strong>2&times;2 grid of 4 cards</strong> on the right (vs. the longer scrollable list on the dedicated SPARK page). Same per-video kebab options.</p>
+
 
 <div class="key-stat">
   <span class="num">1&ndash;2/day</span>
@@ -3044,7 +3188,40 @@
 <p>The user's <strong>Username</strong> is the editable display name shown in the Welcome heading on Home (<code>Welcome, [Username]</code>) and at the top of the My Account page. Click the pencil icon next to the username on the Account Info tab to open the <strong>Edit Username</strong> modal — a single text field plus Cancel / Save.</p>
 
 <div class="callout">
-  <strong>Note on the Welcome heading:</strong> the Home page heading reads <code>Welcome, [Username]</code> — always the Username, never a tenant name. The Username is freely editable by the end user, so it can look like a real name, a company name, or anything else.
+  <strong>Note on the Welcome heading:</strong> the Home page heading reads <code>Welcome, [Username]</code> — always the Username, never a tenant name. The Username is freely editable by the end user, so it can look like a real name, a company name, or anything else.</em>
+</div>
+
+<h3>Account Info user-profile header</h3>
+<ul>
+  <li><strong>Avatar</strong> with edit pencil overlay for upload/change.</li>
+  <li><strong>Username</strong> displayed prominently with an inline edit pencil → opens the Edit Username modal.</li>
+  <li><strong>Email</strong> displayed below the Username.</li>
+  <li><strong>Display/full name</strong> on a secondary line below the email — distinct from the Username and sourced from the user record.</li>
+</ul>
+
+<h3>Account Info two-column layout</h3>
+<p><em>Left column:</em></p>
+<ul>
+  <li><strong>Commands in Autodesk Products</strong> — descriptive text and an "Important:" callout reminding users to close/reopen Autodesk applications to activate the Pinnacle User Tools.</li>
+</ul>
+<p><em>Right column:</em></p>
+<ul>
+  <li><strong>Language</strong> — Language dropdown (default English) + <strong>Apply Language</strong> button.</li>
+  <li><strong>Password</strong> — <strong>Change Password</strong> button. Hidden / disabled for SSO-only users.</li>
+  <li><strong>Notifications</strong> — toggle labeled exactly <code>Send missed in-app notifications via email</code>. Use this verbatim in test cases or support docs.</li>
+  <li><strong>Download Add-Ons</strong> — links to <strong>Pinnacle Management Utility</strong> and <strong>Pinnacle User Tools</strong>, each with an "Updated [date]" timestamp.</li>
+</ul>
+
+<h4>Transcripts tab specifics</h4>
+<ul>
+  <li><strong>Search Members</strong> field (filters within the user's own transcripts).</li>
+  <li><strong>Filter</strong> dropdown (status / date / type).</li>
+  <li><strong>Table columns:</strong> Name, Status, Status Date (sortable).</li>
+  <li><strong>Per-row kebab</strong> opens a <strong>Quiz Result</strong> modal: question text, the user's answer, marked Incorrect/Correct, the correct answer if they got it wrong, and a circular score percentage.</li>
+</ul>
+<p><em>Why this matters for Support:</em> a learner can see exactly why they didn't pass without admin involvement.</p>
+
+<div style="display:none;"><em>
 </div>
 
 <figure class="screenshot">
@@ -3082,6 +3259,11 @@
 <p>The Administration Portal is the admin-side UI for Pinnacle Series. It's where users with admin-tier permissions manage content, users, groups, libraries, settings, and reports.</p>
 
 <h3>Accessing the Admin Portal</h3>
+<p><strong>Page header:</strong> "Admin Home". <strong>Hero:</strong> "Welcome to the Administration Portal" with a pastel mountain/cloud illustration. <strong>Body text (verbatim):</strong></p>
+<blockquote style="border-left:3px solid var(--c-accent); padding:8px 16px; margin:12px 0; color:var(--c-text); font-style:italic; background:#f4f9fd;">
+"Welcome to your Administration Portal! Your available tools and features are tailored to your permissions, ensuring you see exactly what you need. Here, you can customize the application, manage users and permissions, create and publish content, assign learning and assessments, and deep dive into reporting. Jump in and make the experience your own!"
+</blockquote>
+
 <p>From the Home page, the MANAGEMENT section appears in the left nav (only if the user has any admin-tier permission). Below the section header, the only item visible to most users is <strong>Administration Portal</strong>. Click it to enter the admin UI.</p>
 
 <div class="callout warn">
@@ -3164,6 +3346,40 @@
   <figcaption>Assign New → Assessment sub-page with the "Add Users to Assignment" modal open. The modal differentiates Standard Users from External Users in the same picker, and tracks selected counts separately.</figcaption>
 </figure>
 <p>The Assignment Management page is where admins create, monitor, and manage all assigned learning and assessments.</p>
+
+<h3>Toolbar (left to right)</h3>
+<ul>
+  <li><strong>Search</strong> field</li>
+  <li><strong>Filter</strong> dropdown</li>
+  <li><strong>Assignment Date Range</strong> picker (default ~last 30 days)</li>
+  <li><strong>Five icon buttons</strong> (left of Assign New): edit, mail/notify, delete, refresh, document</li>
+  <li><strong>Assign New</strong> &mdash; green button, top-right; opens the Content / Assessment menu</li>
+</ul>
+
+<h3>Table columns (default order, sortable)</h3>
+<ol>
+  <li>Checkbox (select)</li>
+  <li>User (avatar + name)</li>
+  <li>Email</li>
+  <li>Content Type (e.g., Course)</li>
+  <li>Content Title</li>
+  <li>Learning Path (e.g., 3ds Max, Arnold Essentials)</li>
+  <li>Assigned By &mdash; "Self" for self-enrollments</li>
+  <li>Date Assigned (default sort)</li>
+  <li>Due/Expiration Date</li>
+  <li>Status &mdash; values: <strong>Not Started</strong>, <strong>In Progress</strong> (with color dots)</li>
+  <li>Per-row kebab (3-dot) menu</li>
+</ol>
+
+<h3>Assign New &rarr; Assessment sub-page sections</h3>
+<ol>
+  <li><strong>Assessments</strong> &mdash; "These are the assessments that will be assigned." Add New + delete-per-row + "Total Items: N" footer.</li>
+  <li><strong>Users</strong> &mdash; "These are the users that will be assigned." Add New + empty-state placeholder.</li>
+  <li><strong>Options</strong> &mdash; <code>Expiration Date: None</code> + <code>Map Learning: Disabled</code>, both configurable.</li>
+</ol>
+<p><strong>Add Users to Assignment modal:</strong> Search bar + Filter dropdown; columns User Name (sortable), Email, Groups, <strong>User Type</strong> (Standard User / External User with distinct badges); pagination footer; bottom toolbar with <strong>Import Selection</strong>, separate selection counters for Standard and External users, Cancel, and the green <strong>Add Users</strong> button. Admins can mix internal and external users in one operation.</p>
+<p>Breadcrumb: <code>Assignment Management &gt; Assign New</code>. Top-right of the sub-page: Cancel + green <strong>Assign</strong>.</p>
+
 
 <h4>Assign New flow</h4>
 <ol>
@@ -3259,6 +3475,19 @@
 
 <div class="callout warn">
   <strong>Recycle Bin path:</strong> <code>Admin Portal → Content → Tools Menu (kebab) → Recycle Bin</code>. It is <strong>not</strong> a left-nav item.
+
+<h4>Recycle Bin specifics</h4>
+<ul>
+  <li><strong>Breadcrumb:</strong> <code>Content &gt; Recycle Bin</code>.</li>
+  <li><strong>Top-right icons:</strong> Recycle (Restore selected) + Trash (Delete permanently). Both work on multi-select via row checkboxes.</li>
+  <li><strong>Columns:</strong> Name, Path (e.g., <code>Custom &gt; Learning Paths</code> — shows where the item was deleted from), Recycled By, Recycled On.</li>
+  <li><strong>Items remain indefinitely</strong> — captures show entries 14+ months old.</li>
+  <li><strong>Anonymous deletions</strong> display the deleter as <code>&lt;Unnamed&gt;</code>.</li>
+</ul>
+
+<h3>Manage Topics &amp; Subtopics</h3>
+<p>Reached from the Content area's Tools menu. Opens a tile-grid modal of every topic in the topic catalog, each with a brand icon (3ds Max, AIA, Assemble Systems, AutoCAD, Civil 3D, Inventor, OpenRoads Designer, Revit, SOLIDWORKS, etc.). Bottom-left: <strong>Add New Topic</strong>. Bottom-right: Cancel + <strong>Edit Topic</strong>.</p>
+
 </div>
 
 <h3>Folders</h3>
@@ -3289,6 +3518,27 @@
 </div>
 
 <p>The Libraries page is where admins create, manage, and share libraries — the top-level containers that group content for visibility control.</p>
+
+<h3>Page layout</h3>
+<ul>
+  <li><strong>Search:</strong> "Search for Library" field.</li>
+  <li><strong>Topics filter</strong> dropdown.</li>
+  <li><strong>Two tabs</strong> at the top of the body: <code>[Username] Libraries</code> (admin's owned/custom) and <code>Subscription Libraries</code> (Eagle Point provided).</li>
+  <li><strong>Grid view / list view toggle</strong> (top-right).</li>
+  <li><strong>Sortable Name column</strong> with arrow indicator.</li>
+  <li>Each library card: brand icon + library name (e.g., "3ds Max 2022", "AutoCAD 2022").</li>
+</ul>
+
+<h3>Library Details page</h3>
+<p>Click into a library to open <strong>Library Details</strong>. Breadcrumb: <code>Libraries &gt; Library Details</code>.</p>
+<ul>
+  <li><strong>Hero:</strong> cover image + library title + 1-line description.</li>
+  <li><strong>Sharing indicator:</strong> e.g., "Shared with all standard users" with a dropdown to change.</li>
+  <li><strong>Top-right:</strong> green <strong>Share Library</strong> button.</li>
+  <li><strong>Left filter panel:</strong> <strong>Filter by Title</strong> + Applied Filters + Clear All + categorized filters: Publisher, Topics, Content Type, Duration, Difficulty, Keywords.</li>
+  <li><strong>Content table:</strong> Name (sortable), Content Type, Publisher, Date Modified, plus per-item kebab — this is where SCORM Export options appear for eligible content.</li>
+</ul>
+
 
 <h3>Library types</h3>
 <ul>
@@ -3362,7 +3612,11 @@
 
 <p>Peak Reporting is a unified reporting suite launched in <strong>August 2025</strong>. It replaces the older Management Utility-based reporting for most use cases.</p>
 
-<h3>The five reporting pillars</h3>
+<div class="callout">
+  <strong>Correction:</strong> Peak Reporting actually exposes <strong>six</strong> top-level report category tabs at the bottom of every Reports page &mdash; the marketing "five pillars" framing misses <strong>Matrix and Leaderboard Reports</strong>. The six categories below are the canonical UI list.
+</div>
+
+<h3>The six report categories</h3>
 <table>
   <tr><th>Pillar</th><th>Answers questions about</th></tr>
   <tr><td><strong>User Management Reports</strong></td><td>Engagement, login activity, adoption trends. Who is provisioned? Who is active in Pinnacle and KnowledgeSmart?</td></tr>
@@ -3380,10 +3634,37 @@
 <h3>Key features</h3>
 <ul>
   <li><strong>Saved Views</strong> — admins can save filtered report configurations for reuse.</li>
+  <li><strong>Six categories, not five.</strong> The six top-level report category tabs at the bottom of every Reports page are: User Management, Usage, Learning, Assessment, Content, and <strong>Matrix and Leaderboard Reports</strong>. The "five pillars" framing in older marketing material misses the sixth.</li>
   <li><strong>Scheduled Report Alerts</strong> — automatic email alerts when a report meets a defined threshold.</li>
   <li><strong>Targeted permissions</strong> — Reporting Administrator (sees all users) vs. Reporting Manager (sees only managed users).</li>
   <li><strong>Power BI export</strong> — Usage Reports support export for use in Power BI dashboards.</li>
 </ul>
+
+<h3>User Management Reports — specific metrics</h3>
+<ul>
+  <li>Total Pinnacle Logins</li>
+  <li>Total Unique Pinnacle Logins</li>
+  <li>Total KnowledgeSmart Logins</li>
+  <li>Unique KnowledgeSmart Logins</li>
+  <li>Pinnacle Login Histogram</li>
+  <li>Registered Users by Month</li>
+</ul>
+
+<h3>Matrix and Leaderboard Reports (the sixth category)</h3>
+<p>Often missed in marketing materials. Surfaces capability heatmaps and leaderboard views — useful for comparative skill analysis across teams or groups.</p>
+
+<h3>Filter panel — three tiers</h3>
+<p>The left-side filter drawer organizes filters into three named sections:</p>
+<ol>
+  <li><strong>Login Filters</strong> (or report-context filters): Date Dimension (Quarter / Month / Week / Day), Login Date (default "Last 6 months including this month"), User (multi-select).</li>
+  <li><strong>Registered Users Filters</strong>: Created Date (date range), Number of Logins (min / max).</li>
+  <li><strong>Global User Filters</strong>: Attributes, Managers, Groups, User Type (Standard / External), <strong>Is Deleted</strong> (True / False).</li>
+</ol>
+<p>A <strong>Clear Filters</strong> button at the bottom resets all selections. Selections persist across report tab switches but reset when leaving the Reports area.</p>
+
+<h3>Export options</h3>
+<p>The download-data menu offers <strong>CSV</strong> and <strong>Excel</strong> as the two formats. Schedule Export is per-report, not global.</p>
+
 
 <div class="callout permissions">
   <strong>Required permissions:</strong>
@@ -3538,6 +3819,18 @@
 
 <p>The Theme Customization page lets admins brand the Pinnacle Series UI for their tenant — logo, colors, layout.</p>
 
+<h3>Multi-theme management</h3>
+<p>Theme Customization is a theme management library, not a single set of color settings:</p>
+<ul>
+  <li><strong>Available Themes</strong> gallery — admins can save multiple themes.</li>
+  <li>Themes split into <strong>Custom Themes</strong> (admin-created) and <strong>Standard Themes</strong> (Eagle Point-provided defaults like "Autumn Bliss").</li>
+  <li>Each theme card shows a horizontal color bar (Navigation / Primary / Secondary).</li>
+  <li>The currently-active theme has a green <strong>CURRENT THEME</strong> badge.</li>
+  <li><strong>Per-theme kebab:</strong> Edit (re-opens Create New Theme modal pre-populated) / Delete Theme.</li>
+</ul>
+<p>Theme switching is sticky — selecting a different theme changes the entire admin and end-user UI palette in real time after Save.</p>
+
+
 <h3>What you can customize</h3>
 <ul>
   <li><strong>Branding</strong> — upload a tenant logo and background image.</li>
@@ -3571,6 +3864,27 @@
   <figcaption>Settings → General — exact toggle names. Note "Allow Users to Access AI Chat (Preview)" includes the "(Preview)" qualifier; AI Chat is a preview feature. The Peak Experience block contains two independent toggles for the admin UI and the end-user experience.</figcaption>
 </figure>
 <p>Tenant-wide configuration, including:</p>
+
+<p>The General Settings page is split into a left column of dropdowns, a right column of "Users" toggles, and a "Peak Experience" block. Use the canonical names below verbatim &mdash; especially for test cases or support escalations:</p>
+
+<p><strong>Left column &mdash; dropdowns:</strong></p>
+<ul>
+  <li><strong>Default Language</strong> &mdash; defaults to English.</li>
+  <li><strong>Default Workflow Display</strong>.</li>
+  <li><strong>Default Learning Path Workflow Display</strong>.</li>
+</ul>
+
+<p><strong>Right column &mdash; "Users" section</strong> (each defaults to ON):</p>
+<ul>
+  <li><code>Allow Users to Receive Notifications via Email</code></li>
+  <li><code>Allow Users to Declare Areas of Expertise</code></li>
+  <li><code>Allow Users to Download Add-ons</code> &mdash; gates the Pinnacle Management Utility and Pinnacle User Tools download links in My Account.</li>
+  <li><code>Allow Users to Access AI Chat (Preview)</code> &mdash; <strong>note the "(Preview)" qualifier</strong>; AI Chat is a preview feature.</li>
+  <li><code>Allow Users to Submit External Learning</code> &mdash; gates the top-bar button and avatar dropdown item.</li>
+</ul>
+
+<p><strong>Right column &mdash; "Peak Experience" section:</strong></p>
+
 <ul>
   <li><strong>Peak Experience Configuration</strong> toggle — enables the new Peak admin UI.</li>
   <li><strong>Peak Experience for End Users</strong> toggle — enables the new Peak end-user UI.</li>
@@ -3611,22 +3925,25 @@
 <p>Security &amp; Authentication is where all tenant-level authentication and password policy is configured. It's split into two sections.</p>
 
 <h3>Password Authentication</h3>
-<p>Settings that govern password-based sign-in:</p>
+<p>Subtitle: <em>"Set the proper password restrictions based on your security policy."</em> Four independent controls (defaults shown):</p>
 <ul>
-  <li>Complex password requirements</li>
-  <li>Password history (prevent reuse)</li>
-  <li>Remove "Forgot Password" availability</li>
-  <li>Password expiration</li>
-  <li>Account lockout settings</li>
+  <li><strong>Use Complex Passwords</strong> &mdash; when enabled, requires all four: minimum 8 characters, at least one uppercase (A&ndash;Z), at least one lowercase (a&ndash;z), and at least one alphanumeric special character (e.g., <code>!</code>, <code>#</code>, <code>$</code>, <code>%</code>).</li>
+  <li><strong>Password Expires in [90] Days</strong> &mdash; configurable integer.</li>
+  <li><strong>Password Cannot Match Previous [10] Password(s)</strong> &mdash; configurable integer.</li>
+  <li><strong>Lock Out User After [10] Invalid Attempts</strong> &mdash; configurable integer.</li>
 </ul>
 
 <h3>Single Sign-On Authentication</h3>
-<p>SSO integration setup. Pinnacle supports:</p>
+<p>Subtitle: <em>"Single sign-on (SSO) is a session and user authentication service that permits a user to use one set of login credentials to access multiple applications."</em></p>
+<p>Three radio options:</p>
 <ul>
-  <li><strong>SAML</strong> — Identity Provider, Email Parameter, SAML Issuer ID, Encryption Type, Encryption Key, Browse for file (cert upload), Copy URL (ACS endpoint).</li>
-  <li><strong>OpenID Connect</strong></li>
-  <li><strong>Exchange Web Services (EWS)</strong></li>
+  <li><strong>Do Not Use Single Sign-On</strong> (default).</li>
+  <li><strong>SAML</strong> — "SAML is a standard for exchanging authentication and authorization data between security domains. SAML 2.0 is an XML-based protocol that uses security tokens containing assertions to pass information about an end user between an Identity Provider and a SAML consumer."</li>
+  <li><strong>OpenID</strong> — "OpenID is an open standard and decentralized authentication protocol. It allows users to be authenticated by co-operating sites…"</li>
 </ul>
+<div class="callout">
+  <strong>Note on EWS.</strong> Earlier docs listed Exchange Web Services as a third SSO option. The current Security &amp; Authentication page in our reference tenant shows only Do Not Use, SAML, and OpenID. EWS may be tenant-specific, may have moved to Integrations, or may have been removed. Verify in the target tenant before writing tests that assume EWS is here.
+</div>
 
 <h3>Per-user override</h3>
 <p>Even after tenant-level SSO is configured, individual users can be excluded from SSO via the per-user toggle: Admin Portal → Users → Edit User Details → User Settings → "Exclude User from SSO."</p>
@@ -3652,14 +3969,32 @@
 
 <p>The Integrations page is where admins configure third-party connections.</p>
 
-<h3>Supported integrations</h3>
+<h3>Page structure</h3>
+<p>Header: "Integrations". Description: <em>"Pinnacle Series has some built in integrations with various technologies. Enable and configure the integrations here."</em></p>
+
+<h4>Section 1 — Application integrations</h4>
+<p>Each has a checkbox toggle and a Configure button.</p>
 <ul>
-  <li><strong>Microsoft Entra ID (Azure AD) Sync</strong> — Client Identifier, Client Secret, Directory Identifier, Email Attribute to Synchronize, Display Name Attribute to Synchronize. Read-only integration with built-in safeguards.</li>
-  <li><strong>KnowledgeSmart</strong> — connect the tenant to its KnowledgeSmart account for skill assessment integration.</li>
-  <li><strong>On-premises Active Directory</strong> — covered by a separate PDF guide.</li>
-  <li><strong>Extended Search</strong> — integration with external search providers (API Key, Title, Description, Search URL).</li>
-  <li><strong>Management Utility launcher</strong> — Launch Management Utility button for legacy admin tasks not yet in Peak.</li>
+  <li><strong>KnowledgeSmart</strong> — "KnowledgeSmart delivers assessments along with skills gap analysis and benchmarking services to help AECO firms maximize their return on investment in technology, people and client services."</li>
+  <li><strong>Extended Search</strong> — "Toggle on 'Extended Search' to enable passing of search criteria to another source (such as your company Intranet). An additional entry will appear at the top of search results to allow users to continue their search in another platform."</li>
 </ul>
+
+<h4>Section 2 — Active Directory</h4>
+<p>Three <strong>mutually-exclusive</strong> radio options:</p>
+<ul>
+  <li><strong>Do Not Sync</strong>.</li>
+  <li><strong>On-Premises Active Directory</strong> — when selected, a <strong>Launch Management Utility</strong> button appears. <em>On-prem AD sync is configured via the legacy Management Utility, not the new Peak admin portal.</em></li>
+  <li><strong>Microsoft Entra ID</strong> — "Use Microsoft Entra ID to manage user access, provision user accounts, and enable single sign-on with Pinnacle Series."</li>
+</ul>
+
+<h4>Entra ID sub-configurations</h4>
+<p>When Entra ID is selected, four sub-configs appear:</p>
+<ol>
+  <li><strong>Group Synchronization Options</strong> — "Identify the Entra ID Groups used to synchronize users." Manage button opens a modal with columns Entra ID Group, AD Identifier (GUID), Sync with Pinnacle Group; per-row Edit / Remove kebab.</li>
+  <li><strong>Rule Sets</strong> — "Complex Rule Sets can be set up to properly match attributes within Pinnacle Series."</li>
+  <li><strong>Map User Attributes</strong> — "Map user properties in Entra ID to custom user attributes in Pinnacle Series."</li>
+  <li><strong>Microsoft Entra ID Sync Logs</strong> — "View the Microsoft Entra ID Sync Logs for the last 30 days."</li>
+</ol>
 
 <h3>Common actions</h3>
 <ul>
@@ -3682,7 +4017,14 @@
   Admin Portal → <strong>KnowledgeSmart Admin Area</strong> (top-level)
 </div>
 
-<p>The KnowledgeSmart Admin Area is the embedded administrative interface for managing skill assessments through KnowledgeSmart, Eagle Point's assessment product. KnowledgeSmart and Pinnacle Series are integrated but have separate admin roles &mdash; a user with full Pinnacle admin permissions can still see "You do not have permission to log in to KnowledgeSmart" if their KS role isn't set up.</p>
+<div class="callout">
+  <strong>Correction:</strong> The KnowledgeSmart Admin Area is <strong>NOT</strong> an in-product page. Clicking it in the Admin Portal left nav <strong>redirects the user to the external KnowledgeSmart platform</strong> at <code>https://online.knowledgesmart.net/</code>. KS is a separate platform with its own login, admin dashboard, and data model — integrated with Pinnacle Series via the <a href="#integrations">Integrations</a> page.
+</div>
+
+<h3>What KnowledgeSmart looks like</h3>
+<p>The KS admin dashboard has a yellow "KNOWLEDGE SMART" header (distinct from Classic Pinnacle Series, which uses a blue header). Sidebar tabs: Test / Survey / Skills. Top-level nav: Home, Library, Invites, Results, Users, Teams, Settings, Accounts, Help, Support. Common dashboard widgets: <strong>INVITES SENT</strong> bar chart, <strong>TESTS</strong> donut chart, <strong>SUBSCRIPTION DETAILS</strong>.</p>
+
+<p>Cases that exercise functionality "inside" the KS admin area are exercising the external KnowledgeSmart platform, not Pinnacle Series itself. KnowledgeSmart and Pinnacle Series are integrated but have separate admin roles &mdash; a user with full Pinnacle admin permissions can still see "You do not have permission to log in to KnowledgeSmart" if their KS role isn't set up.</p>
 
 <h3>What admins do here</h3>
 <div class="feature-grid">
@@ -3720,6 +4062,26 @@
 <div class="callout">
   <strong>This is new functionality.</strong> Detailed UI flow and test coverage are still being developed. Behavior captured here may evolve. Check <code>Pinnacle_UI_Facts.md</code> &sect;6a for the most current capture.
 </div>
+
+<h3>UI flow (per per-item kebab)</h3>
+<p>SCORM Export is initiated from a per-item kebab on a content list (typically a Library Details page). Two kebab options on a Learning Path item:</p>
+<ul>
+  <li><strong>Export Learning Path to SCORM</strong> — exports the entire LP as one package.</li>
+  <li><strong>Export Course to SCORM</strong> — opens the <strong>Select Course to Export</strong> modal.</li>
+</ul>
+
+<h4>Select Course to Export modal</h4>
+<ul>
+  <li>Title: <strong>Select Course to Export</strong>.</li>
+  <li>Search bar: "Search Course".</li>
+  <li>Columns: Course Name (sortable), Publisher, Modified.</li>
+  <li>Each course in the LP is row-selectable.</li>
+  <li>Footer: Cancel + green <strong>Export Course</strong> button (singular — one course per export action).</li>
+</ul>
+
+<h3>Validating SCORM packages externally</h3>
+<p>QA validates SCORM packages by uploading them to <a href="https://app.cloud.scorm.com/" target="_blank" rel="noopener">SCORM Cloud</a> — the standard external playback target for any SCORM-export test case. This confirms the package itself is valid SCORM regardless of the Pinnacle-side gating documented above.</p>
+
 
 <h3>What can be exported</h3>
 
@@ -3976,6 +4338,107 @@
 </section>
 
 <!-- ====================================================================== -->
+
+<!-- ============================================================
+     Browser & Platform Support  (Option A)
+============================================================ -->
+<section id="platform">
+<h2>Browser &amp; Platform Support</h2>
+
+<p>The basics for Support tickets that ask "is my browser supported?", or for IT teams planning a rollout. Sourced from the EPS technology stack reference (see Eagle Point IT for the full doc).</p>
+
+<h3>Supported browsers</h3>
+<p>Pinnacle Series supports the <strong>last two major versions</strong> of:</p>
+<ul>
+  <li>Google Chrome</li>
+  <li>Mozilla Firefox</li>
+  <li>Apple Safari (macOS)</li>
+  <li>Microsoft Edge</li>
+</ul>
+<p>Internet Explorer is not officially supported; older IE 9–11 builds may render but should not be relied on.</p>
+
+<h3>Hosting and infrastructure</h3>
+<ul>
+  <li><strong>Pinnacle Series</strong> is hosted on <strong>Microsoft Azure Services</strong>. Database storage is in <strong>Microsoft Azure SQL</strong> (kept current with the latest SQL Server release).</li>
+  <li><strong>KnowledgeSmart</strong> is hosted on <strong>Rackspace</strong> with Microsoft SQL Server 2019.</li>
+  <li><strong>Translation:</strong> Microsoft Cognitive Services Translation v3 powers the 130+ language translations of asset titles, descriptions, and transcripts.</li>
+  <li><strong>Search:</strong> Azure Cognitive Search underpins the global search experience.</li>
+</ul>
+
+<h3>Peak vs Classic — front-end stack at a glance</h3>
+<p>Useful when triaging UI bugs or planning compatibility fixes. Both UIs are Angular SPAs; Peak is on a newer Angular than Classic.</p>
+<table style="width:100%; border-collapse:collapse; margin:12px 0;">
+  <thead>
+    <tr style="text-align:left; border-bottom:2px solid var(--c-border);">
+      <th style="padding:8px;">Component</th>
+      <th style="padding:8px;">Classic</th>
+      <th style="padding:8px;">Peak Experience</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom:1px solid var(--c-border);"><td style="padding:6px 8px;">Angular Core</td><td style="padding:6px 8px;">8.3.29</td><td style="padding:6px 8px;">9.1.15</td></tr>
+    <tr style="border-bottom:1px solid var(--c-border);"><td style="padding:6px 8px;">Angular CLI</td><td style="padding:6px 8px;">8.3.29</td><td style="padding:6px 8px;">9.1.13</td></tr>
+    <tr style="border-bottom:1px solid var(--c-border);"><td style="padding:6px 8px;">RxJS</td><td style="padding:6px 8px;">6.6.7</td><td style="padding:6px 8px;">6.5.5</td></tr>
+    <tr style="border-bottom:1px solid var(--c-border);"><td style="padding:6px 8px;">TypeScript</td><td style="padding:6px 8px;">3.5.3</td><td style="padding:6px 8px;">3.8.3</td></tr>
+    <tr style="border-bottom:1px solid var(--c-border);"><td style="padding:6px 8px;">webpack</td><td style="padding:6px 8px;">4.39.2</td><td style="padding:6px 8px;">4.42.0</td></tr>
+    <tr style="border-bottom:1px solid var(--c-border);"><td style="padding:6px 8px;">Node.js (build)</td><td style="padding:6px 8px;">16.15.1</td><td style="padding:6px 8px;">16.15.1</td></tr>
+  </tbody>
+</table>
+
+<h3>Backend &amp; Management Utility</h3>
+<ul>
+  <li><strong>API and core platform:</strong> .NET Framework 4.6.1, C# 7.3, ASP.NET, IIS 10.</li>
+  <li><strong>Pinnacle Management Utility</strong> (Windows desktop app for legacy admin tasks): WPF + XAML, .NET Framework 4.6.1, WCF for SOAP services.</li>
+  <li><strong>API documentation:</strong> Swashbuckle (Swagger / OpenAPI tooling).</li>
+</ul>
+
+<h3>Test environments</h3>
+<ul>
+  <li><strong>PW</strong> — <code>https://prodgenbrowser-pw.azurewebsites.net/#/login</code> (feature testing first stop).</li>
+  <li><strong>INDEV</strong> — <code>https://prodgenbrowser-indev.azurewebsites.net/#/login</code> (regression).</li>
+  <li><strong>SCORM Cloud</strong> — <code>https://app.cloud.scorm.com/</code> for validating exported SCORM packages.</li>
+</ul>
+
+<div class="callout permissions">
+  <strong>Why this section exists.</strong> When a customer reports a UI bug, the first triage question is often "what browser?" When IT plans a rollout, the second is "what versions do we support?" Keep this page as the single answer.
+</div>
+</section>
+
+
+<!-- ============================================================
+     IT Support  (internal contact info)
+============================================================ -->
+<section id="it-support">
+<h2>IT Support</h2>
+
+<p>Where to send IT tickets at Eagle Point — for Pinnacle Series itself, other internal applications (Salesforce, etc.), and equipment requests.</p>
+
+<div class="compare-grid" style="margin:16px 0;">
+  <div class="compare-cell">
+    <h4>Internal applications &amp; equipment</h4>
+    <p>For any internal application (e.g., <strong>Salesforce, Pinnacle Series</strong>) or equipment request, reach out to <strong>Alex Rhomberg</strong> first for direction before contacting RSM.</p>
+  </div>
+  <div class="compare-cell">
+    <h4>Everything else → RSM</h4>
+    <p>For any other issue, contact <strong>RSM</strong> directly. They are staffed <strong>24/7/365</strong>.</p>
+    <ul>
+      <li><strong>Email:</strong> <a href="mailto:Dash@rsmus.com">Dash@rsmus.com</a></li>
+      <li><strong>Support line:</strong> 888-678-5536 or 888-962-4523</li>
+    </ul>
+  </div>
+</div>
+
+<h3>What to expect</h3>
+<ul>
+  <li><strong>Phone calls</strong> are worked on ASAP.</li>
+  <li><strong>Emails</strong> create a case automatically. Work generally starts within the first four hours of creation, often sooner.</li>
+</ul>
+
+<div class="callout">
+  <strong>Tip.</strong> When in doubt about whether something is a Pinnacle Series question (handled by EPS Support / CSM) or an IT issue (handled here), check what's broken: if it's the platform behavior or a specific tenant, that's a Pinnacle Series ticket; if it's your laptop, account access at the OS or Microsoft 365 layer, or an EPS-internal app, that's IT.
+</div>
+</section>
+
 <section id="faq">
 <h2>Common Questions</h2>
 
@@ -4011,6 +4474,60 @@
 
 <h3>Where do users download Pinnacle User Tools?</h3>
 <p>Top-right user avatar → <strong>Profile &amp; Settings</strong> → <strong>Account Info</strong> tab → <strong>Download Add-Ons</strong> section. The page lists both <strong>Pinnacle Management Utility</strong> and <strong>Pinnacle User Tools</strong>. Visibility of these download links is controlled by the Administrator permission on the tenant.</p>
+<h3>Why did the sign-in page only show an email field at first?</h3>
+<p>The sign-in page is <strong>email-first</strong>. Step 1 shows only Email + Set Your Language + Continue. After clicking Continue, step 2 reveals Password + Remember this device + Forgot password? — unless the user is SSO-eligible, in which case the password field is never shown and they're routed to their identity provider. See <a href="#sign-in">Sign In &amp; Authentication</a>.</p>
+
+<h3>What's the difference between an Assignor and an Assignment Administrator?</h3>
+<p>Both can create assignments. The difference is scope: <strong>Assignment Administrator</strong> manages assignments and external learning for <em>all</em> users in the tenant. <strong>Assignor</strong> is scoped to users they manage, users in groups they own (or child groups, if Inherit Permissions is on), and assessment assignments to <a href="#glossary">interviewees</a>. See <a href="#permissions">Permissions Reference</a>.</p>
+
+<h3>What's an Interviewee?</h3>
+<p>A KnowledgeSmart user-status used when an admin assigns an assessment to someone who isn't yet a user in the tenant — typically a job candidate. The interviewee gets an emailed assessment link and does not need a Pinnacle or KS account to take it. If they later become a tenant user, the KS status flips from <em>Interviewee</em> to <em>Employee</em> (the KS account persists). See <a href="#glossary">Glossary</a>.</p>
+
+<h3>Where do I configure password complexity, expiry, or account lockout?</h3>
+<p>Admin Portal → <a href="#security-auth">Security &amp; Authentication</a> → Password Authentication. Four controls: Use Complex Passwords, Password Expires in <em>N</em> Days (default 90), Cannot Match Previous <em>N</em> Passwords (default 10), Lock Out User After <em>N</em> Invalid Attempts (default 10).</p>
+
+<h3>Can I assign content to internal and external users in one operation?</h3>
+<p>Yes. The Add Users to Assignment modal in <a href="#assignment-management">Assignment Management</a> shows both Standard and External users in the same picker, with separate selection counts. The User Type column distinguishes them with badges.</p>
+
+<h3>Why doesn't a user see the MANAGEMENT section in their left nav?</h3>
+<p>The MANAGEMENT section is rendered only for users with at least one admin-tier permission. Users without any Admin-Portal-granting permission see no MANAGEMENT section at all — no placeholder. Granting any admin permission (Content Administrator, Assignment Administrator, Administrator, etc.) makes it appear.</p>
+
+<h3>How do tenants control which features are exposed to end users?</h3>
+<p>Tenant-wide toggles live at Admin Portal → <a href="#settings">Settings</a> → General. Notable ones: <code>Allow Users to Access AI Chat (Preview)</code> gates the AI Chat top-bar button; <code>Allow Users to Submit External Learning</code> gates the matching top-bar button and avatar dropdown item; <code>Allow Users to Download Add-ons</code> gates the Pinnacle Management Utility and User Tools download links in My Account.</p>
+
+<h3>What's the difference between Custom and Standard themes?</h3>
+<p><strong>Standard themes</strong> are Eagle Point-provided defaults like "Autumn Bliss" — available out of the box. <strong>Custom themes</strong> are admin-created with three independently-configurable color slots: Navigation, Primary, Secondary. Multiple themes can be saved per tenant; the active one shows a green CURRENT THEME badge. See <a href="#theme">Theme Customization</a>.</p>
+
+<h3>How does Active Directory sync work?</h3>
+<p>Three mutually-exclusive options at Admin Portal → <a href="#integrations">Integrations</a> → Active Directory: <strong>Do Not Sync</strong>, <strong>On-Premises Active Directory</strong> (configured via the legacy Pinnacle Management Utility), or <strong>Microsoft Entra ID</strong> (configured directly in the Peak admin portal with four sub-configs: Group Sync Options, Rule Sets, Map User Attributes, and Sync Logs with a 30-day window).</p>
+
+<h3>What happens to a SCORM package if the customer's Pinnacle subscription expires?</h3>
+<p>The SCORM activity stops launching successfully and progress no longer reports back. Active Pinnacle Series subscription is one of four prerequisites checked at consumption time (not just at export time). The other three: learner has an active Pinnacle account in the issuing tenant, email matches between the external LMS and Pinnacle, and the learner still has access to the underlying content. See <a href="#scorm-export">SCORM Export</a>.</p>
+
+<h3>Can a vendor or external partner consume a SCORM package we exported?</h3>
+<p>No. The package is bound to the issuing tenant. Each learner consuming the SCORM activity must have an active account in that same Pinnacle Series tenant. There's no way around this — by design.</p>
+
+<h3>How is SPARK content selected for a user?</h3>
+<p>SPARK uses a weighted match across three signals, in priority order: (1) the user's own "Just for You" preferences, (2) topics chosen by an admin at the group level, (3) Hero Products fallback (AutoCAD, Civil 3D, Revit, etc.). Conditions: not viewed in the last 90 days, under 5 minutes long, and the match phrase must appear in the content's Title, Description, Keywords, Topics, Chapters, or Transcript. See <a href="#spark">SPARK</a>.</p>
+
+<h3>What's the difference between the Username and the user's full name?</h3>
+<p>The <strong>Username</strong> is editable free text — it drives the Welcome heading on Home (<code>Welcome, [Username]</code>) and the prominent name on My Account. The <strong>display/full name</strong> is sourced from the user record and shown as a secondary line below the email. They're independent — a user can change their Username without touching their full name.</p>
+
+<h3>Is Naviate a typo of "Navigate"?</h3>
+<p>No. Naviate is a specific customer (a Symetri subsidiary) for whom Eagle Point built a custom SSO integration. URLs with a <code>NaviateID=&lt;email&gt;</code> parameter route the user through Naviate's My.Symetri.com auth instead of Pinnacle's password flow. See <a href="#sign-in">Sign In &amp; Authentication</a>.</p>
+
+<h3>How long do items stay in the Recycle Bin?</h3>
+<p>Indefinitely — there's no automatic expiry. Captured tenants show items 14+ months old. To restore: select rows → click the Recycle icon top-right (or use the per-row kebab → Restore to Previous Location). To purge permanently: Trash icon top-right or per-row kebab → Delete. See <a href="#content">Content</a>.</p>
+
+<h3>Why is "View Reports" called something different now?</h3>
+<p>It was renamed to <strong>Reporting Administrator</strong> in the current Pinnacle UI. A new scoped variant <strong>Reporting Manager</strong> was also introduced, scoped to users the person manages or groups they own. Older training material and the Role-Based Permissions Guide PDF still use the old "View Reports" label — that name is deprecated. See <a href="#permissions">Permissions Reference</a>.</p>
+
+<h3>How do I check the status of an Entra ID sync?</h3>
+<p>Admin Portal → <a href="#integrations">Integrations</a> → with Microsoft Entra ID selected, click the <strong>Microsoft Entra ID Sync Logs</strong> "Logs" button. Shows the last 30 days of sync activity.</p>
+
+<h3>What does "Group Type" mean when I create a group?</h3>
+<p>Pinnacle Series groups are typed at creation. The Add Group Manually modal has a <strong>Group Type</strong> dropdown with two values: <strong>General</strong> (default) and <strong>Job Role</strong>. Behavioral differences across assignments, SPARK, content sharing, and reports aren't yet fully documented.</p>
+
 </section>
 
 <footer>
@@ -4090,6 +4607,43 @@
   navLinks.forEach(a => a.addEventListener('click', () => {
     if (window.innerWidth <= 960) document.querySelector('.sidebar').classList.remove('open');
   }));
+
+  /* Copy-section-link buttons */
+  (function setupCopyAnchors() {
+    const baseUrl = window.location.origin + window.location.pathname;
+    document.querySelectorAll('main section[id] > h2').forEach(h2 => {
+      const sectionId = h2.parentElement.id;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'copy-anchor';
+      btn.setAttribute('aria-label', 'Copy link to this section');
+      btn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6.5 9.5l3-3M5 11a2.5 2.5 0 010-3.5l1.5-1.5a2.5 2.5 0 013.5 0M11 5a2.5 2.5 0 010 3.5l-1.5 1.5a2.5 2.5 0 01-3.5 0"/></svg><span>Copy link</span>';
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const url = baseUrl + '#' + sectionId;
+        const fallback = () => {
+          const ta = document.createElement('textarea');
+          ta.value = url; document.body.appendChild(ta);
+          ta.select(); document.execCommand('copy');
+          document.body.removeChild(ta);
+        };
+        const done = () => {
+          btn.classList.add('copied');
+          btn.querySelector('span').textContent = 'Copied!';
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.querySelector('span').textContent = 'Copy link';
+          }, 1600);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(done, () => { fallback(); done(); });
+        } else {
+          fallback(); done();
+        }
+      });
+      h2.appendChild(btn);
+    });
+  })();
 
   /* Reveal-on-scroll */
   (function setupReveal() {
@@ -4562,7 +5116,6 @@
     var a = e.target.closest('a.jump');
     if (a && window.innerWidth <= 720) closeChat();
   });
-
 
   setTimeout(function() {
     if (!panel.classList.contains('open')) launcher.classList.add('greet');
