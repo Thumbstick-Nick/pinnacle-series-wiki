@@ -367,3 +367,517 @@
     section { page-break-inside: avoid; }
     .poc-banner, .mascot-launcher, .chatbot-panel, .lightbox, .brand-bar, .arch-layer { display: none !important; }
   }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo-row">
+      <span class="logo-mark"></span>
+      <h1>Wiki</h1>
+    </div>
+    <p class="by">by Pinnacle</p>
+    <p class="subtitle">Internal Reference</p>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" id="sidebar-search" placeholder="Search articles...">
+  </div>
+  <nav id="sidebar-nav"></nav>
+</aside>
+
+<button class="menu-toggle" id="menu-toggle">☰</button>
+
+<!-- Main Content -->
+<main>
+
+<section id="welcome-overview">
+  <h1>Welcome to Pinnacle</h1>
+  <p class="lead">The Pinnacle Series—our suite of property tax analysis and strategy tools—is the backbone of Eagle Point Software's mission: to help small and mid-sized assessors and property tax professionals across North America raise their game and reclaim their time.</p>
+
+  <h2>Our World Impact</h2>
+
+  <p>Since 2011, we've been at the table with over <strong>140+ county and municipal property tax departments</strong> across the United States and Canada. These partnerships have transformed how tax analysis happens—from spreadsheet grinding to intelligent, data-driven strategy. Here are some of the customers we're proud to serve:</p>
+
+  <!-- Customer highlights -->
+  <div class="content-card" style="margin: 20px 0 28px; padding: 20px 24px;">
+    <p style="margin: 0; font-size: 14px; color: var(--c-muted);"><strong>Harris County Appraisal District</strong> (Houston, TX) — 800k+ properties annually; <strong>Jackson County</strong> (MO) — major metro jurisdiction; <strong>King County Assessor</strong> (Seattle, WA) — innovation leader in Pacific Northwest; <strong>Orange County Property Appraiser</strong> (FL) — one of the largest assessment operations in North America.</p>
+  </div>
+
+  <p>We've also helped dozens more counties and districts manage everything from mass appraisal workflows to complex appeal preparation. The result: <strong>millions of hours saved across the property tax community</strong>—time that can now be reinvested in strategy, fairness, and professional growth.</p>
+
+</section>
+
+<section id="getting-started">
+  <h2>Getting Started</h2>
+
+  <h3>I'm new to Pinnacle. Where do I begin?</h3>
+  <p>Start with the <strong>Welcome Checklist</strong> in the Admin Portal to make sure your team is set up correctly. Then dive into the section that matches your role:</p>
+  <ul>
+    <li><strong>Assessors &amp; Valuation Teams:</strong> <a href="#peak">Peak</a> is the analysis & modeling engine</li>
+    <li><strong>Clerical &amp; Process Owners:</strong> <a href="#classic">Classic</a> is mass appraisal</li>
+    <li><strong>Strategic Leaders:</strong> <a href="#reports">Reports</a> gives you the full picture</li>
+  </ul>
+
+  <h3>I know Pinnacle already. I just need a quick lookup.</h3>
+  <p>Use the <strong>search box above</strong>, or skip to the section you need from the sidebar.</p>
+
+</section>
+
+<section id="admin-portal">
+  <h2>Admin Portal <span class="ap-badge">Core Tool</span></h2>
+
+  <p class="lead">The nerve center of your Pinnacle account—where you manage people, permissions, billing, and integrations.</p>
+
+  <div class="where">
+    <span class="label">Web Address</span>
+    https://admin.pinnacleseries.com
+  </div>
+
+  <p class="callout warn"><strong>Early-stage docs:</strong> Admin Portal features are still evolving. If you hit a question we haven't covered, reach out to <strong>support@pinnacleseries.com</strong> and we'll help.</p>
+
+  <h3>Main Sections</h3>
+  <ul>
+    <li><strong>Dashboard:</strong> At-a-glance snapshot of your license, active users, and upcoming renewals.</li>
+    <li><strong>Users &amp; Teams:</strong> Add or remove team members; assign roles &amp; permissions.</li>
+    <li><strong>Integrations:</strong> Connect data sources (e.g., county assessor APIs, custom feeds).</li>
+    <li><strong>Billing &amp; Plans:</strong> Manage your subscription and update payment methods.</li>
+    <li><strong>Audit Log:</strong> See who did what, when—for compliance and troubleshooting.</li>
+  </ul>
+
+  <h3>User Roles</h3>
+  <p>Pinnacle supports a flexible permissions system. Here are the standard roles:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Role</th>
+        <th>Can Manage</th>
+        <th>Can View</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Admin</strong></td>
+        <td>Users, Permissions, Integrations, Billing, Audit Log</td>
+        <td>Everything</td>
+      </tr>
+      <tr>
+        <td><strong>Power User</strong></td>
+        <td>Projects, Data Imports, Custom Reports</td>
+        <td>All analysis &amp; reports</td>
+      </tr>
+      <tr>
+        <td><strong>Analyst</strong></td>
+        <td>Their own analyses, case notes</td>
+        <td>Shared analyses &amp; reports</td>
+      </tr>
+      <tr>
+        <td><strong>Viewer</strong></td>
+        <td>Nothing</td>
+        <td>Public reports &amp; dashboards</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout permissions"><strong>Custom Roles:</strong> Need something different? Contact <strong>support@pinnacleseries.com</strong> and describe your use case. We can often craft a custom role to fit your workflow.</div>
+
+</section>
+
+<section id="peak">
+  <h2>Peak</h2>
+
+  <p class="lead">The property valuation &amp; analysis engine. Peak is built for assessors and valuation professionals who need to dig deep into a property's market position, find comparables, and build defensible opinions of value.</p>
+
+  <div class="where">
+    <span class="label">Within Pinnacle Suite</span>
+    Log in to Pinnacle → click "Peak" from the module sidebar
+  </div>
+
+  <h3>Core Use Cases</h3>
+  <ul>
+    <li><strong>Comparable Search:</strong> Find 3-5 recent arm's-length sales; refine by property type, location, and condition.</li>
+    <li><strong>Market Analysis:</strong> View trends, price-per-square-foot trends, and absorption rates in your market segment.</li>
+    <li><strong>Valuation Models:</strong> Build cost, market, and income approaches side-by-side. Reconcile to final opinion.</li>
+    <li><strong>Appeal Prep:</strong> Export your analysis with charts, maps, and comparable details—ready to present to a judge or appeals board.</li>
+  </ul>
+
+  <h3>Key Features</h3>
+  <ul>
+    <li><strong>Drag-and-drop adjustments:</strong> Tweak comp adjustments in real-time; see your final estimate update instantly.</li>
+    <li><strong>Built-in maps:</strong> Click any property to see its footprint, neighborhood context, and sales history.</li>
+    <li><strong>Confidence scoring:</strong> Peak flags weak comps so you know which analyses need more work.</li>
+    <li><strong>Snapshot exports:</strong> Save your analysis as a PDF, Excel, or interactive HTML snapshot for reports and legal proceedings.</li>
+  </ul>
+
+  <h3>Workflow Tips</h3>
+  <p>Most analysts use Peak in this order:</p>
+  <ol>
+    <li><strong>Import:</strong> Load your subject property details (address, lot size, improvements, prior sale price).</li>
+    <li><strong>Search:</strong> Use the comparable finder to pull candidates based on your criteria.</li>
+    <li><strong>Review:</strong> Inspect each comparable's photos, tax record, and recent sales.</li>
+    <li><strong>Adjust:</strong> Build your adjustments model (size, condition, location, time, etc.).</li>
+    <li><strong>Reconcile:</strong> Compare your final estimate to the assessed value; document your reasoning.</li>
+    <li><strong>Export:</strong> Generate your report and file it with your appeal or appraisal memo.</li>
+  </ol>
+
+  <p class="callout"><strong>Tip:</strong> Peak works best when you've already done your homework on market trends and recent sales. If you're new to your market, spend an hour in <strong>Market Analysis</strong> first to get a feel for what's normal.</p>
+
+</section>
+
+<section id="classic">
+  <h2>Classic</h2>
+
+  <p class="lead">The mass appraisal workhorse. Classic handles bulk property evaluation, large-scale data imports, formula-based modeling, and annual revaluation cycles—everything a clerical and valuation team needs to keep thousands of properties in balance.</p>
+
+  <div class="where">
+    <span class="label">Within Pinnacle Suite</span>
+    Log in to Pinnacle → click "Classic" from the module sidebar
+  </div>
+
+  <h3>Core Use Cases</h3>
+  <ul>
+    <li><strong>Annual Revaluation:</strong> Import prior-year data, update sale prices and market indices, generate new assessed values across your jurisdiction.</li>
+    <li><strong>Data Cleanup:</strong> Standardize address formats, flag missing or conflicting property details, bulk-update tax record fields.</li>
+    <li><strong>Model Validation:</strong> Test your valuation formula on a sample of properties before rolling it out county-wide.</li>
+    <li><strong>Exception Handling:</strong> Identify outliers, flag properties for manual review, and merge or split parcels as needed.</li>
+  </ul>
+
+  <h3>Key Features</h3>
+  <ul>
+    <li><strong>Bulk import/export:</strong> CSV, Excel, or API feeds—load thousands of records in minutes.</li>
+    <li><strong>Validation rules:</strong> Set constraints (e.g., "land value must be 20-40% of total," "no parcel can jump more than 15% in one year") and flag violations.</li>
+    <li><strong>Formula editor:</strong> Build custom valuation formulas using drag-and-drop logic; test before deployment.</li>
+    <li><strong>Audit trail:</strong> Track every change to every property; export reports for board meetings and legal discovery.</li>
+    <li><strong>Batch operations:</strong> Reassess a whole neighborhood, apply a cost index update, or recalculate depreciation in one click.</li>
+  </ul>
+
+  <h3>Workflow Tips</h3>
+  <p>A typical annual cycle looks like this:</p>
+  <ol>
+    <li><strong>Import Prior Year:</strong> Load last year's assessed data as your baseline.</li>
+    <li><strong>Ingest New Sales:</strong> Feed in arm's-length transactions to recalibrate your models.</li>
+    <li><strong>Validate Data:</strong> Run your constraint rules; fix errors and outliers before modeling.</li>
+    <li><strong>Build Formula:</strong> Adjust market indices and depreciation schedules; test on a pilot subset.</li>
+    <li><strong>Roll Out:</strong> Run the formula across all properties; review exception reports.</li>
+    <li><strong>Publish:</strong> Generate tax bills and notification letters; upload to the county website.</li>
+  </ol>
+
+  <p class="callout warn"><strong>Critical step:</strong> Always run a pilot test on 5-10% of your portfolio before going live with a new formula. This catches logic errors and unintended outliers before they affect thousands of bills.</p>
+
+</section>
+
+<section id="reports">
+  <h2>Reports</h2>
+
+  <p class="lead">The nerve center for insight and oversight. Reports pulls data from Peak and Classic to give assessors, administrators, and elected officials a clear view of portfolio performance, market trends, and revenue impact.</p>
+
+  <div class="where">
+    <span class="label">Within Pinnacle Suite</span>
+    Log in to Pinnacle → click "Reports" from the module sidebar
+  </div>
+
+  <h3>Core Reports</h3>
+  <ul>
+    <li><strong>Portfolio Summary:</strong> Total assessed value, median price per square foot, cap rate trends, by property type and neighborhood.</li>
+    <li><strong>Appeal Analysis:</strong> How many appeals filed, success rate, average adjustment, by property class and year.</li>
+    <li><strong>Market Trends:</strong> Year-over-year price movement, sales volume, days on market, absorption rates.</li>
+    <li><strong>Revenue Impact:</strong> Projected revenue from new assessments, impact of pending appeals, billable amount under cap laws.</li>
+    <li><strong>Parcel Status:</strong> Count of properties in each assessment stage (pending, approved, appealed, sold); flag stuck parcels.</li>
+    <li><strong>Valuation Model Performance:</strong> Compare Classic formula estimates to actual sales; identify segments that consistently over or underestimate.</li>
+  </ul>
+
+  <h3>Key Features</h3>
+  <ul>
+    <li><strong>Interactive dashboards:</strong> Drill down by property type, location, value range, sale date, or appeal status.</li>
+    <li><strong>Custom date ranges:</strong> Compare any two time periods; identify seasonal patterns and year-over-year shifts.</li>
+    <li><strong>Chart exports:</strong> Download charts as PNG or SVG; use them in board presentations or media.
+</li>
+    <li><strong>Scheduled reports:</strong> Set up daily, weekly, or monthly auto-emails to your board, auditor, or leadership team.</li>
+    <li><strong>Audit-ready formatting:</strong> All charts include source data, calculation method, and confidence intervals for compliance audits.</li>
+  </ul>
+
+  <h3>Workflow Tips</h3>
+  <p>Most leaders use Reports in three ways:</p>
+  <ol>
+    <li><strong>Weekly Check-in:</strong> Open <strong>Portfolio Summary</strong> every Friday to spot anomalies or trends developing in real time.</li>
+    <li><strong>Monthly Board Report:</strong> Pull <strong>Revenue Impact</strong> + <strong>Appeal Analysis</strong> into a slide deck for your elected officials.</li>
+    <li><strong>Annual Audit:</strong> Export <strong>Valuation Model Performance</strong> and <strong>Appeal Analysis</strong> to demonstrate the fairness and consistency of your assessments.</li>
+  </ol>
+
+  <p class="callout"><strong>Pro tip:</strong> If your board wants a custom metric, don't wait—just ask. Most "special reports" can be built in under an hour, and the engineering team is usually happy to add it permanently if other customers want it too.</p>
+
+</section>
+
+<section id="ai-chat">
+  <h2>AI Chat / SPARK / KnowledgeSmart</h2>
+
+  <p class="lead">Your always-on property tax advisor. These tools use machine learning to answer routine questions, surface relevant comparable sales, and help your team work faster and smarter.</p>
+
+  <div class="where">
+    <span class="label">Within Pinnacle Suite</span>
+    Integrated in Peak and Classic; also available as a web chat on pinnacleseries.com
+  </div>
+
+  <h3>Core Capabilities</h3>
+  <ul>
+    <li><strong>Comparable Recommendation:</strong> Describe a property, and the AI surfaces 5-10 recent arm's-length sales that match your criteria.</li>
+    <li><strong>Market Insight:</strong> Ask "What are homes selling for in Downtown district?" and get instant stats, trends, and outliers.</li>
+    <li><strong>Valuation Help:</strong> Get suggested adjustment amounts based on recent comparable analysis in your market.</li>
+    <li><strong>Regulatory Guidance:</strong> Ask about appeal deadlines, required documentation, or state appraisal standards.</li>
+    <li><strong>Case Preparation:</strong> Upload a property file; the AI summarizes comparable evidence and flags weak points in your analysis.</li>
+  </ul>
+
+  <h3>Key Features</h3>
+  <ul>
+    <li><strong>Context-aware:</strong> The chat remembers your jurisdiction, property type preferences, and prior analyses.</li>
+    <li><strong>Source citations:</strong> Every answer includes links to the comparables, regulations, or reports it used.</li>
+    <li><strong>Confidence scoring:</strong> The AI tells you when it's very sure, somewhat sure, or needs more info.</li>
+    <li><strong>Human handoff:</strong> If the AI can't answer, it escalates to a Pinnacle expert with one click.</li>
+  </ul>
+
+  <h3>Workflow Tips</h3>
+  <p>Teams typically use AI Chat for:</p>
+  <ol>
+    <li><strong>Quick lookups:</strong> "What was the last sale price for 123 Main St?"</li>
+    <li><strong>Comparable hunting:</strong> "Find 5 single-family homes sold in Q3 2024 in the downtown area, 1500-2000 sqft."</li>
+    <li><strong>Trend spotting:</strong> "Are waterfront properties appreciating faster than inland in our county?"</li>
+    <li><strong>Appeal prep:</strong> "Help me build a comp package for a 2-bedroom condo in the arts district."</li>
+  </ol>
+
+  <p class="callout warn"><strong>Disclaimer:</strong> AI Chat is a research assistant, not a substitute for human professional judgment. Always review its suggestions against your own market knowledge and regulations.</p>
+
+</section>
+
+<section id="permissions">
+  <h2>Permissions Reference</h2>
+
+  <p class="lead">A detailed breakdown of what each role can do, and how to fine-tune access for your team's specific needs.</p>
+
+  <h3>Role-Based Access Control (RBAC)</h3>
+  <p>Pinnacle uses a role-based permission model. When you add a user, you assign them a role. That role determines what they can see and do. You can also customize individual permissions if you need more granular control.</p>
+
+  <h3>Standard Roles &amp; Permissions</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Permission</th>
+        <th>Admin</th>
+        <th>Power User</th>
+        <th>Analyst</th>
+        <th>Viewer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>View Admin Portal</strong></td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><strong>Manage Users</strong></td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><strong>View Audit Log</strong></td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><strong>Manage Integrations</strong></td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><strong>Manage Billing</strong></td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><strong>Use Peak</strong></td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><strong>Create Analyses</strong></td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><strong>Edit Others' Analyses</strong></td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><strong>Use Classic</strong></td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Limited</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><strong>Run Bulk Revaluations</strong></td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><strong>Access Reports</strong></td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td><strong>Export Data</strong></td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Limited</td>
+      </tr>
+      <tr>
+        <td><strong>Use AI Chat</strong></td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Custom Permissions</h3>
+  <p>If the standard roles don't fit, you can build a custom role. Common customizations include:</p>
+  <ul>
+    <li><strong>"Data Cleaner":</strong> Can import and validate data in Classic, but cannot run formulas or publish assessed values.</li>
+    <li><strong>"Report Reviewer":</strong> Can view all reports and export charts, but cannot modify data or run analyses.</li>
+    <li><strong>"Appeals Officer":</strong> Can view all Peak analyses and create/edit appeal packages, but cannot access Classic or billing.</li>
+    <li><strong>"Intern":</strong> Can use Peak to search comps and build analyses, but cannot publish or export without approval from a Power User.</li>
+  </ul>
+
+  <div class="callout permissions"><strong>Custom roles:</strong> Need a role that's not listed above? Open a support ticket at <strong>support@pinnacleseries.com</strong> with a description of your workflow. We can usually set it up in under an hour.</div>
+
+</section>
+
+<section id="glossary">
+  <h2>Glossary</h2>
+
+  <p><strong>Assessed Value:</strong> The official value of a property for tax purposes, set by the assessor. Often abbreviated as AV.</p>
+
+  <p><strong>Comparable Sale (Comp):</strong> A recent arm's-length sale of a property similar to the subject, used to estimate market value through the sales approach.</p>
+
+  <p><strong>Market Value:</strong> The price at which a property would sell in a competitive, open market with reasonable time for exposure and typical buyer-seller motivation.</p>
+
+  <p><strong>Sales Ratio:</strong> The ratio of assessed value to actual sale price (AV / Sale Price). In a well-calibrated jurisdiction, this ratio should be close to 1.0 and consistent across all property types and neighborhoods.</p>
+
+  <p><strong>CAMA:</strong> Computer-Assisted Mass Appraisal. The methodology and software used to value large numbers of properties consistently and transparently.</p>
+
+  <p><strong>Cost Approach:</strong> A valuation method that estimates value as the cost of land plus the cost to rebuild improvements, minus depreciation.</p>
+
+  <p><strong>Income Approach:</strong> A valuation method that estimates value based on the income (rent, lease payments, etc.) a property can generate.</p>
+
+  <p><strong>State Equalization:</strong> The state-level process that ensures all counties are assessing properties fairly relative to each other, typically by comparing sales ratios across jurisdictions.</p>
+
+  <p><strong>Cap Rate (Capitalization Rate):</strong> The percentage of annual income divided by total property value. Used mainly in income-approach valuations of commercial and investment properties.</p>
+
+  <p><strong>Appeal:</strong> A property owner's formal challenge to the assessed value, usually heard by a local review board or county commission.</p>
+
+</section>
+
+<footer>
+  <p>Last updated: May 2, 2026. For questions or feedback, contact <strong>support@pinnacleseries.com</strong>.</p>
+</footer>
+
+</main>
+
+<script>
+(function() {
+  // Sidebar navigation builder
+  const sections = [
+    { id: 'welcome-overview', label: 'Welcome' },
+    { id: 'getting-started', label: 'Getting Started' },
+    { id: 'admin-portal', label: 'Admin Portal' },
+    { id: 'peak', label: 'Peak' },
+    { id: 'classic', label: 'Classic' },
+    { id: 'reports', label: 'Reports' },
+    { id: 'ai-chat', label: 'AI Chat / SPARK' },
+    { id: 'permissions', label: 'Permissions' },
+    { id: 'glossary', label: 'Glossary' }
+  ];
+
+  const nav = document.getElementById('sidebar-nav');
+
+  // Main nav
+  const mainGroup = document.createElement('div');
+  sections.forEach(section => {
+    const a = document.createElement('a');
+    a.href = '#' + section.id;
+    a.textContent = section.label;
+    a.onclick = (e) => {
+      e.preventDefault();
+      const el = document.getElementById(section.id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        // Close sidebar on mobile
+        document.getElementById('sidebar').classList.remove('open');
+      }
+    };
+    mainGroup.appendChild(a);
+  });
+  nav.appendChild(mainGroup);
+
+  // Scroll spy
+  function updateActiveLink() {
+    sections.forEach(section => {
+      const el = document.getElementById(section.id);
+      const link = nav.querySelector(`a[href="#${section.id}"]`);
+      if (!el || !link) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= 150 && rect.bottom > 150) {
+        nav.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveLink);
+  updateActiveLink();
+
+  // Mobile sidebar toggle
+  const sidebar = document.querySelector('.sidebar');
+  const menuToggle = document.getElementById('menu-toggle');
+  menuToggle.onclick = () => sidebar.classList.toggle('open');
+
+  // Search
+  const searchInput = document.getElementById('sidebar-search');
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase();
+    const links = nav.querySelectorAll('a');
+    links.forEach(link => {
+      const match = link.textContent.toLowerCase().includes(query);
+      link.style.display = match ? 'block' : 'none';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
